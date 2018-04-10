@@ -10,9 +10,10 @@ public class Main {
 		try {
 
 			Buffer buffer = new Buffer("arquivos/entrada.txt");
-			buffer.printCodigo();
-			//AutomatoCadeiaCaracteres automato = new AutomatoCadeiaCaracteres(buffer);
-			//automato.executar();
+			//buffer.printCodigo();
+			AutomatoCadeiaCaracteres automato = new AutomatoCadeiaCaracteres(buffer);
+			Token token = automato.executar();
+			System.out.println(token.getTipoToken());
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

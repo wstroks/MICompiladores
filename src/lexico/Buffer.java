@@ -50,8 +50,12 @@ public class Buffer {
 		this.posicaoAtual = posicaoAtual;
 	}
 	
-	private boolean fimCodigo(){
-		return this.codigo.length() == this.posicaoAtual;
+	public int getTamanhoCodigo(){
+		return this.codigo.length();
+	}
+	
+	public boolean fimCodigo(){
+		return this.codigo.length() == (this.posicaoAtual-1);
 	}
 	
 
