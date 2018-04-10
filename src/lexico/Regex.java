@@ -19,7 +19,7 @@ public class Regex {
 				line = line.trim();
 				
 				System.out.println(line);
-				Pattern p = Pattern.compile("^[\"][a-zA-Z0-9_\\s[\\x20-\\x7E]&&[^\\x22]]*[\"]$");
+				Pattern p = Pattern.compile("^[\"][a-zA-Z0-9_\\s[\\x20-\\x7E][\"]&&[^\\x22]]*[\"]$");
 				Matcher m = p.matcher(line);
 				 
 				if(m.matches()){
