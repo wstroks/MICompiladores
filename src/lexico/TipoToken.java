@@ -1,5 +1,10 @@
 package lexico;
 
+/**
+ * 
+ * @author Tayane
+ *
+ */
 public enum TipoToken {
 	
 	PALAVRA_RESERVADA_CONST,

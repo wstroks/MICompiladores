@@ -4,6 +4,11 @@ import lexico.Buffer;
 import lexico.TipoToken;
 import lexico.Token;
 
+/**
+ * 
+ * @author Tayane
+ *
+ */
 public abstract class Automato {
 	
 	protected Buffer buffer;
