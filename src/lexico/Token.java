@@ -1,5 +1,10 @@
 package lexico;
 
+/**
+ * 
+ * @author Tayane
+ *
+ */
 public class Token {
 	
 	private TipoToken tipoToken;

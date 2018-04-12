@@ -4,6 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author Tayane
+ *
+ */
 public class Buffer {
 	
 	protected String codigo = "";

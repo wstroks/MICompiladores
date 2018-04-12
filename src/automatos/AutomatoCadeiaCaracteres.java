@@ -4,6 +4,11 @@ import lexico.Buffer;
 import lexico.TipoToken;
 import lexico.Token;
 
+/**
+ * 
+ * @author Tayane
+ *
+ */
 public class AutomatoCadeiaCaracteres extends Automato{
 	
 	public AutomatoCadeiaCaracteres(Buffer buffer) {
@@ -17,9 +22,10 @@ public class AutomatoCadeiaCaracteres extends Automato{
 		int estado = 0;
 		char c = buffer.proximoCaractere();
 		while(!buffer.fimCodigo()){
+			System.out.println("Linha: " + buffer.getLinhaAtual());
 			switch (estado) {
 				case 0:
-					System.out.println("estado 0: " + c);
+					System.out.println("	estado 0: " + c);
 					if(c == '"'){
 						estado = 1;
 						c = buffer.proximoCaractere();
@@ -30,7 +36,7 @@ public class AutomatoCadeiaCaracteres extends Automato{
 					break;
 					
 				case 1:
-					System.out.println("estado 1: " + c);
+					System.out.println("	estado 1: " + c);
 					if(c == '"'){
 						return new Token(TipoToken.CADEIA_CARACTERES, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 					}
@@ -46,7 +52,7 @@ public class AutomatoCadeiaCaracteres extends Automato{
 					}
 					break;
 				case 2:
-					System.out.println("estado 2: " + c);
+					System.out.println("	estado 2: " + c);
 					if(this.isBarraInvertida(c)){
 						c = buffer.proximoCaractere();
 					}
@@ -60,7 +66,7 @@ public class AutomatoCadeiaCaracteres extends Automato{
 					break;
 	
 				default:
-					System.out.println("estado default: " + c);
+					System.out.println("	estado default: " + c);
 					return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 			}
 			

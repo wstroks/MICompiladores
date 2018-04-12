@@ -6,6 +6,11 @@ import java.io.FileReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 
+ * @author Tayane
+ *
+ */
 public class Regex {
 	
 	public static void main(String[] args) {

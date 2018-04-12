@@ -3,6 +3,11 @@ package lexico;
 
 import automatos.AutomatoCadeiaCaracteres;
 
+/**
+ * 
+ * @author Tayane
+ *
+ */
 public class Main {
 
 	public static void main(String[] args) {
