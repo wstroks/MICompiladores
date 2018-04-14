@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aque;
+package automatos;
+
+import lexico.Buffer;
+import lexico.TipoToken;
+import lexico.Token;
 
 /**
  *
  * @author wstro
  */
-import aque.Buffer;
-import aque.TipoToken;
-import aque.Token;
+
 
 public class AutomatoLogico extends Automato{
 	
@@ -24,26 +26,35 @@ public class AutomatoLogico extends Automato{
 	public Token executar() {
 		
 		int estado = 0;
+                int verifica=0;
 		char c = buffer.proximoCaractere();
 		while(!buffer.fimCodigo()){
 			switch (estado) {
 				case 0:
 					System.out.println("estado 0: " + c);
 					if(c == '!'){
-                                            
+                                            if(buffer.getTamanhoCodigo()==1){
+                                                 return new Token(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                                            }
+                                            c=buffer.proximoCaractere();
+                                            if(c=='='){
+                                                 return new Token(TipoToken.OPERADOR_RELACIONAL_DIFERENTE, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                                            }else{
                                             return new Token(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                            
+                                            }
 					}else if(c=='&'){
                                             if(buffer.getTamanhoCodigo()==1){
                                             return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                                             }
                                          c=buffer.proximoCaractere();
+                                         verifica=1;
                                          estado=1;
                                         }else if(c=='|'){
                                             if(buffer.getTamanhoCodigo()==1){
                                             return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                                             }
                                          c=buffer.proximoCaractere();
+                                         verifica=2;
                                          estado=1;
                                         }
                                             
@@ -52,9 +63,9 @@ public class AutomatoLogico extends Automato{
 					}
 					break;
                                 case 1:
-                                   System.out.println("estado 0: " + c);
+                                   System.out.println("estado 1: " + c);
                                     if(c=='&'){
-                                        return new Token(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                                        return new Token(TipoToken.OPERADOR_LOGICO_E, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                                     
                                     }
                                     else if(c=='|'){
@@ -62,7 +73,15 @@ public class AutomatoLogico extends Automato{
                                     }
                                     
                                     else{
-                                      estado=-1;
+                                      if(verifica==1){
+                                          System.out.println("Verifiquei o proximo para saber se é erro quando recomeçar tem que começar pelo anterior (Erro &)");
+                                           return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                                          
+                                      }else if(verifica==2){
+                                           System.out.println("Verifiquei o proximo para saber se é erro quando recomeçar tem que começar pelo anterior (Erro |)");
+                                           return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                                        
+                                    }
 					
 					}
                                 

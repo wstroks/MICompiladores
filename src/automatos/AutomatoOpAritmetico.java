@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aque;
+package automatos;
 
-import aque.Buffer;
-import aque.TipoToken;
-import aque.Token;
+import lexico.Buffer;
+import lexico.TipoToken;
+import lexico.Token;
+
 
 /**
  *
@@ -59,7 +60,18 @@ public class AutomatoOpAritmetico extends Automato {
 
                     } else if (c == '/') {
 
-                        return new Token(TipoToken.OPERADOR_ARITIMETICO_DIVISAO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                        if (buffer.getTamanhoCodigo() == 1) {
+                            return new Token(TipoToken.OPERADOR_ARITIMETICO_DIVISAO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+
+                        } else {
+                            c = buffer.proximoCaractere();
+                            System.out.println(c);
+                            if (c == '/') {
+                                return new Token(TipoToken.DELIMITADOR_COMENTARIO_LINHA, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            } else {
+                                return new Token(TipoToken.OPERADOR_ARITIMETICO_DIVISAO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            }
+                        }
 
                     } else if (c == '*') {
 

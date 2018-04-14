@@ -2,6 +2,7 @@ package lexico;
 
 
 import automatos.AutomatoCadeiaCaracteres;
+import automatos.AutomatoLogico;
 
 /**
  * 
@@ -16,7 +17,7 @@ public class Main {
 
 			Buffer buffer = new Buffer("arquivos/entrada.txt");
 			//buffer.printCodigo();
-			AutomatoCadeiaCaracteres automato = new AutomatoCadeiaCaracteres(buffer);
+			                 AutomatoLogico automato = new AutomatoLogico(buffer);
 			Token token = automato.executar();
 			System.out.println(token.getTipoToken());
 			

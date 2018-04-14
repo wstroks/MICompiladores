@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aque;
-import aque.Automato;
-import aque.Buffer;
-import aque.TipoToken;
-import aque.Token;
+package automatos;
+
+import lexico.Buffer;
+import lexico.TipoToken;
+import lexico.Token;
+
 
 public class AutomatoRelacional extends Automato{
 	

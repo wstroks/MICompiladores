@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aque;
+package automatos;
+
+import lexico.Buffer;
+import lexico.TipoToken;
+import lexico.Token;
 
 /**
  *

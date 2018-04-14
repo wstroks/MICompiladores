@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aque;
+package automatos;
+
+import lexico.Buffer;
+import lexico.TipoToken;
+import lexico.Token;
 
 /**
  *
  * @author wstro
  */
-import aque.Buffer;
-import aque.TipoToken;
-import aque.Token;
+
 
 public class AutomatoNumero extends Automato {
 
@@ -25,14 +27,21 @@ public class AutomatoNumero extends Automato {
 
         int estado = 0;
         int contador = 1;
+        int contadorIncremento=0;
         
         char c = buffer.proximoCaractere();
         while (!buffer.fimCodigo()) {
             switch (estado) {
                 case 0:
                     System.out.println("estado 0: " + c);
-                    if (c == '-') {
+                    if (c == '-'){ 
+                            if(buffer.getTamanhoCodigo()==1){
+                                 return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            }else if(contadorIncremento==1){
+                                 return new Token(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            }
                         contador++;
+                        contadorIncremento++;
                         c = buffer.proximoCaractere();
                        
                         estado = 0;
@@ -65,6 +74,9 @@ public class AutomatoNumero extends Automato {
                         }
 
                     } else {
+                        if(contadorIncremento==1){
+                                 return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            }
                         estado = -1;
                     }
                     break;
