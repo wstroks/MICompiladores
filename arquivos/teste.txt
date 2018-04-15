@@ -1,4 +1,9 @@
 entreda -> saida
+observação na core 
+vai ter que tratar quando for numero exemplo
+entrada 111.a
+eu tenho que fazer duas verificações pq pode existe numero com o ponto ou seja vc pega a string e ao inves de retorna 1 casa tem que ser duas ... isso nesses casos
+PODE TESTAR NO AUTOMATO DE OPERADOR E NUMERO
 
 Automato Logico
 !!! -> ! OPERADOR_LOGICO_EXCLAMACAO_NEGADO    passou 
@@ -34,7 +39,7 @@ Automato Aritmetico
 */ -> * COmentario_bloco_fim  passou (olha o codigo essa parte pq eu verifico o proximo pra saber se é erro) ae quando voltar pro core tem que voltar com caracter 1;
 /* -> /* comentario de inicio passou 
 /** -> /* comentario de inicio passou 
-
+-    a -> - Subtração passou 
 ( Só falta tratar numero -1 aque)
 
 Automato Relacionais
