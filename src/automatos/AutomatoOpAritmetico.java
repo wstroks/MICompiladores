@@ -68,15 +68,23 @@ public class AutomatoOpAritmetico extends Automato {
                             System.out.println(c);
                             if (c == '/') {
                                 return new Token(TipoToken.DELIMITADOR_COMENTARIO_LINHA, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                            } else {
+                            } else if(c=='*'){
+                                return new Token(TipoToken.DELIMITADOR_COMENTARIO_BLOCO_INICIO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            }else {
                                 return new Token(TipoToken.OPERADOR_ARITIMETICO_DIVISAO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                             }
                         }
 
                     } else if (c == '*') {
-
+                         c = buffer.proximoCaractere();
+                         System.out.println(c);
+                        if(buffer.getTamanhoCodigo()==1){
+                             return new Token(TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                        }else if(c=='/'){
+                            return new Token(TipoToken.DELIMITADOR_COMENTARIO_BLOCO_FIM, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                        }else{
                         return new Token(TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-
+                        }
                     } else {
                         estado = -1;
                     }
