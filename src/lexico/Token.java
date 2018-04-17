@@ -43,5 +43,9 @@ public class Token {
 	public void setPosicao(int posicao) {
 		this.posicao = posicao;
 	}
+	
+	public void print(){
+		System.out.println("<" + tipoToken.toString() + ", " + lexema + ">");
+	}
 
 }

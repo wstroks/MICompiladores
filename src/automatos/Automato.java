@@ -1,7 +1,6 @@
 package automatos;
 
 import lexico.Buffer;
-import lexico.TipoToken;
 import lexico.Token;
 
 /**
@@ -12,6 +11,7 @@ import lexico.Token;
 public abstract class Automato {
 	
 	protected Buffer buffer;
+	protected String lexema = "";
 	
 	public Automato(Buffer buffer){
 		this.buffer = buffer;
@@ -73,6 +73,16 @@ public abstract class Automato {
     
     public static boolean isBarraInvertida(Character c){
     	return (int) c == 92;
+    }
+    
+    protected void consumirCaractere(boolean sumidouro){
+    	char c = buffer.proximoCaractere();
+    	System.out.println(" ------------> caractere consumido: " + c + " | posicao do caractere consumido: " + (buffer.getPosicaoAtual()-1));
+    	lexema += c;
+    	if(sumidouro){
+    		buffer.goBack();
+    		System.out.println("caractere atual no sumidouro: " + buffer.getCaractereAtual());
+    	}
     }
 	
 }

@@ -14,9 +14,9 @@ import lexico.Token;
  *
  * @author wstro
  */
-public class AutomatoOpAritmetico extends Automato {
+public class AutomatoOperadorAritmetico extends Automato {
 
-    public AutomatoOpAritmetico(Buffer buffer) {
+    public AutomatoOperadorAritmetico(Buffer buffer) {
         super(buffer);
     }
 

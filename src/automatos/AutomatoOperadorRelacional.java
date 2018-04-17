@@ -10,9 +10,9 @@ import lexico.TipoToken;
 import lexico.Token;
 
 
-public class AutomatoRelacional extends Automato{
+public class AutomatoOperadorRelacional extends Automato{
 	
-	public AutomatoRelacional(Buffer buffer) {
+	public AutomatoOperadorRelacional(Buffer buffer) {
 		super(buffer);
 	}
 

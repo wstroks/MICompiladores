@@ -15,9 +15,9 @@ import lexico.Token;
  */
 
 
-public class AutomatoLogico extends Automato{
+public class AutomatoOperadorLogico extends Automato{
 	
-	public AutomatoLogico(Buffer buffer) {
+	public AutomatoOperadorLogico(Buffer buffer) {
 		super(buffer);
 	}
 

@@ -1,8 +1,7 @@
 package lexico;
 
-
-import automatos.AutomatoCadeiaCaracteres;
-import automatos.AutomatoLogico;
+import automatos.Automato;
+import automatos.AutomatoNumero;
 
 /**
  * 
@@ -16,10 +15,13 @@ public class Main {
 		try {
 
 			Buffer buffer = new Buffer("arquivos/entrada.txt");
-			//buffer.printCodigo();
-			                 AutomatoLogico automato = new AutomatoLogico(buffer);
-			Token token = automato.executar();
-			System.out.println(token.getTipoToken());
+			Lexico analisador = new Lexico(buffer);
+			analisador.run();
+			
+//			Automato numero = new AutomatoNumero(buffer);
+//			Token token = numero.executar();
+//			System.out.println("lexema: " + token.getLexema());
+//			System.out.println("posicao caractere: " + buffer.getCaractereAtual());
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

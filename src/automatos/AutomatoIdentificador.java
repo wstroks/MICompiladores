@@ -21,52 +21,56 @@ public class AutomatoIdentificador extends Automato{
 	@SuppressWarnings("static-access")
 	@Override
 	public Token executar() {
-		
+		System.out.println("Automato Identificador");
 		int estado = 0;
-                int contador=0;
-		char c = buffer.proximoCaractere();
+        int contador = 0;
+		
 		while(!buffer.fimCodigo()){
+			char c = buffer.lookAhead();
 			switch (estado) {
 				case 0:
 					System.out.println("estado 0: " + c);
 					if(this.isLetra(c)){
-                                            contador++;
-                                            estado=1;
-                                        }
+                        contador++;
+                        estado = 1;
+                        consumirCaractere(false);
+                    }
 					else{
 						estado = -1;
 					}
 					break;
-                                case 1:
-                                    c = buffer.proximoCaractere();
-                                    contador++;
-                                     System.out.println("estado 1: " + c);
-                                     if(contador==buffer.getTamanhoCodigo()){
-                                         return new Token(TipoToken.IDENTIFICADOR, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                     }else{
-                                     if(this.isLetra(c)){
-                                         
-                                         estado = 1;
-                                     }else if(this.isDigito(c)){
-                                         
-                                         estado = 1;
-                                     }else if(c=='_'){
-                                         
-                                         estado = 1;
-                                     }else{
-                                         return new Token(TipoToken.IDENTIFICADOR, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                     }
-                                     
-                                     }break;
+                case 1:
+                    contador++;
+                     System.out.println("estado 1: " + c);
+                     if(contador == buffer.getTamanhoCodigo()){
+                    	 consumirCaractere(false);
+                         return new Token(TipoToken.IDENTIFICADOR, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                     }else{
+	                     if(this.isLetra(c)){
+	                    	 consumirCaractere(false);
+	                         estado = 1;
+	                     }else if(this.isDigito(c)){
+	                    	 consumirCaractere(false);
+	                         estado = 1;
+	                     }else if(c=='_'){  
+	                    	 consumirCaractere(false);
+	                         estado = 1;
+	                     }else{
+	                         return new Token(TipoToken.IDENTIFICADOR, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+	                     }
+                     }
+                     break;
 	
 				default:
 					System.out.println("estado default: " + c);
-					return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					//lexema += buffer.proximoCaractere();
+					consumirCaractere(true);
+					return new Token(TipoToken.IDENTIFICADOR, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 			}
 			
 		}
 		
-		return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+		return new Token(TipoToken.INDEFINIDO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 		
 	}
 

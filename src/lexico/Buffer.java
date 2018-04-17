@@ -39,29 +39,58 @@ public class Buffer {
 			linhaAtual++;
 		}
 		
-		return this.codigo.charAt(posicaoAtual++);
+		return codigo.charAt(posicaoAtual++);
 	}
 	
 	public int getLinhaAtual() {
 		return linhaAtual;
 	}
+	
 	public void setLinhaAtual(int linhaAtual) {
 		this.linhaAtual = linhaAtual;
 	}
+	
 	public int getPosicaoAtual() {
 		return posicaoAtual;
 	}
+	
 	public void setPosicaoAtual(int posicaoAtual) {
 		this.posicaoAtual = posicaoAtual;
 	}
 	
 	public int getTamanhoCodigo(){
-		return this.codigo.length();
+		return codigo.length();
 	}
 	
 	public boolean fimCodigo(){
-		return this.codigo.length() == (this.posicaoAtual-1);
+		return codigo.length() == (this.posicaoAtual);
 	}
+	
+	public char getCaractereAtual(){
+		if(this.fimCodigo()){
+			return (Character) null;
+		}
+		return codigo.charAt(posicaoAtual);
+	}
+	
+	public char lookAhead(){
+		System.out.println("\ntamanho do codigo: " + getTamanhoCodigo());
+		System.out.println("posicao atual: " + getPosicaoAtual());
+		System.out.println("caractere atual: " + getCaractereAtual()+"\n");
+		if(this.fimCodigo()){
+			return (Character) null;
+		}
+		return codigo.charAt(posicaoAtual + 1);
+	}
+	
+	public char lookBack(){
+		return codigo.charAt(posicaoAtual - 1);
+	}
+	
+	public void goBack(){
+		posicaoAtual--;
+	}
+	
 	
 
 }

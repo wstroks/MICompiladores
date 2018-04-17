@@ -18,17 +18,17 @@ public class AutomatoCadeiaCaracteres extends Automato{
 	@SuppressWarnings("static-access")
 	@Override
 	public Token executar() {
-		
+		System.out.println("Automato Cadeia de Caracteres");
 		int estado = 0;
-		char c = buffer.proximoCaractere();
+		
 		while(!buffer.fimCodigo()){
-			System.out.println("Linha: " + buffer.getLinhaAtual());
+			char c = buffer.lookAhead();
 			switch (estado) {
 				case 0:
 					System.out.println("	estado 0: " + c);
 					if(c == '"'){
 						estado = 1;
-						c = buffer.proximoCaractere();
+						consumirCaractere(false);
 					}
 					else{
 						estado = -1;
@@ -38,14 +38,17 @@ public class AutomatoCadeiaCaracteres extends Automato{
 				case 1:
 					System.out.println("	estado 1: " + c);
 					if(c == '"'){
-						return new Token(TipoToken.CADEIA_CARACTERES, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+						consumirCaractere(false);
+						return new Token(TipoToken.CADEIA_CARACTERES, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 					}
 					else if(this.isLetra(c) || this.isDigito(c) || this.isSimbolo(c)){
-						c = buffer.proximoCaractere();
+						consumirCaractere(false);
+						//c = buffer.proximoCaractere();
 					}
 					else if(this.isBarraInvertida(c)){
 						estado = 2;
-						c = buffer.proximoCaractere();
+						consumirCaractere(false);
+						//c = buffer.proximoCaractere();
 					}
 					else{
 						estado = -1;
@@ -54,11 +57,11 @@ public class AutomatoCadeiaCaracteres extends Automato{
 				case 2:
 					System.out.println("	estado 2: " + c);
 					if(this.isBarraInvertida(c)){
-						c = buffer.proximoCaractere();
+						lexema += buffer.proximoCaractere();
 					}
 					else if(this.isLetra(c) || this.isDigito(c) || this.isSimbolo(c) || c == '"'){
 						estado = 1;
-						c = buffer.proximoCaractere();
+						consumirCaractere(false);
 					}
 					else{
 						estado = -1;
@@ -67,12 +70,14 @@ public class AutomatoCadeiaCaracteres extends Automato{
 	
 				default:
 					System.out.println("	estado default: " + c);
-					return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					consumirCaractere(true);
+					return new Token(TipoToken.CADEIA_CARACTERES, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					//return new Token(TipoToken.INDEFINIDO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 			}
 			
 		}
 		
-		return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+		return new Token(TipoToken.INDEFINIDO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 		
 	}
 
