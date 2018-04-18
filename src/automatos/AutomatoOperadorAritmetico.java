@@ -36,12 +36,13 @@ public class AutomatoOperadorAritmetico extends Automato {
                     System.out.println("estado 0: " + c);
                     if (c == '+') {
                         if (buffer.getTamanhoCodigo() == 1) {
+                        	consumirCaractere();
                             return getToken(TipoToken.OPERADOR_ARITIMETICO_ADICAO);
                         } else {
                             //c = buffer.proximoCaractere();
                         	consumirCaractere();
                             System.out.println(c);
-                            if (c == '+') {
+                            if (c == '+') {//BUG AQUI
                                 return getToken(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
                             } else {
                                 return getToken(TipoToken.OPERADOR_ARITIMETICO_ADICAO);

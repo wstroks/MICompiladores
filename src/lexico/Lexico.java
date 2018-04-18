@@ -4,6 +4,9 @@ import automatos.Automato;
 import automatos.AutomatoCadeiaCaracteres;
 import automatos.AutomatoIdentificador;
 import automatos.AutomatoNumero;
+import automatos.AutomatoOperadorAritmetico;
+import automatos.AutomatoOperadorLogico;
+import automatos.AutomatoOperadorRelacional;
 
 /**
  * 
@@ -16,6 +19,9 @@ public class Lexico {
 	private Automato automatoIdentificador;
 	private Automato automatoCadeiaCaracteres;
 	private Automato automatoNumero;
+	private Automato automatoOpAritimetico;
+	private Automato automatoOpLogico;
+	private Automato automatoOpRelacional;
 
 	public Lexico(Buffer buffer){
 		this.buffer = buffer;
@@ -23,9 +29,14 @@ public class Lexico {
 	}
 	
 	private void instanciarAutomatos(){
-		this.automatoIdentificador = new AutomatoIdentificador(buffer);
-		this.automatoCadeiaCaracteres = new AutomatoCadeiaCaracteres(buffer);
-		this.automatoNumero = new AutomatoNumero(buffer);
+		automatoIdentificador = new AutomatoIdentificador(buffer);
+		automatoCadeiaCaracteres = new AutomatoCadeiaCaracteres(buffer);
+		automatoNumero = new AutomatoNumero(buffer);
+		
+		//Operadores
+		automatoOpAritimetico = new AutomatoOperadorAritmetico(buffer);
+		automatoOpLogico = new AutomatoOperadorLogico(buffer);
+		automatoOpRelacional = new AutomatoOperadorRelacional(buffer);
 	}
 	
 	public void run(){
@@ -44,16 +55,31 @@ public class Lexico {
 					continue;
 				}
 			}
-			
-			if(c == '"'){
+			else if(c == '"'){
 				token = automatoCadeiaCaracteres.executar();
 				if(verficarToken(token)){
 					continue;
 				}
 			}
-			
-			if(Automato.isDigito(c) || c == '-'){
+			else if(Automato.isDigito(c) || c == '-'){
 				token = automatoNumero.executar();
+				if(verficarToken(token)){
+					continue;
+				}
+			}
+			else{
+				//existe um bug nesse automato
+//				token = automatoOpAritimetico.executar();
+//				if(verficarToken(token)){
+//					continue;
+//				}
+				
+				token = automatoOpLogico.executar();
+				if(verficarToken(token)){
+					continue;
+				}
+				
+				token = automatoOpRelacional.executar();
 				if(verficarToken(token)){
 					continue;
 				}

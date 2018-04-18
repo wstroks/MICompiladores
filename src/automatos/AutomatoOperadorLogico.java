@@ -33,6 +33,7 @@ public class AutomatoOperadorLogico extends Automato {
 			case 0:
 				System.out.println("estado 0: " + c);
 				if (c == '!') {
+					consumirCaractere();
 					if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
 					}
@@ -44,19 +45,19 @@ public class AutomatoOperadorLogico extends Automato {
 						return getToken(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
 					}
 				} else if (c == '&') {
+					consumirCaractere();
 					if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.INDEFINIDO);
 					}
 					//c = buffer.proximoCaractere();
-					consumirCaractere();
 					verifica = 1;
 					estado = 1;
 				} else if (c == '|') {
+					consumirCaractere();
 					if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.INDEFINIDO);
 					}
 					//c = buffer.proximoCaractere();
-					consumirCaractere();
 					verifica = 2;
 					estado = 1;
 				}
@@ -66,6 +67,7 @@ public class AutomatoOperadorLogico extends Automato {
 				}
 				break;
 			case 1:
+				consumirCaractere();
 				System.out.println("estado 1: " + c);
 				if (c == '&') {
 					return getToken(TipoToken.OPERADOR_LOGICO_E);

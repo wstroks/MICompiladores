@@ -27,33 +27,33 @@ public class AutomatoOperadorRelacional extends Automato {
 			case 0:
 				System.out.println("estado 0: " + c);
 				if (c == '!') {
+					consumirCaractere();
 					if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
 					}
 					//c = buffer.proximoCaractere();
-					consumirCaractere();
 					estado = 1;
 				} else if (c == '>') {
+					consumirCaractere();
 					if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
 					}
 					//c = buffer.proximoCaractere();
-					consumirCaractere();
 					estado = 2;
 
 				} else if (c == '<') {
+					consumirCaractere();
 					if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
 					}
 					//c = buffer.proximoCaractere();
-					consumirCaractere();
 					estado = 3;
 				} else if (c == '=') {
+					consumirCaractere();
 					if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
 					}
 					//c = buffer.proximoCaractere();
-					consumirCaractere();
 					estado = 4;
 				} else {
 					estado = -1;
@@ -62,6 +62,7 @@ public class AutomatoOperadorRelacional extends Automato {
 
 				break;
 			case 1:
+				consumirCaractere();
 				System.out.println("estado 1: " + c);
 				if (c == '=') {
 					return getToken(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
@@ -70,6 +71,7 @@ public class AutomatoOperadorRelacional extends Automato {
 				}
 
 			case 2:
+				consumirCaractere();
 				System.out.println("estado 2: " + c);
 				if (c == '=') {
 					return getToken(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
@@ -78,6 +80,7 @@ public class AutomatoOperadorRelacional extends Automato {
 				}
 
 			case 3:
+				consumirCaractere();
 				System.out.println("estado 3: " + c);
 				if (c == '=') {
 					return getToken(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
@@ -85,6 +88,7 @@ public class AutomatoOperadorRelacional extends Automato {
 					return getToken(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
 				}
 			case 4:
+				consumirCaractere();
 				System.out.println("estado 3: " + c);
 				if (c == '=') {
 					return getToken(TipoToken.OPERADOR_RELACIONAL_IGUAL);

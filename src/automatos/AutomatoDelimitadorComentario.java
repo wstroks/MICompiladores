@@ -32,12 +32,11 @@ public class AutomatoDelimitadorComentario extends Automato{
 				case 0:
 					System.out.println("estado 0: " + c);
 					if(c == '/'){
+						consumirCaractere();
 						if(buffer.getTamanhoCodigo()==1){
 						    return getToken(TipoToken.OPERADOR_ARITIMETICO_DIVISAO);    
 						}
                         //c=buffer.proximoCaractere();
-						consumirCaractere();
-                       
                         contador++;
                         if(c=='*'){
                         	estado=1;
@@ -52,11 +51,11 @@ public class AutomatoDelimitadorComentario extends Automato{
                
                     }
 					else if(c=='*'){
+						consumirCaractere();
 						if(buffer.getTamanhoCodigo()==1){
 							return getToken(TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO);
 						}
 	                    //c=buffer.proximoCaractere();
-						consumirCaractere();
 	                    contador++;
 	                    
 	                    if(c=='/'){

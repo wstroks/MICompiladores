@@ -31,6 +31,8 @@ public class Buffer {
 	@SuppressWarnings("null")
 	public char proximoCaractere(){
 		
+		pularComentario();
+		
 		if(this.fimCodigo()){
 			return (Character) null;
 		}
@@ -81,8 +83,15 @@ public class Buffer {
 		return codigo.charAt(posicaoAtual);
 	}
 	
-	public char lookBack(){
-		return codigo.charAt(posicaoAtual - 1);
+	public char doubleLookAhead(){
+		if(this.fimCodigo()){
+			return (Character) null;
+		}
+		return codigo.charAt(posicaoAtual++);
+	}
+	
+	private void pularComentario(){
+		//vou implementar ainda
 	}
 
 }
