@@ -24,51 +24,50 @@ public class AutomatoDelimitador extends Automato{
 	public Token executar() {
 		
 		int estado = 0;
-		char c = buffer.proximoCaractere();
+		//char c = buffer.proximoCaractere();
 		while(!buffer.fimCodigo()){
+			char c = buffer.lookAhead();
 			switch (estado) {
 				case 0:
 					System.out.println("estado 0: " + c);
 					if(c == ';'){
-                                            
-                                            return new Token(TipoToken.DELIMITADOR_PONTO_VIRGULA, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                            
+						consumirCaractere();
+						return getToken(TipoToken.DELIMITADOR_PONTO_VIRGULA);                   
 					}else if(c=='.'){
-                                            return new Token(TipoToken.DELIMITADOR_PONTO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                        }
-                                        else if(c=='('){
-                                            return new Token(TipoToken.DELIMITADOR_ABRE_PARENTESES, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                        }
-                                        else if(c==')'){
-                                            return new Token(TipoToken.DELIMITADOR_FECHA_PARENTESES, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                        }else if(c=='{'){
-                                            return new Token(TipoToken.DELIMITADOR_ABRE_CHAVE, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                        }
-                                        else if(c=='}'){
-                                            return new Token(TipoToken.DELIMITADOR_FECHA_CHAVE, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                        }else if(c==','){
-                                            return new Token(TipoToken.DELIMITADOR_VIRGULA, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                        }
-                                        else if(c==']'){
-                                            return new Token(TipoToken.DELIMITADOR_FECHA_COLCHETE, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                        }
-                                        else if(c=='['){
-                                            return new Token(TipoToken.DELIMITADOR_ABRE_COLCHETE, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-                                        }
+                        return getToken(TipoToken.DELIMITADOR_PONTO);
+                    }
+                    else if(c=='('){
+                        return getToken(TipoToken.DELIMITADOR_ABRE_PARENTESES);
+                    }
+                    else if(c==')'){
+                        return getToken(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+                    }else if(c=='{'){
+                        return getToken(TipoToken.DELIMITADOR_ABRE_CHAVE);
+                    }
+                    else if(c=='}'){
+                        return getToken(TipoToken.DELIMITADOR_FECHA_CHAVE);
+                    }else if(c==','){
+                        return getToken(TipoToken.DELIMITADOR_VIRGULA);
+                    }
+                    else if(c==']'){
+                        return getToken(TipoToken.DELIMITADOR_FECHA_COLCHETE);
+                    }
+                    else if(c=='['){
+                        return getToken(TipoToken.DELIMITADOR_ABRE_COLCHETE);
+                    }
 					else{
 						estado = -1;
 					}
 					break;
-                                                         
-	
+                                                         	
 				default:
 					System.out.println("estado default: " + c);
-					return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					return getToken(TipoToken.INDEFINIDO);
 			}
 			
 		}
 		
-		return new Token(TipoToken.INDEFINIDO, "", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+		return getToken(TipoToken.INDEFINIDO);
 		
 	}
 

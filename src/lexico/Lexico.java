@@ -29,15 +29,9 @@ public class Lexico {
 	}
 	
 	public void run(){
-		int cont = 0;
-		System.out.println("iniciando core...");
 		while(!buffer.fimCodigo()){
-			cont++;
-			//char c = buffer.getCaractereAtual();
 			char c = buffer.lookAhead();
-			//System.out.println("posicao atual: " + buffer.getPosicaoAtual());
-			System.out.println("caractere a ser analisado: " + c);
-			//System.exit(0);
+			//System.out.println("caractere a ser analisado: " + c);
 			if((Character) c == null){
 				break;
 			}
@@ -65,9 +59,6 @@ public class Lexico {
 				}
 			}
 			
-			if(cont > 5){
-				System.exit(0);
-			}
 		}
 		
 	}

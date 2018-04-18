@@ -1,6 +1,7 @@
 package automatos;
 
 import lexico.Buffer;
+import lexico.TipoToken;
 import lexico.Token;
 
 /**
@@ -75,14 +76,14 @@ public abstract class Automato {
     	return (int) c == 92;
     }
     
-    protected void consumirCaractere(boolean sumidouro){
+    protected void consumirCaractere(){
     	char c = buffer.proximoCaractere();
-    	System.out.println(" ------------> caractere consumido: " + c + " | posicao do caractere consumido: " + (buffer.getPosicaoAtual()-1));
     	lexema += c;
-    	if(sumidouro){
-    		buffer.goBack();
-    		System.out.println("caractere atual no sumidouro: " + buffer.getCaractereAtual());
-    	}
+    	System.out.println("-----> caractere consumido: " + c + " | posicao: " + (buffer.getPosicaoAtual()-1));
+    }
+    
+    protected Token getToken(TipoToken tipo){
+    	return new Token(tipo, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
     }
 	
 }

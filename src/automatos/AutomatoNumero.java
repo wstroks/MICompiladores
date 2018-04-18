@@ -34,14 +34,14 @@ public class AutomatoNumero extends Automato {
         	char c = buffer.lookAhead();
             switch (estado) {
                 case 0:
-                    System.out.println("estado 0: " + c);
+                    //System.out.println("estado 0: " + c);
                     if (c == '-'){ 
-                    	consumirCaractere(false);
+                    	consumirCaractere();
                         if(buffer.getTamanhoCodigo() == 1){
-                            return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            return getToken(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
                         }
                         else if(contadorIncremento == 1){
-                            return new Token(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            return getToken(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
                         }
 	                    contador++;
 	                    contadorIncremento++;
@@ -49,17 +49,17 @@ public class AutomatoNumero extends Automato {
 
                     }
                     else if (c == ' ') {
-                    	consumirCaractere(false);
+                    	consumirCaractere();
                         contador++;
                         estado = 0;
                     }
                     else if (this.isDigito(c)) {
-                    	consumirCaractere(false);
+                    	consumirCaractere();
                         if (buffer.getTamanhoCodigo() == 1) {
-                            return new Token(TipoToken.NUMERO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            return getToken(TipoToken.NUMERO);
                         } 
                         else if (contador == buffer.getTamanhoCodigo()) {
-                            return new Token(TipoToken.NUMERO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            return getToken(TipoToken.NUMERO);
                         } 
                         else if (contador < buffer.getTamanhoCodigo()) {
                             contador++;
@@ -72,8 +72,8 @@ public class AutomatoNumero extends Automato {
                     } 
                     else {
                         if(contadorIncremento == 1){
-                        	consumirCaractere(false);
-                            return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                        	consumirCaractere();
+                            return getToken(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
                         }
                         estado = -1;
                     }
@@ -81,7 +81,7 @@ public class AutomatoNumero extends Automato {
                 case 1:
                     System.out.println("estado 1: " + c);
                     if (c == '.') {
-                    	consumirCaractere(false);
+                    	consumirCaractere();
                         estado = 2;
                         contador++;                   
                     }
@@ -89,9 +89,9 @@ public class AutomatoNumero extends Automato {
                 case 2:
                     //System.out.println("estado 2: " + c);
                     if (this.isDigito(c)) {
-                    	consumirCaractere(false);
+                    	consumirCaractere();
                         if (contador == buffer.getTamanhoCodigo()) {
-                            return new Token(TipoToken.NUMERO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                            return getToken(TipoToken.NUMERO);
                         }
                         else{
                             contador++;
@@ -99,18 +99,17 @@ public class AutomatoNumero extends Automato {
                         }
                     }
                     else {
-                        return new Token(TipoToken.NUMERO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                        return getToken(TipoToken.NUMERO);
                     }
                     break;
                 default:
-                    System.out.println("estado default: " + c);
-                    consumirCaractere(true);
-                    return new Token(TipoToken.NUMERO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                    //System.out.println("estado default: " + c);
+                    return getToken(TipoToken.NUMERO);
             }
 
         }
 
-        return new Token(TipoToken.INDEFINIDO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+        return getToken(TipoToken.INDEFINIDO);
 
     }
 

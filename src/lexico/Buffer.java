@@ -24,7 +24,7 @@ public class Buffer {
 	public void printCodigo(){
 		while(!fimCodigo()){
 			char c = proximoCaractere();
-			System.out.println("caractere: " + c + " | " + "linha: " + linhaAtual + " | " + "posição atual: " + posicaoAtual);
+			//System.out.println("caractere: " + c + " | " + "linha: " + linhaAtual + " | " + "posição atual: " + posicaoAtual);
 		}
 	}
 	
@@ -63,7 +63,7 @@ public class Buffer {
 	}
 	
 	public boolean fimCodigo(){
-		return codigo.length() == (this.posicaoAtual);
+		return codigo.length() == posicaoAtual;
 	}
 	
 	public char getCaractereAtual(){
@@ -74,23 +74,15 @@ public class Buffer {
 	}
 	
 	public char lookAhead(){
-		System.out.println("\ntamanho do codigo: " + getTamanhoCodigo());
-		System.out.println("posicao atual: " + getPosicaoAtual());
-		System.out.println("caractere atual: " + getCaractereAtual()+"\n");
+		//System.out.println("\nlook ahead: tamanho do codigo: " + getTamanhoCodigo() + " | posicao atual: " + getPosicaoAtual() + " | caractere atual: " + getCaractereAtual()+"\n");
 		if(this.fimCodigo()){
 			return (Character) null;
 		}
-		return codigo.charAt(posicaoAtual + 1);
+		return codigo.charAt(posicaoAtual);
 	}
 	
 	public char lookBack(){
 		return codigo.charAt(posicaoAtual - 1);
 	}
-	
-	public void goBack(){
-		posicaoAtual--;
-	}
-	
-	
 
 }

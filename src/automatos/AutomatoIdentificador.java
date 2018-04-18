@@ -29,48 +29,47 @@ public class AutomatoIdentificador extends Automato{
 			char c = buffer.lookAhead();
 			switch (estado) {
 				case 0:
-					System.out.println("estado 0: " + c);
+					//System.out.println("estado 0: " + c);
 					if(this.isLetra(c)){
                         contador++;
                         estado = 1;
-                        consumirCaractere(false);
+                        consumirCaractere();
                     }
 					else{
 						estado = -1;
 					}
 					break;
                 case 1:
-                    contador++;
-                     System.out.println("estado 1: " + c);
+                     contador++;
+                     //System.out.println("estado 1: " + c);
                      if(contador == buffer.getTamanhoCodigo()){
-                    	 consumirCaractere(false);
-                         return new Token(TipoToken.IDENTIFICADOR, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                    	 consumirCaractere();
+                         return getToken(TipoToken.IDENTIFICADOR);
                      }else{
 	                     if(this.isLetra(c)){
-	                    	 consumirCaractere(false);
+	                    	 consumirCaractere();
 	                         estado = 1;
 	                     }else if(this.isDigito(c)){
-	                    	 consumirCaractere(false);
+	                    	 consumirCaractere();
 	                         estado = 1;
 	                     }else if(c=='_'){  
-	                    	 consumirCaractere(false);
+	                    	 consumirCaractere();
 	                         estado = 1;
 	                     }else{
-	                         return new Token(TipoToken.IDENTIFICADOR, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+	                         return getToken(TipoToken.IDENTIFICADOR);
 	                     }
                      }
                      break;
 	
 				default:
-					System.out.println("estado default: " + c);
-					//lexema += buffer.proximoCaractere();
-					consumirCaractere(true);
-					return new Token(TipoToken.IDENTIFICADOR, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					//System.out.println("estado default: " + c);
+					consumirCaractere();
+					return getToken(TipoToken.IDENTIFICADOR);
 			}
 			
 		}
 		
-		return new Token(TipoToken.INDEFINIDO, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+		return getToken(TipoToken.INDEFINIDO);
 		
 	}
 
