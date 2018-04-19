@@ -13,63 +13,66 @@ import lexico.Token;
  *
  * @author wstro
  */
-public class AutomatoDelimitador extends Automato{
-	
-	public AutomatoDelimitador(Buffer buffer) {
-		super(buffer);
-	}
+public class AutomatoDelimitador extends Automato {
 
-	@SuppressWarnings("static-access")
-	@Override
-	public Token executar() {
-		
-		lexema = "";
-		int estado = 0;
+    public AutomatoDelimitador(Buffer buffer) {
+        super(buffer);
+    }
 
-		while(!buffer.fimCodigo()){
-			char c = buffer.lookAhead();
-			switch (estado) {
-				case 0:
-					System.out.println("estado 0: " + c);
-					if(c == ';'){
-						consumirCaractere();
-						return getToken(TipoToken.DELIMITADOR_PONTO_VIRGULA);                   
-					}else if(c=='.'){
+    @SuppressWarnings("static-access")
+    @Override
+    public Token executar() {
+
+        lexema = "";
+        int estado = 0;
+        System.out.println("Automato Delimitador exemplo: ; , .");
+
+        while (!buffer.fimCodigo()) {
+            char c = buffer.lookAhead();
+            switch (estado) {
+                case 0:
+                    //System.out.println("estado 0: " + c);
+                    if (c == ';') {
+                        consumirCaractere();
+                        return getToken(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+                    } else if (c == '.'){ 
+                        consumirCaractere();
                         return getToken(TipoToken.DELIMITADOR_PONTO);
-                    }
-                    else if(c=='('){
+                    } else if (c == '(') {
+                        consumirCaractere();
                         return getToken(TipoToken.DELIMITADOR_ABRE_PARENTESES);
-                    }
-                    else if(c==')'){
+                    } else if (c == ')') {
+                        consumirCaractere();
                         return getToken(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-                    }else if(c=='{'){
+                    } else if (c == '{') {
+                        consumirCaractere();
                         return getToken(TipoToken.DELIMITADOR_ABRE_CHAVE);
-                    }
-                    else if(c=='}'){
+                    } else if (c == '}') {
+                        consumirCaractere();
                         return getToken(TipoToken.DELIMITADOR_FECHA_CHAVE);
-                    }else if(c==','){
+                    } else if (c == ',') {
+                        consumirCaractere();
                         return getToken(TipoToken.DELIMITADOR_VIRGULA);
-                    }
-                    else if(c==']'){
+                    } else if (c == ']') {
+                        consumirCaractere();
                         return getToken(TipoToken.DELIMITADOR_FECHA_COLCHETE);
-                    }
-                    else if(c=='['){
+                    } else if (c == '[') {
+                        consumirCaractere();
                         return getToken(TipoToken.DELIMITADOR_ABRE_COLCHETE);
+                    } else {
+                        estado = -1;
                     }
-					else{
-						estado = -1;
-					}
-					break;
-                                                         	
-				default:
-					System.out.println("estado default: " + c);
-					return getToken(TipoToken.INDEFINIDO);
-			}
-			
-		}
-		
-		return getToken(TipoToken.INDEFINIDO);
-		
-	}
+                    break;
+
+                default:
+                    System.out.println("estado default: " + c);
+                    return getToken(TipoToken.INDEFINIDO);
+            }
+
+        }
+
+        return getToken(TipoToken.INDEFINIDO);
+
+    }
 
 }
