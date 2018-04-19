@@ -22,8 +22,8 @@ public class AutomatoIdentificador extends Automato{
 	@Override
 	public Token executar() {
 		System.out.println("Automato Identificador");
+		lexema = "";
 		int estado = 0;
-        int contador = 0;
 		
 		while(!buffer.fimCodigo()){
 			char c = buffer.lookAhead();
@@ -31,7 +31,6 @@ public class AutomatoIdentificador extends Automato{
 				case 0:
 					//System.out.println("estado 0: " + c);
 					if(this.isLetra(c)){
-                        contador++;
                         estado = 1;
                         consumirCaractere();
                     }
@@ -40,11 +39,10 @@ public class AutomatoIdentificador extends Automato{
 					}
 					break;
                 case 1:
-                     contador++;
                      //System.out.println("estado 1: " + c);
-                     if(contador == buffer.getTamanhoCodigo()){
+                     if(buffer.isUltimoCaractere()){
                     	 consumirCaractere();
-                         return getToken(TipoToken.IDENTIFICADOR);
+                         return getToken(getTipoToken());
                      }else{
 	                     if(this.isLetra(c)){
 	                    	 consumirCaractere();
@@ -56,7 +54,7 @@ public class AutomatoIdentificador extends Automato{
 	                    	 consumirCaractere();
 	                         estado = 1;
 	                     }else{
-	                         return getToken(TipoToken.IDENTIFICADOR);
+	                         return getToken(getTipoToken());
 	                     }
                      }
                      break;
@@ -64,13 +62,58 @@ public class AutomatoIdentificador extends Automato{
 				default:
 					//System.out.println("estado default: " + c);
 					consumirCaractere();
-					return getToken(TipoToken.IDENTIFICADOR);
+					return getToken(getTipoToken());
 			}
 			
 		}
 		
 		return getToken(TipoToken.INDEFINIDO);
 		
+	}
+	
+	private TipoToken getTipoToken(){
+		switch (lexema) {
+			case "const":
+				return TipoToken.PALAVRA_RESERVADA_CONST;
+			case "var":
+				return TipoToken.PALAVRA_RESERVADA_VAR;	
+			case "struct":
+				return TipoToken.PALAVRA_RESERVADA_STRUCT;	
+			case "procedure":
+				return TipoToken.PALAVRA_RESERVADA_PROCEDURE;
+			case "function":
+				return TipoToken.PALAVRA_RESERVADA_FUNCTION;
+			case "return":
+				return TipoToken.PALAVRA_RESERVADA_RETURN;
+			case "start":
+				return TipoToken.PALAVRA_RESERVADA_START;
+			case "if":
+				return TipoToken.PALAVRA_RESERVADA_IF;
+			case "then":
+				return TipoToken.PALAVRA_RESERVADA_THEN;
+			case "else":
+				return TipoToken.PALAVRA_RESERVADA_ELSE;
+			case "scan":
+				return TipoToken.PALAVRA_RESERVADA_SCAN;
+			case "print":
+				return TipoToken.PALAVRA_RESERVADA_PRINT;
+			case "int":
+				return TipoToken.PALAVRA_RESERVADA_INT;
+			case "float":
+				return TipoToken.PALAVRA_RESERVADA_FLOAT;
+			case "bool":
+				return TipoToken.PALAVRA_RESERVADA_BOOL;
+			case "string":
+				return TipoToken.PALAVRA_RESERVADA_STRING;
+			case "true":
+				return TipoToken.PALAVRA_RESERVADA_TRUE;
+			case "false":
+				return TipoToken.PALAVRA_RESERVADA_FALSE;
+			case "extends":
+				return TipoToken.PALAVRA_RESERVADA_EXTENDS;
+			default:
+				return TipoToken.IDENTIFICADOR;
+		}
 	}
 
 }

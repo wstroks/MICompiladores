@@ -45,7 +45,7 @@ public class Token {
 	}
 	
 	public void print(){
-		System.out.println("<" + tipoToken.toString() + ", " + lexema + ">");
+		System.out.println("\n<" + tipoToken.toString() + ", " + lexema + ">\n");
 	}
 
 }

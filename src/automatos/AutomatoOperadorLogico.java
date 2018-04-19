@@ -23,15 +23,16 @@ public class AutomatoOperadorLogico extends Automato {
 	@SuppressWarnings("static-access")
 	@Override
 	public Token executar() {
-
+		
+		lexema = "";
 		int estado = 0;
 		int verifica = 0;
-		//char c = buffer.proximoCaractere();
+
 		while (!buffer.fimCodigo()) {
 			char c = buffer.lookAhead();
 			switch (estado) {
 			case 0:
-				System.out.println("estado 0: " + c);
+				//System.out.println("estado 0: " + c);
 				if (c == '!') {
 					consumirCaractere();
 					if (buffer.getTamanhoCodigo() == 1) {
@@ -68,7 +69,7 @@ public class AutomatoOperadorLogico extends Automato {
 				break;
 			case 1:
 				consumirCaractere();
-				System.out.println("estado 1: " + c);
+				//System.out.println("estado 1: " + c);
 				if (c == '&') {
 					return getToken(TipoToken.OPERADOR_LOGICO_E);
 
@@ -89,7 +90,7 @@ public class AutomatoOperadorLogico extends Automato {
 				}
 
 			default:
-				System.out.println("estado default: " + c);
+				//System.out.println("estado default: " + c);
 				return getToken(TipoToken.INDEFINIDO);
 			}
 		}

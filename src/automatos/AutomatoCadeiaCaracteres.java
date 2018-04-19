@@ -18,7 +18,9 @@ public class AutomatoCadeiaCaracteres extends Automato{
 	@SuppressWarnings("static-access")
 	@Override
 	public Token executar() {
+		
 		System.out.println("Automato Cadeia de Caracteres");
+		lexema = "";
 		int estado = 0;
 		
 		while(!buffer.fimCodigo()){

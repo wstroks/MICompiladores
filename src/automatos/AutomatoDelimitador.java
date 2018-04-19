@@ -23,8 +23,9 @@ public class AutomatoDelimitador extends Automato{
 	@Override
 	public Token executar() {
 		
+		lexema = "";
 		int estado = 0;
-		//char c = buffer.proximoCaractere();
+
 		while(!buffer.fimCodigo()){
 			char c = buffer.lookAhead();
 			switch (estado) {

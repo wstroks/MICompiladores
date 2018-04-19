@@ -1,5 +1,8 @@
 package automatos;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import lexico.Buffer;
 import lexico.TipoToken;
 import lexico.Token;
@@ -17,7 +20,7 @@ public abstract class Automato {
 	public Automato(Buffer buffer){
 		this.buffer = buffer;
 	}
-
+	
 	/**
 	 * Executa o automato e retorna o token encontrado
 	 * @return Token

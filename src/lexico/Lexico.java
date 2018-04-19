@@ -40,14 +40,26 @@ public class Lexico {
 	}
 	
 	public void run(){
+		
+		char c = ' ';
+		Token token = null;
+		
 		while(!buffer.fimCodigo()){
-			char c = buffer.lookAhead();
+			c = buffer.lookAhead();
 			//System.out.println("caractere a ser analisado: " + c);
+			//System.out.println("double look ahead: " + buffer.doubleLookAhead());
 			if((Character) c == null){
 				break;
 			}
 			
-			Token token = null;
+			if(Buffer.isEspaco(c)){
+				buffer.proximoCaractere();
+				continue;
+			}
+			
+			if(c == '/' && (buffer.doubleLookAhead() == '/' || buffer.doubleLookAhead() == '*')){
+				buffer.pularComentario();
+			}
 			
 			if(Automato.isLetra(c)){
 				token = automatoIdentificador.executar();
@@ -68,21 +80,22 @@ public class Lexico {
 				}
 			}
 			else{
-				//existe um bug nesse automato
+				//os automatos abaixo estão bugados
+				
 //				token = automatoOpAritimetico.executar();
 //				if(verficarToken(token)){
 //					continue;
 //				}
-				
-				token = automatoOpLogico.executar();
-				if(verficarToken(token)){
-					continue;
-				}
-				
-				token = automatoOpRelacional.executar();
-				if(verficarToken(token)){
-					continue;
-				}
+//				
+//				token = automatoOpLogico.executar();
+//				if(verficarToken(token)){
+//					continue;
+//				}
+//				
+//				token = automatoOpRelacional.executar();
+//				if(verficarToken(token)){
+//					continue;
+//				}
 			}
 			
 		}
@@ -93,6 +106,7 @@ public class Lexico {
 		boolean tokenReconhecido = true;
 		if(token.getTipoToken().equals(TipoToken.INDEFINIDO)){
 			tokenReconhecido = false;
+			System.out.println("indefinido");
 		}
 		else{
 			token.print();

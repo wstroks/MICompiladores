@@ -26,6 +26,7 @@ public class AutomatoNumero extends Automato {
     public Token executar() {
     	
     	System.out.println("Automato Numero");
+    	lexema = "";
         int estado = 0;
         int contador = 1;
         int contadorIncremento = 0;

@@ -22,6 +22,7 @@ public class AutomatoDelimitadorComentario extends Automato{
 	@Override
 	public Token executar() {
 		
+		lexema = "";
 		int estado = 0;
 		//char c = buffer.proximoCaractere();
         int comentario=0;

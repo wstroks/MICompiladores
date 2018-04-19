@@ -19,6 +19,7 @@ public class AutomatoOperadorRelacional extends Automato {
 	@Override
 	public Token executar() {
 
+		lexema = "";
 		int estado = 0;
 		//char c = buffer.proximoCaractere();
 		while (!buffer.fimCodigo()) {

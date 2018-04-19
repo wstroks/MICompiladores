@@ -24,6 +24,7 @@ public class AutomatoOperadorAritmetico extends Automato {
     @Override
     public Token executar() {
 
+    	lexema = "";
         int estado = 0;
         int contador=0;
         int ponto=0;
