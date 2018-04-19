@@ -2,6 +2,7 @@ package lexico;
 
 import automatos.Automato;
 import automatos.AutomatoCadeiaCaracteres;
+import automatos.AutomatoDelimitador;
 import automatos.AutomatoIdentificador;
 import automatos.AutomatoNumero;
 import automatos.AutomatoOperadorAritmetico;
@@ -22,6 +23,8 @@ public class Lexico {
 	private Automato automatoOpAritimetico;
 	private Automato automatoOpLogico;
 	private Automato automatoOpRelacional;
+        private Automato automatoDelimiAutomato;
+        public Token token;
 
 	public Lexico(Buffer buffer){
 		this.buffer = buffer;
@@ -37,12 +40,15 @@ public class Lexico {
 		automatoOpAritimetico = new AutomatoOperadorAritmetico(buffer);
 		automatoOpLogico = new AutomatoOperadorLogico(buffer);
 		automatoOpRelacional = new AutomatoOperadorRelacional(buffer);
+                
+                //Delimitador . { e etc
+                automatoDelimiAutomato= new AutomatoDelimitador(buffer);
 	}
 	
 	public void run(){
 		
 		char c = ' ';
-		Token token = null;
+		token = null;
 		
 		while(!buffer.fimCodigo()){
 			c = buffer.lookAhead();
@@ -72,8 +78,8 @@ public class Lexico {
 				if(verficarToken(token)){
 					continue;
 				}
-			}
-			else if(Automato.isDigito(c) || c == '-'){
+			}//|| c == '-'){
+			else if(Automato.isDigito(c) || c=='-' ){
 				token = automatoNumero.executar();
 				if(verficarToken(token)){
 					continue;
@@ -82,20 +88,26 @@ public class Lexico {
 			else{
 				//os automatos abaixo estão bugados
 				
-//				token = automatoOpAritimetico.executar();
-//				if(verficarToken(token)){
-//					continue;
-//				}
-//				
-//				token = automatoOpLogico.executar();
-//				if(verficarToken(token)){
-//					continue;
-//				}
-//				
-//				token = automatoOpRelacional.executar();
-//				if(verficarToken(token)){
-//					continue;
-//				}
+				token = automatoOpAritimetico.executar();
+				if(verficarToken(token)){
+					continue;
+				}
+				
+				token = automatoOpLogico.executar();
+				if(verficarToken(token)){
+					continue;
+				}
+
+				token = automatoOpRelacional.executar();
+				if(verficarToken(token)){
+					continue;
+				
+                                }
+                                
+                                token = automatoDelimiAutomato.executar();
+				if(verficarToken(token)){
+					continue;
+				}
 			}
 			
 		}
