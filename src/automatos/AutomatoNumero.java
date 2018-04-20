@@ -132,7 +132,7 @@ public class AutomatoNumero extends Automato {
                 case 4:
                      consumirCaractere();
 
-                     System.out.println("asdasdasd "+c);
+                     //System.out.println("asdasdasd "+c);
                     if (buffer.fimCodigo() == true) {
                        
                        if(!this.isDigito(c)){
@@ -143,7 +143,7 @@ public class AutomatoNumero extends Automato {
                        
                          return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                     }else if(c=='.'){
-                        System.out.println("tt "+c);
+                      //  System.out.println("tt "+c);
                         buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
                         return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                         
@@ -153,7 +153,7 @@ public class AutomatoNumero extends Automato {
                        // System.out.println("digito " + c);
                         estado = 4;
                     }else {
-                        System.out.println("x "+c);
+                        //System.out.println("x "+c);
                         buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
                         return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                     }
