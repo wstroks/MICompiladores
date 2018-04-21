@@ -23,17 +23,18 @@ public class Main {
             File diretorio = new File("entrada");
             arquivos = diretorio.listFiles();
             int i=0;
-            while(i<arquivos.length){
-            String arquivo="entrada/"+(arquivos[i].getName());
-            System.out.println("Arquivo : "+arquivos[i].getName());
-            System.out.println("-------------------\n");
-            Buffer buffer = new Buffer(arquivo);
-            Lexico analisador = new Lexico(buffer);
-            analisador.run();
-            i++;
-        }
-
             
+            while(i < arquivos.length){
+            	
+	            String arquivo="entrada/"+(arquivos[i].getName());
+	            System.out.println("Arquivo : "+arquivos[i].getName());
+	            System.out.println("-------------------\n");
+	            Buffer buffer = new Buffer(arquivo);
+	            Lexico analisador = new Lexico(buffer);
+	            analisador.run();
+	            i++;
+	            
+	        }      
 
 //			Automato numero = new AutomatoNumero(buffer);
 //			Token token = numero.executar();

@@ -15,7 +15,7 @@ import automatos.AutomatoOperadorRelacional;
  *
  */
 public class Lexico {
-	
+
 	private Buffer buffer;
 	private Automato automatoIdentificador;
 	private Automato automatoCadeiaCaracteres;
@@ -23,104 +23,102 @@ public class Lexico {
 	private Automato automatoOpAritimetico;
 	private Automato automatoOpLogico;
 	private Automato automatoOpRelacional;
-        private Automato automatoDelimiAutomato;
-        public Token token;
+	private Automato automatoDelimiAutomato;
+	public Token token;
 
-	public Lexico(Buffer buffer){
+	public Lexico(Buffer buffer) {
 		this.buffer = buffer;
 		instanciarAutomatos();
 	}
-	
-	private void instanciarAutomatos(){
+
+	private void instanciarAutomatos() {
 		automatoIdentificador = new AutomatoIdentificador(buffer);
 		automatoCadeiaCaracteres = new AutomatoCadeiaCaracteres(buffer);
 		automatoNumero = new AutomatoNumero(buffer);
-		
-		//Operadores
+
+		// Operadores
 		automatoOpAritimetico = new AutomatoOperadorAritmetico(buffer);
 		automatoOpLogico = new AutomatoOperadorLogico(buffer);
 		automatoOpRelacional = new AutomatoOperadorRelacional(buffer);
-                
-                //Delimitador . { e etc
-                automatoDelimiAutomato= new AutomatoDelimitador(buffer);
+
+		// Delimitador . { e etc
+		automatoDelimiAutomato = new AutomatoDelimitador(buffer);
 	}
-	
-	public void run(){
-		
+
+	public void run() {
+
 		char c = ' ';
 		token = null;
-		
-		while(!buffer.fimCodigo()){
+
+		while (!buffer.fimCodigo()) {
 			c = buffer.lookAhead();
-			//System.out.println("caractere a ser analisado: " + c);
-			//System.out.println("double look ahead: " + buffer.doubleLookAhead());
-			if((Character) c == null){
+			// System.out.println("caractere a ser analisado: " + c);
+			// System.out.println("double look ahead: " +
+			// buffer.doubleLookAhead());
+			if ((Character) c == null) {
 				break;
 			}
-			
-			if(Buffer.isEspaco(c)){
+
+			if (Buffer.isEspaco(c)) {
 				buffer.proximoCaractere();
 				continue;
 			}
-			
-			if(c == '/' && (buffer.doubleLookAhead() == '/' || buffer.doubleLookAhead() == '*')){
+
+			if (c == '/' && (buffer.doubleLookAhead() == '/' || buffer.doubleLookAhead() == '*')) {
 				buffer.pularComentario();
 			}
-			
-			if(Automato.isLetra(c)){
+
+			if (Automato.isLetra(c)) {
 				token = automatoIdentificador.executar();
-				if(verficarToken(token)){
+				if (verficarToken(token)) {
 					continue;
 				}
-			}
-			else if(c == '"'){
+			} else if (c == '"') {
 				token = automatoCadeiaCaracteres.executar();
-				if(verficarToken(token)){
+				if (verficarToken(token)) {
 					continue;
 				}
-			}//|| c == '-'){
-			else if(Automato.isDigito(c) || c=='-' ){
+			} // || c == '-'){
+			else if (Automato.isDigito(c) || c == '-') {
 				token = automatoNumero.executar();
-				if(verficarToken(token)){
+				if (verficarToken(token)) {
 					continue;
 				}
-			}
-			else{
-				//os automatos abaixo estão bugados
-				
+			} else {
+				// os automatos abaixo estão bugados
+
 				token = automatoOpAritimetico.executar();
-				if(verficarToken(token)){
+				if (verficarToken(token)) {
 					continue;
 				}
-				
+
 				token = automatoOpLogico.executar();
-				if(verficarToken(token)){
+				if (verficarToken(token)) {
 					continue;
 				}
 
 				token = automatoOpRelacional.executar();
-				if(verficarToken(token)){
+				if (verficarToken(token)) {
 					continue;
-				
-                                }
-                                
-                                token = automatoDelimiAutomato.executar();
-				if(verficarToken(token)){
+
+				}
+
+				token = automatoDelimiAutomato.executar();
+				if (verficarToken(token)) {
 					continue;
 				}
 			}
-			
+
 		}
-		
+
 	}
-	
-	private boolean verficarToken(Token token){
+
+	private boolean verficarToken(Token token) {
 		boolean tokenReconhecido = true;
-		if(token.getTipoToken().equals(TipoToken.INDEFINIDO)){
+		if (token.getTipoToken().equals(TipoToken.INDEFINIDO)) {
 			tokenReconhecido = false;
 			System.out.println("indefinido");
-		}
-		else{
+		} else {
 			token.print();
 		}
 		return tokenReconhecido;
