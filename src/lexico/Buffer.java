@@ -160,6 +160,12 @@ public class Buffer {
 						estado = 4;
 						proximoCaractere();
 					}
+					else if(isUltimoCaractere()){
+						//Ver depois onde e se será adicionando o token de comentario
+						Token token = new Token(TipoToken.COMENTARIO_MAU_FORMADO, comentario, posicao, linha);
+						token.print();
+						continua = false;
+					}
 					else{		
 						proximoCaractere();
 					}
@@ -186,8 +192,8 @@ public class Buffer {
 		}
 		
 		//Ver depois onde e se será adicionando o token de comentario
-		Token token = new Token(tipoToken, comentario, posicao, linha);
-		token.print();
+//		Token token = new Token(tipoToken, comentario, posicao, linha);
+//		token.print();
 		
 	}
 

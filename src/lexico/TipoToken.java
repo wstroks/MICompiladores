@@ -73,8 +73,9 @@ public enum TipoToken {
     COMENTARIO_BLOCO,
 	
 	INDEFINIDO,
-        INDEFINIDO_E,
-        INDEFINIDO_OU
+    INDEFINIDO_E,
+    INDEFINIDO_OU,
+    COMENTARIO_MAU_FORMADO
 
 
 }
