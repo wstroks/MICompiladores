@@ -117,7 +117,7 @@ public class Lexico {
 		boolean tokenReconhecido = true;
 		if (token.getTipoToken().equals(TipoToken.INDEFINIDO)) {
 			tokenReconhecido = false;
-			System.out.println("indefinido");
+			//System.out.println("indefinido");
 		} else {
 			token.print();
 		}

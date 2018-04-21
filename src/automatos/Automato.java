@@ -82,7 +82,7 @@ public abstract class Automato {
     protected void consumirCaractere(){
     	char c = buffer.proximoCaractere();
     	lexema += c;
-    	System.out.println("-----> caractere consumido: " + c + " | posicao: " + (buffer.getPosicaoAtual()-1));
+    	//System.out.println("-----> caractere consumido: " + c + " | posicao: " + (buffer.getPosicaoAtual()-1));
     }
     
     protected Token getToken(TipoToken tipo){

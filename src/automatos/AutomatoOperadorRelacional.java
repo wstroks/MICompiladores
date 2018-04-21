@@ -18,7 +18,7 @@ public class AutomatoOperadorRelacional extends Automato {
 	@SuppressWarnings("static-access")
 	@Override
 	public Token executar() {
-		System.out.println("Automato Operador Relacional");
+		//System.out.println("Automato Operador Relacional");
 		lexema = "";
 		int estado = 0;
 		// char c = buffer.proximoCaractere();

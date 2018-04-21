@@ -23,7 +23,7 @@ public class AutomatoNumero extends Automato {
 	@Override
 	public Token executar() {
 
-		System.out.println("Automato Numero");
+		//System.out.println("Automato Numero");
 		lexema = "";
 		int estado = 0;
 		int contador = 0;

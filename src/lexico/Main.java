@@ -18,32 +18,37 @@ public class Main {
 
         try {
            
+        	//testarArquivosDiretorio("entrada");
+        	testarArquivo("entrada/testes-tay.txt");
 
-            File arquivos[];
-            File diretorio = new File("entrada");
-            arquivos = diretorio.listFiles();
-            int i=0;
-            
-            while(i < arquivos.length){
-            	
-	            String arquivo="entrada/"+(arquivos[i].getName());
-	            System.out.println("Arquivo : "+arquivos[i].getName());
-	            System.out.println("-------------------\n");
-	            Buffer buffer = new Buffer(arquivo);
-	            Lexico analisador = new Lexico(buffer);
-	            analisador.run();
-	            i++;
-	            
-	        }      
-
-//			Automato numero = new AutomatoNumero(buffer);
-//			Token token = numero.executar();
-//			System.out.println("lexema: " + token.getLexema());
-//			System.out.println("posicao caractere: " + buffer.getCaractereAtual());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
+    }
+        
+    private static void testarArquivosDiretorio(String nomeDiretorio) throws FileNotFoundException{
+    	
+        File arquivos[];
+        File diretorio = new File(nomeDiretorio);
+        arquivos = diretorio.listFiles();
+        int i=0;
+        
+        while(i < arquivos.length){
+        	testarArquivo(nomeDiretorio+"/"+(arquivos[i].getName()));
+        	i++;
+        } 
+    	
+    }
+    
+    private static void testarArquivo(String nomeArquivo) throws FileNotFoundException{
+    	
+        System.out.println("Testando Arquivo : "+ nomeArquivo);
+        System.out.println("-----------------------------------------------\n");
+        Buffer buffer = new Buffer(nomeArquivo);
+        Lexico analisador = new Lexico(buffer);
+        analisador.run();
+        
     }
 
 }

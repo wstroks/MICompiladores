@@ -25,7 +25,7 @@ public class AutomatoDelimitador extends Automato {
 
 		lexema = "";
 		int estado = 0;
-		System.out.println("Automato Delimitador exemplo: ; , .");
+		//System.out.println("Automato Delimitador exemplo: ; , .");
 
 		while (!buffer.fimCodigo()) {
 			char c = buffer.lookAhead();
@@ -65,7 +65,7 @@ public class AutomatoDelimitador extends Automato {
 				break;
 
 			default:
-				System.out.println("estado default: " + c);
+				//System.out.println("estado default: " + c);
 				return getToken(TipoToken.INDEFINIDO);
 			}
 

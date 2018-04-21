@@ -25,7 +25,7 @@ public class AutomatoOperadorLogico extends Automato {
 	@SuppressWarnings("static-access")
 	@Override
 	public Token executar() {
-		System.out.println("Automato OperadorLogico");
+		//System.out.println("Automato OperadorLogico");
 
 		lexema = "";
 		int estado = 0;

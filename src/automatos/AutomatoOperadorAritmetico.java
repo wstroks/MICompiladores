@@ -22,7 +22,7 @@ public class AutomatoOperadorAritmetico extends Automato {
 	@SuppressWarnings("static-access")
 	@Override
 	public Token executar() {
-		System.out.println("Automato Operador Aritmetico");
+		//System.out.println("Automato Operador Aritmetico");
 		lexema = "";
 		int estado = 0;
 		int contador = 0;

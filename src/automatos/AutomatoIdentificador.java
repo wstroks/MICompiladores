@@ -23,7 +23,7 @@ public class AutomatoIdentificador extends Automato {
 	@SuppressWarnings("static-access")
 	@Override
 	public Token executar() {
-		System.out.println("Automato Identificador");
+		//System.out.println("Automato Identificador");
 		lexema = "";
 		int estado = 0;
 		String soma = "";

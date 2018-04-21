@@ -19,7 +19,7 @@ public class AutomatoCadeiaCaracteres extends Automato {
 	@Override
 	public Token executar() {
 
-		System.out.println("Automato Cadeia de Caracteres");
+		//System.out.println("Automato Cadeia de Caracteres");
 		lexema = "";
 		int estado = 0;
 
