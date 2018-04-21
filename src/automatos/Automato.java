@@ -85,6 +85,13 @@ public abstract class Automato {
     	//System.out.println("-----> caractere consumido: " + c + " | posicao: " + (buffer.getPosicaoAtual()-1));
     }
     
+    /**
+     * Remove o último caractere do lexema
+     */
+    protected void goBackLexema(){
+    	lexema = (lexema != null && lexema.length() != 0) ? lexema.substring(0, lexema.length() - 1): lexema;
+    }
+    
     protected Token getToken(TipoToken tipo){
     	return new Token(tipo, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
     }

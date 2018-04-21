@@ -87,6 +87,10 @@ public class Buffer {
 		return codigo.charAt(posicaoAtual+1);
 	}
 	
+	public void goBack(){
+		posicaoAtual--;
+	}
+	
     public static boolean isEspaco(Character c){
     	int ascii = (int) c;
     	return (ascii == 9 || ascii == 10 || ascii == 13 || ascii == 32);

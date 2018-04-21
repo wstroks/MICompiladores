@@ -27,29 +27,24 @@ public class AutomatoNumero extends Automato {
 		lexema = "";
 		int estado = 0;
 		int contador = 0;
-		int contadorIncremento = 0;
-		String soma = "";
 
 		while (!buffer.fimCodigo()) {
 			char c = buffer.lookAhead();
 			switch (estado) {
 			case 0:
-				// System.out.println("estado 0: " + c);
+				//System.out.println("estado 0: " + c);
 				if (c == '-') {
 					consumirCaractere();
-					soma += c;
+					//soma += c;
 					if (buffer.fimCodigo() == true) {
 						return getToken(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
 					}
 					if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
 					}
-
 					estado = 1;
-
 				} else if (this.isDigito(c)) {
 					consumirCaractere();
-					soma += c;
 					if (buffer.fimCodigo() == true) {
 						return getToken(TipoToken.NUMERO);
 					}
@@ -63,102 +58,81 @@ public class AutomatoNumero extends Automato {
 				}
 				break;
 			case 1:
+				//System.out.println("estado 1: " + c);
 				consumirCaractere();
-				// System.out.println("asdas " + c);
 				if (c == ' ') {
 					contador++;
 					estado = 2;
 				} else if (c == '-') {
 					return getToken(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
 				} else if (this.isDigito(c)) {
-					soma += c;
 					estado = 3;
-
 				} else {
-					buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-					return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, "-", buffer.getLinhaAtual(),
-							buffer.getPosicaoAtual());
+					buffer.goBack();
+					goBackLexema();
+					return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, "-", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 				}
 				break;
 
 			case 2:
+				//System.out.println("estado 2: " + c);
 				consumirCaractere();
-				if (buffer.fimCodigo() == true) {
-					soma += c;
-					return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+				if (buffer.fimCodigo()) {
+					return getToken(TipoToken.NUMERO);
 				} else if (this.isDigito(c)) {
-					soma += c;
-					// System.out.println("numero " + c);
 					estado = 3;
 				} else if (c == ' ') {
 					contador++;
 					estado = 2;
 				} else {
-					buffer.setPosicaoAtual(buffer.getPosicaoAtual() - contador);
-					return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, "-", buffer.getLinhaAtual(),
-							buffer.getPosicaoAtual());
+					buffer.goBack();
+					goBackLexema();
+					return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, "-", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 				}
 				break;
 
 			case 3:
-
+				//System.out.println("estado 3: " + c);
 				consumirCaractere();
-
-				// System.out.println("3");
-				if (buffer.fimCodigo() == true) {
-					soma += c;
+				if (buffer.fimCodigo()) {
 					if (!this.isDigito(c)) {
-						buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-						return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-
+						buffer.goBack();
+						goBackLexema();
+						return getToken(TipoToken.NUMERO);
 					}
-
-					return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					return getToken(TipoToken.NUMERO);
 				} else if (this.isDigito(c)) {
-					// consumirCaractere();
-					soma += c;
-					// System.out.println("digito " + c);
 					estado = 3;
 				} else if (c == '.') {
-					soma += c;
-					// System.out.println("digito " + c);
 					estado = 4;
-
 				} else {
-
-					buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-					return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					buffer.goBack();
+					goBackLexema();
+					return getToken(TipoToken.NUMERO);
 				}
 				break;
 
 			case 4:
+				//System.out.println("estado 4: " + c);
 				consumirCaractere();
-
-				// System.out.println("asdasdasd "+c);
 				if (buffer.fimCodigo() == true) {
-
 					if (!this.isDigito(c)) {
-						buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-						return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-
+						buffer.goBack();
+						goBackLexema();
+						return getToken(TipoToken.NUMERO);
 					}
-					soma += c;
-
-					return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					return getToken(TipoToken.NUMERO);
 				} else if (c == '.') {
 					// System.out.println("tt "+c);
-					buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-					return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
-
+					buffer.goBack();
+					goBackLexema();
+					return getToken(TipoToken.NUMERO);
 				} else if (this.isDigito(c)) {
-					// consumirCaractere();
-					soma += c;
-					// System.out.println("digito " + c);
 					estado = 4;
 				} else {
-					// System.out.println("x "+c);
-					buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-					return new Token(TipoToken.NUMERO, soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					buffer.goBack();
+					goBackLexema();
+					return getToken(TipoToken.NUMERO);
 				}
 				break;
 
