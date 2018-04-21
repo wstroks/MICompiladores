@@ -120,11 +120,17 @@ public class AutomatoNumero extends Automato {
                     consumirCaractere();
                     if (buffer.fimCodigo() == true) {
                        System.out.println("estado 56: " + c);
-                       if(c=='.' && primeiroPonto==true){
+                       if(c=='.' && primeiroPonto==true && afirma==false){
                             buffer.goBack();
                             goBackLexema();
                             buffer.goBack();
                             goBackLexema();
+                            return getToken(TipoToken.NUMERO);
+                           
+                       }else if(c=='.' && primeiroPonto==true && afirma==true){
+                            buffer.goBack();
+                            goBackLexema();
+                            
                             return getToken(TipoToken.NUMERO);
                            
                        }else if (!this.isDigito(c)) {
