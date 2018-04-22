@@ -60,7 +60,9 @@ public class Lexico {
 		Token token = null;
 
 		while (!buffer.fimCodigo()) {
+			
 			c = buffer.lookAhead();
+			
 			if ((Character) c == null) {
 				break;
 			}
@@ -240,7 +242,7 @@ public class Lexico {
 	}
 	
 	private Token getTokenErro(String c){
-		return new Token(TipoToken.INDEFINIDO, c, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+		return new Token(TipoToken.INDEFINIDO, c, buffer.getLinhaAtual(), buffer.getPosicaoAtual(), true);
 	}
 
 	private ArrayList<String> getStringTokens(){

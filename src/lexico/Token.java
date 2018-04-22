@@ -62,7 +62,8 @@ public class Token {
 
 	public String getImpressaoToken(){
 		if(isErroLexico){
-			return ((linha + 1) + " " + lexema + " " + tipoToken);
+			String tipo = tipoToken == TipoToken.INDEFINIDO ? "CARACTERE_NAO_RECONHECIDO" : tipoToken.toString();
+			return ((linha + 1) + " " + lexema + " " + tipo);
 		}
 		else{
 			return ((linha + 1) + " " + tipoToken + " " + lexema);

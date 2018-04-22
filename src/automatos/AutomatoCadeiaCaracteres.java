@@ -44,6 +44,9 @@ public class AutomatoCadeiaCaracteres extends Automato {
 					estado = 2;
 					consumirCaractere();
 				} else {
+					if(c != '\n'){
+						consumirCaractere();
+					}
 					return getToken(TipoToken.CADEIA_CARACTERES_MAL_FORMADA);
 				}
 				break;
