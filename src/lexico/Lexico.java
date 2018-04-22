@@ -273,6 +273,7 @@ public class Lexico {
 			System.out.println("Nenhum erro foi encontrado");
 		}
 		else{
+			System.out.println("Erros léxicos: ");
 			for (String stringToken : getStringErros()) {
 				System.out.println(stringToken);
 			}
@@ -294,6 +295,7 @@ public class Lexico {
 			writer.println("Nenhum erro foi encontrado");
 		}
 		else{
+			writer.println("Erros léxicos: ");
 			for (String stringToken : getStringErros()) {
 				writer.println(stringToken);
 			}
