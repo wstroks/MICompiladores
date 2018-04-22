@@ -60,14 +60,17 @@ public class Token {
 		this.isErroLexico = isErroLexico;
 	}
 
-	public void print(){
-		//System.out.println("<" + tipoToken.toString() + ", " + lexema + ">");
+	public String getImpressaoToken(){
 		if(isErroLexico){
-			System.out.println((linha + 1) + " " + lexema + " " + tipoToken);
+			return ((linha + 1) + " " + lexema + " " + tipoToken);
 		}
 		else{
-			System.out.println((linha + 1) + " " + tipoToken + " " + lexema);
+			return ((linha + 1) + " " + tipoToken + " " + lexema);
 		}
+	}
+
+	public void print(){
+		System.out.println(getImpressaoToken());
 	}
 
 }

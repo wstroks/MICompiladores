@@ -96,7 +96,7 @@ public class Buffer {
 	}
 	
     public static boolean isEspaco(Character c){
-    	int ascii = (int) c;
+    	int ascii = c;
     	return (ascii == 9 || ascii == 10 || ascii == 13 || ascii == 32);
     }
 	

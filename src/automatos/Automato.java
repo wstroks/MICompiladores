@@ -1,8 +1,5 @@
 package automatos;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import lexico.Buffer;
 import lexico.TipoToken;
 import lexico.Token;
@@ -71,7 +68,7 @@ public abstract class Automato {
     }
     
     public static boolean isSimbolo(Character c){
-    	int ascii = (int) c;
+    	int ascii = c;
     	return (ascii >= 32 && ascii <= 126 && ascii != 34);
     }
     

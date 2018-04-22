@@ -1,5 +1,8 @@
 package lexico;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import automatos.Automato;
@@ -125,7 +128,6 @@ public class Lexico {
 		}
 		
 		listaErros.addAll(buffer.getListaErrosComentario());
-		printTokens();
 
 	}
 	
@@ -236,6 +238,7 @@ public class Lexico {
 			//System.out.println("indefinido");
 		} else {
 			if(tipoToken.equals(TipoToken.CADEIA_CARACTERES_MAL_FORMADA) || tipoToken.equals(TipoToken.COMENTARIO_MAL_FORMADO) ||tipoToken.equals(TipoToken.OPERADOR_LOGICO_MAL_FORMADO)){
+				token.setErroLexico(true);
 				listaErros.add(token);
 			}
 			else{
@@ -249,18 +252,53 @@ public class Lexico {
 	private Token getTokenErro(String c){
 		return new Token(TipoToken.INDEFINIDO, c, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 	}
-	
-	private void printTokens(){
+
+	private ArrayList<String> getStringTokens(){
+		ArrayList<String> output = new ArrayList<String>();
 		for (Token token : listaTokens) {
 			if(token.getTipoToken() == TipoToken.COMENTARIO_LINHA || token.getTipoToken() == TipoToken.COMENTARIO_BLOCO){
 				continue;
 			}
-			token.print();
+			output.add(token.getImpressaoToken());
+		}
+		return output;
+	}
+	
+	private ArrayList<String> getStringErros(){
+		ArrayList<String> output = new ArrayList<String>();
+		for (Token token : listaErros) {
+			output.add(token.getImpressaoToken());
+		}
+		return output;
+	}
+	
+	public void printTokens(){
+		for (String stringToken : getStringTokens()) {
+			System.out.println(stringToken);
 		}
 		System.out.print("\n");
-		for (Token token : listaErros) {
-			token.print();
+		for (String stringToken : getStringErros()) {
+			System.out.println(stringToken);
 		}
+	}
+
+	public void printTokensToFile(String output) throws IOException{
+		
+	    FileWriter arquivo = new FileWriter(output + ".txt");
+	    PrintWriter writer = new PrintWriter(arquivo);
+	    
+		for (String stringToken : getStringTokens()) {
+			writer.println(stringToken);
+		}
+		
+		writer.println("\n");
+		
+		for (String stringToken : getStringErros()) {
+			writer.println(stringToken);
+		}
+	 
+		arquivo.close();
+
 	}
 
 }

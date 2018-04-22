@@ -6,7 +6,6 @@
 package automatos;
 
 import lexico.Buffer;
-import lexico.Lexico;
 import lexico.TipoToken;
 import lexico.Token;
 
@@ -34,7 +33,7 @@ public class AutomatoIdentificador extends Automato {
                 case 0:
                     //System.out.println("estado 0: " + c);
 
-                    if (this.isLetra(c)) {
+                    if (Automato.isLetra(c)) {
                         estado = 1;
                         consumirCaractere();
                         if (buffer.fimCodigo() == true) {
@@ -52,7 +51,7 @@ public class AutomatoIdentificador extends Automato {
                     if (buffer.isUltimoCaractere()) {
                         consumirCaractere();
                         soma += c;
-                        if (c != '_' && !this.isDigito(c) && !this.isLetra(c)) {
+                        if (c != '_' && !Automato.isDigito(c) && !Automato.isLetra(c)) {
                             buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
                             soma = soma.substring(0, soma.length() - 1);
                             // System.out.println("Lexema :"+soma);
@@ -65,11 +64,11 @@ public class AutomatoIdentificador extends Automato {
                         }
 
                     } else {
-                        if (this.isLetra(c)) {
+                        if (Automato.isLetra(c)) {
                             consumirCaractere();
                             soma += c;
                             estado = 1;
-                        } else if (this.isDigito(c)) {
+                        } else if (Automato.isDigito(c)) {
                             consumirCaractere();
                             soma += c;
                             estado = 1;
