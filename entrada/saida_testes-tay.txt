@@ -1,0 +1,6 @@
+1 IDENTIFICADOR teste1
+1 OPERADOR_RELACIONAL_IGUAL ==
+1 IDENTIFICADOR teste2
+
+
+Nenhum erro foi encontrado

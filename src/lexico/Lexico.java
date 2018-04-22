@@ -269,9 +269,15 @@ public class Lexico {
 			System.out.println(stringToken);
 		}
 		System.out.print("\n");
-		for (String stringToken : getStringErros()) {
-			System.out.println(stringToken);
+		if(listaErros.isEmpty()){
+			System.out.println("Nenhum erro foi encontrado");
 		}
+		else{
+			for (String stringToken : getStringErros()) {
+				System.out.println(stringToken);
+			}
+		}
+
 	}
 
 	public void printTokensToFile(String output) throws IOException{
@@ -284,9 +290,13 @@ public class Lexico {
 		}
 		
 		writer.println("\n");
-		
-		for (String stringToken : getStringErros()) {
-			writer.println(stringToken);
+		if(listaErros.isEmpty()){
+			writer.println("Nenhum erro foi encontrado");
+		}
+		else{
+			for (String stringToken : getStringErros()) {
+				writer.println(stringToken);
+			}
 		}
 	 
 		arquivo.close();
