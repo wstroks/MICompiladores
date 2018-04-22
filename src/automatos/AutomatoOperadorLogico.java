@@ -51,20 +51,20 @@ public class AutomatoOperadorLogico extends Automato {
 				} else if (c == '&') {
 					consumirCaractere();
 					if (buffer.fimCodigo() == true) {
-						return getToken(TipoToken.INDEFINIDO_E);
+						return getToken(TipoToken.OPERADOR_LOGICO_MAL_FORMADO);
 					}
 
 					else if (buffer.getTamanhoCodigo() == 1) {
-						return getToken(TipoToken.INDEFINIDO_E);
+						return getToken(TipoToken.OPERADOR_LOGICO_MAL_FORMADO);
 					}
 					estado = 2;
 
 				} else if (c == '|') {
 					consumirCaractere();
 					if (buffer.fimCodigo() == true) {
-						return getToken(TipoToken.INDEFINIDO_OU);
+						return getToken(TipoToken.OPERADOR_LOGICO_MAL_FORMADO);
 					} else if (buffer.getTamanhoCodigo() == 1) {
-						return getToken(TipoToken.INDEFINIDO_OU);
+						return getToken(TipoToken.OPERADOR_LOGICO_MAL_FORMADO);
 					}
 					// c = buffer.proximoCaractere();
 					verifica = 2;
@@ -80,7 +80,7 @@ public class AutomatoOperadorLogico extends Automato {
 					return getToken(TipoToken.OPERADOR_LOGICO_OU);
 				} else {
 					buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-					return new Token(TipoToken.INDEFINIDO_OU, "|", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					return new Token(TipoToken.OPERADOR_LOGICO_MAL_FORMADO, "|", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 				}
 			case 2:
 
@@ -90,7 +90,7 @@ public class AutomatoOperadorLogico extends Automato {
 					return getToken(TipoToken.OPERADOR_LOGICO_E);
 				} else {
 					buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-					return new Token(TipoToken.INDEFINIDO_E, "&", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+					return new Token(TipoToken.OPERADOR_LOGICO_MAL_FORMADO, "&", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 				}
 			case 3:
 				// System.out.println("estado 3: " + c);

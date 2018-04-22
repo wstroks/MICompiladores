@@ -223,7 +223,7 @@ public class Lexico {
 			tokenReconhecido = false;
 			//System.out.println("indefinido");
 		} else {
-			if(tipoToken.equals(TipoToken.CADEIA_CARACTERES_MAL_FORMADA) || tipoToken.equals(TipoToken.COMENTARIO_MAL_FORMADO)){
+			if(tipoToken.equals(TipoToken.CADEIA_CARACTERES_MAL_FORMADA) || tipoToken.equals(TipoToken.COMENTARIO_MAL_FORMADO) ||tipoToken.equals(TipoToken.OPERADOR_LOGICO_MAL_FORMADO)){
 				listaErros.add(token);
 			}
 			else{
