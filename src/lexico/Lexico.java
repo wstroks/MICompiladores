@@ -67,8 +67,8 @@ public class Lexico {
 				buffer.proximoCaractere();
 				continue;
 			}
-
-			if (c == '/' && (buffer.doubleLookAhead() == '/' || buffer.doubleLookAhead() == '*')) {	
+			
+			if (!buffer.isUltimoCaractere() && c == '/' && (buffer.doubleLookAhead() == '/' || buffer.doubleLookAhead() == '*')) {	
 				if(verficarToken(pularComentario())){
 					continue;
 				}
