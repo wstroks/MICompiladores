@@ -2,6 +2,8 @@ package lexico;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,11 +16,13 @@ public class Buffer {
 	protected String codigo = "";
 	private int linhaAtual = 0;
 	private int posicaoAtual = 0;
+	private List<Token> listaErrosComentario;
 	
 	public Buffer(String nomeArquivo) throws FileNotFoundException{
 		Scanner s = new Scanner(new File(nomeArquivo));
-		this.codigo = s.useDelimiter("\\Z").next();
+		codigo = s.useDelimiter("\\Z").next();
 		s.close();
+		listaErrosComentario = new ArrayList<Token>();
 	}
 	
 	public void printCodigo(){
@@ -100,101 +104,8 @@ public class Buffer {
 		return ((codigo.length() - 1) == posicaoAtual);
 	}
 	
-	/**
-	 * Metodo utilizado para pular os comentarios contidos no codigo que esta sendo analisado
-	 */
-	public void pularComentario(){
-		
-		int estado = 0;
-		boolean continua = true; 
-		String comentario = "";
-		TipoToken tipoToken = TipoToken.INDEFINIDO;
-		
-		int posicao = posicaoAtual;
-		int linha = linhaAtual;
-		
-		while(!fimCodigo() && continua){
-			char c = lookAhead();
-			switch (estado) {
-				case 0:
-					//System.out.println("estado 0: " + c);
-					if(c == '/'){
-						estado = 1;
-						comentario += c;
-						proximoCaractere();
-					}
-					else{
-						estado = -1;
-					}
-					break;
-				case 1:
-					//System.out.println("estado 1: " + c);
-					if(c == '/'){
-						estado = 2;
-						comentario += c;
-						proximoCaractere();
-					}
-					else if(c == '*'){
-						estado = 3;
-						comentario += c;
-						proximoCaractere();
-					}
-					else{
-						estado = -1;
-					}
-					break;
-				case 2:
-					//System.out.println("estado 2: " + c);
-					if(codigo.charAt(posicaoAtual++) == '\n'){ //fim do comentario de linha
-						tipoToken = TipoToken.COMENTARIO_LINHA;
-						continua = false;
-					}
-					else{
-						comentario += c;
-					}
-					break;
-				case 3:
-					//System.out.println("estado 3: " + c);
-					comentario += c;
-					if(c == '*'){
-						estado = 4;
-						proximoCaractere();
-					}
-					else if(isUltimoCaractere()){
-						//Ver depois onde e se será adicionando o token de comentario
-						Token token = new Token(TipoToken.COMENTARIO_MAU_FORMADO, comentario, posicao, linha);
-						token.print();
-						continua = false;
-					}
-					else{		
-						proximoCaractere();
-					}
-					break;
-				case 4:
-					//System.out.println("estado 4: " + c);
-					comentario += c;
-					if(c == '/'){ //fim do comentario de bloco
-						proximoCaractere();
-						tipoToken = TipoToken.COMENTARIO_BLOCO;
-						continua = false;
-					}
-					else{
-						estado = 3;
-						proximoCaractere();
-					}
-					break;
-	
-				default:
-					//System.out.println("default: " + c);
-					proximoCaractere();
-					continua = false;
-			}
-		}
-		
-		//Ver depois onde e se será adicionando o token de comentario
-//		Token token = new Token(tipoToken, comentario, posicao, linha);
-//		token.print();
-		
+	public List<Token> getListaErrosComentario() {
+		return listaErrosComentario;
 	}
 
 }

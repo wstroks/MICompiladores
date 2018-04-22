@@ -11,12 +11,21 @@ public class Token {
 	private String lexema;
 	private int linha;
 	private int posicao;
+	private boolean isErroLexico;
 	
 	public Token(TipoToken tipoToken, String lexema, int linha, int posicao) {
 		this.tipoToken = tipoToken;
 		this.lexema = lexema;
 		this.linha = linha;
 		this.posicao = posicao;
+	}
+	
+	public Token(TipoToken tipoToken, String lexema, int linha, int posicao, boolean isErroLexico) {
+		this.tipoToken = tipoToken;
+		this.lexema = lexema;
+		this.linha = linha;
+		this.posicao = posicao;
+		this.isErroLexico = isErroLexico;
 	}
 	
 	public TipoToken getTipoToken() {
@@ -43,9 +52,16 @@ public class Token {
 	public void setPosicao(int posicao) {
 		this.posicao = posicao;
 	}
-	
+	public boolean isErroLexico() {
+		return isErroLexico;
+	}
+
+	public void setErroLexico(boolean isErroLexico) {
+		this.isErroLexico = isErroLexico;
+	}
+
 	public void print(){
-		System.out.println("\n<" + tipoToken.toString() + ", " + lexema + ">\n");
+		System.out.println("<" + tipoToken.toString() + ", " + lexema + ">");
 	}
 
 }

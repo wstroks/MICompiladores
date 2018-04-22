@@ -119,7 +119,7 @@ public class AutomatoNumero extends Automato {
                     //System.out.println("estado 4: " + c);
                     consumirCaractere();
                     if (buffer.fimCodigo() == true) {
-                       System.out.println("estado 56: " + c);
+                       //System.out.println("estado 56: " + c);
                        if(c=='.' && primeiroPonto==true){
                             buffer.goBack();
                             goBackLexema();
