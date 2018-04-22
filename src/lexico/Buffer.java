@@ -77,7 +77,6 @@ public class Buffer {
 	}
 	
 	public char lookAhead(){
-		//System.out.println("\nlook ahead: tamanho do codigo: " + getTamanhoCodigo() + " | posicao atual: " + getPosicaoAtual() + " | caractere atual: " + getCaractereAtual()+"\n");
 		if(this.fimCodigo()){
 			return (Character) null;
 		}

@@ -22,18 +22,17 @@ public class AutomatoOperadorAritmetico extends Automato {
     @SuppressWarnings("static-access")
     @Override
     public Token executar() {
-        //System.out.println("Automato Operador Aritmetico");
+    	
         lexema = "";
         int estado = 0;
         int contador = 0;
         int ponto = 0;
 
-        // char c = buffer.proximoCaractere();
         while (!buffer.fimCodigo()) {
             char c = buffer.lookAhead();
             switch (estado) {
                 case 0:
-                    // System.out.println("estado 0: " + c);
+
                     if (c == '+') {
                         consumirCaractere();
                         if (buffer.fimCodigo() == true) {
@@ -81,32 +80,24 @@ public class AutomatoOperadorAritmetico extends Automato {
                     break;
 
                 case 1:
-                    // c = buffer.proximoCaractere();
                     consumirCaractere();
-                    // System.out.println("estado 1: " + c);
                     if (c == '+') {
                         return getToken(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
                     } else {
-
                         buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-                        return new Token(TipoToken.OPERADOR_ARITIMETICO_ADICAO, "+", buffer.getLinhaAtual(),
-                                buffer.getPosicaoAtual());
+                        return new Token(TipoToken.OPERADOR_ARITIMETICO_ADICAO, "+", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                     }
 
                 case 2:
                     consumirCaractere();
-                    // System.out.println("estado 1: " + c);
                     if (c == '-') {
                         return getToken(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
                     } else {
-
                         buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
-                        return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, "-", buffer.getLinhaAtual(),
-                                buffer.getPosicaoAtual());
+                        return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, "-", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                     }
 
                 default:
-                    // System.out.println("estado default: " + c);
                     return getToken(TipoToken.INDEFINIDO);
             }
 

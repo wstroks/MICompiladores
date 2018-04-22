@@ -6,7 +6,6 @@
 package automatos;
 
 import lexico.Buffer;
-import lexico.Lexico;
 import lexico.TipoToken;
 import lexico.Token;
 
@@ -25,7 +24,6 @@ public class AutomatoOperadorLogico extends Automato {
 	@SuppressWarnings("static-access")
 	@Override
 	public Token executar() {
-		//System.out.println("Automato OperadorLogico");
 
 		lexema = "";
 		int estado = 0;
@@ -35,7 +33,6 @@ public class AutomatoOperadorLogico extends Automato {
 			char c = buffer.lookAhead();
 			switch (estado) {
 			case 0:
-				// System.out.println("estado 0: " + c);
 				if (c == '!') {
 					consumirCaractere();
 					if (buffer.fimCodigo() == true) {
@@ -45,8 +42,6 @@ public class AutomatoOperadorLogico extends Automato {
 					if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
 					}
-
-					// c = buffer.proximoCaractere();
 					estado = 3;
 				} else if (c == '&') {
 					consumirCaractere();
@@ -66,7 +61,6 @@ public class AutomatoOperadorLogico extends Automato {
 					} else if (buffer.getTamanhoCodigo() == 1) {
 						return getToken(TipoToken.OPERADOR_LOGICO_MAL_FORMADO);
 					}
-					// c = buffer.proximoCaractere();
 					verifica = 2;
 					estado = 1;
 				} else {
@@ -75,7 +69,6 @@ public class AutomatoOperadorLogico extends Automato {
 				break;
 			case 1:
 				consumirCaractere();
-				// System.out.println("estado 1: " + c);
 				if (c == '|') {
 					return getToken(TipoToken.OPERADOR_LOGICO_OU);
 				} else {
@@ -83,9 +76,7 @@ public class AutomatoOperadorLogico extends Automato {
 					return new Token(TipoToken.OPERADOR_LOGICO_MAL_FORMADO, "|", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 				}
 			case 2:
-
 				consumirCaractere();
-				// System.out.println("estado 1: " + c);
 				if (c == '&') {
 					return getToken(TipoToken.OPERADOR_LOGICO_E);
 				} else {
@@ -93,24 +84,15 @@ public class AutomatoOperadorLogico extends Automato {
 					return new Token(TipoToken.OPERADOR_LOGICO_MAL_FORMADO, "&", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 				}
 			case 3:
-				// System.out.println("estado 3: " + c);
 				consumirCaractere();
-				// System.out.println("asd "+c);
 				if (c == '=') {
 					return getToken(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
 				} else {
 					int x = buffer.getPosicaoAtual();
-					// System.out.println("naurto "+x);
 					buffer.setPosicaoAtual(x - 1);
-					// return Token.class.
-					return new Token(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO, "!", buffer.getLinhaAtual(),
-							buffer.getPosicaoAtual());
-					// return
-					// getToken(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
+					return new Token(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO, "!", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 				}
 			default:
-				// System.out.println("estado default: " + c);
-				// System.out.println("asd "+c);
 				return getToken(TipoToken.INDEFINIDO);
 			}
 		}

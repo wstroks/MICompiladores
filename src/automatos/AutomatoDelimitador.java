@@ -25,13 +25,11 @@ public class AutomatoDelimitador extends Automato {
 
 		lexema = "";
 		int estado = 0;
-		//System.out.println("Automato Delimitador exemplo: ; , .");
 
 		while (!buffer.fimCodigo()) {
 			char c = buffer.lookAhead();
 			switch (estado) {
 			case 0:
-				// System.out.println("estado 0: " + c);
 				if (c == ';') {
 					consumirCaractere();
 					return getToken(TipoToken.DELIMITADOR_PONTO_VIRGULA);
@@ -65,7 +63,6 @@ public class AutomatoDelimitador extends Automato {
 				break;
 
 			default:
-				//System.out.println("estado default: " + c);
 				return getToken(TipoToken.INDEFINIDO);
 			}
 

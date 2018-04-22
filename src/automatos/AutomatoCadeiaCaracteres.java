@@ -19,7 +19,6 @@ public class AutomatoCadeiaCaracteres extends Automato {
 	@Override
 	public Token executar() {
 
-		//System.out.println("Automato Cadeia de Caracteres");
 		lexema = "";
 		int estado = 0;
 
@@ -27,7 +26,6 @@ public class AutomatoCadeiaCaracteres extends Automato {
 			char c = buffer.lookAhead();
 			switch (estado) {
 			case 0:
-				//System.out.println(" estado 0: " + c);
 				if (c == '"') {
 					estado = 1;
 					consumirCaractere();
@@ -37,7 +35,6 @@ public class AutomatoCadeiaCaracteres extends Automato {
 				break;
 
 			case 1:
-				//System.out.println(" estado 1: " + c);
 				if (c == '"') {
 					consumirCaractere();
 					return getToken(TipoToken.CADEIA_CARACTERES);
@@ -51,7 +48,6 @@ public class AutomatoCadeiaCaracteres extends Automato {
 				}
 				break;
 			case 2:
-				//System.out.println(" estado 2: " + c);
 				if (this.isBarraInvertida(c)) {
 					lexema += buffer.proximoCaractere();
 				} else if (this.isLetra(c) || this.isDigito(c) || this.isSimbolo(c) || c == '"') {
@@ -63,7 +59,6 @@ public class AutomatoCadeiaCaracteres extends Automato {
 				break;
 
 			default:
-				//System.out.println(" estado default: " + c);
 				return getToken(TipoToken.CADEIA_CARACTERES);
 			}
 

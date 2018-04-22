@@ -23,20 +23,18 @@ public class AutomatoNumero extends Automato {
     @Override
     public Token executar() {
 
-        //System.out.println("Automato Numero");
         lexema = "";
         int estado = 0;
         int contador = 0;
         boolean afirma = false;
         boolean primeiroPonto = false;
+        
         while (!buffer.fimCodigo()) {
             char c = buffer.lookAhead();
             switch (estado) {
                 case 0:
-                    //System.out.println("estado 0: " + c);
                     if (c == '-') {
                         consumirCaractere();
-                        //soma += c;
                         if (buffer.fimCodigo() == true) {
                             return getToken(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
                         }
@@ -59,7 +57,6 @@ public class AutomatoNumero extends Automato {
                     }
                     break;
                 case 1:
-                    //System.out.println("estado 1: " + c);
                     consumirCaractere();
                     if (c == ' ') {
                         contador++;
@@ -76,7 +73,6 @@ public class AutomatoNumero extends Automato {
                     break;
 
                 case 2:
-                    //System.out.println("estado 2: " + c);
                     consumirCaractere();
                     if (buffer.fimCodigo()) {
                         return getToken(TipoToken.NUMERO);
@@ -93,8 +89,6 @@ public class AutomatoNumero extends Automato {
                     break;
 
                 case 3:
-                    //System.out.println("estado 3: " + c);
-                    //System.out.println("estado 3: " + c);
                     consumirCaractere();
                     if (buffer.fimCodigo()) {
                         if (!Automato.isDigito(c)) {
@@ -116,7 +110,6 @@ public class AutomatoNumero extends Automato {
                     break;
 
                 case 4:
-                    //System.out.println("estado 4: " + c);
                     consumirCaractere();
                     if (buffer.fimCodigo() == true) {
                        System.out.println("estado 56: " + c);
@@ -140,9 +133,6 @@ public class AutomatoNumero extends Automato {
                         }
                         return getToken(TipoToken.NUMERO);
                     } else if (c == '.') {
-                        // System.out.println("tt "+c);
-                        //System.out.println("estado 4ss: " + c);
-
                         if (primeiroPonto == true && afirma==false) {
                             buffer.goBack();
                             goBackLexema();
@@ -152,13 +142,11 @@ public class AutomatoNumero extends Automato {
                         }
                         buffer.goBack();
                         goBackLexema();
-
                         return getToken(TipoToken.NUMERO);
                     } else if (Automato.isDigito(c)) {
                         estado = 4;
                         afirma = true;
                     } else {
-                        //System.out.println("estado 4ds: " + c);
                         if (afirma == true) {
                             buffer.goBack();
                             goBackLexema();
@@ -173,7 +161,6 @@ public class AutomatoNumero extends Automato {
                     break;
 
                 default:
-                    // System.out.println("estado default: " + c);
                     return getToken(TipoToken.NUMERO);
             }
 

@@ -61,7 +61,6 @@ public class Lexico {
 
 		while (!buffer.fimCodigo()) {
 			c = buffer.lookAhead();
-			//System.out.println("caractere a ser analisado: " + c);
 			if ((Character) c == null) {
 				break;
 			}
@@ -87,7 +86,7 @@ public class Lexico {
 				if (verficarToken(token)) {
 					continue;
 				}
-			} // || c == '-'){
+			}
 			else if (Automato.isDigito(c) || c == '-') {
 				token = automatoNumero.executar();
 				if (verficarToken(token)) {
@@ -95,7 +94,6 @@ public class Lexico {
 				}
 			} 
 			else {
-				// os automatos abaixo estão bugados
 
 				token = automatoOpAritimetico.executar();
 				if (verficarToken(token)) {
@@ -140,7 +138,6 @@ public class Lexico {
 			char c = buffer.lookAhead();
 			switch (estado) {
 				case 0:
-					//System.out.println("estado 0: " + c);
 					if(c == '/'){
 						estado = 1;
 						comentario += c;
@@ -151,7 +148,6 @@ public class Lexico {
 					}
 					break;
 				case 1:
-					//System.out.println("estado 1: " + c);
 					if(c == '/'){
 						comentario += c;
 						if(buffer.isUltimoCaractere()){
@@ -179,7 +175,6 @@ public class Lexico {
 					}
 					break;
 				case 2:
-					//System.out.println("estado 2: " + c);
 					if(buffer.lookAhead() == '\n'){ //fim do comentario de linha
 						return new Token(TipoToken.COMENTARIO_LINHA, comentario, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 					}
@@ -194,7 +189,6 @@ public class Lexico {
 					}
 					break;
 				case 3:
-					//System.out.println("estado 3: " + c);
 					comentario += c;
 					if(c == '*'){
 						estado = 4;
@@ -209,7 +203,6 @@ public class Lexico {
 					}
 					break;
 				case 4:
-					//System.out.println("estado 4: " + c);
 					comentario += c;
 					buffer.proximoCaractere();
 					if(c == '/'){ //fim do comentario de bloco	
@@ -221,7 +214,6 @@ public class Lexico {
 					break;
 	
 				default:
-					//System.out.println("default: " + c);
 					buffer.proximoCaractere();
 					return new Token(TipoToken.INDEFINIDO, comentario, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 			}
@@ -235,7 +227,6 @@ public class Lexico {
 		TipoToken tipoToken = token.getTipoToken();
 		if (tipoToken.equals(TipoToken.INDEFINIDO)) {
 			tokenReconhecido = false;
-			//System.out.println("indefinido");
 		} else {
 			if(tipoToken.equals(TipoToken.CADEIA_CARACTERES_MAL_FORMADA) || tipoToken.equals(TipoToken.COMENTARIO_MAL_FORMADO) ||tipoToken.equals(TipoToken.OPERADOR_LOGICO_MAL_FORMADO)){
 				token.setErroLexico(true);
@@ -244,7 +235,6 @@ public class Lexico {
 			else{
 				listaTokens.add(token);
 			}
-			//token.print();
 		}
 		return tokenReconhecido;
 	}

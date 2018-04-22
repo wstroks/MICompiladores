@@ -22,7 +22,7 @@ public class AutomatoIdentificador extends Automato {
     @SuppressWarnings("static-access")
     @Override
     public Token executar() {
-        //System.out.println("Automato Identificador");
+
         lexema = "";
         int estado = 0;
         String soma = "";
@@ -31,13 +31,10 @@ public class AutomatoIdentificador extends Automato {
             char c = buffer.lookAhead();
             switch (estado) {
                 case 0:
-                    //System.out.println("estado 0: " + c);
-
                     if (Automato.isLetra(c)) {
                         estado = 1;
                         consumirCaractere();
                         if (buffer.fimCodigo() == true) {
-                            //System.out.println("estado 0: " + c);
                             return getToken(getTipoToken());
                         }
                         soma += c;
@@ -46,16 +43,12 @@ public class AutomatoIdentificador extends Automato {
                     }
                     break;
                 case 1:
-                    //System.out.println("estado 1: " + c);
-
                     if (buffer.isUltimoCaractere()) {
                         consumirCaractere();
                         soma += c;
                         if (c != '_' && !Automato.isDigito(c) && !Automato.isLetra(c)) {
                             buffer.setPosicaoAtual(buffer.getPosicaoAtual() - 1);
                             soma = soma.substring(0, soma.length() - 1);
-                            // System.out.println("Lexema :"+soma);
-
                             lexema = soma;
                             return new Token(getTipoToken(), soma, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
                         } else {
@@ -83,7 +76,6 @@ public class AutomatoIdentificador extends Automato {
                     break;
 
                 default:
-                    // System.out.println("estado default: " + c);
                     consumirCaractere();
                     return getToken(getTipoToken());
             }

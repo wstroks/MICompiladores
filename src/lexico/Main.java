@@ -46,7 +46,7 @@ public class Main {
         analisador.printTokens();
         try {
       
-        	String output =  "default_output";
+        	String output = "default_output";
         	String[] aux = nomeArquivo.split("/");
         	if(aux.length == 2){
         		output = aux[0] + "/saida_" + aux[1].replace(".txt", "");
