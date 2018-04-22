@@ -151,14 +151,26 @@ public class Lexico {
 				case 1:
 					//System.out.println("estado 1: " + c);
 					if(c == '/'){
-						estado = 2;
 						comentario += c;
-						buffer.proximoCaractere();
+						if(buffer.isUltimoCaractere()){
+							buffer.proximoCaractere();
+							return new Token(TipoToken.COMENTARIO_LINHA, comentario, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+						}
+						else{
+							estado = 2;
+							buffer.proximoCaractere();
+						}
 					}
 					else if(c == '*'){
-						estado = 3;
 						comentario += c;
-						buffer.proximoCaractere();
+						if(buffer.isUltimoCaractere()){
+							buffer.proximoCaractere();
+							return new Token(TipoToken.COMENTARIO_MAL_FORMADO, comentario, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+						}
+						else{
+							estado = 3;
+							buffer.proximoCaractere();
+						}
 					}
 					else{
 						estado = -1;
@@ -197,12 +209,12 @@ public class Lexico {
 				case 4:
 					//System.out.println("estado 4: " + c);
 					comentario += c;
-					if(c == '/'){ //fim do comentario de bloco
+					buffer.proximoCaractere();
+					if(c == '/'){ //fim do comentario de bloco	
 						return new Token(TipoToken.COMENTARIO_BLOCO, comentario, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
 					}
 					else{
 						estado = 3;
-						buffer.proximoCaractere();
 					}
 					break;
 	
