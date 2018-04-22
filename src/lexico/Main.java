@@ -43,8 +43,8 @@ public class Main {
     
     private static void testarArquivo(String nomeArquivo) throws FileNotFoundException{
     	
-        System.out.println("Testando Arquivo : "+ nomeArquivo);
-        System.out.println("-----------------------------------------------\n");
+        //System.out.println("Testando Arquivo : "+ nomeArquivo);
+        //System.out.println("-----------------------------------------------\n");
         Buffer buffer = new Buffer(nomeArquivo);
         Lexico analisador = new Lexico(buffer);
         analisador.run();

@@ -252,9 +252,12 @@ public class Lexico {
 	
 	private void printTokens(){
 		for (Token token : listaTokens) {
+			if(token.getTipoToken() == TipoToken.COMENTARIO_LINHA || token.getTipoToken() == TipoToken.COMENTARIO_BLOCO){
+				continue;
+			}
 			token.print();
 		}
-		System.out.println("\n ------- ERROS LÉXICOS -----------");
+		System.out.print("\n");
 		for (Token token : listaErros) {
 			token.print();
 		}

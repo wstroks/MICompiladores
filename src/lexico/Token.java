@@ -61,7 +61,13 @@ public class Token {
 	}
 
 	public void print(){
-		System.out.println("<" + tipoToken.toString() + ", " + lexema + ">");
+		//System.out.println("<" + tipoToken.toString() + ", " + lexema + ">");
+		if(isErroLexico){
+			System.out.println((linha + 1) + " " + lexema + " " + tipoToken);
+		}
+		else{
+			System.out.println((linha + 1) + " " + tipoToken + " " + lexema);
+		}
 	}
 
 }
