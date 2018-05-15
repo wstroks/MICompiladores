@@ -1,0 +1,43 @@
+3 IDE a
+3 LOG !
+3 REL =
+3 LOG !
+3 IDE b
+4 IDE a
+4 REL !=
+4 LOG !
+4 IDE b
+5 IDE a
+5 REL >=
+5 IDE b
+5 IDE b
+5 REL <
+5 REL =
+5 IDE d
+6 IDE a
+6 LOG &&
+6 IDE b
+6 ART *
+6 NRO 2
+7 LOG !
+7 IDE b
+7 ART --
+7 REL <=
+7 REL =
+7 IDE d
+8 IDE a
+8 REL >
+8 REL >=
+8 NRO 10
+8 ART +
+8 NRO 20
+8 ART /
+8 LOG &&
+8 NRO 100
+
+
+Erros léxicos: 
+5 & LOG
+5 & LOG
+7 | LOG
+7 | LOG

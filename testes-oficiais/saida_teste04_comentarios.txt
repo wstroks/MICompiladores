@@ -1,0 +1,11 @@
+4 PRE float
+4 IDE b
+4 DEL ;
+9 NRO 1.2
+11 IDE a
+11 REL =
+
+
+Erros léxicos: 
+14 /* comeca aqui 
+cade o fim de comentario? COMENTARIO_MAL_FORMADO

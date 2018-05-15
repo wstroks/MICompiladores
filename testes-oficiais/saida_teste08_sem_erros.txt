@@ -1,0 +1,79 @@
+3 PRE const
+3 PRE int
+3 IDE MAX
+3 REL =
+3 NRO 10
+3 DEL ,
+3 IDE MAX2
+3 REL =
+3 NRO 50
+3 DEL ;
+5 PRE string
+5 IDE Mensagem
+5 REL =
+5 CAD "Hello world"
+5 DEL ;
+7 IDE class
+7 IDE principal
+7 DEL {
+9 IDE main
+9 DEL (
+9 DEL )
+9 DEL {
+11 PRE int
+11 IDE idade
+11 DEL ;
+12 PRE float
+12 IDE salario
+12 DEL ;
+13 PRE string
+13 IDE nome
+13 DEL ;
+15 PRE print
+15 DEL (
+15 CAD "Digite o nome"
+15 DEL )
+15 DEL ;
+16 PRE scan
+16 DEL (
+16 IDE nome
+16 DEL )
+16 DEL ;
+17 PRE print
+17 DEL (
+17 CAD "Digite a idade"
+17 DEL )
+17 DEL ;
+18 PRE scan
+18 DEL (
+18 IDE idade
+18 DEL )
+18 DEL ;
+20 PRE if
+20 DEL (
+20 IDE idade
+20 REL >=
+20 NRO 150
+20 DEL )
+20 PRE print
+20 DEL (
+20 CAD "pode aposentar kkkk"
+20 DEL )
+20 DEL ;
+21 PRE else
+21 DEL {
+22 PRE print
+22 DEL (
+22 CAD "vai trabalhar"
+22 DEL )
+22 DEL ;
+23 IDE salario
+23 REL =
+23 IDE salario
+23 DEL ;
+24 DEL }
+25 DEL }
+26 DEL }
+
+
+Nenhum erro foi encontrado

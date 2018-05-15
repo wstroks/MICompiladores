@@ -14,7 +14,7 @@ public class Main {
 
         try {
            
-        	testarArquivosDiretorio("entrada");
+        	testarArquivosDiretorio("testes-oficiais");
         	//testarArquivo("entrada/testes-tay.txt");
 
         } catch (Exception ex) {

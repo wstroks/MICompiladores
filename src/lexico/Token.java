@@ -62,16 +62,48 @@ public class Token {
 
 	public String getImpressaoToken(){
 		if(isErroLexico){
-			String tipo = tipoToken == TipoToken.INDEFINIDO ? "CARACTERE_NAO_RECONHECIDO" : tipoToken.toString();
+			String tipo = tipoToken == TipoToken.INDEFINIDO ? "CARACTERE_NAO_RECONHECIDO" : getTipoTokenPadrao(tipoToken);
 			return ((linha + 1) + " " + lexema + " " + tipo);
 		}
 		else{
-			return ((linha + 1) + " " + tipoToken + " " + lexema);
+			return ((linha + 1) + " " + getTipoTokenPadrao(tipoToken) + " " + lexema);
 		}
 	}
 
 	public void print(){
 		System.out.println(getImpressaoToken());
+	}
+	
+	public String getTipoTokenPadrao(TipoToken tipo){
+		
+		String stringTipo = tipo.toString();
+		if(stringTipo.indexOf("PALAVRA_RESERVADA") >= 0){
+			return "PRE";
+		}
+		else if(stringTipo.equals("IDENTIFICADOR")){
+			return "IDE";
+		}
+		else if(stringTipo.equals("NUMERO")){
+			return "NRO";
+		}
+		else if(stringTipo.indexOf("DELIMITADOR") >= 0){
+			return "DEL";
+		}
+		else if(stringTipo.indexOf("OPERADOR_LOGICO") >= 0){
+			return "LOG";
+		}
+		else if(stringTipo.indexOf("OPERADOR_ARITIMETICO") >= 0){
+			return "ART";
+		}
+		else if(stringTipo.indexOf("OPERADOR_RELACIONAL") >= 0){
+			return "REL";
+		}
+		else if(stringTipo.equals("CADEIA_CARACTERES")){
+			return "CAD";
+		}
+		else{
+			return stringTipo;
+		}
 	}
 
 }
