@@ -14,7 +14,7 @@ public class Main {
 
         try {
            
-        	testarArquivosDiretorio("testes-oficiais");
+        	testarArquivosDiretorio("entrada");
         	//testarArquivo("entrada/testes-tay.txt");
 
         } catch (Exception ex) {
@@ -31,7 +31,7 @@ public class Main {
         int i=0;
         
         while(i < arquivos.length){
-        	System.out.println(nomeDiretorio);
+        	//System.out.println(nomeDiretorio);
         	testarArquivo(nomeDiretorio+"/"+(arquivos[i].getName()));
         	i++;
         } 
@@ -56,7 +56,7 @@ public class Main {
         	}
         	analisador.printTokensToFile(output);
         	
-        	System.out.println("\nArquivo gerado com sucesso");
+        	//System.out.println("\nArquivo gerado com sucesso");
         	
 		} catch (Exception e) {
 			System.out.println("Erro ao gerar arquivo de saída: " + e.getMessage());
