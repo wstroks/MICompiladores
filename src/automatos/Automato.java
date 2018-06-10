@@ -89,6 +89,11 @@ public abstract class Automato {
     }
     
     protected Token getToken(TipoToken tipo){
+    	if(tipo == TipoToken.NUMERO){
+    		lexema = lexema.replace("\n", "");
+    		lexema = lexema.replace("\r", "");
+    		lexema = lexema.replace("\t", "");
+    	}
     	return new Token(tipo, lexema, buffer.getLinhaAtual(), buffer.getPosicaoAtual());
     }
 	

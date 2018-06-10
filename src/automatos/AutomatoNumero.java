@@ -58,7 +58,7 @@ public class AutomatoNumero extends Automato {
                     break;
                 case 1:
                     consumirCaractere();
-                    if (c == ' ') {
+                    if (Buffer.isEspaco(c)) {
                         contador++;
                         estado = 2;
                     } else if (c == '-') {
@@ -78,7 +78,7 @@ public class AutomatoNumero extends Automato {
                         return getToken(TipoToken.NUMERO);
                     } else if (Automato.isDigito(c)) {
                         estado = 3;
-                    } else if (c == ' ') {
+                    } else if (Buffer.isEspaco(c)) {
                         contador++;
                         estado = 2;
                     } else {

@@ -14,8 +14,8 @@ public class Main {
 
         try {
            
-        	testarArquivosDiretorio("entrada");
-        	//testarArquivo("entrada/testes-tay.txt");
+        	//testarArquivosDiretorio("arquivos/testes");
+        	testarArquivo("arquivos/testes/teste02_numeros.txt");
 
         } catch (Exception ex) {
             ex.printStackTrace();
