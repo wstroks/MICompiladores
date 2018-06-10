@@ -49,7 +49,6 @@ public class AutomatoNumero extends Automato {
                         }
                         if (buffer.getTamanhoCodigo() == 1) {
                             return getToken(TipoToken.NUMERO);
-
                         }
                         estado = 3;
                     } else {
@@ -75,7 +74,14 @@ public class AutomatoNumero extends Automato {
                 case 2:
                     consumirCaractere();
                     if (buffer.fimCodigo()) {
-                        return getToken(TipoToken.NUMERO);
+                    	if(Automato.isDigito(c)){
+                    		return getToken(TipoToken.NUMERO);
+                    	}
+                    	else if(c == '-'){
+                            buffer.goBack();
+                            goBackLexema();
+                    		return new Token(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO, "-", buffer.getLinhaAtual(), buffer.getPosicaoAtual());
+                    	}
                     } else if (Automato.isDigito(c)) {
                         estado = 3;
                     } else if (Buffer.isEspaco(c)) {

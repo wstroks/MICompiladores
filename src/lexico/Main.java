@@ -15,7 +15,8 @@ public class Main {
         try {
            
         	//testarArquivosDiretorio("arquivos/testes");
-        	testarArquivo("arquivos/testes/teste02_numeros.txt");
+        	//testarArquivo("arquivos/testes/teste02_numeros.txt");
+        	testarArquivo("correcao/teste.txt");
 
         } catch (Exception ex) {
             ex.printStackTrace();
