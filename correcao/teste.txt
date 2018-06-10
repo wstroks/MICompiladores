@@ -1,1 +1,1 @@
-" diga \"oi\""
+" string \"nao fechada\"
