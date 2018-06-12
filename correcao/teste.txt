@@ -1,1 +1,1 @@
-" string \"nao fechada\"
+" string \"fechada\""
