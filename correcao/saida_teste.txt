@@ -1,7 +1,4 @@
-1 CAD "\"
-1 IDE oi
-1 CAD ""
+1 CAD " string \"fechada\""
 
 
-Erros léxicos: 
-1 \ CARACTERE_NAO_RECONHECIDO
+Nenhum erro foi encontrado
