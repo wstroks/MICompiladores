@@ -4,6 +4,7 @@
 package producoes.blocoVariaveis;
 
 import producoes.RegraProducao;
+import sintatico.GerenciadorToken;
 
 /**
  * @author Tayane
@@ -15,7 +16,7 @@ public class DeclaracaoDeVar extends RegraProducao{
 	 * @see producoes.RegraProducao#analisar()
 	 */
 	@Override
-	public boolean analisar() {
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		// TODO Auto-generated method stub
 		return false;
 	}

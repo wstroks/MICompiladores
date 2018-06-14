@@ -3,6 +3,7 @@ package producoes;
 import java.util.ArrayList;
 
 import lexico.TipoToken;
+import sintatico.GerenciadorToken;
 
 /**
 *
@@ -24,7 +25,7 @@ public abstract class RegraProducao {
      * 
      * @return true se a sequência foi reconhecida, falso caso contrário
      */
-    public abstract boolean analisar();
+    public abstract boolean analisar(GerenciadorToken gerenciadorToken);
 
 
     /**
