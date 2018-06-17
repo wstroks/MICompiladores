@@ -5,6 +5,7 @@ package producoes.core;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import producoes.declaracaoFuncaoProcedimento.DeclaracaoDeInicio;
 import sintatico.GerenciadorToken;
 
 /**
@@ -22,20 +23,29 @@ public class Declaracao extends RegraProducao{
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		if(!first.contains(gerenciadorToken.consumirTokenAtual())){
-			gerenciadorToken.addErro(first);
-			return false;
+		System.out.println("Analisando <Declaracao>");
+		
+		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
+			
+			//DeclaracaoDeInicio
+			if(!DeclaracaoDeInicio.getInstancia().analisar(gerenciadorToken)){
+				return false;
+			}
+			
+			//TODO: implementar classes abaixo e continuar o código de análise desta classe
+			
+			//DeclaracaoDeFuncao
+			//DeclaracaoDeProcedimento
+			//DeclaracaoDeVar
+			//DeclaracaoDeConst
+			//DeclaracaoDeStruct
+			//DeclaracaoDeTypedef
+			
+			return true;
+			
 		}
-		
-		//DeclaracaoDeFuncao
-		//DeclaracaoDeProcedimento
-		//DeclaracaoDeInicio
-		//DeclaracaoDeVar
-		//DeclaracaoDeConst
-		//DeclaracaoDeStruct
-		//DeclaracaoDeTypedef
-		
-		return gerenciadorToken.eof();
+
+		return false;
 		
 	}
 

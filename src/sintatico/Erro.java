@@ -3,8 +3,6 @@
  */
 package sintatico;
 
-import java.util.ArrayList;
-
 import lexico.TipoToken;
 import lexico.Token;
 
@@ -14,18 +12,18 @@ import lexico.Token;
  */
 public class Erro {
 	
-	protected ArrayList<TipoToken> tipoTokensEsperados;
+	protected TipoToken tokenEsperado;
 	protected Token tokenEncontrado;
 	protected Token tokenAnterior;
 	
-	public Erro(ArrayList<TipoToken> tipoTokensEsperados, Token tokenEncontrado, Token tokenAnterior) {
-		this.tipoTokensEsperados = tipoTokensEsperados;
+	public Erro(TipoToken tokenEsperado, Token tokenEncontrado, Token tokenAnterior) {
+		this.tokenEsperado = tokenEsperado;
 		this.tokenEncontrado = tokenEncontrado;
 		this.tokenAnterior = tokenAnterior;
 	}
 
-	public ArrayList<TipoToken> getTokensEsperados() {
-		return tipoTokensEsperados;
+	public TipoToken getTokenEsperado() {
+		return tokenEsperado;
 	}
 
 	public Token getTokenEncontrado() {

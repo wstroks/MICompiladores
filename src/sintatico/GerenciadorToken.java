@@ -49,10 +49,11 @@ public class GerenciadorToken {
      * @return o token atual
      */
     public Token consumirTokenAtual(){
+    	System.out.println("Token consumido: " + listaTokens.get(contTokenAtual).getTipoToken());
         return listaTokens.get(contTokenAtual++);
     }
     
-    public void addErro(ArrayList<TipoToken> tokensEsperados){
+    public void addErro(TipoToken tokenEsperado){
     	
     	Token tokenAnterior;
     	if(contTokenAtual == 0){
@@ -61,7 +62,7 @@ public class GerenciadorToken {
     	else{
     		tokenAnterior = listaTokens.get(contTokenAtual-1);
     	}
-    	listaErros.add(new Erro(tokensEsperados, listaTokens.get(contTokenAtual), tokenAnterior));
+    	listaErros.add(new Erro(tokenEsperado, listaTokens.get(contTokenAtual), tokenAnterior));
     }
     
     public boolean eof(){
@@ -80,7 +81,7 @@ public class GerenciadorToken {
 		}
     	
     	for (Erro erro : listaErros) {
-			System.out.println("Token inválido: " + erro.getTokenEncontrado().getLexema());
+			System.out.println("Token inválido: " + erro.getTokenEncontrado().getLexema() + ". Era esperado: " + erro.tokenEsperado);
 		}
     	
     }

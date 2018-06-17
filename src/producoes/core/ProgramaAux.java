@@ -11,9 +11,9 @@ import sintatico.GerenciadorToken;
  * @author Tayane
  *
  */
-public class Programa extends RegraProducao{
+public class ProgramaAux extends RegraProducao{
 	
-	private static Programa instancia = new Programa();
+	private static ProgramaAux instancia = new ProgramaAux();
 	
 	public static RegraProducao getInstancia() {
 		return instancia;
@@ -22,23 +22,24 @@ public class Programa extends RegraProducao{
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		System.out.println("Analisando <Programa>");
+		System.out.println("Analisando <ProgramaAux>");
 		
-		if(!Declaracao.getInstancia().analisar(gerenciadorToken)){
-			return false;
+		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
+			
+			if((!Programa.getInstancia().analisar(gerenciadorToken)) || (!gerenciadorToken.eof())){
+				return false;
+			}
+			
+			return true;
+			
 		}
 		
-		if(!ProgramaAux.getInstancia().analisar(gerenciadorToken)){
-			return false;
-		}
-		
-		return true;
-		
+		return false;
 	}
 
 	@Override
 	protected void gerarFirst() {
-		//{const, function, procedure, start, struct, typedef, var }
+		//{ const, function, procedure, start, struct, typedef, var, E }
         first.add(TipoToken.PALAVRA_RESERVADA_CONST);
         first.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
         first.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);
@@ -46,6 +47,7 @@ public class Programa extends RegraProducao{
         first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
         first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
         first.add(TipoToken.PALAVRA_RESERVADA_VAR);	
+        first.add(TipoToken.EOF);
 	}
 
 	@Override
@@ -53,5 +55,7 @@ public class Programa extends RegraProducao{
 		//{ $ }
 		follow.add(TipoToken.EOF);
 	}
+	
+	
 
 }

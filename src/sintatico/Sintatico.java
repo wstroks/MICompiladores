@@ -27,6 +27,7 @@ public class Sintatico {
 		GerenciadorToken gerenciadorToken = new GerenciadorToken(listaTokens);
 		Programa.getInstancia().analisar(gerenciadorToken);
 		gerenciadorToken.printErros();
+		
 	}
 	
 
