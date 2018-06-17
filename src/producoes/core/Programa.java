@@ -22,7 +22,7 @@ public class Programa extends RegraProducao{
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		if(!first.contains(gerenciadorToken.getTokenAtual())){
+		if(!first.contains(gerenciadorToken.consumirTokenAtual())){
 			gerenciadorToken.addErro(first);
 			return false;
 		}

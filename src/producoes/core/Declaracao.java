@@ -35,7 +35,7 @@ public class Declaracao extends RegraProducao{
 		//DeclaracaoDeStruct
 		//DeclaracaoDeTypedef
 		
-		return false;
+		return gerenciadorToken.eof();
 		
 	}
 
