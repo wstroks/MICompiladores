@@ -55,6 +55,8 @@ public class Lexico {
 	}
 
 	public void run() {
+		
+		System.out.println("===================== Análise léxica =====================");
 
 		char c = ' ';
 		Token token = null;
@@ -270,7 +272,7 @@ public class Lexico {
 		}
 		System.out.print("\n");
 		if(listaErros.isEmpty()){
-			System.out.println("Nenhum erro foi encontrado");
+			System.out.println("Nenhum erro léxico foi encontrado");
 		}
 		else{
 			System.out.println("Erros léxicos: ");
@@ -292,7 +294,7 @@ public class Lexico {
 		
 		writer.println("\n");
 		if(listaErros.isEmpty()){
-			writer.println("Nenhum erro foi encontrado");
+			writer.println("Nenhum erro léxico foi encontrado");
 		}
 		else{
 			writer.println("Erros léxicos: ");
@@ -303,6 +305,14 @@ public class Lexico {
 	 
 		arquivo.close();
 
+	}
+
+	public List<Token> getListaTokens() {
+		return listaTokens;
+	}
+
+	public List<Token> getListaErros() {
+		return listaErros;
 	}
 
 }

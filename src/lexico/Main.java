@@ -3,6 +3,8 @@ package lexico;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import sintatico.Sintatico;
+
 /**
  *
  * @author Tayane
@@ -15,8 +17,7 @@ public class Main {
         try {
            
         	//testarArquivosDiretorio("arquivos/testes");
-        	//testarArquivo("arquivos/testes/teste02_numeros.txt");
-        	testarArquivo("correcao/teste.txt");
+        	testarArquivo("arquivos/teste.txt");
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -42,26 +43,30 @@ public class Main {
     private static void testarArquivo(String nomeArquivo) throws FileNotFoundException{
     	
         Buffer buffer = new Buffer(nomeArquivo);
-        Lexico analisador = new Lexico(buffer);
-        analisador.run();
-        analisador.printTokens();
-        try {
-      
-        	String output = "default_output";
-        	String[] aux = nomeArquivo.split("/");
-        	if(aux.length == 2){
-        		output = aux[0] + "/saida_" + aux[1].replace(".txt", "");
-        	}
-        	else if(aux.length == 1){
-        		output = "saida_" + aux[0].replace(".txt", "");
-        	}
-        	analisador.printTokensToFile(output);
-        	
-        	//System.out.println("\nArquivo gerado com sucesso");
-        	
-		} catch (Exception e) {
-			System.out.println("Erro ao gerar arquivo de saída: " + e.getMessage());
-		}
+        Lexico lexico = new Lexico(buffer);
+        lexico.run();
+        lexico.printTokens();
+        
+        Sintatico sintatico = new Sintatico(lexico.getListaTokens());
+        sintatico.run();
+        
+//        try {
+//      
+//        	String output = "default_output";
+//        	String[] aux = nomeArquivo.split("/");
+//        	if(aux.length == 2){
+//        		output = aux[0] + "/saida_" + aux[1].replace(".txt", "");
+//        	}
+//        	else if(aux.length == 1){
+//        		output = "saida_" + aux[0].replace(".txt", "");
+//        	}
+//        	analisador.printTokensToFile(output);
+//        	
+//        	//System.out.println("\nArquivo gerado com sucesso");
+//        	
+//		} catch (Exception e) {
+//			System.out.println("Erro ao gerar arquivo de saída: " + e.getMessage());
+//		}
         
     }
 

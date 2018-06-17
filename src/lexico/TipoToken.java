@@ -86,7 +86,10 @@ public enum TipoToken {
     INDEFINIDO_E,
     INDEFINIDO_OU,
     COMENTARIO_MAL_FORMADO,
-    OPERADOR_LOGICO_MAL_FORMADO
+    OPERADOR_LOGICO_MAL_FORMADO,
+    
+    //EOF ($)
+    EOF
 
 
 }

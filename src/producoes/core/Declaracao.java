@@ -21,8 +21,22 @@ public class Declaracao extends RegraProducao{
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		// TODO Auto-generated method stub
+		
+		if(!first.contains(gerenciadorToken.consumirTokenAtual())){
+			gerenciadorToken.addErro(first);
+			return false;
+		}
+		
+		//DeclaracaoDeFuncao
+		//DeclaracaoDeProcedimento
+		//DeclaracaoDeInicio
+		//DeclaracaoDeVar
+		//DeclaracaoDeConst
+		//DeclaracaoDeStruct
+		//DeclaracaoDeTypedef
+		
 		return false;
+		
 	}
 
 	@Override
@@ -45,6 +59,7 @@ public class Declaracao extends RegraProducao{
 		follow.add(TipoToken.PALAVRA_RESERVADA_START);
 		follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
 		follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
+		follow.add(TipoToken.EOF);
 	}
 
 }

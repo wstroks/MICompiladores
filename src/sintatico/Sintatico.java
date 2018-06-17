@@ -6,6 +6,7 @@ package sintatico;
 import java.util.List;
 
 import lexico.Token;
+import producoes.core.Programa;
 
 /**
  * @author Tayane
@@ -13,10 +14,19 @@ import lexico.Token;
  */
 public class Sintatico {
 	
-	protected GerenciadorToken gerenciadorToken;
+	private List<Token> listaTokens;
+	
+	public Sintatico(List<Token> listaTokens){
+		this.listaTokens = listaTokens;
+	}
 	
 	public void run(){
-		OperacaoDeAtribuicao.getInstance().analisar(gerenciadorToken);
+		
+		System.out.println("\n===================== Análise sintática ===================");
+		
+		GerenciadorToken gerenciadorToken = new GerenciadorToken(listaTokens);
+		Programa.getInstancia().analisar(gerenciadorToken);
+		gerenciadorToken.printErros();
 	}
 	
 

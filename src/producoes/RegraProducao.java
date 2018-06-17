@@ -27,7 +27,6 @@ public abstract class RegraProducao {
      */
     public abstract boolean analisar(GerenciadorToken gerenciadorToken);
 
-
     /**
      * Gera o conjunto primeiro da regra.
      *
@@ -56,6 +55,31 @@ public abstract class RegraProducao {
      */
     public boolean isFollow(TipoToken tipoToken) {
         return follow.contains(tipoToken);
+    }
+    
+    /**
+     * Verifica se o token atual será consumido pela produção 
+     * @param gerenciadorToken
+     * @param tipoToken
+     * @return boolean
+     */
+    protected boolean verificarToken(GerenciadorToken gerenciadorToken, TipoToken tipoToken){
+    	
+        if (!gerenciadorToken.eof() && tipoToken == gerenciadorToken.getTokenAtual().getTipoToken()) {
+            return true;
+        }
+        return false;
+    	
+    }
+    
+    protected boolean consumir(GerenciadorToken gerenciadorToken, TipoToken tipoToken){
+    	
+    	if(verificarToken(gerenciadorToken, tipoToken)){
+    		gerenciadorToken.consumirTokenAtual();
+    		return true;
+    	}
+    	return false;
+    	
     }
 
 }

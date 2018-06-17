@@ -21,10 +21,18 @@ public class Programa extends RegraProducao{
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
+		
+		if(!first.contains(gerenciadorToken.getTokenAtual())){
+			gerenciadorToken.addErro(first);
+			return false;
+		}
+		
 		if(!Declaracao.getInstancia().analisar(gerenciadorToken)){
 			return false;
 		}
-		return false;
+		
+		return gerenciadorToken.eof();
+		
 	}
 
 	@Override
@@ -41,7 +49,8 @@ public class Programa extends RegraProducao{
 
 	@Override
 	protected void gerarFollow() {
-		//{ $ } EOF
+		//{ $ }
+		follow.add(TipoToken.EOF);
 	}
 
 }

@@ -3,8 +3,10 @@
  */
 package sintatico;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import lexico.TipoToken;
 import lexico.Token;
 
 /**
@@ -14,10 +16,12 @@ import lexico.Token;
 public class GerenciadorToken {
 	
 	private List<Token> listaTokens;
+	private ArrayList<Erro> listaErros;
 	protected int contTokenAtual = 0;
 	
-	private GerenciadorToken(List<Token> listaTokens){
+	GerenciadorToken(List<Token> listaTokens){
 		this.listaTokens = listaTokens;
+		this.listaErros = new ArrayList<Erro>();
 	}
 	
     /**
@@ -33,6 +37,9 @@ public class GerenciadorToken {
      * @return o token atual
      */
     public Token getTokenAtual(){
+    	if(eof()){
+    		getEofToken();
+    	}
         return listaTokens.get(contTokenAtual);
     }
 
@@ -42,6 +49,39 @@ public class GerenciadorToken {
      */
     public Token consumirTokenAtual(){
         return listaTokens.get(contTokenAtual++);
+    }
+    
+    public void addErro(ArrayList<TipoToken> tokensEsperados){
+    	
+    	Token tokenAnterior;
+    	if(contTokenAtual == 0){
+    		tokenAnterior = getEofToken();
+    	}
+    	else{
+    		tokenAnterior = listaTokens.get(contTokenAtual-1);
+    	}
+    	listaErros.add(new Erro(tokensEsperados, listaTokens.get(contTokenAtual), tokenAnterior));
+    }
+    
+    public boolean eof(){
+    	return contTokenAtual == listaTokens.size();
+    }
+    
+    private Token getEofToken(){
+    	return new Token(TipoToken.EOF, "$", 0, 0);
+    }
+    
+    public void printErros(){
+    	
+		System.out.print("\n");
+		if(listaErros.isEmpty()){
+			System.out.println("Nenhum erro sintático foi encontrado");
+		}
+    	
+    	for (Erro erro : listaErros) {
+			System.out.println("Token inválido: " + erro.getTokenEncontrado().getLexema());
+		}
+    	
     }
 
 }
