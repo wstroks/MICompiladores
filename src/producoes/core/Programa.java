@@ -3,6 +3,7 @@
  */
 package producoes.core;
 
+import lexico.TipoToken;
 import producoes.RegraProducao;
 import sintatico.GerenciadorToken;
 
@@ -18,31 +19,29 @@ public class Programa extends RegraProducao{
 		return instancia;
 	}
 
-	/* (non-Javadoc)
-	 * @see producoes.RegraProducao#analisar()
-	 */
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		// TODO Auto-generated method stub
+		if(!Declaracao.getInstancia().analisar(gerenciadorToken)){
+			return false;
+		}
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see producoes.RegraProducao#gerarFirst()
-	 */
 	@Override
 	protected void gerarFirst() {
-		// TODO Auto-generated method stub
-		
+		//{const, function, procedure, start, struct, typedef, var }
+        first.add(TipoToken.PALAVRA_RESERVADA_CONST);
+        first.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
+        first.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);
+        first.add(TipoToken.PALAVRA_RESERVADA_START);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+        first.add(TipoToken.PALAVRA_RESERVADA_VAR);	
 	}
 
-	/* (non-Javadoc)
-	 * @see producoes.RegraProducao#gerarFollow()
-	 */
 	@Override
 	protected void gerarFollow() {
-		// TODO Auto-generated method stub
-		
+		//{ $ } EOF
 	}
 
 }
