@@ -45,12 +45,20 @@ public class Escalar extends RegraProducao {
 	@Override
 	protected void gerarFirst() {
 		// TODO Auto-generated method stub
+                // bool, float, int, string
+                first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+                first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+                first.add(TipoToken.PALAVRA_RESERVADA_INT);
+                first.add(TipoToken.PALAVRA_RESERVADA_STRING);
 
 	}
 
 	@Override
 	protected void gerarFollow() {
 		// TODO Auto-generated method stub
+                 //[, Identificador
+                 follow.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
+                 follow.add(TipoToken.IDENTIFICADOR);
 
 	}
 

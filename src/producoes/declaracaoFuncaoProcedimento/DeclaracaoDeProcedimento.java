@@ -1,5 +1,7 @@
-/**
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.declaracaoFuncaoProcedimento;
 
@@ -8,28 +10,28 @@ import producoes.RegraProducao;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class DeclaracaoDeFuncao extends RegraProducao {
+public class DeclaracaoDeProcedimento extends RegraProducao {
 
     public static RegraProducao getInstancia() {
-        return new DeclaracaoDeFuncao();
+        return new DeclaracaoDeProcedimento();
     }
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        System.out.println("Analisando <DeclaracaoDeFuncao>");
+        System.out.println("Analisando <DeclaracaoDeProcedimento>");
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FUNCTION)) {
+            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PROCEDURE)) {
                 return false;
             }
 
-            //TODO: <FuncID>
-            else if (!FuncID.getInstancia().analisar(gerenciadorToken)) {
+            
+            else if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                 return false;
             }
 
@@ -50,8 +52,8 @@ public class DeclaracaoDeFuncao extends RegraProducao {
 
     @Override
     protected void gerarFirst() {
-        //{ function }
-        first.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
+        //{ PROCEDURE }
+        first.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);
     }
 
     @Override

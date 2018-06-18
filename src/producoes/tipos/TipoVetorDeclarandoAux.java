@@ -3,6 +3,7 @@
  */
 package producoes.tipos;
 
+import lexico.TipoToken;
 import producoes.RegraProducao;
 import sintatico.GerenciadorToken;
 
@@ -24,6 +25,7 @@ public class TipoVetorDeclarandoAux extends RegraProducao {
 			if(TipoVetorDeclarando.getInstancia().analisar(gerenciadorToken)){
 				return true;
 			}
+                        //vazio
 			else if(gerenciadorToken.eof()){
 				return true;
 			}
@@ -37,12 +39,17 @@ public class TipoVetorDeclarandoAux extends RegraProducao {
 	@Override
 	protected void gerarFirst() {
 		// TODO Auto-generated method stub
+                //[, E
+                first.add(TipoToken.E);
+                first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
 
 	}
 
 	@Override
 	protected void gerarFollow() {
 		// TODO Auto-generated method stub
+                // Identificador
+                follow.add(TipoToken.IDENTIFICADOR);
 
 	}
 

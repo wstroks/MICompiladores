@@ -1,5 +1,7 @@
-/**
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.declaracaoFuncaoProcedimento;
 
@@ -8,37 +10,30 @@ import producoes.RegraProducao;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class DeclaracaoDeFuncao extends RegraProducao {
+public class FuncaoProcedimentoFim extends RegraProducao {
 
     public static RegraProducao getInstancia() {
-        return new DeclaracaoDeFuncao();
+        return new FuncaoProcedimentoFim();
     }
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        System.out.println("Analisando <DeclaracaoDeFuncao>");
+        
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FUNCTION)) {
+            if (!Parametros.getInstancia().analisar(gerenciadorToken)) {
+                return false;
+            }else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
                 return false;
             }
 
-            //TODO: <FuncID>
-            else if (!FuncID.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-
-            else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                return false;
-            }
-
-            //TODO: <FuncaoProcedimentoFim>
-             else if (!FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
+            
+           else if (!Bloco.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
             return true;
@@ -50,13 +45,19 @@ public class DeclaracaoDeFuncao extends RegraProducao {
 
     @Override
     protected void gerarFirst() {
-        //{ function }
-        first.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
+        //{ ), bool, float, identificador,int, string, struct }
+        first.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+        first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+        first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+        first.add(TipoToken.PALAVRA_RESERVADA_INT);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRING);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        
     }
 
     @Override
     protected void gerarFollow() {
-        //{ const, function, procedure, start, struct, typedef, var, $ }
+        //{  const, function, procedure, start, struct, typedef, var, $ }
         follow.add(TipoToken.PALAVRA_RESERVADA_CONST);
         follow.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
         follow.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);

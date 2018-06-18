@@ -28,7 +28,7 @@ public class Bloco extends RegraProducao{
 				return false;
 			}
 			
-			if(!BlocoAux.getInstancia().analisar(gerenciadorToken)){
+                        else if(!BlocoAux.getInstancia().analisar(gerenciadorToken)){
 				return false;
 			}
 			

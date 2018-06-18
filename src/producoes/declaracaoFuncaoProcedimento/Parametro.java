@@ -1,5 +1,7 @@
-/**
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.declaracaoFuncaoProcedimento;
 
@@ -9,23 +11,23 @@ import producoes.tipos.Tipo;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class FuncID extends RegraProducao {
+public class Parametro extends RegraProducao {
 
     public static RegraProducao getInstancia() {
-        return new FuncID();
+        return new Parametro();
     }
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        System.out.println("Analisando <FuncID>");
+       
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            //TODO: <Tipo>
+            
             if (!Tipo.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
@@ -42,19 +44,20 @@ public class FuncID extends RegraProducao {
 
     @Override
     protected void gerarFirst() {
-        //{ ( }
-        first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
+        //{ bool, float, identificador, int, string,struct}
+        first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+        first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+        first.add(TipoToken.PALAVRA_RESERVADA_INT);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRING);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        first.add(TipoToken.IDENTIFICADOR);
     }
 
     @Override
     protected void gerarFollow() {
-        //{ bool, float, identificador,int, string, struct }
-        follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
-        follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
-        follow.add(TipoToken.IDENTIFICADOR);
-        follow.add(TipoToken.PALAVRA_RESERVADA_INT);
-        follow.add(TipoToken.PALAVRA_RESERVADA_STRING);
-        follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        //{ ‘,’, ) }
+       follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+       follow.add(TipoToken.DELIMITADOR_VIRGULA);
     }
 
 }

@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.printScan;
 
@@ -8,13 +10,13 @@ import producoes.RegraProducao;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class Print extends RegraProducao{
+public class OutrasSaidas extends RegraProducao{
 	
 	public static RegraProducao getInstancia() {
-		return new Print();
+		return new OutrasSaidas();
 	}
 
 	@Override
@@ -22,15 +24,14 @@ public class Print extends RegraProducao{
 		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
-			if(!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT)){
+			if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
 				return false;
 			}
 			
-                        else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
-				return false;
-			}
+                       
 			
 			//TODO: <Saida>
+                        
                         else if(!Saida.getInstancia().analisar(gerenciadorToken)){
                             return false;
                         }
@@ -39,10 +40,10 @@ public class Print extends RegraProducao{
                         else if(!OutrasSaidas.getInstancia().analisar(gerenciadorToken)){
                             return false;
                         }
+                        
+                        //Todo: Produção vazia
 			
-                        else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
-				return false;
-			}
+                        
 			return true;
 		}
 		
@@ -51,14 +52,15 @@ public class Print extends RegraProducao{
 
 	@Override
 	protected void gerarFirst() {
-		//{ print }
-		first.add(TipoToken.PALAVRA_RESERVADA_PRINT);
+		//{  E, ‘,’ }
+		first.add(TipoToken.E);
+                first.add(TipoToken.DELIMITADOR_VIRGULA);
 	}
 
 	@Override
 	protected void gerarFollow() {
-		//{ ; }
-		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+		//{ )}
+		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
 	}
 
 }

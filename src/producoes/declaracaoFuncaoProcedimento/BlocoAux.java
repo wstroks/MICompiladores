@@ -5,6 +5,7 @@ package producoes.declaracaoFuncaoProcedimento;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import producoes.instrucoes.ListaDeIntrucoes;
 import sintatico.GerenciadorToken;
 
 /**
@@ -32,7 +33,9 @@ public class BlocoAux extends RegraProducao{
 			}
 			
 			//TODO: adicionar anáise da produção "<ListaDeIntrucoes> '}'"
-			
+                        else if(!ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
+                            return false;
+                        }
 			return true;
 		}
 		
@@ -46,6 +49,7 @@ public class BlocoAux extends RegraProducao{
 		first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
 		first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
 		first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
+                first.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
 		first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
 		first.add(TipoToken.CADEIA_CARACTERES);
 		first.add(TipoToken.NUMERO);

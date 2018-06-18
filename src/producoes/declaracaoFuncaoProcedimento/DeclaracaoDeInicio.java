@@ -26,15 +26,15 @@ public class DeclaracaoDeInicio extends RegraProducao{
 			return false;
 		}
 		
-		if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
+                else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
 			return false;
 		}
 		
-		if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
+                else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
 			return false;
 		}
 		
-		if(!Bloco.getInstancia().analisar(gerenciadorToken)){
+                else if(!Bloco.getInstancia().analisar(gerenciadorToken)){
 			return false;
 		}
 		

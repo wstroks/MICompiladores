@@ -1,21 +1,22 @@
-/**
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.precedenciaOperadores;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
-import producoes.tipos.Tipo;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class OperacaoDeAtribuicao extends RegraProducao {
+public class ParametrosFuncao extends RegraProducao {
 
     public static RegraProducao getInstancia() {
-        return new OperacaoDeAtribuicao();
+        return new ParametrosFuncao();
     }
 
     @Override
@@ -23,13 +24,9 @@ public class OperacaoDeAtribuicao extends RegraProducao {
         // TODO Auto-generated method stub
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!Final.getInstancia().analisar(gerenciadorToken)) {
+            if (!Expressao.getInstancia().analisar(gerenciadorToken)) {
                 return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
-                return false;
-            }else if(!Expressao.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            }else if(!ParametrosFuncaoAux.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
 
@@ -56,8 +53,8 @@ public class OperacaoDeAtribuicao extends RegraProducao {
 
     @Override
     protected void gerarFollow() {
-        //{;}
-        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+        //{ )}
+        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
 
     }
 

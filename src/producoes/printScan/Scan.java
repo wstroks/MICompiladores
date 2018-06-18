@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.printScan;
 
@@ -8,13 +10,13 @@ import producoes.RegraProducao;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class Print extends RegraProducao{
+public class Scan extends RegraProducao{
 	
 	public static RegraProducao getInstancia() {
-		return new Print();
+		return new Scan();
 	}
 
 	@Override
@@ -22,7 +24,7 @@ public class Print extends RegraProducao{
 		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
-			if(!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT)){
+			if(!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_SCAN)){
 				return false;
 			}
 			
@@ -30,20 +32,22 @@ public class Print extends RegraProducao{
 				return false;
 			}
 			
-			//TODO: <Saida>
-                        else if(!Saida.getInstancia().analisar(gerenciadorToken)){
+			//TODO: <Entrada>
+                        else if(!Entrada.getInstancia().analisar(gerenciadorToken)){
                             return false;
                         }
 			
-			//TODO: <OutrasSaidas>
-                        else if(!OutrasSaidas.getInstancia().analisar(gerenciadorToken)){
+			//TODO: <OutrasEntradas> 
+                        else if(!OutrasEntradas.getInstancia().analisar(gerenciadorToken)){
                             return false;
                         }
 			
                         else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
 				return false;
 			}
-			return true;
+                        
+                        return true;
+			
 		}
 		
 		return false;
@@ -51,8 +55,8 @@ public class Print extends RegraProducao{
 
 	@Override
 	protected void gerarFirst() {
-		//{ print }
-		first.add(TipoToken.PALAVRA_RESERVADA_PRINT);
+		//{  scan}
+		first.add(TipoToken.PALAVRA_RESERVADA_SCAN);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class TipoVetorDeclarado extends RegraProducao {
 				return false;
 			}
 			
-			if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)){
+                        else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)){
 				return false;
 			}
 			
@@ -42,13 +42,18 @@ public class TipoVetorDeclarado extends RegraProducao {
 	@Override
 	protected void gerarFirst() {
 		// TODO Auto-generated method stub
+                // [ 
+                first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
 
 	}
 
 	@Override
 	protected void gerarFollow() {
 		// TODO Auto-generated method stub
-
+                // [, Identificador
+                follow.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
+                follow.add(TipoToken.IDENTIFICADOR);
+                
 	}
 
 }

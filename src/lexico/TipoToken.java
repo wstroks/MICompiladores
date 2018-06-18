@@ -89,7 +89,9 @@ public enum TipoToken {
     OPERADOR_LOGICO_MAL_FORMADO,
     
     //EOF ($)
-    EOF
-
+    EOF,
+    
+    // Vazio
+    E
 
 }

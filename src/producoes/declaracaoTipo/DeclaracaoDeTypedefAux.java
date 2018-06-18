@@ -1,20 +1,23 @@
-/**
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.declaracaoTipo;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import producoes.tipos.Tipo;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class DeclaracaoDeTypedef extends RegraProducao {
+public class DeclaracaoDeTypedefAux extends RegraProducao {
 
     public static RegraProducao getInstancia() {
-        return new DeclaracaoDeTypedef();
+        return new DeclaracaoDeTypedefAux();
     }
 
     @Override
@@ -22,11 +25,13 @@ public class DeclaracaoDeTypedef extends RegraProducao {
         // TODO Auto-generated method stub
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TYPEDEF)) {
+            if (!Tipo.getInstancia().analisar(gerenciadorToken)) {
                 return false;
-            } else if (!DeclaracaoDeTypedefAux.getInstancia().analisar(gerenciadorToken)) {
+            } else if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                 return false;
-            } 
+            } else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                return false;
+            }
 
             return true;
 
@@ -47,7 +52,7 @@ public class DeclaracaoDeTypedef extends RegraProducao {
         /*
         --, !, ( , ++, CadeiaDeCaracteres, Digitos, false, identificador, print, return , scan, struct,
         true, typdef, var, while, }, const, function, procedure, start, $
-        */
+         */
         follow.add(TipoToken.EOF);
         follow.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);
         follow.add(TipoToken.PALAVRA_RESERVADA_START);

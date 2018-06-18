@@ -1,21 +1,22 @@
-/**
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.blocoStruct;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
-import producoes.blocoConstante.DeclaracaoDeConstanteCorpo;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class DeclaracaoDeStruct extends RegraProducao {
+public class DeclaracaoDeStructAux extends RegraProducao {
 
     public static RegraProducao getInstancia() {
-        return new DeclaracaoDeStruct();
+        return new DeclaracaoDeStructAux();
     }
 
     @Override
@@ -24,9 +25,18 @@ public class DeclaracaoDeStruct extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)) {
+            if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                 return false;
-            } else if (!DeclaracaoDeStructAux.getInstancia().analisar(gerenciadorToken)) {
+            } else if (!Extends.getInstancia().analisar(gerenciadorToken)) {
+                return false;
+            }
+             else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                return false;
+            }
+            else if(!DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+                return false;
+            }
+            else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
                 return false;
             }
 
@@ -39,9 +49,11 @@ public class DeclaracaoDeStruct extends RegraProducao {
     @Override
     protected void gerarFirst() {
         // TODO Auto-generated method stub
-        // struct
+        // {, extends,identificador
 
-        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        first.add(TipoToken.IDENTIFICADOR);
+        first.add(TipoToken.PALAVRA_RESERVADA_EXTENDS);
+        first.add(TipoToken.DELIMITADOR_ABRE_CHAVE);
 
     }
 

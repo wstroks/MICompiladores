@@ -1,23 +1,24 @@
-/**
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package producoes.estruturasRepeticao;
+package producoes.estruturasCondicionais;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
-import producoes.blocoStruct.DeclaracaoDeStructAux;
 import producoes.declaracaoFuncaoProcedimento.Bloco;
 import producoes.precedenciaOperadores.Expressao;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class While extends RegraProducao {
+public class IfThen extends RegraProducao {
 
     public static RegraProducao getInstancia() {
-        return new While();
+        return new IfThen();
     }
 
     @Override
@@ -25,7 +26,7 @@ public class While extends RegraProducao {
         // TODO Auto-generated method stub
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_WHILE)) {
+            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_IF)) {
                 return false;
             }else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
                 return false;
@@ -35,7 +36,11 @@ public class While extends RegraProducao {
                 return false;
             }else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
                 return false;
-            } else if(!Bloco.getInstancia().analisar(gerenciadorToken)) {
+            } 
+            else if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_THEN)) {
+                return false;
+            } 
+            else if(!Bloco.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
 
@@ -48,8 +53,8 @@ public class While extends RegraProducao {
     @Override
     protected void gerarFirst() {
         // TODO Auto-generated method stub
-        // while
-        first.add(TipoToken.PALAVRA_RESERVADA_WHILE);
+        // IF
+        first.add(TipoToken.PALAVRA_RESERVADA_IF);
     }
 
     @Override

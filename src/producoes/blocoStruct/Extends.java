@@ -1,21 +1,22 @@
-/**
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.blocoStruct;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
-import producoes.blocoConstante.DeclaracaoDeConstanteCorpo;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class DeclaracaoDeStruct extends RegraProducao {
+public class Extends extends RegraProducao {
 
     public static RegraProducao getInstancia() {
-        return new DeclaracaoDeStruct();
+        return new Extends();
     }
 
     @Override
@@ -24,11 +25,12 @@ public class DeclaracaoDeStruct extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)) {
+            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS)) {
                 return false;
-            } else if (!DeclaracaoDeStructAux.getInstancia().analisar(gerenciadorToken)) {
+            } else if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                 return false;
             }
+            // Produção vazia falta
 
             return true;
 
