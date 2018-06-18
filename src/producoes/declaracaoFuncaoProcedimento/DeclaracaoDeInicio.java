@@ -5,7 +5,6 @@ package producoes.declaracaoFuncaoProcedimento;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
-import producoes.core.Declaracao;
 import sintatico.GerenciadorToken;
 
 /**
