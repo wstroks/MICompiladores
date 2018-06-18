@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package producoes.instrucoes;
 
@@ -15,13 +17,13 @@ import producoes.declaracaoTipo.DeclaracaoDeTypedef;
 import sintatico.GerenciadorToken;
 
 /**
- * @author Tayane
  *
+ * @author wstro
  */
-public class ListaDeIntrucoes extends RegraProducao {
+public class ListaDeIntrucoesAux extends RegraProducao {
 
     public static RegraProducao getInstancia() {
-        return new ListaDeIntrucoes();
+        return new ListaDeIntrucoesAux();
     }
 
     @Override
@@ -30,11 +32,10 @@ public class ListaDeIntrucoes extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!Instrucao.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!ListaDeIntrucoesAux.getInstancia().analisar(gerenciadorToken)) {
+            if (!ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             } 
+            // PRODUCAO VAZIA
 
             return true;
 
@@ -47,7 +48,7 @@ public class ListaDeIntrucoes extends RegraProducao {
     protected void gerarFirst() {
         // TODO Auto-generated method stub
         // --, !, ( , ++, CadeiaDeCaracter, Digitos, false, identificador, print, return , scan, struct,true,
-        //typdef, var,while
+        //typdef, var,while,E
         first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
@@ -63,17 +64,20 @@ public class ListaDeIntrucoes extends RegraProducao {
         first.add(TipoToken.PALAVRA_RESERVADA_VAR);
         first.add(TipoToken.PALAVRA_RESERVADA_WHILE);
         first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
+        
         first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+        first.add(TipoToken.E);
 
     }
 
     @Override
     protected void gerarFollow() {
         // TODO Auto-generated method stub
-        // }
+         // }
 
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
        
+
 
     }
 
