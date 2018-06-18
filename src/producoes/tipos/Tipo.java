@@ -20,6 +20,8 @@ public class Tipo extends RegraProducao{
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
+		System.out.println("Analisando <Tipo>");
+		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
 			//TODO: <TipoBase>

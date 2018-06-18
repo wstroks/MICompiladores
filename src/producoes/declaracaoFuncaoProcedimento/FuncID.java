@@ -20,6 +20,8 @@ public class FuncID extends RegraProducao{
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
+		System.out.println("Analisando <FuncID>");
+		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
 			//TODO: <Tipo>

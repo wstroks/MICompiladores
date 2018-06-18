@@ -20,6 +20,9 @@ public class BlocoAux extends RegraProducao{
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
+//		<BlocoAux>  ::= <ListaDeIntrucoes> '}'
+//        | '}'
+		
 		System.out.println("Analisando <BlocoAux>");
 		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){

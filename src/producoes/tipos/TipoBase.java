@@ -5,6 +5,7 @@ package producoes.tipos;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import producoes.blocoStruct.DeclaracaoDeStruct;
 import sintatico.GerenciadorToken;
 
 /**
@@ -20,13 +21,17 @@ public class TipoBase extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
+		System.out.println("Analisando <TipoBase>");
+		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
-			//TODO: <Escalar>
-			
-			//TODO: <DeclaracaoDeStruct>
-			
-			if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){
+			if(Escalar.getInstancia().analisar(gerenciadorToken)){
+				return true;
+			}
+			else if(DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)){
+				return true;
+			}
+			else if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){
 				return true;
 			}
 			else if(consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)){
