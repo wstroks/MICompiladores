@@ -7,6 +7,7 @@ package producoes.printScan;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import producoes.precedenciaOperadores.Final;
 import sintatico.GerenciadorToken;
 
 /**
@@ -30,7 +31,10 @@ public class Entrada extends RegraProducao{
 			
                        
 			//TODO: <Final>
-			
+			else if(!Final.getInstancia().analisar(gerenciadorToken)){
+                            return false;
+                            
+                        }
 			return true;
 			
 		}

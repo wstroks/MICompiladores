@@ -40,7 +40,7 @@ public class TipoVetorDeclarandoAux extends RegraProducao {
 	protected void gerarFirst() {
 		// TODO Auto-generated method stub
                 //[, E
-                first.add(TipoToken.E);
+                first.add(TipoToken.EOF);
                 first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
 
 	}

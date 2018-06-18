@@ -7,6 +7,8 @@ package producoes.blocoVariaveis;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import producoes.blocoStruct.DeclaracaoDeStructCorpo;
+import producoes.precedenciaOperadores.Expressao;
 import sintatico.GerenciadorToken;
 
 /**
@@ -30,7 +32,12 @@ public class ExpressaoIdentificadorVarAux extends RegraProducao {
             }
 
             // falta: <Expressao>
-            // <> ! Produção Vazia
+            else if (!Expressao.getInstancia().analisar(gerenciadorToken)) {
+                return false;
+            }
+             else if (gerenciadorToken.eof()) {
+                return true;
+            }
             return true;
 
         }
@@ -42,7 +49,7 @@ public class ExpressaoIdentificadorVarAux extends RegraProducao {
         // TODO Auto-generated method stub
         // =, E
         first.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
     }
 
     @Override

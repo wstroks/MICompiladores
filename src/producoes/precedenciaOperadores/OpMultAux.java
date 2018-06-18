@@ -33,7 +33,9 @@ public class OpMultAux extends RegraProducao {
                 return false;
             }
 
-            // producao vazia
+             else if (gerenciadorToken.eof()) {
+                return true;
+            }
             return true;
 
         }
@@ -45,7 +47,7 @@ public class OpMultAux extends RegraProducao {
     protected void gerarFirst() {
         //{  E, * , /}
 
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
         first.add(TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO);
         first.add(TipoToken.OPERADOR_ARITIMETICO_DIVISAO);
 

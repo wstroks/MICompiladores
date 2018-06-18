@@ -28,7 +28,9 @@ public class SimboloUnario extends RegraProducao {
             }else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO)) {
                 return false;
             } 
-            // producao vazia
+             else if (gerenciadorToken.eof()) {
+                return true;
+            }
             return true;
 
         }
@@ -42,7 +44,7 @@ public class SimboloUnario extends RegraProducao {
 
         first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
         
     }
 

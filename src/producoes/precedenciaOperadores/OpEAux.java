@@ -29,7 +29,9 @@ public class OpEAux extends RegraProducao {
             }else if (!OpE.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
-            //producao vazia
+             else if (gerenciadorToken.eof()) {
+                return true;
+            }
             
 
             return true;
@@ -43,7 +45,7 @@ public class OpEAux extends RegraProducao {
     protected void gerarFirst() {
         //{  &&, E}
         first.add(TipoToken.OPERADOR_LOGICO_E);
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
         
         
         

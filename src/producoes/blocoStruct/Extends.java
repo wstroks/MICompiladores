@@ -30,7 +30,9 @@ public class Extends extends RegraProducao {
             } else if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                 return false;
             }
-            // Produção vazia falta
+             else if (gerenciadorToken.eof()) {
+                return true;
+            }
 
             return true;
 

@@ -26,11 +26,11 @@ public class ParametrosFuncaoAux extends RegraProducao {
 
             if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
                 return false;
-            }else if (!ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
+            } else if (!ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
                 return false;
+            } else if (gerenciadorToken.eof()) {
+                return true;
             }
-            
-            //producao vazia 
 
             return true;
 
@@ -42,9 +42,9 @@ public class ParametrosFuncaoAux extends RegraProducao {
     @Override
     protected void gerarFirst() {
         //{ E, ‘,'}
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
         first.add(TipoToken.DELIMITADOR_VIRGULA);
-        
+
     }
 
     @Override

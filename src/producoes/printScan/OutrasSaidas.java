@@ -41,7 +41,10 @@ public class OutrasSaidas extends RegraProducao{
                             return false;
                         }
                         
-                        //Todo: Produção vazia
+                        else if(gerenciadorToken.eof()){
+				return true;
+			}
+			
 			
                         
 			return true;
@@ -53,7 +56,7 @@ public class OutrasSaidas extends RegraProducao{
 	@Override
 	protected void gerarFirst() {
 		//{  E, ‘,’ }
-		first.add(TipoToken.E);
+		first.add(TipoToken.EOF);
                 first.add(TipoToken.DELIMITADOR_VIRGULA);
 	}
 

@@ -30,7 +30,9 @@ public class EstruturaCondicionalAux extends RegraProducao {
            else if (!Bloco.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
-            // falta produçãovazia
+            else if(gerenciadorToken.eof()){
+		return true;
+	     }
             return true;
 
         }
@@ -42,7 +44,7 @@ public class EstruturaCondicionalAux extends RegraProducao {
         // TODO Auto-generated method stub
         // else e E
         first.add(TipoToken.PALAVRA_RESERVADA_ELSE);
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
     }
 
     @Override

@@ -42,7 +42,10 @@ public class OutrasEntradas extends RegraProducao{
                             return false;
                         }
                         
-                        // Todo: Vazio
+                        else if(gerenciadorToken.eof()){
+				return true;
+			}
+			
 			
                        return true;
 			
@@ -54,7 +57,7 @@ public class OutrasEntradas extends RegraProducao{
 	@Override
 	protected void gerarFirst() {
 		//{ E, ‘,’}
-		first.add(TipoToken.E);
+		first.add(TipoToken.EOF);
                 first.add(TipoToken.DELIMITADOR_VIRGULA);
 	}
 

@@ -28,7 +28,9 @@ public class DeclaracaoDeStructCorpoAux extends RegraProducao {
            if (!DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
-            // falta produção vazia
+             else if (gerenciadorToken.eof()) {
+                return true;
+            }
             return true;
 
         }
@@ -46,7 +48,7 @@ public class DeclaracaoDeStructCorpoAux extends RegraProducao {
         first.add(TipoToken.PALAVRA_RESERVADA_INT);
         first.add(TipoToken.PALAVRA_RESERVADA_STRING);
         first.add(TipoToken.IDENTIFICADOR);
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
 
     }
 

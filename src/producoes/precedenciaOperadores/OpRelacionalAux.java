@@ -29,7 +29,9 @@ public class OpRelacionalAux extends RegraProducao {
             }else if (!OpRelacional.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
-            // producao vazia
+             else if (gerenciadorToken.eof()) {
+                return true;
+            }
             
 
             return true;
@@ -42,7 +44,7 @@ public class OpRelacionalAux extends RegraProducao {
     @Override
     protected void gerarFirst() {
         //{   E, != , < , <=, == , > , >=}
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
         first.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
         first.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
         first.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);

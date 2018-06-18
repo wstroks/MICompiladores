@@ -27,7 +27,9 @@ public class ValorAux2 extends RegraProducao {
                 return false;
             } else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
                 return false;
-            } 
+            }  else if (gerenciadorToken.eof()) {
+                return true;
+            }
 
             return true;
 

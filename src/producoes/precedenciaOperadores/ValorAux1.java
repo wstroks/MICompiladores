@@ -27,7 +27,9 @@ public class ValorAux1 extends RegraProducao {
                 return false;
             } else if (!ValorAux2.getInstancia().analisar(gerenciadorToken)) {
                 return false;
-            } //producao vazia
+            } else if (gerenciadorToken.eof()) {
+                return true;
+            }
 
             return true;
 
@@ -42,7 +44,7 @@ public class ValorAux1 extends RegraProducao {
 
         first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
        
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
         
 
     }

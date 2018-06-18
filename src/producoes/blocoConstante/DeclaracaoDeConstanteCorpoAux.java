@@ -13,63 +13,52 @@ import sintatico.GerenciadorToken;
  *
  * @author wstro
  */
-public class DeclaracaoDeConstanteCorpoAux extends RegraProducao{
-	
-	public static RegraProducao getInstancia() {
-		return new DeclaracaoDeConstanteCorpoAux();
-	}
+public class DeclaracaoDeConstanteCorpoAux extends RegraProducao {
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		// TODO Auto-generated method stub
-                
-                if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
-			
-			if(!DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)){
-                            return false;
-                        }
-                        
-                        
-                         // falta producao vazia
-                         
-                         
-                        return true;
-                        
-			
-                       
-			
-			
-			
-		}
-		return false;
-		
-	}
+    public static RegraProducao getInstancia() {
+        return new DeclaracaoDeConstanteCorpoAux();
+    }
 
-	@Override
-	protected void gerarFirst() {
-		// TODO Auto-generated method stub
-                // bool, float, identificador, int, string, struct, E
-                first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
-                first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
-                first.add(TipoToken.PALAVRA_RESERVADA_INT);
-                first.add(TipoToken.PALAVRA_RESERVADA_STRING);
-                first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-                first.add(TipoToken.IDENTIFICADOR);
-                first.add(TipoToken.E);
-                
-		
-	}
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
+        // TODO Auto-generated method stub
 
-	@Override
-	protected void gerarFollow() {
-		// TODO Auto-generated method stub
-                // }
-                
-                follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-                
-		
-	}
+            if (!DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)) {
+                return false;
+            } else if (gerenciadorToken.eof()) {
+                return true;
+            }
+
+            return true;
+
+        }
+        return false;
+
+    }
+
+    @Override
+    protected void gerarFirst() {
+        // TODO Auto-generated method stub
+        // bool, float, identificador, int, string, struct, E
+        first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+        first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+        first.add(TipoToken.PALAVRA_RESERVADA_INT);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRING);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        first.add(TipoToken.IDENTIFICADOR);
+        first.add(TipoToken.EOF);
+
+    }
+
+    @Override
+    protected void gerarFollow() {
+        // TODO Auto-generated method stub
+        // }
+
+        follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+
+    }
 
 }
-

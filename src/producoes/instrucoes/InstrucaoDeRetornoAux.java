@@ -28,7 +28,11 @@ public class InstrucaoDeRetornoAux extends RegraProducao {
 
               if (!Expressao.getInstancia().analisar(gerenciadorToken)) {
                 return false;
-            }//PRODUCAO VAZIA
+            }else if (gerenciadorToken.eof()) {
+                return true;
+            }else if (gerenciadorToken.eof()) {
+                return true;
+            }
             
 
             return true;
@@ -54,7 +58,7 @@ public class InstrucaoDeRetornoAux extends RegraProducao {
         first.add(TipoToken.PALAVRA_RESERVADA_SCAN);
         first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
         first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
         
         
 

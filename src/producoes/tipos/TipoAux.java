@@ -41,7 +41,7 @@ public class TipoAux extends RegraProducao {
 	protected void gerarFirst() {
 		// TODO Auto-generated method stub
                 
-                first.add(TipoToken.E);//vazio
+                first.add(TipoToken.EOF);//vazio
                 first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
 	}
 

@@ -33,7 +33,9 @@ public class ParametrosAux extends RegraProducao {
             else if (!Parametros.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
-            // produção vazia
+            else if (gerenciadorToken.eof()) {
+                return true;
+            }
 
             return true;
 
@@ -47,7 +49,7 @@ public class ParametrosAux extends RegraProducao {
         //{ E, ‘,’}
         first.add(TipoToken.DELIMITADOR_VIRGULA);
         
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
     }
 
     @Override

@@ -91,7 +91,5 @@ public enum TipoToken {
     //EOF ($)
     EOF,
     
-    // Vazio
-    E
-
+    
 }

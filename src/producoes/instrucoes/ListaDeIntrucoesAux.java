@@ -35,7 +35,9 @@ public class ListaDeIntrucoesAux extends RegraProducao {
             if (!ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             } 
-            // PRODUCAO VAZIA
+            else if (gerenciadorToken.eof()) {
+                return true;
+            }
 
             return true;
 
@@ -66,7 +68,7 @@ public class ListaDeIntrucoesAux extends RegraProducao {
         first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
         
         first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
 
     }
 

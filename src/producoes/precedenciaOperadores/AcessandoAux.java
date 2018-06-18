@@ -27,7 +27,9 @@ public class AcessandoAux extends RegraProducao {
                 return false;
             }
             
-            // producao vazia
+             else if (gerenciadorToken.eof()) {
+                return true;
+            }
             return true;
 
         }
@@ -41,7 +43,7 @@ public class AcessandoAux extends RegraProducao {
 
         first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
         first.add(TipoToken.DELIMITADOR_PONTO);
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
 
     }
 

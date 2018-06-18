@@ -33,7 +33,9 @@ public class ValorRelacionalAux extends RegraProducao {
             } else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO)) {
                 return false;
             }
-            // producao vazia
+           else if (gerenciadorToken.eof()) {
+                return true;
+            }
 
             return true;
 
@@ -46,7 +48,7 @@ public class ValorRelacionalAux extends RegraProducao {
     protected void gerarFirst() {
         //{  { E, - , + }
 
-        first.add(TipoToken.E);
+        first.add(TipoToken.EOF);
         first.add(TipoToken.OPERADOR_ARITIMETICO_ADICAO);
         first.add(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
 
