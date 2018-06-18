@@ -1,7 +1,7 @@
 /**
  * 
  */
-package producoes.tipos;
+package producoes.declaracaoFuncaoProcedimento;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
@@ -11,10 +11,10 @@ import sintatico.GerenciadorToken;
  * @author Tayane
  *
  */
-public class Tipo extends RegraProducao{
+public class FuncID extends RegraProducao{
 	
 	public static RegraProducao getInstancia() {
-		return new Tipo();
+		return new FuncID();
 	}
 
 	@Override
@@ -22,9 +22,11 @@ public class Tipo extends RegraProducao{
 		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
-			//TODO: <TipoBase>
+			//TODO: <Tipo>
 			
-			//TODO: <TipoAux>
+			if(!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){
+				return false;
+			}
 			
 			return true;
 			
@@ -35,14 +37,15 @@ public class Tipo extends RegraProducao{
 
 	@Override
 	protected void gerarFirst() {
-		//{ Identificador }
-		first.add(TipoToken.IDENTIFICADOR);
+		//{ ( }
+		first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
 	}
 
 	@Override
 	protected void gerarFollow() {
 		//{ bool, float, identificador,int, string, struct }
 		follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+		follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
 		follow.add(TipoToken.IDENTIFICADOR);
 		follow.add(TipoToken.PALAVRA_RESERVADA_INT);
 		follow.add(TipoToken.PALAVRA_RESERVADA_STRING);

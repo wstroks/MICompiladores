@@ -24,11 +24,12 @@ public class ProgramaAux extends RegraProducao{
 		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
-			if((!Programa.getInstancia().analisar(gerenciadorToken)) || (!gerenciadorToken.eof())){
-				return false;
+			if((Programa.getInstancia().analisar(gerenciadorToken))){
+				return true;
 			}
-			
-			return true;
+			else if(gerenciadorToken.eof()){
+				return true;
+			}
 			
 		}
 		

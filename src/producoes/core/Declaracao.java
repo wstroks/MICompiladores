@@ -25,9 +25,8 @@ public class Declaracao extends RegraProducao{
 		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
-			//DeclaracaoDeInicio
-			if(!DeclaracaoDeInicio.getInstancia().analisar(gerenciadorToken)){
-				return false;
+			if(DeclaracaoDeInicio.getInstancia().analisar(gerenciadorToken)){
+				return true;
 			}
 			
 			//TODO: implementar classes abaixo e continuar o código de análise desta classe
@@ -38,8 +37,6 @@ public class Declaracao extends RegraProducao{
 			//DeclaracaoDeConst
 			//DeclaracaoDeStruct
 			//DeclaracaoDeTypedef
-			
-			return true;
 			
 		}
 
