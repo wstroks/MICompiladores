@@ -25,7 +25,6 @@ public class BlocoAux extends RegraProducao{
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 					
 			if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
-				gerenciadorToken.addErro(TipoToken.DELIMITADOR_FECHA_CHAVE);
 				return false;
 			}
 			

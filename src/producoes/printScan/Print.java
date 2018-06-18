@@ -23,12 +23,10 @@ public class Print extends RegraProducao{
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
 			if(!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT)){
-				gerenciadorToken.addErro(TipoToken.PALAVRA_RESERVADA_PRINT);
 				return false;
 			}
 			
 			if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
-				gerenciadorToken.addErro(TipoToken.DELIMITADOR_ABRE_PARENTESES);
 				return false;
 			}
 			
@@ -37,7 +35,6 @@ public class Print extends RegraProducao{
 			//TODO: <OutrasSaidas>
 			
 			if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
-				gerenciadorToken.addErro(TipoToken.DELIMITADOR_ABRE_PARENTESES);
 				return false;
 			}
 			

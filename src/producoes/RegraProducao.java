@@ -72,13 +72,22 @@ public abstract class RegraProducao {
     	
     }
     
-    protected boolean consumir(GerenciadorToken gerenciadorToken, TipoToken tipoToken){
+    /**
+     * Verifica se o token atual é igual ao token esperado. Se sim, consome o token atual, se não adiciona o token encontrato na lista de erros
+     * @param gerenciadorToken
+     * @param tokenEsperado
+     * @return
+     */
+    protected boolean consumir(GerenciadorToken gerenciadorToken, TipoToken tokenEsperado){
     	
-    	if(verificarToken(gerenciadorToken, tipoToken)){
+    	if(verificarToken(gerenciadorToken, tokenEsperado)){
     		gerenciadorToken.consumirTokenAtual();
     		return true;
     	}
-    	return false;
+    	else{
+    		gerenciadorToken.addErro(tokenEsperado);
+    		return false;
+    	}
     	
     }
 

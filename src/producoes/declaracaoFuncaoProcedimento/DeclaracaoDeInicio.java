@@ -23,17 +23,14 @@ public class DeclaracaoDeInicio extends RegraProducao{
 		System.out.println("Analisando <DeclaracaoDeInicio>");
 		
 		if(!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_START)){
-			gerenciadorToken.addErro(TipoToken.PALAVRA_RESERVADA_START);
 			return false;
 		}
 		
 		if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
-			gerenciadorToken.addErro(TipoToken.DELIMITADOR_ABRE_PARENTESES);
 			return false;
 		}
 		
 		if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
-			gerenciadorToken.addErro(TipoToken.DELIMITADOR_FECHA_PARENTESES);
 			return false;
 		}
 		

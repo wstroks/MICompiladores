@@ -25,7 +25,6 @@ public class Bloco extends RegraProducao{
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
 			if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)){
-				gerenciadorToken.addErro(TipoToken.DELIMITADOR_ABRE_CHAVE);
 				return false;
 			}
 			
