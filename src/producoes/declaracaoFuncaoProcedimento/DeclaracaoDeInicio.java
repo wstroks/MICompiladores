@@ -13,10 +13,8 @@ import sintatico.GerenciadorToken;
  */
 public class DeclaracaoDeInicio extends RegraProducao{
 	
-	private static DeclaracaoDeInicio instancia = new DeclaracaoDeInicio();
-	
 	public static RegraProducao getInstancia() {
-		return instancia;
+		return new DeclaracaoDeInicio();
 	}
 
 	@Override

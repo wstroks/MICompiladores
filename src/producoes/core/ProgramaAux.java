@@ -13,10 +13,8 @@ import sintatico.GerenciadorToken;
  */
 public class ProgramaAux extends RegraProducao{
 	
-	private static ProgramaAux instancia = new ProgramaAux();
-	
 	public static RegraProducao getInstancia() {
-		return instancia;
+		return new ProgramaAux();
 	}
 
 	@Override

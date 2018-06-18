@@ -13,10 +13,8 @@ import sintatico.GerenciadorToken;
  */
 public class OperacaoDeAtribuicao extends RegraProducao{
 	
-	private static OperacaoDeAtribuicao instancia = new OperacaoDeAtribuicao();
-	
 	public static RegraProducao getInstancia() {
-		return instancia;
+		return new OperacaoDeAtribuicao();
 	}
 
 	@Override

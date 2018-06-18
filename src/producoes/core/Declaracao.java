@@ -14,10 +14,8 @@ import sintatico.GerenciadorToken;
  */
 public class Declaracao extends RegraProducao{
 	
-	private static Declaracao instancia = new Declaracao();
-	
 	public static RegraProducao getInstancia() {
-		return instancia;
+		return new Declaracao();
 	}
 
 	@Override
