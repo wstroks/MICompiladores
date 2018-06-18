@@ -24,9 +24,13 @@ public class Tipo extends RegraProducao{
 		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
-			//TODO: <TipoBase>
+			if(!TipoBase.getInstancia().analisar(gerenciadorToken)){
+				return false;
+			}
 			
-			//TODO: <TipoAux>
+			if(!TipoAux.getInstancia().analisar(gerenciadorToken)){
+				return false;
+			}
 			
 			return true;
 			
