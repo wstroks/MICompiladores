@@ -15,50 +15,44 @@ import sintatico.GerenciadorToken;
  */
 public class DeclaracaoDeStructCorpo extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new DeclaracaoDeStructCorpo();
-    }
+	public static RegraProducao getInstancia() {
+		return new DeclaracaoDeStructCorpo();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!DeclaracaoDeStructLinha.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if(!DeclaracaoDeStructCorpoAux.getInstancia().analisar(gerenciadorToken)){
-                return false;
-            }
+			if (!DeclaracaoDeStructLinha.getInstancia().analisar(gerenciadorToken)) {
+				return false;
+			} 
+			
+			if (!DeclaracaoDeStructCorpoAux.getInstancia().analisar(gerenciadorToken)) {
+				return false;
+			}
 
-            return true;
+			return true;
 
-        }
-        return false;
-    }
+		}
+		return false;
+	}
 
-    @Override
-    protected void gerarFirst() {
-        // TODO Auto-generated method stub
-        // bool, float, identificador, int, string, struct
+	@Override
+	protected void gerarFirst() {
+		// bool, float, identificador, int, string, struct
+		first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+		first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+		first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+		first.add(TipoToken.PALAVRA_RESERVADA_INT);
+		first.add(TipoToken.PALAVRA_RESERVADA_STRING);
+		first.add(TipoToken.IDENTIFICADOR);
+	}
 
-        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-        first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
-        first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
-        first.add(TipoToken.PALAVRA_RESERVADA_INT);
-        first.add(TipoToken.PALAVRA_RESERVADA_STRING);
-        first.add(TipoToken.IDENTIFICADOR);
-        
-
-    }
-
-    @Override
-    protected void gerarFollow() {
-        // TODO Auto-generated method stub
-        //  }
-        follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
-        
-    }
+	@Override
+	protected void gerarFollow() {
+		// }
+		follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+	}
 
 }
-

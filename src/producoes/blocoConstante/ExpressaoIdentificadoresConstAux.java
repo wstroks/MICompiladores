@@ -15,54 +15,50 @@ import sintatico.GerenciadorToken;
  */
 public class ExpressaoIdentificadoresConstAux extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new ExpressaoIdentificadoresConstAux();
-    }
+	public static RegraProducao getInstancia() {
+		return new ExpressaoIdentificadoresConstAux();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-                return false;
-            } // falta: <<ExpressaoIdentificadoresConst>
-            else if (!ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
+			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+				return true;
+			} 
+			else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
 
-            return true;
+				if (ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
 
-        }
-        return false;
+			}
 
-    }
+		}
 
-    @Override
-    protected void gerarFirst() {
-        // TODO Auto-generated method stub
-        // ‘,’ , ;
-        first.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-        first.add(TipoToken.DELIMITADOR_VIRGULA);
+		return false;
 
-    }
+	}
 
-    @Override
-    protected void gerarFollow() {
-        // TODO Auto-generated method stub
-        //  bool, float, identificador, int, string, struct } 
+	@Override
+	protected void gerarFirst() {
+		// ‘,’ , ;
+		first.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+		first.add(TipoToken.DELIMITADOR_VIRGULA);
 
-        follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
-        follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
-        follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
-        follow.add(TipoToken.PALAVRA_RESERVADA_INT);
-        follow.add(TipoToken.PALAVRA_RESERVADA_STRING);
-        follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-        follow.add(TipoToken.IDENTIFICADOR);
+	}
 
-    }
+	@Override
+	protected void gerarFollow() {
+		// bool, float, identificador, int, string, struct }
+		follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+		follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+		follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+		follow.add(TipoToken.PALAVRA_RESERVADA_INT);
+		follow.add(TipoToken.PALAVRA_RESERVADA_STRING);
+		follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+		follow.add(TipoToken.IDENTIFICADOR);
+	}
 
 }

@@ -21,36 +21,57 @@ public class DeclaracaoDeStructAux extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                return false;
-            } else if (!Extends.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+            if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            	
+                if (!Extends.getInstancia().analisar(gerenciadorToken)) {
+                    return false;
+                }
+               
+                if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                    return false;
+                }
+                
+                if(!DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+                    return false;
+                }
+                
+                if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                    return false;
+                }
+                
+                return true;
+                
             }
-             else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                return false;
+            else if(Extends.getInstancia().analisar(gerenciadorToken)){
+            	
+                if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                    return false;
+                }
+                
+                if(!DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+                    return false;
+                }
+                
+                if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                    return false;
+                }
+                
+                return true;
+            	
             }
-            else if(!DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-            else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                return false;
-            }
-
-            return true;
 
         }
+        
         return false;
+        
     }
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         // {, extends,identificador
-
         first.add(TipoToken.IDENTIFICADOR);
         first.add(TipoToken.PALAVRA_RESERVADA_EXTENDS);
         first.add(TipoToken.DELIMITADOR_ABRE_CHAVE);
@@ -59,7 +80,6 @@ public class DeclaracaoDeStructAux extends RegraProducao {
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         //const, function, procedure, start, struct, typedef, var, $ ,; , [, Identificador
         follow.add(TipoToken.IDENTIFICADOR);
         follow.add(TipoToken.PALAVRA_RESERVADA_CONST);

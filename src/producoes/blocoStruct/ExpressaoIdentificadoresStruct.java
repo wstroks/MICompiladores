@@ -21,37 +21,35 @@ public class ExpressaoIdentificadoresStruct extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (!ExpressaoIdentificadorStruct.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
-            else if (!ExpressaoIdentificadoresStructAux.getInstancia().analisar(gerenciadorToken)) {
+            
+            if (!ExpressaoIdentificadoresStructAux.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
 
             return true;
 
         }
+        
         return false;
     }
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         // Identificador
-
         first.add(TipoToken.IDENTIFICADOR);
 
     }
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         //bool, float, identificador, int, string, struct }
-         follow.add(TipoToken.IDENTIFICADOR);
+        follow.add(TipoToken.IDENTIFICADOR);
         follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
         follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
         follow.add(TipoToken.PALAVRA_RESERVADA_INT);

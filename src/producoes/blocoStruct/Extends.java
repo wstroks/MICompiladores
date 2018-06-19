@@ -21,37 +21,32 @@ public class Extends extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS)) {
-                return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                return false;
+            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS)) {
+            	if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                    return true;
+                }
             }
-             else if (gerenciadorToken.eof()) {
+            else if (gerenciadorToken.eof()) {
                 return true;
             }
 
-            return true;
-
         }
+        
         return false;
+        
     }
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         // struct
-
         first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-
     }
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         //const, function, procedure, start, struct, typedef, var, $ ,; , [, Identificador
         follow.add(TipoToken.IDENTIFICADOR);
         follow.add(TipoToken.PALAVRA_RESERVADA_CONST);

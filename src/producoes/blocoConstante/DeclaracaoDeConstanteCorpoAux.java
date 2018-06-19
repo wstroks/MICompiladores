@@ -21,7 +21,6 @@ public class DeclaracaoDeConstanteCorpoAux extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
@@ -34,13 +33,13 @@ public class DeclaracaoDeConstanteCorpoAux extends RegraProducao {
             return true;
 
         }
+        
         return false;
 
     }
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         // bool, float, identificador, int, string, struct, E
         first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
         first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
@@ -54,9 +53,7 @@ public class DeclaracaoDeConstanteCorpoAux extends RegraProducao {
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         // }
-
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
 
     }

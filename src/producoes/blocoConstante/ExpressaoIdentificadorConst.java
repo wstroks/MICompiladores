@@ -14,63 +14,49 @@ import sintatico.GerenciadorToken;
  *
  * @author wstro
  */
-public class ExpressaoIdentificadorConst extends RegraProducao{
-	
+public class ExpressaoIdentificadorConst extends RegraProducao {
+
 	public static RegraProducao getInstancia() {
 		return new ExpressaoIdentificadorConst();
 	}
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		// TODO Auto-generated method stub
-                
-                if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
-			
-			if(!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){
+
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+
+			if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
 				return false;
 			}
-                        else if(!consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)){
-                            return false;
-                        }
-                        
-                        // falta: <Expressao>
-                        else if(!Expressao.getInstancia().analisar(gerenciadorToken)){
-                            return false;
-                        }
-                        
-                        
-                        
-                        return true;
-                        
 			
-                       
-			
-			
-			
+			if (!consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
+				return false;
+			}
+
+			if (!Expressao.getInstancia().analisar(gerenciadorToken)) {
+				return false;
+			}
+
+			return true;
+
 		}
-		return false;
 		
+		return false;
+
 	}
 
 	@Override
 	protected void gerarFirst() {
-		// TODO Auto-generated method stub
-                // Identificador
-                first.add(TipoToken.IDENTIFICADOR);
-                
-		
+		// Identificador
+		first.add(TipoToken.IDENTIFICADOR);
 	}
 
 	@Override
 	protected void gerarFollow() {
-		// TODO Auto-generated method stub
-                //  ‘,’ , ;
-                
-                follow.add(TipoToken.DELIMITADOR_VIRGULA);
-                follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-                
-                
-		
+		// ‘,’ , ;
+		follow.add(TipoToken.DELIMITADOR_VIRGULA);
+		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+
 	}
 
 }

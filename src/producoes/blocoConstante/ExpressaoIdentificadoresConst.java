@@ -15,50 +15,47 @@ import sintatico.GerenciadorToken;
  */
 public class ExpressaoIdentificadoresConst extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new ExpressaoIdentificadoresConst();
-    }
+	public static RegraProducao getInstancia() {
+		return new ExpressaoIdentificadoresConst();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!ExpressaoIdentificadorConst.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!ExpressaoIdentificadoresConstAux.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
+			if (!ExpressaoIdentificadorConst.getInstancia().analisar(gerenciadorToken)) {
+				return false;
+			}
+			
+			if (!ExpressaoIdentificadoresConstAux.getInstancia().analisar(gerenciadorToken)) {
+				return false;
+			}
 
-            return true;
+			return true;
 
-        }
-        return false;
+		}
+		
+		return false;
 
-    }
+	}
 
-    @Override
-    protected void gerarFirst() {
-        // TODO Auto-generated method stub
-        // Identificador
-        first.add(TipoToken.IDENTIFICADOR);
+	@Override
+	protected void gerarFirst() {
+		// Identificador
+		first.add(TipoToken.IDENTIFICADOR);
+	}
 
-    }
-
-    @Override
-    protected void gerarFollow() {
-        // TODO Auto-generated method stub
-        // bool, float, identificador, int, string, struct }
-
-        follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
-        follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
-        follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
-        follow.add(TipoToken.PALAVRA_RESERVADA_INT);
-        follow.add(TipoToken.PALAVRA_RESERVADA_STRING);
-        follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-        follow.add(TipoToken.IDENTIFICADOR);
-
-    }
+	@Override
+	protected void gerarFollow() {
+		// bool, float, identificador, int, string, struct }
+		follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+		follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+		follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+		follow.add(TipoToken.PALAVRA_RESERVADA_INT);
+		follow.add(TipoToken.PALAVRA_RESERVADA_STRING);
+		follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+		follow.add(TipoToken.IDENTIFICADOR);
+	}
 
 }

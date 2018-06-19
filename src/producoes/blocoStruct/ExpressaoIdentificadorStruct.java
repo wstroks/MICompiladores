@@ -21,38 +21,30 @@ public class ExpressaoIdentificadorStruct extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                return false;
+            if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                return true;
             } 
 
-            return true;
-
         }
+        
         return false;
+        
     }
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         //Identificador
-
         first.add(TipoToken.IDENTIFICADOR);
-
     }
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         // ',’ , ;
         follow.add(TipoToken.DELIMITADOR_VIRGULA);
-        
-        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-        
-       
+        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA); 
     }
 
 }

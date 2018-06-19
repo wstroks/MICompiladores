@@ -1,4 +1,4 @@
 start(){
 	//comentando o print porque ainda está em fase de desenvolvimento...
-	//print("testando print"); 
+	print("testando print"); 
 }
