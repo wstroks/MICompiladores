@@ -28,7 +28,7 @@ public class TipoBase extends RegraProducao {
 			if(Escalar.getInstancia().analisar(gerenciadorToken)){
 				return true;
 			}
-			else if(DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)){
+			else if(DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)){	
 				return true;
 			}
 			else if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){

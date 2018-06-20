@@ -20,8 +20,6 @@ public class DeclaracaoDeInicio extends RegraProducao{
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		System.out.println("Analisando <DeclaracaoDeInicio>");
-		
 		if(!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_START)){
 			return false;
 		}

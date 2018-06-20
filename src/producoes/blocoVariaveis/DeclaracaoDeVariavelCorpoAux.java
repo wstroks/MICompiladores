@@ -34,12 +34,13 @@ public class DeclaracaoDeVariavelCorpoAux extends RegraProducao {
             return true;
 
         }
+        
         return false;
+        
     }
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         // bool, float, identificador, int, string, struct, E
         first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
         first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
@@ -52,7 +53,6 @@ public class DeclaracaoDeVariavelCorpoAux extends RegraProducao {
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         // }
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
 

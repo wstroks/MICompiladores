@@ -20,8 +20,6 @@ public class DeclaracaoDeFuncao extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        System.out.println("Analisando <DeclaracaoDeFuncao>");
-
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FUNCTION)) {

@@ -21,17 +21,17 @@ public class OpE extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-             if (!OpRelacional.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }else if (!OpEAux.getInstancia().analisar(gerenciadorToken)) {
+            if (!OpRelacional.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
-            
-            
-
+             
+            if (!OpEAux.getInstancia().analisar(gerenciadorToken)) {
+                return false;
+            }
+           
             return true;
 
         }

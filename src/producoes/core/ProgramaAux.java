@@ -20,8 +20,6 @@ public class ProgramaAux extends RegraProducao{
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		System.out.println("Analisando <ProgramaAux>");
-		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
 			if((Programa.getInstancia().analisar(gerenciadorToken))){

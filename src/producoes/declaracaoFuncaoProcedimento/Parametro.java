@@ -23,8 +23,6 @@ public class Parametro extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-       
-
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             

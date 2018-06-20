@@ -20,8 +20,6 @@ public class Programa extends RegraProducao{
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		System.out.println("Analisando <Programa>");
-		
 		if(!Declaracao.getInstancia().analisar(gerenciadorToken)){
 			return false;
 		}

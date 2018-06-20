@@ -22,8 +22,6 @@ public class ParametrosAux extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        System.out.println("Analisando <FuncID>");
-
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){

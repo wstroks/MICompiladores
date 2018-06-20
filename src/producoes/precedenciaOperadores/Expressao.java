@@ -21,17 +21,17 @@ public class Expressao extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-             if (!OpE.getInstancia().analisar(gerenciadorToken)) {
+            if (!OpE.getInstancia().analisar(gerenciadorToken)) {
                 return false;
-            }else if (!ExpressaoAux.getInstancia().analisar(gerenciadorToken)) {
+            }
+             
+            if (!ExpressaoAux.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
             
-            
-
             return true;
 
         }

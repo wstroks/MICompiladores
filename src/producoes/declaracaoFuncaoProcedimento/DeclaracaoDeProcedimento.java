@@ -22,19 +22,14 @@ public class DeclaracaoDeProcedimento extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        System.out.println("Analisando <DeclaracaoDeProcedimento>");
-
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PROCEDURE)) {
                 return false;
             }
-
-            
             else if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                 return false;
             }
-
             else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
                 return false;
             }

@@ -25,15 +25,14 @@ public class ExpressaoIdentificadoresVarAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-                return false;
-            } //<ExpressaoIdentificadoresVar>
-            else if (!ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-            return true;
+            if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                return true;
+            } 
+            else if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+            	if(ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
+            } 
 
         }
         return false;
@@ -41,7 +40,6 @@ public class ExpressaoIdentificadoresVarAux extends RegraProducao {
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         // ',’ , ;
         first.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
         first.add(TipoToken.DELIMITADOR_VIRGULA);
@@ -49,9 +47,7 @@ public class ExpressaoIdentificadoresVarAux extends RegraProducao {
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         // bool, float, identificador, int, string, struct }
-
         follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
         follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
         follow.add(TipoToken.PALAVRA_RESERVADA_INT);
@@ -59,7 +55,6 @@ public class ExpressaoIdentificadoresVarAux extends RegraProducao {
         follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
         follow.add(TipoToken.IDENTIFICADOR);
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
-
     }
 
 }

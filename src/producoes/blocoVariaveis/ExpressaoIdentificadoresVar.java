@@ -21,36 +21,34 @@ public class ExpressaoIdentificadoresVar extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            //<ExpressaoIdentificadorVar>
             if (!ExpressaoIdentificadorVar.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
-            //<ExpressaoIdentificadoresVarAux>
-            else if(!ExpressaoIdentificadoresVarAux.getInstancia().analisar(gerenciadorToken)) {
+
+            if(!ExpressaoIdentificadoresVarAux.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
+            
             return true;
 
         }
+        
         return false;
+        
     }
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         // Identificador
         first.add(TipoToken.IDENTIFICADOR);
     }
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         //bool, float, identificador, int, string, struct }
-
         follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
         follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
         follow.add(TipoToken.PALAVRA_RESERVADA_INT);
@@ -58,7 +56,6 @@ public class ExpressaoIdentificadoresVar extends RegraProducao {
         follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
         follow.add(TipoToken.IDENTIFICADOR);
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
-
     }
 
 }

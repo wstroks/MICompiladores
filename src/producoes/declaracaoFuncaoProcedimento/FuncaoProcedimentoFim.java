@@ -22,8 +22,6 @@ public class FuncaoProcedimentoFim extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        
-
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (!Parametros.getInstancia().analisar(gerenciadorToken)) {
