@@ -22,14 +22,18 @@ public class DeclaracaoDeTypedefAux extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (!Tipo.getInstancia().analisar(gerenciadorToken)) {
                 return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            }
+            
+            if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                 return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+            }
+            
+            if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
                 return false;
             }
 
@@ -41,14 +45,12 @@ public class DeclaracaoDeTypedefAux extends RegraProducao {
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         // TYPEDEF
         first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
     }
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         /*
         --, !, ( , ++, CadeiaDeCaracteres, Digitos, false, identificador, print, return , scan, struct,
         true, typdef, var, while, }, const, function, procedure, start, $
@@ -75,7 +77,6 @@ public class DeclaracaoDeTypedefAux extends RegraProducao {
         follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         follow.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
         follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
-
     }
 
 }
