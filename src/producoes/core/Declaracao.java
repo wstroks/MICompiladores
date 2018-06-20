@@ -1,6 +1,3 @@
-/**
- * 
- */
 package producoes.core;
 
 import lexico.TipoToken;
@@ -26,7 +23,6 @@ public class Declaracao extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
@@ -49,13 +45,13 @@ public class Declaracao extends RegraProducao {
             return true;
 
         }
+        
         return false;
 
     }
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         // const, function, procedure, start, typedef, var
         first.add(TipoToken.PALAVRA_RESERVADA_CONST);
         first.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
@@ -68,9 +64,7 @@ public class Declaracao extends RegraProducao {
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         // const, function, procedure, start, struct, typedef, var, $
-
         follow.add(TipoToken.EOF);
         follow.add(TipoToken.PALAVRA_RESERVADA_CONST);
         follow.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
@@ -79,7 +73,6 @@ public class Declaracao extends RegraProducao {
         follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
         follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
         follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
-
     }
 
 }
