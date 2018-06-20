@@ -7,7 +7,6 @@ package producoes.declaracaoFuncaoProcedimento;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
-import producoes.tipos.Tipo;
 import sintatico.GerenciadorToken;
 
 /**
@@ -24,12 +23,12 @@ public class Parametros extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-            
+        	
             if (!Parametro.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
-            else if (!ParametrosAux.getInstancia().analisar(gerenciadorToken)) {
+            
+            if (!ParametrosAux.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
 

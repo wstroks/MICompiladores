@@ -15,55 +15,58 @@ import sintatico.GerenciadorToken;
  */
 public class FuncaoProcedimentoFim extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new FuncaoProcedimentoFim();
-    }
+	public static RegraProducao getInstancia() {
+		return new FuncaoProcedimentoFim();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!Parametros.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                return false;
-            }
+			if (Parametros.getInstancia().analisar(gerenciadorToken)) {
+				if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+					return false;
+				}
+				if (!Bloco.getInstancia().analisar(gerenciadorToken)) {
+					return false;
+				}
+				return true;
+			}
+			else if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
+				if(Bloco.getInstancia().analisar(gerenciadorToken)){
+					return true;
+				}
+			}
 
-            
-           else if (!Bloco.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-            return true;
+		}
 
-        }
+		return false;
+	}
 
-        return false;
-    }
+	@Override
+	protected void gerarFirst() {
+		// { ), bool, float, identificador,int, string, struct }
+		first.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+		first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+		first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+		first.add(TipoToken.PALAVRA_RESERVADA_INT);
+		first.add(TipoToken.PALAVRA_RESERVADA_STRING);
+		first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
 
-    @Override
-    protected void gerarFirst() {
-        //{ ), bool, float, identificador,int, string, struct }
-        first.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-        first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
-        first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
-        first.add(TipoToken.PALAVRA_RESERVADA_INT);
-        first.add(TipoToken.PALAVRA_RESERVADA_STRING);
-        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-        
-    }
+	}
 
-    @Override
-    protected void gerarFollow() {
-        //{  const, function, procedure, start, struct, typedef, var, $ }
-        follow.add(TipoToken.PALAVRA_RESERVADA_CONST);
-        follow.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
-        follow.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);
-        follow.add(TipoToken.PALAVRA_RESERVADA_START);
-        follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-        follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
-        follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
-        follow.add(TipoToken.EOF);
-    }
+	@Override
+	protected void gerarFollow() {
+		// { const, function, procedure, start, struct, typedef, var, $ }
+		follow.add(TipoToken.PALAVRA_RESERVADA_CONST);
+		follow.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
+		follow.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);
+		follow.add(TipoToken.PALAVRA_RESERVADA_START);
+		follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+		follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+		follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
+		follow.add(TipoToken.EOF);
+	}
 
 }

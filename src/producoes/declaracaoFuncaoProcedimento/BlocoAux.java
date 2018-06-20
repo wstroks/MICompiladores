@@ -12,44 +12,43 @@ import sintatico.GerenciadorToken;
  * @author Tayane
  *
  */
-public class BlocoAux extends RegraProducao{
-	
+public class BlocoAux extends RegraProducao {
+
 	public static RegraProducao getInstancia() {
 		return new BlocoAux();
 	}
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		
-//		<BlocoAux>  ::= <ListaDeIntrucoes> '}'
-//        | '}'
-		
-		System.out.println("Analisando <BlocoAux>");
-		
-		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
-					
-			if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
-				return false;
+
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+
+			if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
+				return true;
 			}
-			
-			//TODO: adicionar anáise da produção "<ListaDeIntrucoes> '}'"
-                        else if(!ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
-                            return false;
-                        }
-			return true;
+			else if(ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
+				
+				if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
+					return true;
+				}
+				
+			}
+
 		}
-		
+
 		return false;
-		
+
 	}
 
 	@Override
 	protected void gerarFirst() {
-		//{ --, ++, !, (, }, ++, CadeiaDeCaracteres, Digito, false, identificador, if, print, return, scan, struct, true, typedef, var, while }
+		// { --, ++, !, (, }, ++, CadeiaDeCaracteres, Digito, false,
+		// identificador, if, print, return, scan, struct, true, typedef, var,
+		// while }
 		first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
 		first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
 		first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
-                first.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+		first.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
 		first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
 		first.add(TipoToken.CADEIA_CARACTERES);
 		first.add(TipoToken.NUMERO);
@@ -67,7 +66,9 @@ public class BlocoAux extends RegraProducao{
 
 	@Override
 	protected void gerarFollow() {
-		//{--, !, ( , ++, CadeiaDeCaracteres, Digitos, false, Identificador, print, return , scan, struct, true, typdef, var, while, else, } , const, function, procedure, start, $ }
+		// {--, !, ( , ++, CadeiaDeCaracteres, Digitos, false, Identificador,
+		// print, return , scan, struct, true, typdef, var, while, else, } ,
+		// const, function, procedure, start, $ }
 		follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
 		follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
 		follow.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
@@ -89,7 +90,7 @@ public class BlocoAux extends RegraProducao{
 		follow.add(TipoToken.PALAVRA_RESERVADA_CONST);
 		follow.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
 		follow.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);
-		follow.add(TipoToken.PALAVRA_RESERVADA_START);	
+		follow.add(TipoToken.PALAVRA_RESERVADA_START);
 		follow.add(TipoToken.EOF);
 	}
 

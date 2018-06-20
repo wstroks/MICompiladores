@@ -26,19 +26,18 @@ public class DeclaracaoDeFuncao extends RegraProducao {
                 return false;
             }
 
-            //TODO: <FuncID>
-            else if (!FuncID.getInstancia().analisar(gerenciadorToken)) {
+            if (!FuncID.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
 
-            else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+            if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
                 return false;
             }
 
-            //TODO: <FuncaoProcedimentoFim>
-             else if (!FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
+            if (!FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
                 return false;
             }
+            
             return true;
 
         }

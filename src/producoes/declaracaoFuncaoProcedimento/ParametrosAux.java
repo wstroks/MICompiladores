@@ -15,45 +15,41 @@ import sintatico.GerenciadorToken;
  */
 public class ParametrosAux extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new ParametrosAux();
-    }
+	public static RegraProducao getInstancia() {
+		return new ParametrosAux();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
-				return false;
-	    }
-			
-            else if (!Parametros.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-            else if (gerenciadorToken.eof()) {
-                return true;
-            }
+			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+				if (Parametros.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
+			}
+			else if (gerenciadorToken.eof()) {
+				return true;
+			}
 
-            return true;
+		}
 
-        }
+		return false;
+	}
 
-        return false;
-    }
+	@Override
+	protected void gerarFirst() {
+		// { E, ‘,’}
+		first.add(TipoToken.DELIMITADOR_VIRGULA);
 
-    @Override
-    protected void gerarFirst() {
-        //{ E, ‘,’}
-        first.add(TipoToken.DELIMITADOR_VIRGULA);
-        
-        first.add(TipoToken.EOF);
-    }
+		first.add(TipoToken.EOF);
+	}
 
-    @Override
-    protected void gerarFollow() {
-        //{ ) }
-       follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-    }
+	@Override
+	protected void gerarFollow() {
+		// { ) }
+		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+	}
 
 }
