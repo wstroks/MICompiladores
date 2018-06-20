@@ -15,48 +15,41 @@ import sintatico.GerenciadorToken;
  */
 public class InstrucaoDeRetorno extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new InstrucaoDeRetorno();
-    }
+	public static RegraProducao getInstancia() {
+		return new InstrucaoDeRetorno();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-             if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_RETURN)) {
-                return false;
-            }else if (!InstrucaoDeRetornoAux.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-            
+			if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_RETURN)) {
+				return false;
+			}
+			
+			if (!InstrucaoDeRetornoAux.getInstancia().analisar(gerenciadorToken)) {
+				return false;
+			}
 
-            return true;
+			return true;
 
-        }
-        return false;
+		}
+		
+		return false;
 
-    }
+	}
 
-    @Override
-    protected void gerarFirst() {
-        // TODO Auto-generated method stub
-        // RETURN
-        first.add(TipoToken.PALAVRA_RESERVADA_RETURN);
-        
+	@Override
+	protected void gerarFirst() {
+		// RETURN
+		first.add(TipoToken.PALAVRA_RESERVADA_RETURN);
+	}
 
-    }
-
-    @Override
-    protected void gerarFollow() {
-        // TODO Auto-generated method stub
-         // ;
-
-        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-       
-
-
-    }
+	@Override
+	protected void gerarFollow() {
+		// ;
+		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+	}
 
 }

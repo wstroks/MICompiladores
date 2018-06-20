@@ -7,12 +7,7 @@ package producoes.instrucoes;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
-import producoes.blocoConstante.DeclaracaoDeConst;
-import producoes.blocoStruct.DeclaracaoDeStruct;
 import producoes.blocoVariaveis.DeclaracaoDeVar;
-import producoes.declaracaoFuncaoProcedimento.DeclaracaoDeFuncao;
-import producoes.declaracaoFuncaoProcedimento.DeclaracaoDeInicio;
-import producoes.declaracaoFuncaoProcedimento.DeclaracaoDeProcedimento;
 import producoes.declaracaoTipo.DeclaracaoDeTypedef;
 import producoes.estruturasCondicionais.EstruturaCondicional;
 import producoes.estruturasRepeticao.While;
@@ -30,32 +25,31 @@ public class Instrucao extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!InstrucaoNormal.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!EstruturaCondicional.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!While.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!DeclaracaoDeVar.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!DeclaracaoDeTypedef.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+            if (InstrucaoNormal.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (EstruturaCondicional.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (While.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (DeclaracaoDeVar.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (DeclaracaoDeTypedef.getInstancia().analisar(gerenciadorToken)) {
+                return true;
             } 
 
             return true;
 
         }
+        
         return false;
 
     }
 
     @Override
     protected void gerarFirst() {
-        // TODO Auto-generated method stub
         //  --, !, (, ++, CadeiadeCaracter, Digitos, false, identificador, if, print, return,scan, struct, true, typedef,
         //var, while
         first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
@@ -73,17 +67,13 @@ public class Instrucao extends RegraProducao {
         first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
         first.add(TipoToken.PALAVRA_RESERVADA_VAR);
         first.add(TipoToken.PALAVRA_RESERVADA_WHILE);
-        
-        first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
-        
+        first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF); 
     }
 
     @Override
     protected void gerarFollow() {
-        // TODO Auto-generated method stub
         //--, !, ( , ++, CadeiaDeCaracteres, Digitos, false, identificador, print, return , scan, struct, true, typdef,
         //var, while, }
-
         follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         follow.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
@@ -101,7 +91,6 @@ public class Instrucao extends RegraProducao {
         follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
         follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
-
     }
 
 }
