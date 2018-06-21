@@ -13,55 +13,53 @@ import sintatico.GerenciadorToken;
  *
  * @author wstro
  */
-public class Scan extends RegraProducao{
-	
+public class Scan extends RegraProducao {
+
 	public static RegraProducao getInstancia() {
 		return new Scan();
 	}
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		
-		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
-			
-			if(!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_SCAN)){
+
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+
+			if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_SCAN)) {
 				return false;
 			}
-			
-                        else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
+
+			if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
 				return false;
 			}
-			
-			//TODO: <Entrada>
-                        else if(!Entrada.getInstancia().analisar(gerenciadorToken)){
-                            return false;
-                        }
-			
-			//TODO: <OutrasEntradas> 
-                        else if(!OutrasEntradas.getInstancia().analisar(gerenciadorToken)){
-                            return false;
-                        }
-			
-                        else if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
+
+			if (!Entrada.getInstancia().analisar(gerenciadorToken)) {
 				return false;
 			}
-                        
-                        return true;
-			
+
+			if (!OutrasEntradas.getInstancia().analisar(gerenciadorToken)) {
+				return false;
+			}
+
+			if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+				return false;
+			}
+
+			return true;
+
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	protected void gerarFirst() {
-		//{  scan}
+		// { scan}
 		first.add(TipoToken.PALAVRA_RESERVADA_SCAN);
 	}
 
 	@Override
 	protected void gerarFollow() {
-		//{ ; }
+		// { ; }
 		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
 	}
 

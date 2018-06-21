@@ -13,56 +13,43 @@ import sintatico.GerenciadorToken;
  *
  * @author wstro
  */
-public class OutrasSaidas extends RegraProducao{
-	
+public class OutrasSaidas extends RegraProducao {
+
 	public static RegraProducao getInstancia() {
 		return new OutrasSaidas();
 	}
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		
-		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
-			
-			if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
-				return false;
+
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+
+			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+				if (Saida.getInstancia().analisar(gerenciadorToken)) {
+					if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
+						return true;
+					}
+				}
 			}
-			
-                       
-			
-			//TODO: <Saida>
-                        
-                        else if(!Saida.getInstancia().analisar(gerenciadorToken)){
-                            return false;
-                        }
-			
-			//TODO: <OutrasSaidas>
-                        else if(!OutrasSaidas.getInstancia().analisar(gerenciadorToken)){
-                            return false;
-                        }
-                        
-                        else if(gerenciadorToken.eof()){
+			else if (gerenciadorToken.eof()) {
 				return true;
 			}
-			
-			
-                        
-			return true;
+
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	protected void gerarFirst() {
-		//{  E, ‘,’ }
+		// { E, ‘,’ }
 		first.add(TipoToken.EOF);
-                first.add(TipoToken.DELIMITADOR_VIRGULA);
+		first.add(TipoToken.DELIMITADOR_VIRGULA);
 	}
 
 	@Override
 	protected void gerarFollow() {
-		//{ )}
+		// { )}
 		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
 	}
 

@@ -14,45 +14,40 @@ import sintatico.GerenciadorToken;
  *
  * @author wstro
  */
-public class Entrada extends RegraProducao{
-	
+public class Entrada extends RegraProducao {
+
 	public static RegraProducao getInstancia() {
 		return new Entrada();
 	}
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		
-		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
-			
-			if(!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){
-				return false;
+
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+
+			if (Final.getInstancia().analisar(gerenciadorToken)) {
+				return true;
 			}
-			
-                       
-			//TODO: <Final>
-			else if(!Final.getInstancia().analisar(gerenciadorToken)){
-                            return false;
-                            
-                        }
-			return true;
-			
+			else if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){
+				return true;
+			}
+
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	protected void gerarFirst() {
-		//{ Identificador }
+		// { Identificador }
 		first.add(TipoToken.IDENTIFICADOR);
 	}
 
 	@Override
 	protected void gerarFollow() {
-		//{ ‘,’, ) }
+		// { ‘,’, ) }
 		follow.add(TipoToken.DELIMITADOR_VIRGULA);
-                follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
 	}
 
 }

@@ -16,45 +16,44 @@ import sintatico.GerenciadorToken;
  */
 public class Saida extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new Saida();
-    }
+	public static RegraProducao getInstancia() {
+		return new Saida();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if(!Expressao.getInstancia().analisar(gerenciadorToken)){
-                            return false;
-                        }
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+			
+			if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+				return true;
+			}
 
-            return true;
-        }
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Override
-    protected void gerarFirst() {
-        //{ -- , !, ( , ++ , CadeiaDeCaracter, Digitos, false, identificador, true}
-        first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
-        first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
-        first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
-        first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
-        first.add(TipoToken.CADEIA_CARACTERES);
-        first.add(TipoToken.NUMERO);
-        first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
-        first.add(TipoToken.IDENTIFICADOR);
-        first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
+	@Override
+	protected void gerarFirst() {
+		// { -- , !, ( , ++ , CadeiaDeCaracter, Digitos, false, identificador,
+		// true}
+		first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
+		first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
+		first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
+		first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
+		first.add(TipoToken.CADEIA_CARACTERES);
+		first.add(TipoToken.NUMERO);
+		first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
+		first.add(TipoToken.IDENTIFICADOR);
+		first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
+	}
 
-    }
-
-    @Override
-    protected void gerarFollow() {
-        //{ ‘,’ , ) }
-        follow.add(TipoToken.DELIMITADOR_VIRGULA);
-        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-
-    }
+	@Override
+	protected void gerarFollow() {
+		// { ‘,’ , ) }
+		follow.add(TipoToken.DELIMITADOR_VIRGULA);
+		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+	}
 
 }
