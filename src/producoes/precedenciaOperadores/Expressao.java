@@ -24,16 +24,12 @@ public class Expressao extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!OpE.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-             
-            if (!ExpressaoAux.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+            if (OpE.getInstancia().analisar(gerenciadorToken)) {
+                if (ExpressaoAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
             }
             
-            return true;
-
         }
 
         return false;
@@ -50,12 +46,7 @@ public class Expressao extends RegraProducao {
         first.add(TipoToken.NUMERO);
         first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
         first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
-        first.add(TipoToken.IDENTIFICADOR);
-        
-        
-        
-      
-        
+        first.add(TipoToken.IDENTIFICADOR);     
     }
 
     @Override
@@ -65,9 +56,6 @@ public class Expressao extends RegraProducao {
         follow.add(TipoToken.DELIMITADOR_VIRGULA);
         follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
         follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
-        
-        
-
     }
 
 }

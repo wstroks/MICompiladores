@@ -15,60 +15,49 @@ import sintatico.GerenciadorToken;
  */
 public class OpRelacionalAux extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new OpRelacionalAux();
-    }
+	public static RegraProducao getInstancia() {
+		return new OpRelacionalAux();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-             if (!EscalarRelacional.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }else if (!OpRelacional.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-             else if (gerenciadorToken.eof()) {
-                return true;
-            }
-            
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            return true;
+			if(EscalarRelacional.getInstancia().analisar(gerenciadorToken)){
+				if(OpRelacional.getInstancia().analisar(gerenciadorToken)){
+					return true;
+				}
+			}
+			else if (gerenciadorToken.eof()) {
+				return true;
+			}
 
-        }
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Override
-    protected void gerarFirst() {
-        //{   E, != , < , <=, == , > , >=}
-        first.add(TipoToken.EOF);
-        first.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
-        first.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
-        first.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
-        first.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
-        first.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
-        first.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
-        
-        
-        
-      
-        
-    }
+	@Override
+	protected void gerarFirst() {
+		// { E, != , < , <=, == , > , >=}
+		first.add(TipoToken.EOF);
+		first.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
+		first.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
+		first.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
+		first.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
+		first.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
+		first.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
+	}
 
-    @Override
-    protected void gerarFollow() {
-        //{ ), ‘,’, ;, ], ||}
-        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-        follow.add(TipoToken.DELIMITADOR_VIRGULA);
-        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-        follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
-        follow.add(TipoToken.OPERADOR_LOGICO_OU);
-        
-        
-
-    }
+	@Override
+	protected void gerarFollow() {
+		// { ), ‘,’, ;, ], ||}
+		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+		follow.add(TipoToken.DELIMITADOR_VIRGULA);
+		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+		follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
+		follow.add(TipoToken.OPERADOR_LOGICO_OU);
+	}
 
 }

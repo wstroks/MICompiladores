@@ -21,30 +21,30 @@ public class AcessandoAux extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (!Acessando.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+
+            if(Acessando.getInstancia().analisar(gerenciadorToken)){
+            	return true;
             }
-            
-             else if (gerenciadorToken.eof()) {
+            else if (gerenciadorToken.eof()) {
                 return true;
             }
+            
             return true;
 
         }
 
         return false;
+        
     }
 
     @Override
     protected void gerarFirst() {
         //{ . ,[}
-
         first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
         first.add(TipoToken.DELIMITADOR_PONTO);
         first.add(TipoToken.EOF);
-
     }
 
     @Override
@@ -59,7 +59,6 @@ public class AcessandoAux extends RegraProducao {
         follow.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
-
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
@@ -70,7 +69,6 @@ public class AcessandoAux extends RegraProducao {
         follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         follow.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
-
     }
 
 }

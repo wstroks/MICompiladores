@@ -21,36 +21,34 @@ public class OpMultAux extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (!consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO)) {
-                return false;
-            } else if (!OpUnary.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!OpMultAux.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DIVISAO)) {
-                return false;
-            }
 
-             else if (gerenciadorToken.eof()) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        	
+            if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO) || consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DIVISAO)) {
+            	
+            	if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
+                	if (OpMultAux.getInstancia().analisar(gerenciadorToken)) {
+                        return true;
+                    }
+                }
+
+            } 
+            else if(gerenciadorToken.eof()){
                 return true;
             }
-            return true;
 
         }
 
         return false;
+        
     }
 
     @Override
     protected void gerarFirst() {
         //{  E, * , /}
-
         first.add(TipoToken.EOF);
         first.add(TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO);
         first.add(TipoToken.OPERADOR_ARITIMETICO_DIVISAO);
-
     }
 
     @Override
@@ -65,13 +63,11 @@ public class OpMultAux extends RegraProducao {
         follow.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
-
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_ADICAO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
-
     }
 
 }

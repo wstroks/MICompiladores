@@ -15,43 +15,40 @@ import sintatico.GerenciadorToken;
  */
 public class ParametrosFuncaoAux extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new ParametrosFuncaoAux();
-    }
+	public static RegraProducao getInstancia() {
+		return new ParametrosFuncaoAux();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-            if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-                return false;
-            } else if (!ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (gerenciadorToken.eof()) {
-                return true;
-            }
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            return true;
+			if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+				if(ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
+			} 
+			else if (gerenciadorToken.eof()) {
+				return true;
+			}
 
-        }
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Override
-    protected void gerarFirst() {
-        //{ E, ‘,'}
-        first.add(TipoToken.EOF);
-        first.add(TipoToken.DELIMITADOR_VIRGULA);
+	@Override
+	protected void gerarFirst() {
+		// { E, ‘,'}
+		first.add(TipoToken.EOF);
+		first.add(TipoToken.DELIMITADOR_VIRGULA);
+	}
 
-    }
-
-    @Override
-    protected void gerarFollow() {
-        //{ )}
-        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-
-    }
+	@Override
+	protected void gerarFollow() {
+		// { )}
+		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+	}
 
 }

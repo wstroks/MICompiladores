@@ -21,21 +21,23 @@ public class Acesso extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO)) {
-                return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
-                return false;
-            } else if (!Expressao.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
-                return false;
-            }
 
-            return true;
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        	
+            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO)) {
+            	if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                    return true;
+                }
+            }
+            else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
+            	
+            	if(Expressao.getInstancia().analisar(gerenciadorToken)) {
+                	if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
+                        return true;
+                    }
+                }
+            	
+            }
 
         }
 
@@ -45,11 +47,8 @@ public class Acesso extends RegraProducao {
     @Override
     protected void gerarFirst() {
         //{ . ,[}
-
         first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
         first.add(TipoToken.DELIMITADOR_PONTO);
-        
-
     }
 
     @Override
@@ -64,7 +63,6 @@ public class Acesso extends RegraProducao {
         follow.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
-
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
@@ -75,7 +73,6 @@ public class Acesso extends RegraProducao {
         follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         follow.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
-
     }
 
 }

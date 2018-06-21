@@ -21,25 +21,23 @@ public class EscalarRelacional extends RegraProducao {
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		// TODO Auto-generated method stub
+
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_DIFERENTE)) {
-				return false;
-			} else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_IGUAL)) {
-				return false;
-			} else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_QUE)) {
-				return false;
-			} else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE)) {
-				return false;
-			} else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE)) {
-				return false;
-			} else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE)) {
-				return false;
+			if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_DIFERENTE)) {
+				return true;
+			} else if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_IGUAL)) {
+				return true;
+			} else if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_QUE)) {
+				return true;
+			} else if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE)) {
+				return true;
+			} else if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE)) {
+				return true;
+			} else if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE)) {
+				return true;
 			}
 			
-			return true;
-
 		}
 
 		return false;
@@ -47,7 +45,6 @@ public class EscalarRelacional extends RegraProducao {
 
 	@Override
 	protected void gerarFirst() {
-
 		// { != , < , <= , == , >=, >}
 		first.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
 		first.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
@@ -55,12 +52,10 @@ public class EscalarRelacional extends RegraProducao {
 		first.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
 		first.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
 		first.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
-
 	}
 
 	@Override
 	protected void gerarFollow() {
-
 		// { --, ! , (, ++ , CadeiaDeCaracteres, Digitos, false, identificador,
 		// true}
 		follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
@@ -72,7 +67,6 @@ public class EscalarRelacional extends RegraProducao {
 		follow.add(TipoToken.PALAVRA_RESERVADA_FALSE);
 		follow.add(TipoToken.PALAVRA_RESERVADA_TRUE);
 		follow.add(TipoToken.IDENTIFICADOR);
-
 	}
 
 }

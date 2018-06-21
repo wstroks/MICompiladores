@@ -21,17 +21,18 @@ public class SimboloUnario extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-             if (!consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)) {
-                return false;
-            }else if (!consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO)) {
-                return false;
-            } 
-             else if (gerenciadorToken.eof()) {
+        	
+            if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)) {
                 return true;
             }
-            return true;
+            else if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO)) {
+                return true;
+            } 
+            else if (gerenciadorToken.eof()) {
+                return true;
+            }
 
         }
 
@@ -41,11 +42,9 @@ public class SimboloUnario extends RegraProducao {
     @Override
     protected void gerarFirst() {
         //{ --, ++, E}
-
         first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
-        first.add(TipoToken.EOF);
-        
+        first.add(TipoToken.EOF);    
     }
 
     @Override
@@ -60,7 +59,6 @@ public class SimboloUnario extends RegraProducao {
         follow.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
-
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
@@ -68,7 +66,6 @@ public class SimboloUnario extends RegraProducao {
         follow.add(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_DIVISAO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO);
-
     }
 
 }

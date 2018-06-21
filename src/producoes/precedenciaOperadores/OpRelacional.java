@@ -15,61 +15,50 @@ import sintatico.GerenciadorToken;
  */
 public class OpRelacional extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new OpRelacional();
-    }
+	public static RegraProducao getInstancia() {
+		return new OpRelacional();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-             if (!ValorRelacional.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }else if (!OpRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-            
-            
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            return true;
+			if (ValorRelacional.getInstancia().analisar(gerenciadorToken)) {
+				if (OpRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
+			}
 
-        }
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Override
-    protected void gerarFirst() {
-        //{   --, ! , (, ++ , cadeiaDeCaracteres, Digitos, false, identificador, true}
-        first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
-        first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
-        first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
-        first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
-        first.add(TipoToken.CADEIA_CARACTERES);
-        first.add(TipoToken.NUMERO);
-        first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
-        first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
-        first.add(TipoToken.IDENTIFICADOR);
-        
-        
-        
-      
-        
-    }
+	@Override
+	protected void gerarFirst() {
+		// { --, ! , (, ++ , cadeiaDeCaracteres, Digitos, false, identificador,
+		// true}
+		first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
+		first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
+		first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
+		first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
+		first.add(TipoToken.CADEIA_CARACTERES);
+		first.add(TipoToken.NUMERO);
+		first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
+		first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
+		first.add(TipoToken.IDENTIFICADOR);
+	}
 
-    @Override
-    protected void gerarFollow() {
-        //{ ), ‘,’, ;, ], ||,&&}
-        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-        follow.add(TipoToken.DELIMITADOR_VIRGULA);
-        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-        follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
-        follow.add(TipoToken.OPERADOR_LOGICO_OU);
-        follow.add(TipoToken.OPERADOR_LOGICO_E);
-        
-        
-
-    }
+	@Override
+	protected void gerarFollow() {
+		// { ), ‘,’, ;, ], ||,&&}
+		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+		follow.add(TipoToken.DELIMITADOR_VIRGULA);
+		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+		follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
+		follow.add(TipoToken.OPERADOR_LOGICO_OU);
+		follow.add(TipoToken.OPERADOR_LOGICO_E);
+	}
 
 }

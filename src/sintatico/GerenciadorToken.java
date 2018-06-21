@@ -53,6 +53,13 @@ public class GerenciadorToken {
         return listaTokens.get(contTokenAtual++);
     }
     
+    /**
+     * Volta um token
+     */
+    public void goBack(){
+    	contTokenAtual--;
+    }
+    
     public void addErro(TipoToken tokenEsperado){
     	
     	Token tokenAnterior;

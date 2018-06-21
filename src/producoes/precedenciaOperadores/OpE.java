@@ -24,15 +24,11 @@ public class OpE extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!OpRelacional.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+            if (OpRelacional.getInstancia().analisar(gerenciadorToken)) {
+                if (OpEAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
             }
-             
-            if (!OpEAux.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-           
-            return true;
 
         }
 
@@ -50,12 +46,7 @@ public class OpE extends RegraProducao {
         first.add(TipoToken.NUMERO);
         first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
         first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
-        first.add(TipoToken.IDENTIFICADOR);
-        
-        
-        
-      
-        
+        first.add(TipoToken.IDENTIFICADOR);     
     }
 
     @Override
@@ -66,9 +57,6 @@ public class OpE extends RegraProducao {
         follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
         follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
         follow.add(TipoToken.OPERADOR_LOGICO_OU);
-        
-        
-
     }
 
 }

@@ -23,14 +23,13 @@ public class ExpressaoAux extends RegraProducao {
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-			if (!consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_OU)) {
-				return false;
-			} else if (gerenciadorToken.eof()) {
+			
+			if (gerenciadorToken.eof()) {
 				return true;
 			}
-
-			return true;
+			else if(consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_OU)){
+				return Expressao.getInstancia().analisar(gerenciadorToken);
+			}
 
 		}
 
@@ -42,7 +41,6 @@ public class ExpressaoAux extends RegraProducao {
 		// { E, ||}
 		first.add(TipoToken.OPERADOR_LOGICO_OU);
 		first.add(TipoToken.EOF);
-
 	}
 
 	@Override
@@ -52,7 +50,6 @@ public class ExpressaoAux extends RegraProducao {
 		follow.add(TipoToken.DELIMITADOR_VIRGULA);
 		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
 		follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
-
 	}
 
 }

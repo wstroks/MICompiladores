@@ -21,16 +21,14 @@ public class ParametrosFuncao extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!Expressao.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }else if(!ParametrosFuncaoAux.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+            if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                if(ParametrosFuncaoAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
             }
-
-            return true;
 
         }
 
@@ -55,7 +53,6 @@ public class ParametrosFuncao extends RegraProducao {
     protected void gerarFollow() {
         //{ )}
         follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-
     }
 
 }

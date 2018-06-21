@@ -21,14 +21,14 @@ public class Final extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
+
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                return false;
-            } else if (!Acessando.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+        	
+            if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                if (Acessando.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
             }
-            return true;
 
         }
 
@@ -38,9 +38,7 @@ public class Final extends RegraProducao {
     @Override
     protected void gerarFirst() {
         //{ Identificador}
-
         first.add(TipoToken.IDENTIFICADOR);
-
     }
 
     @Override
@@ -55,7 +53,6 @@ public class Final extends RegraProducao {
         follow.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
-
         follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
         follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
@@ -66,7 +63,6 @@ public class Final extends RegraProducao {
         follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         follow.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
-
     }
 
 }
