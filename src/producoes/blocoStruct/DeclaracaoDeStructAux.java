@@ -26,40 +26,26 @@ public class DeclaracaoDeStructAux extends RegraProducao {
 
             if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
             	
-                if (!Extends.getInstancia().analisar(gerenciadorToken)) {
-                    return false;
+                if (Extends.getInstancia().analisar(gerenciadorToken)) {
+                    if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                        if(DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+                            if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                                return true;
+                            }
+                        }
+                    }
                 }
-               
-                if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                    return false;
-                }
-                
-                if(!DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-                    return false;
-                }
-                
-                if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                    return false;
-                }
-                
-                return true;
                 
             }
             else if(Extends.getInstancia().analisar(gerenciadorToken)){
             	
-                if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                    return false;
+                if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                    if(DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+                        if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                            return true;
+                        }
+                    }
                 }
-                
-                if(!DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-                    return false;
-                }
-                
-                if(!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                    return false;
-                }
-                
-                return true;
             	
             }
 
@@ -75,7 +61,6 @@ public class DeclaracaoDeStructAux extends RegraProducao {
         first.add(TipoToken.IDENTIFICADOR);
         first.add(TipoToken.PALAVRA_RESERVADA_EXTENDS);
         first.add(TipoToken.DELIMITADOR_ABRE_CHAVE);
-
     }
 
     @Override
