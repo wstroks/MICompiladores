@@ -11,40 +11,36 @@ import sintatico.GerenciadorToken;
  * @author Tayane
  *
  */
-public class Tipo extends RegraProducao{
-	
+public class Tipo extends RegraProducao {
+
 	public static RegraProducao getInstancia() {
 		return new Tipo();
 	}
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		
-		System.out.println("Analisando <Tipo>");
-		
-		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
-			
-			if(!TipoBase.getInstancia().analisar(gerenciadorToken)){
+
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+
+			if (!TipoBase.getInstancia().analisar(gerenciadorToken)) {
 				return false;
 			}
-			
-                        else if(!TipoAux.getInstancia().analisar(gerenciadorToken)){
+
+			if (!TipoAux.getInstancia().analisar(gerenciadorToken)) {
 				return false;
 			}
-			
+
 			return true;
-			
+
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	protected void gerarFirst() {
-		//bool, float, identificador,int, string, struct 
-		
-                
-                first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+		// bool, float, identificador,int, string, struct
+		first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
 		first.add(TipoToken.IDENTIFICADOR);
 		first.add(TipoToken.PALAVRA_RESERVADA_INT);
 		first.add(TipoToken.PALAVRA_RESERVADA_STRING);
@@ -53,10 +49,8 @@ public class Tipo extends RegraProducao{
 
 	@Override
 	protected void gerarFollow() {
-		//identificador
-                
-                follow.add(TipoToken.IDENTIFICADOR);
-		
+		// identificador
+		follow.add(TipoToken.IDENTIFICADOR);
 	}
 
 }
