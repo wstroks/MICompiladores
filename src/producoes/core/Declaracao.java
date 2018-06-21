@@ -26,20 +26,20 @@ public class Declaracao extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!DeclaracaoDeFuncao.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!DeclaracaoDeProcedimento.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!DeclaracaoDeInicio.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!DeclaracaoDeVar.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!DeclaracaoDeConst.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } else if (!DeclaracaoDeTypedef.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+            if (DeclaracaoDeFuncao.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (DeclaracaoDeProcedimento.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (DeclaracaoDeInicio.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (DeclaracaoDeVar.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (DeclaracaoDeConst.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)) {
+                return true;
+            } else if (DeclaracaoDeTypedef.getInstancia().analisar(gerenciadorToken)) {
+                return true;
             } 
 
             return true;
