@@ -22,15 +22,11 @@ public class ListaDeIntrucoes extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!Instrucao.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+            if (Instrucao.getInstancia().analisar(gerenciadorToken)) {
+                if (ListaDeIntrucoesAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
             }
-            
-            if (!ListaDeIntrucoesAux.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            } 
-
-            return true;
 
         }
         

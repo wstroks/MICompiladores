@@ -25,10 +25,10 @@ public class InstrucaoDeRetornoAux extends RegraProducao {
 		
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (gerenciadorToken.eof()) {
+			if(Expressao.getInstancia().analisar(gerenciadorToken)){
 				return true;
 			}
-			else if(Expressao.getInstancia().analisar(gerenciadorToken)){
+			else if (gerenciadorToken.eof()) {
 				return true;
 			}
 

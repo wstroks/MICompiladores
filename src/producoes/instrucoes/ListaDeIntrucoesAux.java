@@ -24,11 +24,11 @@ public class ListaDeIntrucoesAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             
-            if (gerenciadorToken.eof()) {
-                return true;
-            }
-            else if(ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
+            if(ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
             	return true;
+            }
+            else if (gerenciadorToken.eof()) {
+                return true;
             }
 
         }
