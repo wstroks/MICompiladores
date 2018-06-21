@@ -25,14 +25,12 @@ public class DeclaracaoDeVariavelCorpoAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!DeclaracaoDeVariavelCorpo.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+            if (DeclaracaoDeVariavelCorpo.getInstancia().analisar(gerenciadorToken)) {
+                return true;
             } else if (gerenciadorToken.eof()) {
                 return true;
             }
-
-            return true;
-
+            
         }
         
         return false;
@@ -55,7 +53,6 @@ public class DeclaracaoDeVariavelCorpoAux extends RegraProducao {
     protected void gerarFollow() {
         // }
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
-
     }
 
 }
