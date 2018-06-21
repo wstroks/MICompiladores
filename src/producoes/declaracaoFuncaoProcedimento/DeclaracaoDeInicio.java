@@ -21,25 +21,17 @@ public class DeclaracaoDeInicio extends RegraProducao {
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
-			
-			if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_START)) {
-				return false;
+
+			if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_START)) {
+				if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+					if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+						if (Bloco.getInstancia().analisar(gerenciadorToken)) {
+							return true;
+						}
+					}
+				}
 			}
 
-			else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-				return false;
-			}
-
-			else if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-				return false;
-			}
-
-			else if (!Bloco.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-
-			return true;
-			
 		}
 
 		return false;
