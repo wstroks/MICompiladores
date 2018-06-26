@@ -23,15 +23,15 @@ public class BlocoAux extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
-				return true;
-			}
-			else if(ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
+			if(ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
 				
 				if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
 					return true;
 				}
 				
+			}
+			if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
+				return true;
 			}
 
 		}

@@ -28,25 +28,36 @@ public class OpUnary extends RegraProducao {
 				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
+				//gerenciadorToken.goBack();
 			} 
 			else if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO)) {
 				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
+				//gerenciadorToken.goBack();
 			}
 			else if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)) {
 				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
+				//gerenciadorToken.goBack();
 			}
-			else if (Final.getInstancia().analisar(gerenciadorToken)) {
-				if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
-					return true;
+			if(gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR){
+				if(gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO){
+					if (Final.getInstancia().analisar(gerenciadorToken)) {
+						if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
+							return true;
+						}
+						//gerenciadorToken.goBack();
+					}
 				}
-			}
-			else if(Valor.getInstancia().analisar(gerenciadorToken)){
-				if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
-					return true;
+				else{
+					if(Valor.getInstancia().analisar(gerenciadorToken)){
+						if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
+							return true;
+						}
+						//gerenciadorToken.goBack();
+					}
 				}
 			}
 

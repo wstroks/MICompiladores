@@ -21,22 +21,25 @@ public class OperacaoDeAtribuicao extends RegraProducao {
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-			if (Final.getInstancia().analisar(gerenciadorToken)) {
-				if(consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
-					if(Expressao.getInstancia().analisar(gerenciadorToken)) {
-						return true;
-					} 
-				}
-			}
-			else if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){
-				if(consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
+			
+			if(gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR){
+				if(gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO){
 					if(Expressao.getInstancia().analisar(gerenciadorToken)) {
 						return true;
 					}
 				}
+				else{
+					if (Final.getInstancia().analisar(gerenciadorToken)) {
+						if(consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
+							if(Expressao.getInstancia().analisar(gerenciadorToken)) {
+								return true;
+							} 
+						}
+					}
+				}
 			}
-			else if(Expressao.getInstancia().analisar(gerenciadorToken)){
+
+			if(Expressao.getInstancia().analisar(gerenciadorToken)){
 				return true;
 			}
 

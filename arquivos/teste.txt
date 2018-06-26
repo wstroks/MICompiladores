@@ -1,4 +1,5 @@
 start(){
-	struct teste{
+	var{
+		int a;
 	}
 }

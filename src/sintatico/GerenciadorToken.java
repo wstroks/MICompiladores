@@ -37,11 +37,23 @@ public class GerenciadorToken {
      * @return o token atual
      */
     public Token getTokenAtual(){
-    	System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
+    	//System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
     	if(eof()){
     		return getEofToken();
     	}
         return listaTokens.get(contTokenAtual);
+    }
+    
+    /**
+     * Obtendo o próximo token
+     * @return o próximo token
+     */
+    public Token getProximoToken(){
+    	//System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
+    	if(eof()){
+    		return getEofToken();
+    	}
+        return listaTokens.get(contTokenAtual+1);
     }
 
     /**

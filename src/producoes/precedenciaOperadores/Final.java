@@ -28,6 +28,9 @@ public class Final extends RegraProducao {
                 if (Acessando.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
+//                else{
+//                	gerenciadorToken.goBack();
+//                }
             }
 
         }

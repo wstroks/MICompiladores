@@ -16,9 +16,13 @@ public abstract class RegraProducao {
     protected ArrayList<TipoToken> follow = new ArrayList<TipoToken>();
     
     protected RegraProducao() {
-    	System.out.println("Analisando <" + this.getClass().getSimpleName() + ">");
+    	System.out.println("Analisando <" + getNomeClasse() + ">");
         this.gerarFirst();
         this.gerarFollow();
+    }
+    
+    protected String getNomeClasse(){
+    	return this.getClass().getSimpleName();
     }
     
     /**
@@ -46,6 +50,7 @@ public abstract class RegraProducao {
      * @return true se sim, falso caso contrario
      */
     public boolean isFirst(TipoToken tipoToken) {
+    	System.out.println("\n\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "? " + first.contains(tipoToken));
         return first.contains(tipoToken);
     }
 
@@ -86,6 +91,7 @@ public abstract class RegraProducao {
     		return true;
     	}
     	else{
+    		System.out.println("----> Erro na classe " + getNomeClasse() + ": " + gerenciadorToken.getTokenAtual().getTipoToken());
     		gerenciadorToken.addErro(tokenEsperado);
     		return false;
     	}
