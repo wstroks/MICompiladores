@@ -22,28 +22,25 @@ public class Print extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT)) {
-				return false;
-			}
-
-			if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-				return false;
-			}
-
-			if (!Saida.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-
-			if (!OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-
-			if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-				return false;
-			}
-			
-			return true;
-		}
+			if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT)) {
+                            if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
+                                if((Saida.getInstancia().analisar(gerenciadorToken))){
+                                   if(OutrasSaidas.getInstancia().analisar(gerenciadorToken)){
+                                      
+                                           return true;
+                                   }
+                                }    
+                                
+                                    else{
+                                         if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
+                                             
+                                             return true;
+                                         }
+                                    }
+                                }
+                            }
+                        }  
+                        
 
 		return false;
 	}

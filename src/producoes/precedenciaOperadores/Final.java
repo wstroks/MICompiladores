@@ -26,11 +26,14 @@ public class Final extends RegraProducao {
         	
             if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                 if (Acessando.getInstancia().analisar(gerenciadorToken)) {
+                    
                     return true;
                 }
-//                else{
-//                	gerenciadorToken.goBack();
-//                }
+                    
+                
+   //             else{
+     //          	gerenciadorToken.goBack();
+      //          }
             }
 
         }

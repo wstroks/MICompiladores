@@ -37,7 +37,7 @@ public class GerenciadorToken {
      * @return o token atual
      */
     public Token getTokenAtual(){
-    	//System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
+    	//System.out.println("\n asda " +listaTokens.get(contTokenAtual).getTipoToken());
     	if(eof()){
     		return getEofToken();
     	}

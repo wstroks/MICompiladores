@@ -30,12 +30,12 @@ public class Programa extends RegraProducao{
 				return false;
 			}
 			
-			return true;
+			
 			
 		}
 		
-		return false;
 		
+		return false;
 	}
 
 	@Override

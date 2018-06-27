@@ -1,0 +1,16 @@
+start () {
+    var{
+        
+        int a,b,c;
+	float a,b,c;
+    }
+} ok- teste falta arrumar bloco atribuição nao conseguir
+
+start () {
+    scan(a,sad,asd,a[a]);
+} ok funciona tudo aque
+
+start(){
+	print(a,sad,asd,a[a]);
+}msm coisa funciona ... menos cadeia de caracter e numeros .. ver isso
+

@@ -10,42 +10,40 @@ import sintatico.GerenciadorToken;
  */
 public class ExpressaoIdentificadorVar extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new ExpressaoIdentificadorVar();
-	}
+    public static RegraProducao getInstancia() {
+        return new ExpressaoIdentificadorVar();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-				return false;
-			}
+            if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                if (ExpressaoIdentificadorVarAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
+            }
 
-			if (!ExpressaoIdentificadorVarAux.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-			
-			return true;
+            
 
-		}
-		
-		return false;
-		
-	}
+        }
 
-	@Override
-	protected void gerarFirst() {
-		// Identificador
-		first.add(TipoToken.IDENTIFICADOR);
-	}
+        return false;
 
-	@Override
-	protected void gerarFollow() {
-		// ‘,’ , ;
-		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-		follow.add(TipoToken.DELIMITADOR_VIRGULA);
-	}
+    }
+
+    @Override
+    protected void gerarFirst() {
+        // Identificador
+        first.add(TipoToken.IDENTIFICADOR);
+    }
+
+    @Override
+    protected void gerarFollow() {
+        // ‘,’ , ;
+        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+        follow.add(TipoToken.DELIMITADOR_VIRGULA);
+    }
 
 }

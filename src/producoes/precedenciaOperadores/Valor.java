@@ -29,23 +29,23 @@ public class Valor extends RegraProducao {
                     return true;
                 }
             } 
-            else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
             	if (Expressao.getInstancia().analisar(gerenciadorToken)) {
             		if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
                         return true;
                     }
                 }
             }
-            else if (consumir(gerenciadorToken, TipoToken.NUMERO)) {
+            if (consumir(gerenciadorToken, TipoToken.NUMERO)) {
                 return true;
             }
-            else if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FALSE)) {
+            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FALSE)) {
                 return true;
             }
-            else if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE)) {
+            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE)) {
                 return true;
             }
-            else if (!consumir(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
+            if (!consumir(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
                 return true;
             }
 

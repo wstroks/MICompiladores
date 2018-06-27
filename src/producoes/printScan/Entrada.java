@@ -24,14 +24,17 @@ public class Entrada extends RegraProducao {
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-			if (Final.getInstancia().analisar(gerenciadorToken)) {
+                    if(gerenciadorToken.getProximoToken().getTipoToken()== TipoToken.DELIMITADOR_PONTO ||gerenciadorToken.getProximoToken().getTipoToken()== TipoToken.DELIMITADOR_ABRE_COLCHETE ){
+			if(Final.getInstancia().analisar(gerenciadorToken)){
 				return true;
 			}
-			else if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){
-				return true;
-			}
-
+                }
+                        else if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)){
+                        
+                            return true;
+                            
+                        }
+		
 		}
 
 		return false;

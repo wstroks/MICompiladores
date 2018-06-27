@@ -23,10 +23,11 @@ public class TipoVetorDeclarando extends RegraProducao {
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
 			if (TipoVetorDeclarado.getInstancia().analisar(gerenciadorToken)) {
-				if (!TipoVetorDeclarandoAux.getInstancia().analisar(gerenciadorToken)) {
+				return true;
+			}
+                        if (TipoVetorDeclarandoAux.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
-			}
 
 		}
 

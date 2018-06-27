@@ -15,42 +15,48 @@ import sintatico.GerenciadorToken;
  */
 public class OutrasEntradas extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new OutrasEntradas();
-	}
+    public static RegraProducao getInstancia() {
+        return new OutrasEntradas();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+                if (Entrada.getInstancia().analisar(gerenciadorToken)) {
+                    if (OutrasEntradas.getInstancia().analisar(gerenciadorToken)) {
 
-			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-				if (Entrada.getInstancia().analisar(gerenciadorToken)) {
-					if (OutrasEntradas.getInstancia().analisar(gerenciadorToken)) {
-						return true;
-					}
-				}
-			}
-			else if (gerenciadorToken.eof()) {
-				return true;
-			}
+                        return true;
+                    }
+                }
 
-		}
+            }
+            
+            
+            if (gerenciadorToken.eof()) {
+                   //gerenciadorToken.goBack();
+                   return true;
+                   
+	     }
 
-		return false;
-	}
+        }
+         
 
-	@Override
-	protected void gerarFirst() {
-		// { E, ‘,’}
-		first.add(TipoToken.EOF);
-		first.add(TipoToken.DELIMITADOR_VIRGULA);
-	}
+        return false;
+    }
 
-	@Override
-	protected void gerarFollow() {
-		// { ) }
-		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-	}
+    @Override
+    protected void gerarFirst() {
+        // { E, ‘,’}
+        first.add(TipoToken.EOF);
+        first.add(TipoToken.DELIMITADOR_VIRGULA);
+    }
+
+    @Override
+    protected void gerarFollow() {
+        // { ) }
+        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+    }
 
 }

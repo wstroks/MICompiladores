@@ -31,12 +31,12 @@ public class OutrasSaidas extends RegraProducao {
 					}
 				}
 			}
-			else if (gerenciadorToken.eof()) {
+                        if (gerenciadorToken.eof()) {
 				return true;
 			}
 
 		}
-
+                System.out.println("naruto \n");
 		return false;
 	}
 

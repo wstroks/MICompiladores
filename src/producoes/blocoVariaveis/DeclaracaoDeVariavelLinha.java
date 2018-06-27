@@ -29,7 +29,7 @@ public class DeclaracaoDeVariavelLinha extends RegraProducao {
 				return false;
 			}
 			
-			if (!ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
+                        else if (!ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
 				return false;
 			}
 			
