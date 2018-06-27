@@ -41,29 +41,30 @@ public class OpUnary extends RegraProducao {
                 //gerenciadorToken.goBack();
             }
             if (gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR) {
-                if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO) {
+                if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_PARENTESES ) {
                     if (Final.getInstancia().analisar(gerenciadorToken)) {
                         if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
                             //gerenciadorToken.goBack();
                             return true;
                         }
                         //gerenciadorToken.goBack();
-                    } else if (gerenciadorToken.eof()) {
+                    } /*else if (gerenciadorToken.eof()) {
                         return true;
-                    }
+                    }*/
 
-                } else {
-                    if (Valor.getInstancia().analisar(gerenciadorToken)) {
+                } 
+                   
+                }
+             if (Valor.getInstancia().analisar(gerenciadorToken)) {
                         if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
                             //gerenciadorToken.goBack();
                             return true;
                         }
                         //gerenciadorToken.goBack();
                     }
-                }
             }
 
-        }
+        
 
         return false;
 
