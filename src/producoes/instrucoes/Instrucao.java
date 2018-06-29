@@ -40,7 +40,7 @@ public class Instrucao extends RegraProducao {
                 return true;
             } 
 
-            return true;
+            //return true;
 
         }
         
@@ -68,6 +68,7 @@ public class Instrucao extends RegraProducao {
         first.add(TipoToken.PALAVRA_RESERVADA_VAR);
         first.add(TipoToken.PALAVRA_RESERVADA_WHILE);
         first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF); 
+        first.add(TipoToken.PALAVRA_RESERVADA_IF); 
     }
 
     @Override

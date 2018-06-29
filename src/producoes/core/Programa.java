@@ -22,13 +22,13 @@ public class Programa extends RegraProducao{
 		
 		if(isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 			
-			if(!Declaracao.getInstancia().analisar(gerenciadorToken)){
-				return false;
+			if(Declaracao.getInstancia().analisar(gerenciadorToken)){
+				if(ProgramaAux.getInstancia().analisar(gerenciadorToken)){
+				return true;
+			}
 			}
 			
-			if(!ProgramaAux.getInstancia().analisar(gerenciadorToken)){
-				return false;
-			}
+                        
 			
 			
 			

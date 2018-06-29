@@ -22,7 +22,7 @@ public class ProgramaAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if ((Programa.getInstancia().analisar(gerenciadorToken))) {
+            if (Programa.getInstancia().analisar(gerenciadorToken)) {
                 return true;
             } else if (gerenciadorToken.eof()) {
                 return true;

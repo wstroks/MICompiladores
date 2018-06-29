@@ -24,11 +24,13 @@ public class ExpressaoAux extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 			
-			if (gerenciadorToken.eof()) {
+			
+			if(consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_OU)){
+				if(Expressao.getInstancia().analisar(gerenciadorToken)){
+                                    return true;
+                                }
+			}else if (gerenciadorToken.eof()) {
 				return true;
-			}
-			else if(consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_OU)){
-				return Expressao.getInstancia().analisar(gerenciadorToken);
 			}
 
 		}

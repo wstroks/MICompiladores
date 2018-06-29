@@ -24,7 +24,7 @@ public class OpMultAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
         	
-            if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO) || consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DIVISAO)) {
+            if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO)) {
             	
             	if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
                 	if (OpMultAux.getInstancia().analisar(gerenciadorToken)) {
@@ -32,7 +32,13 @@ public class OpMultAux extends RegraProducao {
                     }
                 }
 
-            } 
+            }else if( consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DIVISAO)) {
+                if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
+                	if (OpMultAux.getInstancia().analisar(gerenciadorToken)) {
+                        return true;
+                    }
+                }
+            }
             else if(gerenciadorToken.eof()){
                 return true;
             }

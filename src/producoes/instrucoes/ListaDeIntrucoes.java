@@ -54,6 +54,7 @@ public class ListaDeIntrucoes extends RegraProducao {
         first.add(TipoToken.PALAVRA_RESERVADA_WHILE);
         first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
         first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+        first.add(TipoToken.PALAVRA_RESERVADA_IF);
 
     }
 

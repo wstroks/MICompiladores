@@ -42,7 +42,7 @@ public class Declaracao extends RegraProducao {
                 return true;
             } 
 
-            return true;
+            //return true;
 
         }
         

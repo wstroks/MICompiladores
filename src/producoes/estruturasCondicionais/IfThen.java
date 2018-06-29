@@ -17,75 +17,63 @@ import sintatico.GerenciadorToken;
  */
 public class IfThen extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new IfThen();
-	}
+    public static RegraProducao getInstancia() {
+        return new IfThen();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_IF)) {
-				return false;
-			}
-			
-			if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-				return false;
-			}
+            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_IF)) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                    if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_THEN)) {
+                                if (Bloco.getInstancia().analisar(gerenciadorToken)) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
-			if (!Expressao.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-			
-			if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-				return false;
-			}
-			
-			if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_THEN)) {
-				return false;
-			}
-			
-			if (!Bloco.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
+        }
 
-			return true;
+        return false;
 
-		}
-		
-		return false;
-		
-	}
+    }
 
-	@Override
-	protected void gerarFirst() {
-		// IF
-		first.add(TipoToken.PALAVRA_RESERVADA_IF);
-	}
+    @Override
+    protected void gerarFirst() {
+        // IF
+        first.add(TipoToken.PALAVRA_RESERVADA_IF);
+    }
 
-	@Override
-	protected void gerarFollow() {
-		// --, !, ( , ++, CadeiaDeCaracter, Digitos, false, identificador,
-		// print, return , scan, struct,true, typdef,
-		// var,while, }
-		follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
-		follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
-		follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
-		follow.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
-		follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
-		follow.add(TipoToken.CADEIA_CARACTERES);
-		follow.add(TipoToken.NUMERO);
-		follow.add(TipoToken.IDENTIFICADOR);
-		follow.add(TipoToken.PALAVRA_RESERVADA_FALSE);
-		follow.add(TipoToken.PALAVRA_RESERVADA_PRINT);
-		follow.add(TipoToken.PALAVRA_RESERVADA_RETURN);
-		follow.add(TipoToken.PALAVRA_RESERVADA_SCAN);
-		follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-		follow.add(TipoToken.PALAVRA_RESERVADA_TRUE);
-		follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
-		follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
-		follow.add(TipoToken.PALAVRA_RESERVADA_WHILE);
-	}
+    @Override
+    protected void gerarFollow() {
+        // --, !, ( , ++, CadeiaDeCaracter, Digitos, false, identificador,
+        // print, return , scan, struct,true, typdef,
+        // var,while, }
+        follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
+        follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
+        follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
+        follow.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
+        follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+        follow.add(TipoToken.CADEIA_CARACTERES);
+        follow.add(TipoToken.NUMERO);
+        follow.add(TipoToken.IDENTIFICADOR);
+        follow.add(TipoToken.PALAVRA_RESERVADA_FALSE);
+        follow.add(TipoToken.PALAVRA_RESERVADA_PRINT);
+        follow.add(TipoToken.PALAVRA_RESERVADA_RETURN);
+        follow.add(TipoToken.PALAVRA_RESERVADA_SCAN);
+        follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        follow.add(TipoToken.PALAVRA_RESERVADA_TRUE);
+        follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+        follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
+        follow.add(TipoToken.PALAVRA_RESERVADA_WHILE);
+    }
 
 }

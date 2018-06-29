@@ -29,7 +29,7 @@ public class ValorAux1 extends RegraProducao {
 					return true;
 				}
 			} 
-			if (gerenciadorToken.eof()) {
+                        else if (gerenciadorToken.eof()) {
 				return true;
 			}
 
