@@ -15,43 +15,45 @@ import sintatico.GerenciadorToken;
  */
 public class OutrasSaidas extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new OutrasSaidas();
-	}
+    public static RegraProducao getInstancia() {
+        return new OutrasSaidas();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
+        //System.out.println("naruto \n\n\n\n"+ gerenciadorToken.getProximoToken().getTipoToken()  +" "+gerenciadorToken .getTokenAtual().getTipoToken());
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken()) && !isFollow(gerenciadorToken.getProximoToken().getTipoToken())) {
+            //System.out.println("naruto \n\n\n\n"+ gerenciadorToken.getProximoToken().getTipoToken());
+            //if (!isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+                    if (Saida.getInstancia().analisar(gerenciadorToken)) {
+                        if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
+                            return true;
+                        }
+                    }
+                //}
+            } else if (gerenciadorToken.eof()) {
+                return true;
+            }
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-System.out.println("naruto \n\n\n\n");
-			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-				if (Saida.getInstancia().analisar(gerenciadorToken)) {
-					if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
-						return true;
-					}
-				}
-			}
-                        if (gerenciadorToken.eof()) {
-				return true;
-			}
+        } else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            return true;
+        }
+        return false;
+    }
 
-		}
-                System.out.println("naruto \n");
-		return false;
-	}
+    @Override
+    protected void gerarFirst() {
+        // { E, ‘,’ }
+        first.add(TipoToken.DELIMITADOR_VIRGULA);
+        first.add(TipoToken.EOF);
 
-	@Override
-	protected void gerarFirst() {
-		// { E, ‘,’ }
-                first.add(TipoToken.DELIMITADOR_VIRGULA);
-		first.add(TipoToken.EOF);
-		
-	}
+    }
 
-	@Override
-	protected void gerarFollow() {
-		// { )}
-		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-	}
+    @Override
+    protected void gerarFollow() {
+        // { )}
+        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+    }
 
 }

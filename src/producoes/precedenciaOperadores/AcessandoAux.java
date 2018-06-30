@@ -22,7 +22,7 @@ public class AcessandoAux extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken()) ||isFollow(gerenciadorToken.getTokenAtual().getTipoToken()) ) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if(Acessando.getInstancia().analisar(gerenciadorToken)){
             	return true;
@@ -31,9 +31,11 @@ public class AcessandoAux extends RegraProducao {
                 return true;
             }
             
-            //return true;
+            //return false;
 
-        }
+        }else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
+                    return true;
+                }
 
         return false;
         

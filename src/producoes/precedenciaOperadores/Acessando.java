@@ -31,9 +31,11 @@ public class Acessando extends RegraProducao {
                                     //gerenciadorToken.goBack();
 					return true;
 			}
-
+                      //return false;  
 		}
-
+                else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
+                    return true;
+                }
 		return false;
 	}
 

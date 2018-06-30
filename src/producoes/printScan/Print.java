@@ -30,14 +30,15 @@ public class Print extends RegraProducao {
                             if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
                                 return true;
                             }
-
                         }
 
                     }
                 }
             }
+        } if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            return true;
         }
-        System.out.println("naruto \n\n\n\n");
+        //System.out.println("naruto \n\n\n\n");
         return false;
     }
 

@@ -32,8 +32,10 @@ public class ExpressaoAux extends RegraProducao {
 			}else if (gerenciadorToken.eof()) {
 				return true;
 			}
-
-		}
+                        //return false;
+		}else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
+                    return true;
+                }
 
 		return false;
 	}

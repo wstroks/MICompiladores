@@ -23,23 +23,23 @@ public class Acesso extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-        	
-            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO)) {
-            	if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    return true;
-                }
-            }
-            else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
-            	
-            	if(Expressao.getInstancia().analisar(gerenciadorToken)) {
-                	return true;
-                    }
-                else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO)) {
+                    if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                         return true;
+                    }
                 }
-            	
-            }
+             else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
 
+                if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
+                        return true;
+                    }
+                }
+
+            }
+            //return false;
+        } else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            return true;
         }
 
         return false;

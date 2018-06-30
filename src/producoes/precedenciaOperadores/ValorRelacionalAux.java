@@ -22,7 +22,7 @@ public class ValorRelacionalAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken()) ) {
 
 			if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_ADICAO)) {
 				if (OpMult.getInstancia().analisar(gerenciadorToken)) {
@@ -41,8 +41,10 @@ public class ValorRelacionalAux extends RegraProducao {
 			else if (gerenciadorToken.eof()) {
 				return true;
 			}
-
-		}
+                        //return false;
+		}else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
+                    return true;
+                }
 
 		return false;
 	}

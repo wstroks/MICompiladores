@@ -33,8 +33,10 @@ public class SimboloUnario extends RegraProducao {
             else if (gerenciadorToken.eof()) {
                 return true;
             }
-
-        }
+           //sreturn true;
+        }else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
+                    return true;
+                }
 
         return false;
     }

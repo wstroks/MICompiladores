@@ -22,7 +22,7 @@ public class ValorRelacional extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken()) ) {
 
 			if (OpMult.getInstancia().analisar(gerenciadorToken)) {
 				
@@ -30,9 +30,12 @@ public class ValorRelacional extends RegraProducao {
 					return true;
 				}
 				
-			} 
+			}
+                       // return false;
 
-		}
+		}else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
+                    return true;
+                }
 
 		return false;
 	}
@@ -48,6 +51,7 @@ public class ValorRelacional extends RegraProducao {
 		first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
 		first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
 		first.add(TipoToken.NUMERO);
+                first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
 	}
 
 	@Override

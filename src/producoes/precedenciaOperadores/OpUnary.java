@@ -40,32 +40,36 @@ public class OpUnary extends RegraProducao {
                 }
                 //gerenciadorToken.goBack();
             }
-         // else if (gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR) {
-              else  if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE) {
-                    if (Final.getInstancia().analisar(gerenciadorToken)) {
-                        if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
-                            //gerenciadorToken.goBack();
-                            return true;
-                        }
-                        //gerenciadorToken.goBack();
-                    
-                    /*else if (gerenciadorToken.eof()) {
-                        return true;
-                    }*/
 
-                }
-
-            }
-           //else if (gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.DELIMITADOR_ABRE_PARENTESES || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.NUMERO || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.CADEIA_CARACTERES || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.PALAVRA_RESERVADA_TRUE || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.PALAVRA_RESERVADA_FALSE ) {
-               else if (Valor.getInstancia().analisar(gerenciadorToken)) {
+            if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE && gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR) {
+                if (Final.getInstancia().analisar(gerenciadorToken)) {
                     if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
                         //gerenciadorToken.goBack();
                         return true;
+
+                        //gerenciadorToken.goBack();
+                        /*else if (gerenciadorToken.eof()) {
+                        return true;
+                    }*/
                     }
-                    //gerenciadorToken.goBack();
                 }
+                // }
+
+            } //else if (gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.DELIMITADOR_ABRE_PARENTESES || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.NUMERO || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.CADEIA_CARACTERES || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.PALAVRA_RESERVADA_TRUE || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.PALAVRA_RESERVADA_FALSE ) {
+            if (Valor.getInstancia().analisar(gerenciadorToken)) {
+                System.out.println("kkkk \n\n");
+                if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
+                    //gerenciadorToken.goBack();
+
+                    return true;
+                }
+                //gerenciadorToken.goBack();
             }
-       // }
+            //return false;
+        } else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            return true;
+        }
+        // }
 
         return false;
 
@@ -104,6 +108,7 @@ public class OpUnary extends RegraProducao {
         follow.add(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_DIVISAO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO);
+        follow.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
     }
 
 }
