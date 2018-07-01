@@ -24,19 +24,23 @@ public class FuncID extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (Tipo.getInstancia().analisar(gerenciadorToken)) {
-                if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    return true;
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                    if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                        return true;
+                    }
                 }
-            }
-
-            //return true;
+            
         }
 
-        return false;
+        //return true;
+    }
+
+
+return false;
     }
 
     @Override
-    protected void gerarFirst() {
+        protected void gerarFirst() {
         //{ bool, float, identificador,int, string, struct }
         first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
         first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
@@ -48,7 +52,7 @@ public class FuncID extends RegraProducao {
     }
 
     @Override
-    protected void gerarFollow() {
+        protected void gerarFollow() {
        
         
         follow.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);

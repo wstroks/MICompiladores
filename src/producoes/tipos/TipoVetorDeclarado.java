@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package producoes.tipos;
 
@@ -13,38 +13,44 @@ import sintatico.GerenciadorToken;
  */
 public class TipoVetorDeclarado extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new TipoVetorDeclarado();
-	}
+    public static RegraProducao getInstancia() {
+        return new TipoVetorDeclarado();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
+                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
+                            return true;
+                        }
+                    }
+                }
 
-			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
-				if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
-					return true;
-				}
-			}
+            }}
 
-		}
+            return false;
 
-		return false;
+        }
 
-	}
-
-	@Override
-	protected void gerarFirst() {
+        @Override
+        protected void gerarFirst
+        
+            () {
 		// [
 		first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
-	}
+        }
 
-	@Override
-	protected void gerarFollow() {
+        @Override
+        protected void gerarFollow
+        
+            () {
 		// [, Identificador
 		follow.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
-		follow.add(TipoToken.IDENTIFICADOR);
-	}
+            follow.add(TipoToken.IDENTIFICADOR);
+        }
 
-}
+    }

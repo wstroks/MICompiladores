@@ -21,7 +21,7 @@ public class OutrasSaidas extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-
+            
 		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
 			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
 				if (Saida.getInstancia().analisar(gerenciadorToken)) {

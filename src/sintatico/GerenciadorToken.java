@@ -127,9 +127,9 @@ public class GerenciadorToken {
             System.out.println("Nenhum erro sintático foi encontrado");
         }
 
-        if (contTokenAtual == listaTokens.size()) {
+       /* if (contTokenAtual == listaTokens.size()) {
             System.out.println("Nenhum erro sintático foi encontrado");
-        } else {
+        }*/ else {
             for (Erro erro : listaErros) {
                 System.out.println("Token inválido: " + erro.getTokenEncontrado().getLexema() + ". Era esperado: " + erro.getStringTokensEsperados());
             }

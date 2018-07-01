@@ -21,21 +21,26 @@ public class Print extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                    if (Saida.getInstancia().analisar(gerenciadorToken)) {
-                        if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
-
-                            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                                return true;
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT)) {
+                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                            if (Saida.getInstancia().analisar(gerenciadorToken)) {
+                                if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
+                                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                                            return true;
+                                        }
+                                    }
+                                }
                             }
                         }
 
                     }
                 }
             }
-        } if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        }
+        if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
             return true;
         }
         //System.out.println("naruto \n\n\n\n");

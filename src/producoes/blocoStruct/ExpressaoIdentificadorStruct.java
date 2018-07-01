@@ -23,15 +23,16 @@ public class ExpressaoIdentificadorStruct extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-            if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                return true;
-            } 
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                    return true;
+                }
+            }
 
         }
-        
+
         return false;
-        
+
     }
 
     @Override
@@ -44,8 +45,7 @@ public class ExpressaoIdentificadorStruct extends RegraProducao {
     protected void gerarFollow() {
         // ',’ , ;
         follow.add(TipoToken.DELIMITADOR_VIRGULA);
-        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA); 
+        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
     }
 
 }
-

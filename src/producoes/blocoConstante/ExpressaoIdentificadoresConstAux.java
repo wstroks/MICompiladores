@@ -15,50 +15,52 @@ import sintatico.GerenciadorToken;
  */
 public class ExpressaoIdentificadoresConstAux extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new ExpressaoIdentificadoresConstAux();
-	}
+    public static RegraProducao getInstancia() {
+        return new ExpressaoIdentificadoresConstAux();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                    return true;
+                }
+            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
 
-			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-				return true;
-			} 
-			else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+                    if (ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {
+                        return true;
+                    }
 
-				if (ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {
-					return true;
-				}
+                }
+            }
 
-			}
+        }
 
-		}
+        return false;
 
-		return false;
+    }
 
-	}
+    @Override
+    protected void gerarFirst() {
+        // ‘,’ , ;
+        first.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+        first.add(TipoToken.DELIMITADOR_VIRGULA);
 
-	@Override
-	protected void gerarFirst() {
-		// ‘,’ , ;
-		first.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-		first.add(TipoToken.DELIMITADOR_VIRGULA);
+    }
 
-	}
-
-	@Override
-	protected void gerarFollow() {
-		// bool, float, identificador, int, string, struct }
-		follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
-		follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
-		follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
-		follow.add(TipoToken.PALAVRA_RESERVADA_INT);
-		follow.add(TipoToken.PALAVRA_RESERVADA_STRING);
-		follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-		follow.add(TipoToken.IDENTIFICADOR);
-	}
+    @Override
+    protected void gerarFollow() {
+        // bool, float, identificador, int, string, struct }
+        follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+        follow.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+        follow.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+        follow.add(TipoToken.PALAVRA_RESERVADA_INT);
+        follow.add(TipoToken.PALAVRA_RESERVADA_STRING);
+        follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        follow.add(TipoToken.IDENTIFICADOR);
+    }
 
 }

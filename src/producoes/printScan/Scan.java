@@ -23,15 +23,19 @@ public class Scan extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_SCAN)) {
+                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_SCAN)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                            if ((Entrada.getInstancia().analisar(gerenciadorToken))) {
+                                if ((OutrasEntradas.getInstancia().analisar(gerenciadorToken))) {
+                                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
 
-            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_SCAN)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                    if ((Entrada.getInstancia().analisar(gerenciadorToken))) {
-                        if ((OutrasEntradas.getInstancia().analisar(gerenciadorToken))) {
-
-                            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-
-                                return true;
+                                            return true;
+                                        }
+                                    }
+                                }
                             }
 
                         }

@@ -29,37 +29,42 @@ public class InstrucaoNormal extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (OperacaoDeAtribuicao.getInstancia().analisar(gerenciadorToken)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                    return true;
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                        return true;
+                    }
                 }
-            } 
-            else if (DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                    return true;
+            } else if (DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                        return true;
+                    }
                 }
-            } 
-            else if (InstrucaoDeRetorno.getInstancia().analisar(gerenciadorToken)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                    return true;
+            } else if (InstrucaoDeRetorno.getInstancia().analisar(gerenciadorToken)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                        return true;
+                    }
                 }
-            } 
-            else if (Print.getInstancia().analisar(gerenciadorToken)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                    return true;
-                }
+            } else if (Print.getInstancia().analisar(gerenciadorToken)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                        return true;
+                    }
 //                else{
 //                	System.out.println("DEVERIA DAR ERRO AQUI");
 //                	System.exit(0);
 //                }
-            } 
-            else if (Scan.getInstancia().analisar(gerenciadorToken)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                    return true;
+                }
+            } else if (Scan.getInstancia().analisar(gerenciadorToken)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                        return true;
+                    }
                 }
             }
-
         }
-        
+
         return false;
 
     }
@@ -106,4 +111,3 @@ public class InstrucaoNormal extends RegraProducao {
     }
 
 }
-

@@ -21,17 +21,18 @@ public class DeclaracaoDeStruct extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)) {
-                if (DeclaracaoDeStructAux.getInstancia().analisar(gerenciadorToken)) {
-                    return true;
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)) {
+                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)) {
+                    if (DeclaracaoDeStructAux.getInstancia().analisar(gerenciadorToken)) {
+                        return true;
+                    }
+                    gerenciadorToken.goBack(getNomeClasse());
                 }
-                gerenciadorToken.goBack(getNomeClasse());
             }
         }
-        
+
         return false;
-        
+
     }
 
     @Override

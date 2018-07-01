@@ -32,16 +32,20 @@ public class OperacaoDeAtribuicao extends RegraProducao {
                         }
                     }
                 }
-            } else if (gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR &&gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO) {
+            } else if (gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR && gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO) {
                 //System.out.println("sasuke23 \n");
                 //if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO) {
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                     if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                        if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
-                            if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                                //System.out.println("sasuke5 \n");
-                                return true;
+                        if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
+                            if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
+                                if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                                    //System.out.println("sasuke5 \n");
+                                    return true;
+                                }
+                                //}
                             }
-                        //}
+                        }
                     }
                 }
 

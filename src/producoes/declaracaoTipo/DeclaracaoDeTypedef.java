@@ -21,12 +21,13 @@ public class DeclaracaoDeTypedef extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TYPEDEF)) {
+                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TYPEDEF)) {
+                    if (DeclaracaoDeTypedefAux.getInstancia().analisar(gerenciadorToken)) {
+                        return true;
+                    }
 
-            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TYPEDEF)) {
-                if (DeclaracaoDeTypedefAux.getInstancia().analisar(gerenciadorToken)) {
-                    return true;
                 }
-
             }
 
         }

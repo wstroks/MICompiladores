@@ -23,37 +23,45 @@ public class Valor extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-        	
-            if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-            	if (ValorAux1.getInstancia().analisar(gerenciadorToken)) {
-                    return true;
-                }
-            	//gerenciadorToken.goBack(getNomeClasse());
-            } 
-            else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-            	if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-            		if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                    if (ValorAux1.getInstancia().analisar(gerenciadorToken)) {
                         return true;
                     }
+                    //gerenciadorToken.goBack(getNomeClasse());
                 }
-            	//gerenciadorToken.goBack(getNomeClasse());
-            }
-            else  if (consumir(gerenciadorToken, TipoToken.NUMERO)) {
-                return true;
-            }
-            else if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FALSE)) {
-                return true;
-            }
-            else if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE)) {
-                return true;
-            }
-           else if (consumir(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
-                return true;
-            }
-
-        }else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
+            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                    if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                                return true;
+                            }
+                        }
+                        //gerenciadorToken.goBack(getNomeClasse());
+                    }
+                }
+            } else if (verificarToken(gerenciadorToken, TipoToken.NUMERO)) {
+                if (consumir(gerenciadorToken, TipoToken.NUMERO)) {
                     return true;
                 }
+            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FALSE)) {
+                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FALSE)) {
+                    return true;
+                }
+            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE)) {
+                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE)) {
+                    return true;
+                }
+            } else if (verificarToken(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
+                if (consumir(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
+                    return true;
+                }
+            }
+
+        } else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            return true;
+        }
 
         return false;
     }

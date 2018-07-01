@@ -22,21 +22,21 @@ public class Extends extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if(verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS)){
+        if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS)) {
             if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS)) {
-                
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                     if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
                         return true;
                     }
-                
+                }
+
             }
+        } else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
+            return true;
         }
-	else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
-			return true;
-		}
-        
+
         return false;
-        
+
     }
 
     @Override
@@ -50,8 +50,7 @@ public class Extends extends RegraProducao {
     protected void gerarFollow() {
         //const, function, procedure, start, struct, typedef, var, $ ,; , [, Identificador
         follow.add(TipoToken.DELIMITADOR_ABRE_CHAVE);
-        
-        
+
     }
 
 }

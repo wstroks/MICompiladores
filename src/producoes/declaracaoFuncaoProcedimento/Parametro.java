@@ -25,15 +25,15 @@ public class Parametro extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!Tipo.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-            
-            if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                return false;
-            }
+            if (Tipo.getInstancia().analisar(gerenciadorToken)) {
 
-            return true;
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                    if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                        return true;
+                    }
+
+                }
+            }
 
         }
 
@@ -54,8 +54,8 @@ public class Parametro extends RegraProducao {
     @Override
     protected void gerarFollow() {
         //{ ‘,’, ) }
-       follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-       follow.add(TipoToken.DELIMITADOR_VIRGULA);
+        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+        follow.add(TipoToken.DELIMITADOR_VIRGULA);
     }
 
 }

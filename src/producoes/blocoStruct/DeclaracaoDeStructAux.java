@@ -23,36 +23,44 @@ public class DeclaracaoDeStructAux extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
 
-            if(consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-            	
-                if (Extends.getInstancia().analisar(gerenciadorToken)) {
-                    if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                        if(DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-                            if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                                return true;
+                    if (Extends.getInstancia().analisar(gerenciadorToken)) {
+
+                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                                if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+                                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                                            return true;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                
-            }
-            else if(Extends.getInstancia().analisar(gerenciadorToken)){
-            	
-                if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                    if(DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-                        if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                            return true;
+
+            } else if (Extends.getInstancia().analisar(gerenciadorToken)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                        if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+                            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                                    return true;
+                                }
+                            }
                         }
+
                     }
                 }
-            	
             }
 
         }
-        
+
         return false;
-        
+
     }
 
     @Override
