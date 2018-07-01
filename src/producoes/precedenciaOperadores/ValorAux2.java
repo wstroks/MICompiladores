@@ -22,7 +22,7 @@ public class ValorAux2 extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken()) ) {
 			
 			if (ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
 				if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {

@@ -27,6 +27,7 @@ public class OpEAux extends RegraProducao {
 				if(OpE.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
+                               
 			}
 		}
 		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){

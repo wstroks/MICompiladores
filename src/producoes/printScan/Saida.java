@@ -29,7 +29,9 @@ public class Saida extends RegraProducao {
 				return true;
 			}
 
-		}
+		}else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
+                    return true;
+                }
 
 		return false;
 	}

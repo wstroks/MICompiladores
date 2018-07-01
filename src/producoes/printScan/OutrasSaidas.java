@@ -15,12 +15,26 @@ import sintatico.GerenciadorToken;
  */
 public class OutrasSaidas extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new OutrasSaidas();
-	}
+    public static RegraProducao getInstancia() {
+        return new OutrasSaidas();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
+        //System.out.println("naruto \n\n\n\n"+ gerenciadorToken.getProximoToken().getTipoToken()  +" "+gerenciadorToken .getTokenAtual().getTipoToken());
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken()) && !isFollow(gerenciadorToken.getProximoToken().getTipoToken())) {
+            //System.out.println("naruto \n\n\n\n"+ gerenciadorToken.getProximoToken().getTipoToken());
+            //if (!isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+                    if (Saida.getInstancia().analisar(gerenciadorToken)) {
+                        if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
+                            return true;
+                        }
+                    }
+                //}
+            } else if (gerenciadorToken.eof()) {
+                return true;
+            }
 
 		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
 			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
@@ -46,10 +60,10 @@ public class OutrasSaidas extends RegraProducao {
 
 	}
 
-	@Override
-	protected void gerarFollow() {
-		// { )}
-		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-	}
+    @Override
+    protected void gerarFollow() {
+        // { )}
+        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+    }
 
 }

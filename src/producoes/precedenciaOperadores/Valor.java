@@ -47,11 +47,13 @@ public class Valor extends RegraProducao {
             else if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE)) {
                 return true;
             }
-           else if (!consumir(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
+           else if (consumir(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
                 return true;
             }
 
-        }
+        }else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
+                    return true;
+                }
 
         return false;
     }
