@@ -25,15 +25,10 @@ public class ExpressaoIdentificadoresVar extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (ExpressaoIdentificadorVar.getInstancia().analisar(gerenciadorToken)) {
-                return true;
+                if(ExpressaoIdentificadoresVarAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
             }
-
-            if(ExpressaoIdentificadoresVarAux.getInstancia().analisar(gerenciadorToken)) {
-                return true;
-            }
-            
-            
-
         }
         
         return false;

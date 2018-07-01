@@ -23,6 +23,10 @@ public class ExpressaoIdentificadorVar extends RegraProducao {
                 if (ExpressaoIdentificadorVarAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
+//                else{
+//                	System.out.println("\nToda vez que entrar nesse else será erro léxico??\n");
+//                	gerenciadorToken.addErro(getNomeClasse(), ExpressaoIdentificadorVarAux.getInstancia().getFirst());
+//                }
             }
         }
 

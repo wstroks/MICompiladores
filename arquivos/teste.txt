@@ -1,3 +1,5 @@
 start(){
-	print(a);
+	var{
+		int a, b
+	}
 }

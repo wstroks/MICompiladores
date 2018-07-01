@@ -93,7 +93,7 @@ public class GerenciadorToken {
     	}
     }
 
-    public void addErro(TipoToken tokenEsperado) {
+    public void addErro(String nomeProducao, ArrayList<TipoToken> tokensEsperados) {
 
         Token tokenAnterior;
         if (contTokenAtual == 0) {
@@ -101,7 +101,10 @@ public class GerenciadorToken {
         } else {
             tokenAnterior = listaTokens.get(contTokenAtual - 1);
         }
-        listaErros.add(new Erro(tokenEsperado, listaTokens.get(contTokenAtual), tokenAnterior));
+        
+        Erro erro = new Erro(tokensEsperados, listaTokens.get(contTokenAtual), tokenAnterior);
+        listaErros.add(erro);
+        System.out.println("--> Erro na classe " + nomeProducao + ". Token recebido: " + getTipoTokenAtual() + ". Tokens esperados: " + erro.getStringTokensEsperados());
     }
 
     public boolean eof() {
@@ -128,7 +131,7 @@ public class GerenciadorToken {
             System.out.println("Nenhum erro sintático foi encontrado");
         } else {
             for (Erro erro : listaErros) {
-                System.out.println("Token inválido: " + erro.getTokenEncontrado().getLexema() + ". Era esperado: " + erro.tokenEsperado);
+                System.out.println("Token inválido: " + erro.getTokenEncontrado().getLexema() + ". Era esperado: " + erro.getStringTokensEsperados());
             }
         }
 

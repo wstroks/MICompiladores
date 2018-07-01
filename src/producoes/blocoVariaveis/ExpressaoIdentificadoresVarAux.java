@@ -22,20 +22,28 @@ public class ExpressaoIdentificadoresVarAux extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-            if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                return true;
-            } 
-            else if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-            	if(ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
+        //if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        	
+        	if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)){
+                if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
                     return true;
+                } 
+        	}
+        	else if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
+        		if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+                	if(ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
+                        return true;
+                    }
                 }
-                //
-            } 
+        	}
+        	else{
+        		System.out.println("\nToda vez que entrar nesse else será erro léxico??\n");
+        	}
 
-        }
+        //}
+        
         return false;
+        
     }
 
     @Override

@@ -24,22 +24,25 @@ public class OpUnary extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO)) {
-				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
-					return true;
+			if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO)){
+				if (consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO)) {
+					if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
+						return true;
+					}
 				}
-				 gerenciadorToken.goBack(getNomeClasse());
-			} else if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO)) {
-				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
-					return true;
-				}
-				 gerenciadorToken.goBack(getNomeClasse());
-			} else if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)) {
-				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
-					return true;
-				}
-				 gerenciadorToken.goBack(getNomeClasse());
 			}
+			else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO)){
+				if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO)) {
+					if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
+						return true;
+					}
+				}
+			}
+			else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)){
+				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
+			}	
 			else if(gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR){
 				if(gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE){
 					if (Final.getInstancia().analisar(gerenciadorToken)) {

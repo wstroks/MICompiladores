@@ -47,6 +47,10 @@ public class InstrucaoNormal extends RegraProducao {
                 if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
                     return true;
                 }
+//                else{
+//                	System.out.println("DEVERIA DAR ERRO AQUI");
+//                	System.exit(0);
+//                }
             } 
             else if (Scan.getInstancia().analisar(gerenciadorToken)) {
                 if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {

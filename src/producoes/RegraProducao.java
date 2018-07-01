@@ -44,7 +44,15 @@ public abstract class RegraProducao {
      */
     protected abstract void gerarFollow();
 
-    /**
+    public ArrayList<TipoToken> getFirst() {
+		return first;
+	}
+
+	public ArrayList<TipoToken> getFollow() {
+		return follow;
+	}
+
+	/**
      * Informa se o token esta no conjunto primeiro da regra
      * @param tipoToken um TokenClass
      * @return true se sim, falso caso contrario
@@ -77,10 +85,7 @@ public abstract class RegraProducao {
      */
     protected boolean verificarToken(GerenciadorToken gerenciadorToken, TipoToken tipoToken){
     	
-        if (!gerenciadorToken.eof() && tipoToken == gerenciadorToken.getTokenAtual().getTipoToken()) {
-            return true;
-        }
-        return false;
+    	return tipoToken == gerenciadorToken.getTipoTokenAtual();
     	
     }
     
@@ -98,10 +103,9 @@ public abstract class RegraProducao {
     		return true;
     	}
     	else{
-    		System.out.println("--> Erro na classe " + getNomeClasse() + ". Token recebido: " + gerenciadorToken.getTipoTokenAtual() + ". Token esperado: " + tokenEsperado);
-    		gerenciadorToken.addErro(tokenEsperado);
-    		return false;
+    		System.out.println("\n	ERRO EM " + getNomeClasse() + "???? : ERA PRA VIM " + tokenEsperado + " MAS VEIO " + gerenciadorToken.getTipoTokenAtual() + "\n");
     	}
+    	return false;
     	
     }
 
