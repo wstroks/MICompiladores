@@ -25,7 +25,12 @@ public class Sintatico {
 		System.out.println("\n===================== Análise sintática ===================");
 		
 		GerenciadorToken gerenciadorToken = new GerenciadorToken(listaTokens);
-		Programa.getInstancia().analisar(gerenciadorToken);
+		
+		//while(!gerenciadorToken.eof()){
+			Programa.getInstancia().analisar(gerenciadorToken);
+			//System.out.print("Qtd de tokens restantes: " + gerenciadorToken.getQtdTokensRestantes());
+		//}
+		
 		gerenciadorToken.printErros();
 		
 	}

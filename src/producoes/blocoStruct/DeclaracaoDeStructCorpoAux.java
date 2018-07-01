@@ -22,14 +22,11 @@ public class DeclaracaoDeStructCorpoAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-			if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-				return true;
-			} else if (gerenciadorToken.eof()) {
-				return true;
-			}
-
+		if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+			return true;
+		}
+		else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
+			return true;
 		}
 		
 		return false;

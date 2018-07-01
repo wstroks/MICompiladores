@@ -28,6 +28,7 @@ public class Valor extends RegraProducao {
             	if (ValorAux1.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
+            	gerenciadorToken.goBack(getNomeClasse());
             } 
             else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
             	if (Expressao.getInstancia().analisar(gerenciadorToken)) {
@@ -35,6 +36,7 @@ public class Valor extends RegraProducao {
                         return true;
                     }
                 }
+            	gerenciadorToken.goBack(getNomeClasse());
             }
             else  if (consumir(gerenciadorToken, TipoToken.NUMERO)) {
                 return true;
@@ -45,7 +47,7 @@ public class Valor extends RegraProducao {
             else if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE)) {
                 return true;
             }
-           else if (!consumir(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
+           else if (consumir(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
                 return true;
             }
 

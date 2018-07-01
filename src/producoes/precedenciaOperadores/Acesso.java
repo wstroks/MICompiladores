@@ -15,65 +15,63 @@ import sintatico.GerenciadorToken;
  */
 public class Acesso extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new Acesso();
-    }
+	public static RegraProducao getInstancia() {
+		return new Acesso();
+	}
 
-    @Override
-    public boolean analisar(GerenciadorToken gerenciadorToken) {
+	@Override
+	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-        	
-            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO)) {
-            	if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    return true;
-                }
-            }
-            else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
-            	
-            	if(Expressao.getInstancia().analisar(gerenciadorToken)) {
-                	return true;
-                    }
-                else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
-                        return true;
-                }
-            	
-            }
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-        }
+			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO)) {
+				if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+					return true;
+				}
+			} else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
 
-        return false;
-    }
+				if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				} else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
+					return true;
+				}
 
-    @Override
-    protected void gerarFirst() {
-        //{ . ,[}
-        first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
-        first.add(TipoToken.DELIMITADOR_PONTO);
-    }
+			}
 
-    @Override
-    protected void gerarFollow() {
-        //{ =,--,++,*,/- , + != , < , <=, == , > , >= , &&, || , ), ‘,’, ;, ]}
-        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
-        follow.add(TipoToken.DELIMITADOR_VIRGULA);
-        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-        follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
-        follow.add(TipoToken.OPERADOR_LOGICO_OU);
-        follow.add(TipoToken.OPERADOR_LOGICO_E);
-        follow.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
-        follow.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
-        follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
-        follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
-        follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
-        follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
-        follow.add(TipoToken.OPERADOR_ARITIMETICO_ADICAO);
-        follow.add(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
-        follow.add(TipoToken.OPERADOR_ARITIMETICO_DIVISAO);
-        follow.add(TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO);
-        follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
-        follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
-        follow.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
-    }
+		}
+
+		return false;
+	}
+
+	@Override
+	protected void gerarFirst() {
+		// { . ,[}
+		first.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
+		first.add(TipoToken.DELIMITADOR_PONTO);
+	}
+
+	@Override
+	protected void gerarFollow() {
+		// { =,--,++,*,/- , + != , < , <=, == , > , >= , &&, || , ), ‘,’, ;, ]}
+		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+		follow.add(TipoToken.DELIMITADOR_VIRGULA);
+		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+		follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
+		follow.add(TipoToken.OPERADOR_LOGICO_OU);
+		follow.add(TipoToken.OPERADOR_LOGICO_E);
+		follow.add(TipoToken.OPERADOR_RELACIONAL_DIFERENTE);
+		follow.add(TipoToken.OPERADOR_RELACIONAL_IGUAL);
+		follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE);
+		follow.add(TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE);
+		follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE);
+		follow.add(TipoToken.OPERADOR_RELACIONAL_MENOR_QUE);
+		follow.add(TipoToken.OPERADOR_ARITIMETICO_ADICAO);
+		follow.add(TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO);
+		follow.add(TipoToken.OPERADOR_ARITIMETICO_DIVISAO);
+		follow.add(TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO);
+		follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
+		follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
+		follow.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
+	}
 
 }

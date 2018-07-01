@@ -50,7 +50,10 @@ public abstract class RegraProducao {
      * @return true se sim, falso caso contrario
      */
     public boolean isFirst(TipoToken tipoToken) {
-    	System.out.println("\n\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "? " + first.contains(tipoToken));
+    	//System.out.println("\n\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "? " + first.contains(tipoToken));
+    	if(first.contains(tipoToken)){
+    		System.out.println("\n\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "? " + first.contains(tipoToken));
+    	}
         return first.contains(tipoToken);
     }
 
@@ -87,11 +90,12 @@ public abstract class RegraProducao {
     protected boolean consumir(GerenciadorToken gerenciadorToken, TipoToken tokenEsperado){
     	
     	if(verificarToken(gerenciadorToken, tokenEsperado)){
+    		System.out.println("**** Consumindo token "+ gerenciadorToken.getTipoTokenAtual() +" na classe " + getNomeClasse() + ". Próximo token: " + gerenciadorToken.getProximoToken().getTipoToken());
     		gerenciadorToken.consumirTokenAtual();
     		return true;
     	}
     	else{
-    		System.out.println("----> Erro na classe " + getNomeClasse() + ": " + gerenciadorToken.getTokenAtual().getTipoToken());
+    		System.out.println("--> Erro na classe " + getNomeClasse() + ". Token recebido: " + gerenciadorToken.getTipoTokenAtual() + ". Token esperado: " + tokenEsperado);
     		gerenciadorToken.addErro(tokenEsperado);
     		return false;
     	}

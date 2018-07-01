@@ -25,25 +25,23 @@ public class Scan extends RegraProducao {
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
 			if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_SCAN)) {
-                            if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
-                                if((Entrada.getInstancia().analisar(gerenciadorToken))){
-                                    if((OutrasEntradas.getInstancia().analisar(gerenciadorToken))){
-                                      
-                                           return true;
-                                       
-                                    }else{
-                                         if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)){
-                                             
-                                             return true;
-                                         }
-                                    }
-                                }
-                            }
-                            
-                        }
+				if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+					if ((Entrada.getInstancia().analisar(gerenciadorToken))) {
+						if ((OutrasEntradas.getInstancia().analisar(gerenciadorToken))) {
 
-		
-        }
+							return true;
+
+						} else {
+							if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+
+								return true;
+							}
+						}
+					}
+				}
+			}
+
+		}
 
 		return false;
 	}

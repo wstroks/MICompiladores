@@ -30,6 +30,7 @@ public class DeclaracaoDeInicio extends RegraProducao {
 						}
 					}
 				}
+				gerenciadorToken.goBack(getNomeClasse());
 			}
 
 		}

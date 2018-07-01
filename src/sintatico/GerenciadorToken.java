@@ -46,6 +46,10 @@ public class GerenciadorToken {
         }
         return listaTokens.get(contTokenAtual);
     }
+    
+    public TipoToken getTipoTokenAtual(){
+    	return getTokenAtual().getTipoToken();
+    }
 
     /**
      * Obtendo o próximo token
@@ -66,15 +70,30 @@ public class GerenciadorToken {
      * @return o token atual
      */
     public Token consumirTokenAtual() {
-        System.out.println("Token consumido: " + listaTokens.get(contTokenAtual).getTipoToken());
+        //System.out.println("Token consumido: " + listaTokens.get(contTokenAtual).getTipoToken());
+        System.out.println("Quantidade de tokens restantes: " + getQtdTokensRestantes());
         return listaTokens.get(contTokenAtual++);
     }
 
     /**
      * Volta um token
      */
-    public void goBack() {
-        contTokenAtual--;
+    public void goBack(String nomeClasse) {
+        //contTokenAtual--;
+        //System.out.println("-> "+nomeClasse+": Go back. Token atual: " + getTipoTokenAtual() + " | Quantidade de tokens restantes: " + getQtdTokensRestantes());
+    }
+    
+    public void stepBack(boolean removerUltimoErro){
+    	contTokenAtual--;
+    	if(removerUltimoErro){
+    		removerUltimoErro();
+    	}
+    }
+    
+    protected void removerUltimoErro(){
+    	if(!listaErros.isEmpty()){
+    		listaErros.remove(listaErros.size() - 1);
+    	}
     }
 
     public void addErro(TipoToken tokenEsperado) {
@@ -89,7 +108,7 @@ public class GerenciadorToken {
     }
 
     public boolean eof() {
-        return contTokenAtual == listaTokens.size();
+        return contTokenAtual == (listaTokens.size() - 1);
     }
 
     private Token getEofToken() {
@@ -116,5 +135,9 @@ public class GerenciadorToken {
             }
         }
 
+    }
+    
+    public int getQtdTokensRestantes(){
+    	return listaTokens.size() - contTokenAtual;
     }
 }

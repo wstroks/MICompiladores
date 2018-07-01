@@ -26,6 +26,7 @@ public class DeclaracaoDeStruct extends RegraProducao {
                 if (DeclaracaoDeStructAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
+                gerenciadorToken.goBack(getNomeClasse());
             }
         }
         

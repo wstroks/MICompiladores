@@ -1,5 +1,3 @@
 start(){
-	var{
-		int a;
-	}
+    print(a,a,asd,a[a],a);
 }

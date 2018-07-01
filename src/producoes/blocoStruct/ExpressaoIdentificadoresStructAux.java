@@ -21,20 +21,20 @@ public class ExpressaoIdentificadoresStructAux extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
 
-            if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)){
-                return true;
-            } 
-            else if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
+
+           if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
             	
             	if(ExpressaoIdentificadoresStruct.getInstancia().analisar(gerenciadorToken)){
             		return true;
-            	}
+                }
 
             }
+            else if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)){
+                return true;
+            } 
 
         }
         

@@ -26,11 +26,9 @@ public class Tipo extends RegraProducao {
 				return true;
 			}
 
-                        if(TipoAux.getInstancia().analisar(gerenciadorToken)) {
+			if (TipoAux.getInstancia().analisar(gerenciadorToken)) {
 				return true;
 			}
-
-			
 
 		}
 
@@ -45,7 +43,7 @@ public class Tipo extends RegraProducao {
 		first.add(TipoToken.PALAVRA_RESERVADA_INT);
 		first.add(TipoToken.PALAVRA_RESERVADA_STRING);
 		first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-                first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+		first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
 	}
 
 	@Override

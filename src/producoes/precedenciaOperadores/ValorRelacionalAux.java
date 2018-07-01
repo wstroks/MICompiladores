@@ -21,9 +21,8 @@ public class ValorRelacionalAux extends RegraProducao {
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
+		
+		if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_ADICAO)){
 			if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_ADICAO)) {
 				if (OpMult.getInstancia().analisar(gerenciadorToken)) {
 					if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
@@ -31,17 +30,18 @@ public class ValorRelacionalAux extends RegraProducao {
 					}
 				}
 			}
-			else if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO)) {
+		}
+		else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO)){
+			if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO)) {
 				if (OpMult.getInstancia().analisar(gerenciadorToken)) {
 					if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
 						return true;
 					}
 				}
-			} 
-			else if (gerenciadorToken.eof()) {
-				return true;
 			}
-
+		}
+		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
+			return true;
 		}
 
 		return false;

@@ -8,6 +8,7 @@ package producoes.estruturasCondicionais;
 import lexico.TipoToken;
 import producoes.RegraProducao;
 import producoes.declaracaoFuncaoProcedimento.Bloco;
+import producoes.precedenciaOperadores.Expressao;
 import sintatico.GerenciadorToken;
 
 /**
@@ -23,18 +24,17 @@ public class EstruturaCondicionalAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-			if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_ELSE)) {
-				if(Bloco.getInstancia().analisar(gerenciadorToken)) {
+		if(verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_ELSE)){
+			if (consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_OU)) {
+				if (Bloco.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
-			} 
-			else if (gerenciadorToken.eof()) {
-				return true;
 			}
-
 		}
+		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
+			return true;
+		}
+
 		return false;
 	}
 

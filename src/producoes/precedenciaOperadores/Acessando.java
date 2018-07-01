@@ -23,13 +23,12 @@ public class Acessando extends RegraProducao {
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-			
+
 			if (Acesso.getInstancia().analisar(gerenciadorToken)) {
 				return true;
-			}
-                        else if (AcessandoAux.getInstancia().analisar(gerenciadorToken)) {
-                                    //gerenciadorToken.goBack();
-					return true;
+			} else if (AcessandoAux.getInstancia().analisar(gerenciadorToken)) {
+				// gerenciadorToken.goBack();
+				return true;
 			}
 
 		}

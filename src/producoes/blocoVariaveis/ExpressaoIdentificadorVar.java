@@ -24,9 +24,6 @@ public class ExpressaoIdentificadorVar extends RegraProducao {
                     return true;
                 }
             }
-
-            
-
         }
 
         return false;

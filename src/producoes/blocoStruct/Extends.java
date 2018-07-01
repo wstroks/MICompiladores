@@ -22,18 +22,18 @@ public class Extends extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
+        if(verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS)){
             if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS)) {
-            	if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    return true;
+                if(verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS)){
+                    if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                        return true;
+                    }
                 }
             }
-            else if (gerenciadorToken.eof()) {
-                return true;
-            }
-
         }
+		else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
+			return true;
+		}
         
         return false;
         

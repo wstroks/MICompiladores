@@ -21,21 +21,20 @@ public class ValorAux1 extends RegraProducao {
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
-
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-			
+		
+		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
 			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-				if(ValorAux2.getInstancia().analisar(gerenciadorToken)) {
+				if (ValorAux2.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
-			} 
-                        else if (gerenciadorToken.eof()) {
-				return true;
 			}
-
 		}
-
+		else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
+			return true;
+		}
+		
 		return false;
+		
 	}
 
 	@Override

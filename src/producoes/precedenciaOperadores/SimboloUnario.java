@@ -21,22 +21,19 @@ public class SimboloUnario extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
         	
-            if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)) {
-                return true;
-            }
-            else if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO)) {
-                return true;
-            } 
-            else if (gerenciadorToken.eof()) {
-                return true;
-            }
+    	if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)){
+    		return consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
+    	}
+    	else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)){
+    		return consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
+    	}
+		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
+			return true;
+		}
+    	
+    	return false;
 
-        }
-
-        return false;
     }
 
     @Override

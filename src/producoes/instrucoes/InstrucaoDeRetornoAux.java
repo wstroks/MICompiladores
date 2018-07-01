@@ -23,17 +23,13 @@ public class InstrucaoDeRetornoAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-			if(Expressao.getInstancia().analisar(gerenciadorToken)){
-				return true;
-			}
-			else if (gerenciadorToken.eof()) {
-				return true;
-			}
-
+		if(Expressao.getInstancia().analisar(gerenciadorToken)){
+			return true;
 		}
-		
+		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
+			return true;
+		}
+
 		return false;
 
 	}

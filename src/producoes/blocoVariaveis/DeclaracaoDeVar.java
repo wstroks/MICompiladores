@@ -20,31 +20,26 @@ public class DeclaracaoDeVar extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken()) || isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			
 			if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_VAR)) {
-                            if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)){
-                                if((DeclaracaoDeVariavelCorpo.getInstancia().analisar(gerenciadorToken))){
-                                    
-                                      
-                                           return true;
-                                       
-                                }else{
-                                         if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
-                                             
-                                             return true;
-                                         }
-                                    }
-                                }
-                            }
-                            
-                        }
+				if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+					if ((DeclaracaoDeVariavelCorpo.getInstancia().analisar(gerenciadorToken))) {
+						return true;
+					} else {
+						if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+							return true;
+						}
+					}
+					gerenciadorToken.goBack(getNomeClasse());
+				}
+				gerenciadorToken.goBack(getNomeClasse());
+			}
 
-		
-		
+		}
+
 		return false;
-		
+
 	}
 
 	@Override

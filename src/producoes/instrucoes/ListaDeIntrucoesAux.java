@@ -21,19 +21,15 @@ public class ListaDeIntrucoesAux extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            
-            if(ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
-            	return true;
-            }
-            else if (gerenciadorToken.eof()) {
-                return true;
-            }
-
-        }
         
-        return false;
+		if(ListaDeIntrucoes.getInstancia().isFirst(gerenciadorToken.getTipoTokenAtual())){
+			return ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken);
+        }
+        else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
+			return true;
+		}
+
+		return false;
 
     }
 

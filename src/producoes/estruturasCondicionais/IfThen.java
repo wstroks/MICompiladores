@@ -34,10 +34,15 @@ public class IfThen extends RegraProducao {
                                 if (Bloco.getInstancia().analisar(gerenciadorToken)) {
                                     return true;
                                 }
+                                gerenciadorToken.goBack(getNomeClasse());
                             }
+                            gerenciadorToken.goBack(getNomeClasse());
                         }
+                        gerenciadorToken.goBack(getNomeClasse());
                     }
+                    gerenciadorToken.goBack(getNomeClasse());
                 }
+                gerenciadorToken.goBack(getNomeClasse());
             }
 
         }

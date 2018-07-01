@@ -22,20 +22,17 @@ public class OpRelacionalAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-			if(EscalarRelacional.getInstancia().analisar(gerenciadorToken)){
-				if(OpRelacional.getInstancia().analisar(gerenciadorToken)){
-					return true;
-				}
-			}
-			else if (gerenciadorToken.eof()) {
+		if(EscalarRelacional.getInstancia().analisar(gerenciadorToken)){
+			if(OpRelacional.getInstancia().analisar(gerenciadorToken)){
 				return true;
 			}
-
+		}
+		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
+			return true;
 		}
 
 		return false;
+		
 	}
 
 	@Override

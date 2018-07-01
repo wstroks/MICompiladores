@@ -21,7 +21,6 @@ public class ExpressaoIdentificadoresVarAux extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        // TODO Auto-generated method stub
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
@@ -32,6 +31,7 @@ public class ExpressaoIdentificadoresVarAux extends RegraProducao {
             	if(ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
+                //
             } 
 
         }

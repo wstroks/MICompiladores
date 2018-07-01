@@ -22,17 +22,15 @@ public class ExpressaoAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-			
-			
-			if(consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_OU)){
-				if(Expressao.getInstancia().analisar(gerenciadorToken)){
-                                    return true;
-                                }
-			}else if (gerenciadorToken.eof()) {
-				return true;
+		if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_OU)){
+			if (consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_OU)) {
+				if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
 			}
-
+		}
+		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
+			return true;
 		}
 
 		return false;

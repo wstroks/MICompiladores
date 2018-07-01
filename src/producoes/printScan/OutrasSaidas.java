@@ -22,8 +22,7 @@ public class OutrasSaidas extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-System.out.println("naruto \n\n\n\n");
+		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
 			if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
 				if (Saida.getInstancia().analisar(gerenciadorToken)) {
 					if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
@@ -31,21 +30,20 @@ System.out.println("naruto \n\n\n\n");
 					}
 				}
 			}
-                        if (gerenciadorToken.eof()) {
-				return true;
-			}
-
 		}
-                System.out.println("naruto \n");
+		else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
+			return true;
+		}
+
 		return false;
 	}
 
 	@Override
 	protected void gerarFirst() {
 		// { E, ‘,’ }
-                first.add(TipoToken.DELIMITADOR_VIRGULA);
+		first.add(TipoToken.DELIMITADOR_VIRGULA);
 		first.add(TipoToken.EOF);
-		
+
 	}
 
 	@Override

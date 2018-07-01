@@ -23,14 +23,13 @@ public class BlocoAux extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if(ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
-				
-				if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
+			if (ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)) {
+
+				if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
 					return true;
 				}
-				
-			}
-                        else if(consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)){
+
+			} else if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
 				return true;
 			}
 
@@ -62,8 +61,8 @@ public class BlocoAux extends RegraProducao {
 		first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
 		first.add(TipoToken.PALAVRA_RESERVADA_VAR);
 		first.add(TipoToken.PALAVRA_RESERVADA_WHILE);
-                first.add(TipoToken.PALAVRA_RESERVADA_IF);
-                
+		first.add(TipoToken.PALAVRA_RESERVADA_IF);
+
 	}
 
 	@Override
