@@ -1,0 +1,4 @@
+start () {
+    operacao[a] = algumacoisa;
+    operacao[b][c] = outraCoisa[a];
+}

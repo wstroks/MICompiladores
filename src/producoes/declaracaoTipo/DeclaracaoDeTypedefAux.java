@@ -25,28 +25,28 @@ public class DeclaracaoDeTypedefAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!Tipo.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-            
-            if (!consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                return false;
-            }
-            
-            if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                return false;
+            if (Tipo.getInstancia().analisar(gerenciadorToken)) {
+                if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                        return true;
+                    }
+                }
             }
 
-            return true;
-
+            // return true;
         }
         return false;
     }
 
     @Override
     protected void gerarFirst() {
-        // TYPEDEF
-        first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+        // bool, float, identificador, int, string, struct 
+        first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+        first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+        first.add(TipoToken.IDENTIFICADOR);
+        first.add(TipoToken.PALAVRA_RESERVADA_INT);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRING);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
     }
 
     @Override

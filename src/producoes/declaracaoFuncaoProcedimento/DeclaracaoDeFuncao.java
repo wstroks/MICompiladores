@@ -22,23 +22,18 @@ public class DeclaracaoDeFuncao extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FUNCTION)) {
-                return false;
+            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FUNCTION)) {
+                if (FuncID.getInstancia().analisar(gerenciadorToken)) {
+                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                        if (FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
+                            return true;
+                        }
+                    }
+                }
+
             }
 
-            if (!FuncID.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-
-            if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                return false;
-            }
-
-            if (!FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-            
-            return true;
+            //return true;
 
         }
 

@@ -43,7 +43,7 @@ public class OpUnary extends RegraProducao {
 					return true;
 				}
 			}	
-			else if(gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR){
+			else if(gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.CADEIA_CARACTERES || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.NUMERO||gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.DELIMITADOR_ABRE_PARENTESES  || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.PALAVRA_RESERVADA_FALSE || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.PALAVRA_RESERVADA_TRUE ){
 				if(gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE){
 					if (Final.getInstancia().analisar(gerenciadorToken)) {
 						if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
@@ -78,6 +78,7 @@ public class OpUnary extends RegraProducao {
 		first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
 		first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
 		first.add(TipoToken.NUMERO);
+                first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
 	}
 
 	@Override

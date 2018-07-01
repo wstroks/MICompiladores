@@ -1,0 +1,14 @@
+function int nomeDaFuncao (int parametroUm, float parametroDois) {
+    nomeDaFuncao();
+    algumaOutraVariavel = nomeDaFuncao();
+    return algo;
+}
+
+procedure nomeDoProcedimento (tipoDefinidoPeloUsuario parametroDois, int algo) {
+    nomeDaFuncao();
+    algumaOutraVariavel = nomeDaFuncao(parametroDois, parametroUm);
+}
+
+start () {
+    nomeDoProcedimento();
+}

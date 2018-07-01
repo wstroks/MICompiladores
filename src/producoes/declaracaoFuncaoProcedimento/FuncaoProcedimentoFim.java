@@ -51,6 +51,7 @@ public class FuncaoProcedimentoFim extends RegraProducao {
 		first.add(TipoToken.PALAVRA_RESERVADA_INT);
 		first.add(TipoToken.PALAVRA_RESERVADA_STRING);
 		first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+                first.add(TipoToken.IDENTIFICADOR);
 
 	}
 

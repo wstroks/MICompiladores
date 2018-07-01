@@ -49,12 +49,13 @@ public class OpRelacionalAux extends RegraProducao {
 
 	@Override
 	protected void gerarFollow() {
-		// { ), ‘,’, ;, ], ||}
+		// {&&, ), ‘,’, ;, ], ||}
 		follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
 		follow.add(TipoToken.DELIMITADOR_VIRGULA);
 		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
 		follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
 		follow.add(TipoToken.OPERADOR_LOGICO_OU);
+                follow.add(TipoToken.OPERADOR_LOGICO_E);
 	}
 
 }

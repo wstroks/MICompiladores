@@ -1,0 +1,5 @@
+var {
+    struct extends estruturaPreviamenteCriada { 
+        int novoCampoQueNaoTemNaPreviamenteCriada;
+    } nomeDaVariavel;
+}

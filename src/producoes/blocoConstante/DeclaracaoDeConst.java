@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package producoes.blocoConstante;
 
@@ -13,57 +13,50 @@ import sintatico.GerenciadorToken;
  */
 public class DeclaracaoDeConst extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new DeclaracaoDeConst();
-	}
+    public static RegraProducao getInstancia() {
+        return new DeclaracaoDeConst();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_CONST)) {
-				return false;
-			}
+            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_CONST)) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                    if (DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)) {
+                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                            return true;
+                        }
+                    }
+                }
+            }
 
-			if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-				return false;
-			}
+            //return true;
+        }
 
-			if (!DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
+        return false;
 
-			if (!consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-				return false;
-			}
+    }
 
-			return true;
+    @Override
+    protected void gerarFirst() {
+        // const
+        first.add(TipoToken.PALAVRA_RESERVADA_CONST);
+    }
 
-		}
+    @Override
+    protected void gerarFollow() {
+        // const, function, procedure, start, struct, typedef, var, $
+        follow.add(TipoToken.EOF);
+        follow.add(TipoToken.PALAVRA_RESERVADA_CONST);
+        follow.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
+        follow.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);
+        follow.add(TipoToken.PALAVRA_RESERVADA_START);
+        follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+        follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
 
-		return false;
-
-	}
-
-	@Override
-	protected void gerarFirst() {
-		// const
-		first.add(TipoToken.PALAVRA_RESERVADA_CONST);
-	}
-
-	@Override
-	protected void gerarFollow() {
-		// const, function, procedure, start, struct, typedef, var, $
-		follow.add(TipoToken.EOF);
-		follow.add(TipoToken.PALAVRA_RESERVADA_CONST);
-		follow.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);
-		follow.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);
-		follow.add(TipoToken.PALAVRA_RESERVADA_START);
-		follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-		follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
-		follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
-
-	}
+    }
 
 }

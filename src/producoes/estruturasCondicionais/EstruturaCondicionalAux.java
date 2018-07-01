@@ -17,55 +17,55 @@ import sintatico.GerenciadorToken;
  */
 public class EstruturaCondicionalAux extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new EstruturaCondicionalAux();
-	}
+    public static RegraProducao getInstancia() {
+        return new EstruturaCondicionalAux();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
-		
-		if(verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_ELSE)){
-			if (consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_OU)) {
-				if (Bloco.getInstancia().analisar(gerenciadorToken)) {
-					return true;
-				}
-			}
-		}
-		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
-			return true;
-		}
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		return false;
-	}
+        if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_ELSE)) {
+            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_ELSE)) {
+                if (Bloco.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
+            }
 
-	@Override
-	protected void gerarFirst() {
-		// else e E
-		first.add(TipoToken.PALAVRA_RESERVADA_ELSE);
-		first.add(TipoToken.EOF);
-	}
+        } else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
+            return true;
+        }
 
-	@Override
-	protected void gerarFollow() {
-		// --, !, ( , ++, CadeiaDeCaracteres, Digitos, false, identificador,
-		// print, return , scan, struct,
-		// true, typdef, var, while
-		follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
-		follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
-		follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
-		follow.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
-		follow.add(TipoToken.CADEIA_CARACTERES);
-		follow.add(TipoToken.NUMERO);
-		follow.add(TipoToken.IDENTIFICADOR);
-		follow.add(TipoToken.PALAVRA_RESERVADA_FALSE);
-		follow.add(TipoToken.PALAVRA_RESERVADA_PRINT);
-		follow.add(TipoToken.PALAVRA_RESERVADA_RETURN);
-		follow.add(TipoToken.PALAVRA_RESERVADA_SCAN);
-		follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-		follow.add(TipoToken.PALAVRA_RESERVADA_TRUE);
-		follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
-		follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
-		follow.add(TipoToken.PALAVRA_RESERVADA_WHILE);
-	}
+        return false;
+    }
+
+    @Override
+    protected void gerarFirst() {
+        // else e E
+        first.add(TipoToken.PALAVRA_RESERVADA_ELSE);
+        first.add(TipoToken.EOF);
+    }
+
+    @Override
+    protected void gerarFollow() {
+        // --, !, ( , ++, CadeiaDeCaracteres, Digitos, false, identificador,
+        // print, return , scan, struct,
+        // true, typdef, var, while
+        follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
+        follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
+        follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
+        follow.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
+        follow.add(TipoToken.CADEIA_CARACTERES);
+        follow.add(TipoToken.NUMERO);
+        follow.add(TipoToken.IDENTIFICADOR);
+        follow.add(TipoToken.PALAVRA_RESERVADA_FALSE);
+        follow.add(TipoToken.PALAVRA_RESERVADA_PRINT);
+        follow.add(TipoToken.PALAVRA_RESERVADA_RETURN);
+        follow.add(TipoToken.PALAVRA_RESERVADA_SCAN);
+        follow.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        follow.add(TipoToken.PALAVRA_RESERVADA_TRUE);
+        follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+        follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
+        follow.add(TipoToken.PALAVRA_RESERVADA_WHILE);
+    }
 
 }

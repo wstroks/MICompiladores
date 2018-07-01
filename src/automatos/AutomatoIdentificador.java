@@ -126,6 +126,10 @@ public class AutomatoIdentificador extends Automato {
                 return TipoToken.PALAVRA_RESERVADA_FALSE;
             case "extends":
                 return TipoToken.PALAVRA_RESERVADA_EXTENDS;
+            case "while":
+                return TipoToken.PALAVRA_RESERVADA_WHILE;
+            case "typedef":
+                return TipoToken.PALAVRA_RESERVADA_TYPEDEF;
             default:
                 return TipoToken.IDENTIFICADOR;
         }

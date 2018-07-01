@@ -1,0 +1,6 @@
+start () {
+    const{
+        int num = 5;
+        bool aprovado = false;
+    }
+}

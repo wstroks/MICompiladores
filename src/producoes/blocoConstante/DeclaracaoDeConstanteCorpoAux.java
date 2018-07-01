@@ -22,17 +22,17 @@ public class DeclaracaoDeConstanteCorpoAux extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        
 
-            if (!DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)) {
+            if (DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)) {
                 return false;
-            } else if (gerenciadorToken.eof()) {
-                return true;
-            }
+            } else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
+			return true;
+		}
 
-            return true;
+            
 
-        }
+        
         
         return false;
 

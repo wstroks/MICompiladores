@@ -50,6 +50,7 @@ public class InstrucaoDeRetornoAux extends RegraProducao {
 		first.add(TipoToken.PALAVRA_RESERVADA_SCAN);
 		first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
 		first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+                first.add(TipoToken.PALAVRA_RESERVADA_RETURN);
 		first.add(TipoToken.EOF);
 	}
 

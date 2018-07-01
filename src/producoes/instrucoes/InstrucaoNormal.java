@@ -78,7 +78,8 @@ public class InstrucaoNormal extends RegraProducao {
         first.add(TipoToken.PALAVRA_RESERVADA_PRINT);
         first.add(TipoToken.PALAVRA_RESERVADA_SCAN);
         first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
-        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);     
+        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        first.add(TipoToken.PALAVRA_RESERVADA_RETURN);
     }
 
     @Override

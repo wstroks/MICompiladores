@@ -26,7 +26,7 @@ public class Bloco extends RegraProducao {
                 if (BlocoAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
-                gerenciadorToken.goBack(getNomeClasse());
+                //gerenciadorToken.goBack(getNomeClasse());
             }
 
         }

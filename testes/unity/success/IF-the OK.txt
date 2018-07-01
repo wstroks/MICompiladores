@@ -1,0 +1,6 @@
+start() {
+    if(a == b || naruto!=a && n>a || a+b>=k ||  a+b<=k &&  a+b<k)then{
+
+    }
+
+}

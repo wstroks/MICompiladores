@@ -1,0 +1,4 @@
+start () {
+    operacao.algo.outro = algumacoisa; //nao tá funcionando
+operacao.algo = algumacoisa; //assim vai
+}

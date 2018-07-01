@@ -1,0 +1,15 @@
+start(){
+
+    vetor1[10] = 50;
+    vetor2[0]= (teste1 || teste2);
+    vetor3[4] = true;
+    vetor4[index]=atributo = "teste"; 
+    vetor5[0] = vetor3[10];
+    vetor1[identificador] = 10 + 2;
+    vetor1[identificador] = (10 + 2) * (50/4) ;
+    vetor["teste"] = "teste";
+    vetor2[5] = getValor();
+    vetor8[(i + 3)] = 10;
+    vetor8[i + 3] = identificador;
+
+}

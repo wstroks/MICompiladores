@@ -1,0 +1,14 @@
+function int nomeDaFuncao ( ) {
+    nomeDaFuncao();
+    algumaOutraVariavel = nomeDaFuncao();
+    return;
+}
+
+procedure nomeDoProcedimento ( ) {
+    nomeDaFuncao();
+    algumaOutraVariavel = nomeDaFuncao();
+}
+
+start ( ) {
+    nomeDoProcedimento();
+}

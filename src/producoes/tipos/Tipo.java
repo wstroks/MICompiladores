@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package producoes.tipos;
 
@@ -13,43 +13,41 @@ import sintatico.GerenciadorToken;
  */
 public class Tipo extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new Tipo();
-	}
+    public static RegraProducao getInstancia() {
+        return new Tipo();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (TipoBase.getInstancia().analisar(gerenciadorToken)) {
-				return true;
-			}
+            if (TipoBase.getInstancia().analisar(gerenciadorToken)) {
+                if (TipoAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
+                }
+            }
 
-			if (TipoAux.getInstancia().analisar(gerenciadorToken)) {
-				return true;
-			}
+        }
 
-		}
+        return false;
+    }
 
-		return false;
-	}
+    @Override
+    protected void gerarFirst() {
+        // bool, float, identificador,int, string, struct
+        first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
+        first.add(TipoToken.IDENTIFICADOR);
+        first.add(TipoToken.PALAVRA_RESERVADA_INT);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRING);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
+    }
 
-	@Override
-	protected void gerarFirst() {
-		// bool, float, identificador,int, string, struct
-		first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
-		first.add(TipoToken.IDENTIFICADOR);
-		first.add(TipoToken.PALAVRA_RESERVADA_INT);
-		first.add(TipoToken.PALAVRA_RESERVADA_STRING);
-		first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
-		first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
-	}
-
-	@Override
-	protected void gerarFollow() {
-		// identificador
-		follow.add(TipoToken.IDENTIFICADOR);
-	}
+    @Override
+    protected void gerarFollow() {
+        // identificador
+        follow.add(TipoToken.IDENTIFICADOR);
+    }
 
 }

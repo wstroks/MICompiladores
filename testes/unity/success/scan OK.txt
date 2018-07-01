@@ -1,0 +1,4 @@
+start(){
+    scan (variavel,a[a],a.a,a);
+    scan (idade, ano);
+}

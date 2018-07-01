@@ -1,0 +1,10 @@
+start(){
+
+    var {
+        int[] vetor1;
+        float[][] vetor2;
+        bool[] vetor3, vetor4;
+        nomeStruct[] vetor5;
+    }
+
+}

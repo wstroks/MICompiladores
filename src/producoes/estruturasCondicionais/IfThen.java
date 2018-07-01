@@ -29,7 +29,7 @@ public class IfThen extends RegraProducao {
             if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_IF)) {
                 if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
                     if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                        System.out.println("fada se\n\n\n");
+                        //System.out.println("fada se\n\n\n");
                         if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
                             if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_THEN)) {
                                 if (Bloco.getInstancia().analisar(gerenciadorToken)) {
@@ -80,6 +80,7 @@ public class IfThen extends RegraProducao {
         follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
         follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
         follow.add(TipoToken.PALAVRA_RESERVADA_WHILE);
+        follow.add(TipoToken.PALAVRA_RESERVADA_ELSE);
     }
 
 }

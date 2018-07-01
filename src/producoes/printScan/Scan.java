@@ -15,47 +15,45 @@ import sintatico.GerenciadorToken;
  */
 public class Scan extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new Scan();
-	}
+    public static RegraProducao getInstancia() {
+        return new Scan();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_SCAN)) {
-				if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-					if ((Entrada.getInstancia().analisar(gerenciadorToken))) {
-						if ((OutrasEntradas.getInstancia().analisar(gerenciadorToken))) {
+            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_SCAN)) {
+                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                    if ((Entrada.getInstancia().analisar(gerenciadorToken))) {
+                        if ((OutrasEntradas.getInstancia().analisar(gerenciadorToken))) {
 
-							return true;
+                            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
 
-						} else {
-							if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                                return true;
+                            }
 
-								return true;
-							}
-						}
-					}
-				}
-			}
+                        }
+                    }
+                }
+            }
 
-		}
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	protected void gerarFirst() {
-		// { scan}
-		first.add(TipoToken.PALAVRA_RESERVADA_SCAN);
-	}
+    @Override
+    protected void gerarFirst() {
+        // { scan}
+        first.add(TipoToken.PALAVRA_RESERVADA_SCAN);
+    }
 
-	@Override
-	protected void gerarFollow() {
-		// { ; }
-		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-	}
+    @Override
+    protected void gerarFollow() {
+        // { ; }
+        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+    }
 
 }
