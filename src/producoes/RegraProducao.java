@@ -52,7 +52,7 @@ public abstract class RegraProducao {
     public boolean isFirst(TipoToken tipoToken) {
     	//System.out.println("\n\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "? " + first.contains(tipoToken));
     	if(first.contains(tipoToken)){
-    		System.out.println("\n\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "? " + first.contains(tipoToken));
+    		System.out.println("\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "\n");
     	}
         return first.contains(tipoToken);
     }
@@ -63,6 +63,9 @@ public abstract class RegraProducao {
      * @return true se sim, falso caso contrário
      */
     public boolean isFollow(TipoToken tipoToken) {
+    	if(follow.contains(tipoToken)){
+    		System.out.println("\n" + tipoToken + " isFollow de " + this.getClass().getSimpleName() + "\n");
+    	}
         return follow.contains(tipoToken);
     }
     

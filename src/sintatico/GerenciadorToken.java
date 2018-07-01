@@ -21,6 +21,8 @@ public class GerenciadorToken {
 
     GerenciadorToken(List<Token> listaTokens) {
         this.listaTokens = listaTokens;
+        //Adiciona o token EOF no final da lista
+        this.listaTokens.add(getEofToken());
         this.listaErros = new ArrayList<Erro>();
     }
 
@@ -41,9 +43,6 @@ public class GerenciadorToken {
      */
     public Token getTokenAtual() {
         //System.out.println("\n asda " +listaTokens.get(contTokenAtual).getTipoToken());
-        if (eof()) {
-            return getEofToken();
-        }
         return listaTokens.get(contTokenAtual);
     }
     
@@ -58,9 +57,6 @@ public class GerenciadorToken {
      */
     public Token getProximoToken() {
         //System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
-        if (eof()) {
-            return getEofToken();
-        }
         return listaTokens.get(contTokenAtual + 1);
     }
 
@@ -71,8 +67,9 @@ public class GerenciadorToken {
      */
     public Token consumirTokenAtual() {
         //System.out.println("Token consumido: " + listaTokens.get(contTokenAtual).getTipoToken());
+    	contTokenAtual++;
         System.out.println("Quantidade de tokens restantes: " + getQtdTokensRestantes());
-        return listaTokens.get(contTokenAtual++);
+        return listaTokens.get(contTokenAtual);
     }
 
     /**
@@ -108,7 +105,7 @@ public class GerenciadorToken {
     }
 
     public boolean eof() {
-        return contTokenAtual == (listaTokens.size() - 1);
+    	return getTipoTokenAtual() == TipoToken.EOF;
     }
 
     private Token getEofToken() {
