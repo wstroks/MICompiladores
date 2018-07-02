@@ -21,8 +21,8 @@ public class TipoVetorDeclarado extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
-                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
+            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE, false)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE, true)) {
                     return true;
                 }
 

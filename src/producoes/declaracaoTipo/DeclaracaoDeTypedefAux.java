@@ -26,8 +26,8 @@ public class DeclaracaoDeTypedefAux extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (Tipo.getInstancia().analisar(gerenciadorToken)) {
-                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, true)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA, false)) {
                         return true;
                     }
                 }

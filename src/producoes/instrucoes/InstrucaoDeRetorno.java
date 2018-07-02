@@ -23,7 +23,7 @@ public class InstrucaoDeRetorno extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_RETURN)) {
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_RETURN, false)) {
                 if (InstrucaoDeRetornoAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }

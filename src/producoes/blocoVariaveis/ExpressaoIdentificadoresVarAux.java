@@ -26,7 +26,7 @@ public class ExpressaoIdentificadoresVarAux extends RegraProducao {
 
         if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA, false)) {
             return true;
-        } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA, true)) {
+        } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA, false)) {
 
             if (ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
                 return true;

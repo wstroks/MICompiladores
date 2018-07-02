@@ -22,15 +22,13 @@ public class ValorAux2 extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-            if (ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
-                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                    return true;
-                }
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+        if (ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
+            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
                 return true;
             }
+        } 
+        else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, false)) {
+            return true;
         }
 
         return false;

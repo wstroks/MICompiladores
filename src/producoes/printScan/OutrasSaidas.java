@@ -22,17 +22,17 @@ public class OutrasSaidas extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
             
-		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
+		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA, false)){
 			if (Saida.getInstancia().analisar(gerenciadorToken)) {
 				if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
 			}
 		}
-		else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
-			return true;
+		else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
-
+		
 		return false;
 	}
 

@@ -24,7 +24,7 @@ public class OperacaoDeAtribuicao extends RegraProducao {
             if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO
                     || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE) {
                 if (Final.getInstancia().analisar(gerenciadorToken)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
                         if (Expressao.getInstancia().analisar(gerenciadorToken)) {
                             // System.out.println("sasuke3 \n");
                             return true;
@@ -36,8 +36,8 @@ public class OperacaoDeAtribuicao extends RegraProducao {
                 // System.out.println("sasuke23 \n");
                 // if (gerenciadorToken.getProximoToken().getTipoToken() ==
                 // TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO) {
-                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
                         if (Expressao.getInstancia().analisar(gerenciadorToken)) {
                             // System.out.println("sasuke5 \n");
                             return true;
@@ -50,11 +50,10 @@ public class OperacaoDeAtribuicao extends RegraProducao {
                 return true;
             }
 
-        } else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            return true;
-        }
-
+        } 
+        
         return false;
+
     }
 
     @Override

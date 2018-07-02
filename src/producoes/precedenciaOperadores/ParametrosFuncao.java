@@ -22,14 +22,10 @@ public class ParametrosFuncao extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
-            if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                if(ParametrosFuncaoAux.getInstancia().analisar(gerenciadorToken)) {
-                    return true;
-                }
+        if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+            if(ParametrosFuncaoAux.getInstancia().analisar(gerenciadorToken)) {
+                return true;
             }
-
         }
 
         return false;

@@ -22,24 +22,24 @@ public class OpMultAux extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO)) {
+        if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO, false)) {
             if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
                 if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
             }
-        } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DIVISAO)) {
+        } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DIVISAO, false)) {
             if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
                 if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
             }
-        } else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
-            return true;
-        }
+        } 
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
+		}
 
         return false;
-
     }
 
     @Override

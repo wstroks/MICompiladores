@@ -104,7 +104,7 @@ public class GerenciadorToken {
         
         Erro erro = new Erro(tokensEsperados, listaTokens.get(contTokenAtual), tokenAnterior);
         listaErros.add(erro);
-        System.out.println("--> Erro na classe " + nomeProducao + ". Token recebido: " + getTipoTokenAtual() + ". Tokens esperados: " + erro.getStringTokensEsperados());
+        System.out.println("\n!!!!! Erro na classe " + nomeProducao + ". Token recebido: " + getTipoTokenAtual() + ". Tokens esperados: " + erro.getStringTokensEsperados() + "\n");
     }
 
     public boolean eof() {

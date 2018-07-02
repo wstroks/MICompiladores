@@ -29,7 +29,7 @@ public class Entrada extends RegraProducao {
                 if (Final.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
-            } else if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 return true;
             }
 

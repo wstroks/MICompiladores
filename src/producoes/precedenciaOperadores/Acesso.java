@@ -23,13 +23,13 @@ public class Acesso extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO)) {
-                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO, false)) {
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, true)) {
                     return true;
                 }
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE, false)) {
                 if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE, true)) {
                         return true;
                     }
                 }
@@ -52,6 +52,7 @@ public class Acesso extends RegraProducao {
         follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
         follow.add(TipoToken.DELIMITADOR_VIRGULA);
         follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+        follow.add(TipoToken.DELIMITADOR_PONTO);
         follow.add(TipoToken.DELIMITADOR_FECHA_COLCHETE);
         follow.add(TipoToken.OPERADOR_LOGICO_OU);
         follow.add(TipoToken.OPERADOR_LOGICO_E);
@@ -68,7 +69,6 @@ public class Acesso extends RegraProducao {
         follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         follow.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
-        follow.add(TipoToken.DELIMITADOR_PONTO);
     }
 
 }

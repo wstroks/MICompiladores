@@ -24,7 +24,7 @@ public class FuncID extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (Tipo.getInstancia().analisar(gerenciadorToken)) {
-                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, true)) {
                     return true;
                 }
             }

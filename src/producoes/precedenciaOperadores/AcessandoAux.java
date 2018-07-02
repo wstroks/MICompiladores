@@ -25,12 +25,9 @@ public class AcessandoAux extends RegraProducao {
         if(Acessando.getInstancia().analisar(gerenciadorToken)){
             return true;
         }
-        else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
-            return true;
-        }
-
-        return false;
-        
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
+		}
     }
 
     @Override
@@ -63,7 +60,6 @@ public class AcessandoAux extends RegraProducao {
         follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         follow.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
-        //follow.add(TipoToken.DELIMITADOR_PONTO);
     }
 
 }

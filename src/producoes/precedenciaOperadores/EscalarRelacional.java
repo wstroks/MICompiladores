@@ -23,17 +23,17 @@ public class EscalarRelacional extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_DIFERENTE)) {
+            if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_DIFERENTE, false)) {
                 return true;
-            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_IGUAL)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_IGUAL, false)) {
                 return true;
-            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_QUE)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_QUE, false)) {
                 return true;
-            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE, false)) {
                 return true;
-            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE, false)) {
                 return true;
-            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE, false)) {
                 return true;
             }
 

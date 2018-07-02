@@ -1,5 +1,3 @@
-start(){
-	var{
-		int a, b
-	}
+start () {
+    operacao[b][c] = outraCoisa[a];
 }

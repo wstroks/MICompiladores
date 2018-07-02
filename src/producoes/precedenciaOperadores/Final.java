@@ -23,17 +23,22 @@ public class Final extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 if (Acessando.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
             }
             //return false;
-        } else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            return true;
-        }
-
+        } 
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
+		}
+        // else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        //     return true;
+        // }
+        
         return false;
+
     }
 
     @Override

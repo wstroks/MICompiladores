@@ -21,10 +21,10 @@ public class DeclaracaoDeConst extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_CONST)) {
-                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_CONST, false)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE, true)) {
                     if (DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)) {
-                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, true)) {
                             return true;
                         }
                     }

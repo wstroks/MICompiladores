@@ -22,15 +22,15 @@ public class ParametrosFuncaoAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if(verificarToken(gerenciadorToken, gerenciadorToken.getTipoTokenAtual())){
+		if(verificarToken(gerenciadorToken, gerenciadorToken.getTipoTokenAtual(), false)){
 			if(ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
 				return true;
 			}
 		}
-		else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
-			return true;
+		else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
-
+		
 		return false;
 	}
 

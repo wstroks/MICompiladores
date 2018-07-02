@@ -21,11 +21,11 @@ public class Print extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT)) {
-                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PRINT, false)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
                     if (Saida.getInstancia().analisar(gerenciadorToken)) {
                         if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
-                            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
                                 return true;
                             }
                         }
@@ -33,10 +33,7 @@ public class Print extends RegraProducao {
                 }
             }
         }
-        if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            return true;
-        }
-        // System.out.println("naruto \n\n\n\n");
+
         return false;
     }
 

@@ -24,8 +24,8 @@ public class ExpressaoIdentificadorConst extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
+                if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
                     if (Expressao.getInstancia().analisar(gerenciadorToken)) {
                         return true;
                     }

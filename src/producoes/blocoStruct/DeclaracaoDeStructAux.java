@@ -23,20 +23,20 @@ public class DeclaracaoDeStructAux extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 if (Extends.getInstancia().analisar(gerenciadorToken)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE, true)) {
                         if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-                            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, true)) {
                                 return true;
                             }
                         }
                     }
                 }
             } else if (Extends.getInstancia().analisar(gerenciadorToken)) {
-                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE, false)) {
                     if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, true)) {
                             return true;
                         }
                     }

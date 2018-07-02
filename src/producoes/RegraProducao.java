@@ -71,10 +71,22 @@ public abstract class RegraProducao {
      * @return true se sim, falso caso contrário
      */
     public boolean isFollow(TipoToken tipoToken) {
-    	if(follow.contains(tipoToken)){
-    		System.out.println("\n" + tipoToken + " isFollow de " + this.getClass().getSimpleName() + "\n");
-    	}
+//    	if(follow.contains(tipoToken)){
+//    		System.out.println("\n" + tipoToken + " isFollow de " + this.getClass().getSimpleName() + "\n");
+//    	}
         return follow.contains(tipoToken);
+    }
+    
+    public boolean verificarSimboloVazio(GerenciadorToken gt, boolean addErro){
+    	if (isFollow(gt.getTipoTokenAtual())) {
+			return true;
+		}
+    	else{
+    		if(addErro){
+    			gt.addErro(getNomeClasse(), getFollow());
+    		}
+    		return false;
+    	}
     }
     
     /**
@@ -91,9 +103,9 @@ public abstract class RegraProducao {
     	}
     	else{
     		if(addErro){
-    			gerenciadorToken.addErro(getNomeClasse(), getFirst());
+    			gerenciadorToken.addErro(getNomeClasse(), convertTokenToArrayList(tipoToken));
     		}
-    		System.out.println("\n>>>>>>>>>> TESTANDO ESSA MERDAAAAAAAAA!! eu queria um " + tipoToken + "\n");
+    		//System.out.println("\n" + getNomeClasse() + ": >>>>>>>>>> TESTANDO ESSA MERDAAAAAAAAA!! eu queria um " + tipoToken + "\n");
     		return false;
     	}
     	
@@ -105,10 +117,10 @@ public abstract class RegraProducao {
      * @param tokenEsperado
      * @return
      */
-    protected boolean consumir(GerenciadorToken gerenciadorToken, TipoToken tokenEsperado){
+    protected boolean consumir(GerenciadorToken gt, TipoToken tokenEsperado){
     	
-		System.out.println("**** Consumindo token "+ gerenciadorToken.getTipoTokenAtual() +" na classe " + getNomeClasse() + ". Próximo token: " + gerenciadorToken.getProximoToken().getTipoToken());
-		gerenciadorToken.consumirTokenAtual();
+		System.out.println("**** Consumindo token "+ gt.getTipoTokenAtual() + " ("  + gt.getTokenAtual().getLexema() + ") na classe " + getNomeClasse() + ". Próximo token: " + gt.getProximoToken().getTipoToken());
+		gt.consumirTokenAtual();
 		return true;
     	
     }

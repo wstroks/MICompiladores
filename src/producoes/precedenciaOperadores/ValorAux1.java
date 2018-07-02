@@ -22,13 +22,13 @@ public class ValorAux1 extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)){
+		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, false)){
 			if (ValorAux2.getInstancia().analisar(gerenciadorToken)) {
 				return true;
 			}
 		}
-		else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
-			return true;
+		else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
 		
 		return false;

@@ -25,11 +25,9 @@ public class DeclaracaoDeVariavelCorpoAux extends RegraProducao {
         if (DeclaracaoDeVariavelCorpo.getInstancia().analisar(gerenciadorToken)) {
             return true;
         } 
-        else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
-            return true;
-        }
-        
-        return false;
+        else{
+			return  verificarSimboloVazio(gerenciadorToken, true);
+		}
         
     }
 

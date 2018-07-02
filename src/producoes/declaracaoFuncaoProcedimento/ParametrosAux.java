@@ -22,7 +22,7 @@ public class ParametrosAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
+		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA, false)){
 			if (Parametros.getInstancia().analisar(gerenciadorToken)) {
 				return true;
 			}
@@ -39,7 +39,6 @@ public class ParametrosAux extends RegraProducao {
 	protected void gerarFirst() {
 		// { E, ‘,’}
 		first.add(TipoToken.DELIMITADOR_VIRGULA);
-
 		first.add(TipoToken.EOF);
 	}
 

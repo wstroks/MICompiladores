@@ -23,7 +23,7 @@ public class ExpressaoIdentificadorStruct extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 return true;
             }
 

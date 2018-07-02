@@ -31,10 +31,16 @@ public class Acessando extends RegraProducao {
 				return true;
 			}
 			// return false;
-		} else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
-			return true;
+		} 
+		else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
+		// else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		// 	return true;
+		// }
+		
 		return false;
+
 	}
 
 	@Override

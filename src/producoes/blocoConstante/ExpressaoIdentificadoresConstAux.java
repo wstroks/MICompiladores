@@ -23,9 +23,9 @@ public class ExpressaoIdentificadoresConstAux extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA, false)) {
                 return true;
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA, false)) {
                 if (ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }

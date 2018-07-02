@@ -24,13 +24,13 @@ public class ExpressaoIdentificadoresStructAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
+            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA, false)) {
 
                 if (ExpressaoIdentificadoresStruct.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
 
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA, true)) {
                 return true;
             }
 

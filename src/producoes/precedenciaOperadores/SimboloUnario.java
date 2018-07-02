@@ -22,10 +22,10 @@ public class SimboloUnario extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
         	
-    	if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)){
+    	if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, false)){
     		return true;
     	}
-    	else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)){
+    	else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, false)){
     		return true;
     	}
 		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){

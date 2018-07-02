@@ -23,30 +23,34 @@ public class Valor extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 if (ValorAux1.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, false)) {
                 if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
                         return true;
                     }
                 }
-            } else if (verificarToken(gerenciadorToken, TipoToken.NUMERO)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.NUMERO, false)) {
                 return true;
-            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FALSE)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FALSE, false)) {
                 return true;
-            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE, false)) {
                 return true;
-            } else if (verificarToken(gerenciadorToken, TipoToken.CADEIA_CARACTERES)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.CADEIA_CARACTERES, false)) {
                 return true;
             }
 
-        } else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            return true;
         }
-
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
+		} 
+        // else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+        //     return true;
+        // }
+        
         return false;
     }
 

@@ -24,14 +24,14 @@ public class EstruturaCondicionalAux extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_ELSE)) {
+        if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_ELSE, false)) {
             if (Bloco.getInstancia().analisar(gerenciadorToken)) {
                 return true;
             }
-
-        } else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {
-            return true;
-        }
+        } 
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
+		}
 
         return false;
     }
@@ -64,6 +64,7 @@ public class EstruturaCondicionalAux extends RegraProducao {
         follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
         follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
         follow.add(TipoToken.PALAVRA_RESERVADA_WHILE);
+        follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
     }
 
 }
