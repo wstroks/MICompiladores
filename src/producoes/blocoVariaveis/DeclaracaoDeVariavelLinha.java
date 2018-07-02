@@ -25,20 +25,19 @@ public class DeclaracaoDeVariavelLinha extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!Tipo.getInstancia().analisar(gerenciadorToken)) {
-				return false;
+			if (Tipo.getInstancia().analisar(gerenciadorToken)) {
+				if (ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
+				// else{
+				// 	gerenciadorToken.addErro(getNomeClasse(), ExpressaoIdentificadoresVar.getInstancia().getFirst());
+				// }
 			}
-			
-                        else if (!ExpressaoIdentificadoresVar.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-			
-			return true;
 
 		}
-		
+
 		return false;
-		
+
 	}
 
 	@Override

@@ -25,10 +25,8 @@ public class EstruturaCondicionalAux extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_ELSE)) {
-            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_ELSE)) {
-                if (Bloco.getInstancia().analisar(gerenciadorToken)) {
-                    return true;
-                }
+            if (Bloco.getInstancia().analisar(gerenciadorToken)) {
+                return true;
             }
 
         } else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {

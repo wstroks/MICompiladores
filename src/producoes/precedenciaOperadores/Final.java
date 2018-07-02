@@ -24,10 +24,8 @@ public class Final extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    if (Acessando.getInstancia().analisar(gerenciadorToken)) {
-                        return true;
-                    }
+                if (Acessando.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
                 }
             }
             //return false;

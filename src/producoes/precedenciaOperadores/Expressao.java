@@ -29,17 +29,17 @@ public class Expressao extends RegraProducao {
                     return true;
                 }
             }
-            //return false;
-        }else if(isFollow(gerenciadorToken.getTokenAtual().getTipoToken())){
-                    return true;
-                }
+            // return false;
+        } else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
+            return true;
+        }
 
         return false;
     }
 
     @Override
     protected void gerarFirst() {
-        //{  -- , ! , ( , ++ , CadeiaDeCaracteres, Digitos, false, identificador, true}
+        // { -- , ! , ( , ++ , CadeiaDeCaracteres, Digitos, false, identificador, true}
         first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         first.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
@@ -48,12 +48,12 @@ public class Expressao extends RegraProducao {
         first.add(TipoToken.NUMERO);
         first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
         first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
-        first.add(TipoToken.IDENTIFICADOR);     
+        first.add(TipoToken.IDENTIFICADOR);
     }
 
     @Override
     protected void gerarFollow() {
-        //{ ), ‘,’, ;, ]}
+        // { ), ‘,’, ;, ]}
         follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
         follow.add(TipoToken.DELIMITADOR_VIRGULA);
         follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);

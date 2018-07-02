@@ -22,11 +22,8 @@ public class DeclaracaoDeTypedef extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TYPEDEF)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TYPEDEF)) {
-                    if (DeclaracaoDeTypedefAux.getInstancia().analisar(gerenciadorToken)) {
-                        return true;
-                    }
-
+                if (DeclaracaoDeTypedefAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
                 }
             }
 

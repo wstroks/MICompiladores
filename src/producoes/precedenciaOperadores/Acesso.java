@@ -24,27 +24,16 @@ public class Acesso extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                        if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                            return true;
-                        }
-                    }
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+                    return true;
                 }
             } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE)) {
-
-                    if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
-                            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
-                                return true;
-                            }
-                        }
+                if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE)) {
+                        return true;
                     }
                 }
-
             }
-
         }
 
         return false;

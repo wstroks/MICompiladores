@@ -19,11 +19,9 @@ public class ExpressaoIdentificadorVarAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)){
-			if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
-				if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-					return true;
-				}
+		if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, false)){
+			if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+				return true;
 			}
 		}
 		else if (isFollow(gerenciadorToken.getTipoTokenAtual())) {

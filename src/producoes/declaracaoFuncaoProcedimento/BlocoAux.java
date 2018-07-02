@@ -24,16 +24,12 @@ public class BlocoAux extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)) {
-                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                        return true;
-                    }
-                }
-
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, true)) {
                     return true;
                 }
+
+            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, false)) {
+                return true;
             }
 
         }

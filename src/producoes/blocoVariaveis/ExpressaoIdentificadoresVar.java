@@ -28,6 +28,9 @@ public class ExpressaoIdentificadoresVar extends RegraProducao {
                 if(ExpressaoIdentificadoresVarAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
+//                else{
+//                	gerenciadorToken.addErro(getNomeClasse(), ExpressaoIdentificadoresVarAux.getInstancia().getFirst());
+//                }
             }
         }
         

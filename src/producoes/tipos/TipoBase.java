@@ -21,23 +21,17 @@ public class TipoBase extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        System.out.println("Analisando <TipoBase>");
-
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (Escalar.getInstancia().analisar(gerenciadorToken)) {
                 return true;
-            } //			else if(DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)){	
-            //				return true;
-            //			} 
-            else if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    return true;
-                }
-            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)) {
-                    return true;
-                }
+            } // else if(DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)){
+              // return true;
+              // }
+            else if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
+                return true;
+            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT, false)) {
+                return true;
 
             }
         }
@@ -47,7 +41,7 @@ public class TipoBase extends RegraProducao {
 
     @Override
     protected void gerarFirst() {
-        //{ bool, float, identificador, int, string, struct }
+        // { bool, float, identificador, int, string, struct }
         first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
         first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
         first.add(TipoToken.IDENTIFICADOR);
@@ -58,7 +52,7 @@ public class TipoBase extends RegraProducao {
 
     @Override
     protected void gerarFollow() {
-        //{ [, Identificador }
+        // { [, Identificador }
         follow.add(TipoToken.DELIMITADOR_ABRE_COLCHETE);
         follow.add(TipoToken.IDENTIFICADOR);
     }

@@ -19,14 +19,14 @@ public class ExpressaoIdentificadorVar extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 if (ExpressaoIdentificadorVarAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
-//                else{
-//                	System.out.println("\nToda vez que entrar nesse else será erro léxico??\n");
-//                	gerenciadorToken.addErro(getNomeClasse(), ExpressaoIdentificadorVarAux.getInstancia().getFirst());
-//                }
+//                 else{
+//                 	//System.out.println("\nToda vez que entrar nesse else será erro léxico??\n");
+//                 	gerenciadorToken.addErro(getNomeClasse(), ExpressaoIdentificadorVarAux.getInstancia().getFirst());
+//                 }
             }
         }
 

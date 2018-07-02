@@ -26,17 +26,13 @@ public class FuncaoProcedimentoFim extends RegraProducao {
 
             if (Parametros.getInstancia().analisar(gerenciadorToken)) {
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                        if (Bloco.getInstancia().analisar(gerenciadorToken)) {
-                            return true;
-                        }
-                    }
-                }
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
                     if (Bloco.getInstancia().analisar(gerenciadorToken)) {
                         return true;
                     }
+                }
+            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                if (Bloco.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
                 }
             }
 

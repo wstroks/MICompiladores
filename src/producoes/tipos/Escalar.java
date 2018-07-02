@@ -23,22 +23,14 @@ public class Escalar extends RegraProducao {
         //System.out.println("Analisando <Escalar>");
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_INT)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_INT)) {
-                    return true;
-                }
-            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FLOAT)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FLOAT)) {
-                    return true;
-                }
-            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_BOOL)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_BOOL)) {
-                    return true;
-                }
-            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRING)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRING)) {
-                    return true;
-                }
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_INT, false)) {
+                return true;
+            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FLOAT, false)) {
+                return true;
+            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_BOOL, false)) {
+                return true;
+            } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRING, false)) {
+                return true;
             }
 
         }

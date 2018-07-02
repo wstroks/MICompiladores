@@ -27,24 +27,19 @@ public class DeclaracaoDeTypedefAux extends RegraProducao {
 
             if (Tipo.getInstancia().analisar(gerenciadorToken)) {
                 if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                                return true;
-                            }
-                        }
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+                        return true;
                     }
                 }
             }
 
-            // return true;
         }
         return false;
     }
 
     @Override
     protected void gerarFirst() {
-        // bool, float, identificador, int, string, struct 
+        // bool, float, identificador, int, string, struct
         first.add(TipoToken.PALAVRA_RESERVADA_BOOL);
         first.add(TipoToken.PALAVRA_RESERVADA_FLOAT);
         first.add(TipoToken.IDENTIFICADOR);
@@ -56,8 +51,9 @@ public class DeclaracaoDeTypedefAux extends RegraProducao {
     @Override
     protected void gerarFollow() {
         /*
-        --, !, ( , ++, CadeiaDeCaracteres, Digitos, false, identificador, print, return , scan, struct,
-        true, typdef, var, while, }, const, function, procedure, start, $
+         * --, !, ( , ++, CadeiaDeCaracteres, Digitos, false, identificador, print,
+         * return , scan, struct, true, typdef, var, while, }, const, function,
+         * procedure, start, $
          */
         follow.add(TipoToken.EOF);
         follow.add(TipoToken.PALAVRA_RESERVADA_PROCEDURE);

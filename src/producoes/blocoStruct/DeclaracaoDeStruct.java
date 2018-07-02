@@ -22,11 +22,8 @@ public class DeclaracaoDeStruct extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT)) {
-                    if (DeclaracaoDeStructAux.getInstancia().analisar(gerenciadorToken)) {
-                        return true;
-                    }
-                    gerenciadorToken.goBack(getNomeClasse());
+                if (DeclaracaoDeStructAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
                 }
             }
         }

@@ -23,11 +23,9 @@ public class OutrasEntradas extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)){
-            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-                if (Entrada.getInstancia().analisar(gerenciadorToken)) {
-                    if (OutrasEntradas.getInstancia().analisar(gerenciadorToken)) {
-                        return true;
-                    }
+            if (Entrada.getInstancia().analisar(gerenciadorToken)) {
+                if (OutrasEntradas.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
                 }
             }
         }

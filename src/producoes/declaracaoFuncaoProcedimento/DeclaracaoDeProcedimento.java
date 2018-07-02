@@ -23,24 +23,15 @@ public class DeclaracaoDeProcedimento extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PROCEDURE)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PROCEDURE)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                        if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                                    if (FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
-                                        return true;
-                                    }
-                                }
-                            }
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PROCEDURE, false)) {
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, true)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
+                        if (FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
+                            return true;
                         }
                     }
                 }
             }
-
-            
-
         }
 
         return false;

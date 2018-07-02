@@ -23,11 +23,8 @@ public class OpEAux extends RegraProducao {
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
 		if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_E)){
-			if(consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_E)){
-				if(OpE.getInstancia().analisar(gerenciadorToken)) {
-					return true;
-				}
-                               
+			if(OpE.getInstancia().analisar(gerenciadorToken)) {
+				return true;
 			}
 		}
 		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){

@@ -25,17 +25,13 @@ public class OpUnary extends RegraProducao {
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
 			if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO)){
-				if (consumir(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO)) {
-					if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
-						return true;
-					}
+				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
+					return true;
 				}
 			}
 			else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO)){
-				if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO)) {
-					if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
-						return true;
-					}
+				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
+					return true;
 				}
 			}
 			else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO)){

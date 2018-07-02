@@ -83,9 +83,19 @@ public abstract class RegraProducao {
      * @param tipoToken
      * @return boolean
      */
-    protected boolean verificarToken(GerenciadorToken gerenciadorToken, TipoToken tipoToken){
+    protected boolean verificarToken(GerenciadorToken gerenciadorToken, TipoToken tipoToken, boolean addErro){
     	
-    	return tipoToken == gerenciadorToken.getTipoTokenAtual();
+    	if(tipoToken == gerenciadorToken.getTipoTokenAtual()){
+    		consumir(gerenciadorToken, tipoToken);
+    		return true;
+    	}
+    	else{
+    		if(addErro){
+    			gerenciadorToken.addErro(getNomeClasse(), getFirst());
+    		}
+    		System.out.println("\n>>>>>>>>>> TESTANDO ESSA MERDAAAAAAAAA!! eu queria um " + tipoToken + "\n");
+    		return false;
+    	}
     	
     }
     
@@ -97,16 +107,21 @@ public abstract class RegraProducao {
      */
     protected boolean consumir(GerenciadorToken gerenciadorToken, TipoToken tokenEsperado){
     	
-    	if(verificarToken(gerenciadorToken, tokenEsperado)){
-    		System.out.println("**** Consumindo token "+ gerenciadorToken.getTipoTokenAtual() +" na classe " + getNomeClasse() + ". Próximo token: " + gerenciadorToken.getProximoToken().getTipoToken());
-    		gerenciadorToken.consumirTokenAtual();
-    		return true;
-    	}
-    	else{
-    		System.out.println("\n	ERRO EM " + getNomeClasse() + "???? : ERA PRA VIM " + tokenEsperado + " MAS VEIO " + gerenciadorToken.getTipoTokenAtual() + "\n");
-    	}
-    	return false;
+		System.out.println("**** Consumindo token "+ gerenciadorToken.getTipoTokenAtual() +" na classe " + getNomeClasse() + ". Próximo token: " + gerenciadorToken.getProximoToken().getTipoToken());
+		gerenciadorToken.consumirTokenAtual();
+		return true;
     	
+    }
+    
+    /**
+     * Converte um tipo token em um array list. Esse método é último ao adicionar um erro passando um tipo de token específico
+     * @param token
+     * @return ArrayList<TipoToken> array list contendo 1 único elemento, que é o token passado para o método
+     */
+    protected ArrayList<TipoToken> convertTokenToArrayList(TipoToken token){
+    	ArrayList<TipoToken> lista = new ArrayList<TipoToken>();
+    	lista.add(token);
+    	return lista;
     }
 
 }

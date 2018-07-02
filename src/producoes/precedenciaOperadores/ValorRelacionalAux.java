@@ -23,20 +23,16 @@ public class ValorRelacionalAux extends RegraProducao {
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
 		if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_ADICAO)){
-			if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_ADICAO)) {
-				if (OpMult.getInstancia().analisar(gerenciadorToken)) {
-					if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
-						return true;
-					}
+			if (OpMult.getInstancia().analisar(gerenciadorToken)) {
+				if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
+					return true;
 				}
 			}
 		}
 		else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO)){
-			if (consumir(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_SUBTRACAO)) {
-				if (OpMult.getInstancia().analisar(gerenciadorToken)) {
-					if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
-						return true;
-					}
+			if (OpMult.getInstancia().analisar(gerenciadorToken)) {
+				if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
+					return true;
 				}
 			}
 		}

@@ -24,12 +24,9 @@ public class InstrucaoDeRetorno extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_RETURN)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_RETURN)) {
-                    if (InstrucaoDeRetornoAux.getInstancia().analisar(gerenciadorToken)) {
-                        return true;
-                    }
+                if (InstrucaoDeRetornoAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
                 }
-
             }
         }
 

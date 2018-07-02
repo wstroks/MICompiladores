@@ -24,17 +24,11 @@ public class Parametro extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
             if (Tipo.getInstancia().analisar(gerenciadorToken)) {
-
                 if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                        return true;
-                    }
-
+                    return true;
                 }
             }
-
         }
 
         return false;

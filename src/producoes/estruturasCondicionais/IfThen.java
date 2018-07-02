@@ -26,32 +26,18 @@ public class IfThen extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_IF)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_IF)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                            if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                                //System.out.println("fada se\n\n\n");
-                                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                                        if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_THEN)) {
-                                            if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_THEN)) {
-                                                if (Bloco.getInstancia().analisar(gerenciadorToken)) {
-                                                    return true;
-                                                }
-                                                //gerenciadorToken.goBack(getNomeClasse());
-                                            }
-                                            //gerenciadorToken.goBack(getNomeClasse());
-                                        }
-                                        // gerenciadorToken.goBack(getNomeClasse());
-                                    }
-                                    //gerenciadorToken.goBack(getNomeClasse());
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
+                    if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                        // System.out.println("fada se\n\n\n");
+                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
+                            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_THEN)) {
+                                if (Bloco.getInstancia().analisar(gerenciadorToken)) {
+                                    return true;
                                 }
-                                //gerenciadorToken.goBack(getNomeClasse());
                             }
                         }
                     }
                 }
-
             }
         }
 

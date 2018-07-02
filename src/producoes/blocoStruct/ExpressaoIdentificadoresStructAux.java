@@ -25,17 +25,13 @@ public class ExpressaoIdentificadoresStructAux extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
 
-                    if (ExpressaoIdentificadoresStruct.getInstancia().analisar(gerenciadorToken)) {
-                        return true;
-                    }
+                if (ExpressaoIdentificadoresStruct.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
                 }
 
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)){
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
                 return true;
-                }
             }
 
         }
@@ -46,7 +42,7 @@ public class ExpressaoIdentificadoresStructAux extends RegraProducao {
 
     @Override
     protected void gerarFirst() {
-        //  ‘,’ , ;
+        // ‘,’ , ;
         first.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
         first.add(TipoToken.DELIMITADOR_VIRGULA);
     }

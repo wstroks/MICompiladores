@@ -21,30 +21,26 @@ public class OperacaoDeAtribuicao extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE) {
+            if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO
+                    || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE) {
                 if (Final.getInstancia().analisar(gerenciadorToken)) {
                     if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
-                        if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
-                            if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                                // System.out.println("sasuke3 \n");
-                                return true;
-                            }
+                        if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                            // System.out.println("sasuke3 \n");
+                            return true;
                         }
                     }
                 }
-            } else if (gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR && gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO) {
-                //System.out.println("sasuke23 \n");
-                //if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO) {
+            } else if (gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR
+                    && gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO) {
+                // System.out.println("sasuke23 \n");
+                // if (gerenciadorToken.getProximoToken().getTipoToken() ==
+                // TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO) {
                 if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                    if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                        if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
-                            if (consumir(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
-                                if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                                    //System.out.println("sasuke5 \n");
-                                    return true;
-                                }
-                                //}
-                            }
+                    if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO)) {
+                        if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                            // System.out.println("sasuke5 \n");
+                            return true;
                         }
                     }
                 }

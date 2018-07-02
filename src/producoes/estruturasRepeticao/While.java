@@ -23,25 +23,14 @@ public class While extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_WHILE)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_WHILE)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES)) {
-                            if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES)) {
-                                        if (Bloco.getInstancia().analisar(gerenciadorToken)) {
-                                            return true;
-                                        }
-                                        //gerenciadorToken.goBack(getNomeClasse());
-                                    }
-                                    //gerenciadorToken.goBack(getNomeClasse());
-                                }
-                                //gerenciadorToken.goBack(getNomeClasse());
+            if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_WHILE, false)) {
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
+                    if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
+                            if (Bloco.getInstancia().analisar(gerenciadorToken)) {
+                                return true;
                             }
-                            //gerenciadorToken.goBack(getNomeClasse());
                         }
-
                     }
                 }
             }
@@ -59,8 +48,9 @@ public class While extends RegraProducao {
 
     @Override
     protected void gerarFollow() {
-        //--, !, ( , ++, CadeiaDeCaracter, Digitos, false, identificador, print, return , scan, struct,true, typdef,
-        //var,while, } 
+        // --, !, ( , ++, CadeiaDeCaracter, Digitos, false, identificador, print, return
+        // , scan, struct,true, typdef,
+        // var,while, }
         follow.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         follow.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
         follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);

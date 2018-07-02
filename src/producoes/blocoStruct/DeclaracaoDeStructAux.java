@@ -24,39 +24,24 @@ public class DeclaracaoDeStructAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-                if (consumir(gerenciadorToken, TipoToken.IDENTIFICADOR)) {
-
-                    if (Extends.getInstancia().analisar(gerenciadorToken)) {
-
-                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                            if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                                if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-                                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                                            return true;
-                                        }
-                                    }
-                                }
+                if (Extends.getInstancia().analisar(gerenciadorToken)) {
+                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                        if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+                            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                                return true;
                             }
                         }
                     }
                 }
-
             } else if (Extends.getInstancia().analisar(gerenciadorToken)) {
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                        if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
-                            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                                    return true;
-                                }
-                            }
+                    if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
+                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                            return true;
                         }
-
                     }
                 }
             }
-
         }
 
         return false;
@@ -73,7 +58,8 @@ public class DeclaracaoDeStructAux extends RegraProducao {
 
     @Override
     protected void gerarFollow() {
-        //const, function, procedure, start, struct, typedef, var, $ ,; , [, Identificador
+        // const, function, procedure, start, struct, typedef, var, $ ,; , [,
+        // Identificador
         follow.add(TipoToken.IDENTIFICADOR);
         follow.add(TipoToken.PALAVRA_RESERVADA_CONST);
         follow.add(TipoToken.PALAVRA_RESERVADA_FUNCTION);

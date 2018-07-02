@@ -22,20 +22,18 @@ public class DeclaracaoDeVar extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_VAR)) {
-				if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+			if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_VAR, false)) {
+				if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE, true)) {
 					if ((DeclaracaoDeVariavelCorpo.getInstancia().analisar(gerenciadorToken))) {
 						return true;
 					} else {
-						if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+						if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, true)) {
 							return true;
 						}
 					}
-					gerenciadorToken.goBack(getNomeClasse());
 				}
-				gerenciadorToken.goBack(getNomeClasse());
 			}
-
+			
 		}
 
 		return false;

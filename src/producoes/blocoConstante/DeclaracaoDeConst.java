@@ -22,22 +22,14 @@ public class DeclaracaoDeConst extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_CONST)) {
-                if (consumir(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_CONST)) {
-                    if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                        if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                            if (DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)) {
-                                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                                    if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
-                                        return true;
-                                    }
-                                }
-                            }
+                if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
+                    if (DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)) {
+                        if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE)) {
+                            return true;
                         }
                     }
                 }
             }
-
-            //return true;
         }
 
         return false;

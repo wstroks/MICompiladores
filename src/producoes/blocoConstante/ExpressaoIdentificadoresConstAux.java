@@ -24,16 +24,10 @@ public class ExpressaoIdentificadoresConstAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA)) {
-                    return true;
-                }
+                return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA)) {
-
-                    if (ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {
-                        return true;
-                    }
-
+                if (ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
                 }
             }
 

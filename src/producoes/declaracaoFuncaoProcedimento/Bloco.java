@@ -21,12 +21,9 @@ public class Bloco extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                if (consumir(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE)) {
-                    if (BlocoAux.getInstancia().analisar(gerenciadorToken)) {
-                        return true;
-                    }
-                    //gerenciadorToken.goBack(getNomeClasse());
+            if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE, false)) {
+                if (BlocoAux.getInstancia().analisar(gerenciadorToken)) {
+                    return true;
                 }
             }
 
