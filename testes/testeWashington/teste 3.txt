@@ -1,0 +1,9 @@
+start() {
+    while(true) {
+	print(asdasda);
+    }
+	
+while(false) {
+	print(asdasda);
+    }
+}

@@ -1,0 +1,20 @@
+start( ) {
+    var{
+        int idade; 
+        float salario;
+        string nome;
+    }
+        print("Digite o nome");
+        scan(nome);
+        print("Digite a idade");
+        scan(idade);
+        
+        if (idade >= 150)then{
+         print("pode aposentar kkkk");
+        }else {
+            print("vai trabalhar");
+            salario = salario; 
+        }
+              
+    
+} 

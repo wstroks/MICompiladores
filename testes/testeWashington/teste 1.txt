@@ -1,0 +1,11 @@
+start(){
+
+	var{
+
+	Pessoa[] a;
+	X[][] a;
+
+	}
+
+x[a][v]=b;
+}
