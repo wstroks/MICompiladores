@@ -27,7 +27,8 @@ public class Acesso extends RegraProducao {
                 if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, true)) {
                     return true;
                 }
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE, false)) {
+            } 
+            else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE, false)) {
                 if (Expressao.getInstancia().analisar(gerenciadorToken)) {
                     if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE, true)) {
                         return true;

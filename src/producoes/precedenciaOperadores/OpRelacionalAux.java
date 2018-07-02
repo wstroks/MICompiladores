@@ -27,8 +27,8 @@ public class OpRelacionalAux extends RegraProducao {
 				return true;
 			}
 		}
-		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
-			return true;
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
 
 		return false;

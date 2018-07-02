@@ -26,11 +26,9 @@ public class InstrucaoDeRetornoAux extends RegraProducao {
 		if(Expressao.getInstancia().analisar(gerenciadorToken)){
 			return true;
 		}
-		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
-			return true;
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
-
-		return false;
 
 	}
 

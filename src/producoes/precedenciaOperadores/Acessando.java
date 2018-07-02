@@ -26,18 +26,11 @@ public class Acessando extends RegraProducao {
 
 			if (Acesso.getInstancia().analisar(gerenciadorToken)) {
 				return true;
-			} else if (AcessandoAux.getInstancia().analisar(gerenciadorToken)) {
-				// gerenciadorToken.goBack();
+			} 
+			else if (AcessandoAux.getInstancia().analisar(gerenciadorToken)) {
 				return true;
 			}
-			// return false;
 		} 
-		else{
-			return verificarSimboloVazio(gerenciadorToken, true);
-		}
-		// else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
-		// 	return true;
-		// }
 		
 		return false;
 

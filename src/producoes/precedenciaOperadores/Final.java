@@ -28,14 +28,7 @@ public class Final extends RegraProducao {
                     return true;
                 }
             }
-            //return false;
         } 
-        else{
-			return verificarSimboloVazio(gerenciadorToken, true);
-		}
-        // else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
-        //     return true;
-        // }
         
         return false;
 

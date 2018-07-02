@@ -28,11 +28,9 @@ public class SimboloUnario extends RegraProducao {
     	else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, false)){
     		return true;
     	}
-		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
-			return true;
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
-    	
-    	return false;
 
     }
 

@@ -23,8 +23,8 @@ public class TipoAux extends RegraProducao {
 		if (TipoVetorDeclarando.getInstancia().analisar(gerenciadorToken)) {
 			return true;
 		}
-		else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
-			return true;
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
 
 		return false;

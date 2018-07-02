@@ -23,11 +23,9 @@ public class ProgramaAux extends RegraProducao {
         if(Programa.getInstancia().analisar(gerenciadorToken)){
             return true;
         }
-        else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
-			return true;
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
-
-        return false;
 
     }
 

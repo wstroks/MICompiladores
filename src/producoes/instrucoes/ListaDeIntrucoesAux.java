@@ -25,8 +25,8 @@ public class ListaDeIntrucoesAux extends RegraProducao {
 		if(ListaDeIntrucoes.getInstancia().isFirst(gerenciadorToken.getTipoTokenAtual())){
 			return ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken);
         }
-        else if(isFollow(gerenciadorToken.getTipoTokenAtual())){
-			return true;
+        else{
+			return verificarSimboloVazio(gerenciadorToken, true);
 		}
 
 		return false;

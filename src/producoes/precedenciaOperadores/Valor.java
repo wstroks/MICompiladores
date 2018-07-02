@@ -44,12 +44,6 @@ public class Valor extends RegraProducao {
             }
 
         }
-        else{
-			return verificarSimboloVazio(gerenciadorToken, true);
-		} 
-        // else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
-        //     return true;
-        // }
         
         return false;
     }

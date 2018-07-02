@@ -59,9 +59,9 @@ public abstract class RegraProducao {
      */
     public boolean isFirst(TipoToken tipoToken) {
     	//System.out.println("\n\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "? " + first.contains(tipoToken));
-    	if(first.contains(tipoToken)){
-    		System.out.println("\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "\n");
-    	}
+//    	if(first.contains(tipoToken)){
+//    		System.out.println("\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "\n");
+//    	}
         return first.contains(tipoToken);
     }
 
@@ -100,7 +100,7 @@ public abstract class RegraProducao {
     	if(tipoToken == gerenciadorToken.getTipoTokenAtual()){
     		consumir(gerenciadorToken, tipoToken);
     		return true;
-    	}
+        }
     	else{
     		if(addErro){
     			gerenciadorToken.addErro(getNomeClasse(), convertTokenToArrayList(tipoToken));
@@ -119,7 +119,7 @@ public abstract class RegraProducao {
      */
     protected boolean consumir(GerenciadorToken gt, TipoToken tokenEsperado){
     	
-		System.out.println("**** Consumindo token "+ gt.getTipoTokenAtual() + " ("  + gt.getTokenAtual().getLexema() + ") na classe " + getNomeClasse() + ". Próximo token: " + gt.getProximoToken().getTipoToken());
+		System.out.println("\n**** Consumindo token "+ gt.getTipoTokenAtual() + " ("  + gt.getTokenAtual().getLexema() + ") na classe " + getNomeClasse() + ". Próximo token: " + gt.getProximoToken().getTipoToken() + "\n");
 		gt.consumirTokenAtual();
 		return true;
     	
