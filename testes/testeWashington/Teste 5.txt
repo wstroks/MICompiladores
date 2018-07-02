@@ -1,0 +1,14 @@
+start( ) {
+    
+        
+      var{
+      int [][]a;
+      int sad=50,a=10;
+      string x="heheh";
+      float s= 1.00000005554545;
+      }
+              
+    a=-1;
+    b=-1.555;
+    a.a.a=a[1][2];
+} 

@@ -1,0 +1,8 @@
+start() {
+    while(!asdasd && !asdasd || asds>=0) {
+	print(asdasda);
+    }
+	
+
+    
+}

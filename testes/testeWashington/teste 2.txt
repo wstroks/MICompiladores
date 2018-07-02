@@ -1,0 +1,12 @@
+tart(){
+
+    var{
+
+    Pessoa[] a;
+    X[][] a;
+
+    }
+
+x[a][v]=b;
+x[a][s][as][sa]=b.b.a.a;
+}

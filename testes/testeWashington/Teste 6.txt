@@ -1,0 +1,28 @@
+function int nomeDaFuncao (int parametroUm, float parametroDois) {
+    a=a+a;
+    a[2][b]=asd;
+    a=asdasd.as.asd;
+    a="ashduadhaus";
+    asdasd=a+a*(asdasd/2);
+    return 1;
+}
+
+procedure nomeDoProcedimento () {
+    nomeDaFuncao();
+    algumaOutraVariavel = nomeDaFuncao(parametroDois, parametroUm,dasdas,sdasd,121,a[1]);
+}
+
+start( ) {
+    
+       nomeDoProcedimento(); 
+      var{
+      int [][]a;
+      int sad=50,a=10;
+      string x="heheh";
+      float s= 1.00000005554545;
+      }
+              
+    a=-1;
+    b=-1.555;
+    a.a.a=a[1][2];
+} 

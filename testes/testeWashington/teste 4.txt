@@ -1,0 +1,4 @@
+start(){
+
+ print("asdasdas","asdasda",1,dsadasd,v[1][2][2]);
+}
