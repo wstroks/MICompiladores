@@ -66,18 +66,9 @@ public class GerenciadorToken {
      * @return o token atual
      */
     public Token consumirTokenAtual() {
-        //System.out.println("Token consumido: " + listaTokens.get(contTokenAtual).getTipoToken());
     	contTokenAtual++;
-        System.out.println("Quantidade de tokens restantes: " + getQtdTokensRestantes());
+        //System.out.println("Quantidade de tokens restantes: " + getQtdTokensRestantes());
         return listaTokens.get(contTokenAtual);
-    }
-
-    /**
-     * Volta um token
-     */
-    public void goBack(String nomeClasse) {
-        //contTokenAtual--;
-        //System.out.println("-> "+nomeClasse+": Go back. Token atual: " + getTipoTokenAtual() + " | Quantidade de tokens restantes: " + getQtdTokensRestantes());
     }
     
     public void stepBack(boolean removerUltimoErro){
@@ -104,7 +95,7 @@ public class GerenciadorToken {
         
         Erro erro = new Erro(tokensEsperados, listaTokens.get(contTokenAtual), tokenAnterior);
         listaErros.add(erro);
-        System.out.println("\n!!!!! Erro na regra <" + nomeProducao + ">. Token recebido: " + getTipoTokenAtual() + ". Tokens esperados: " + erro.getStringTokensEsperados() + "\n");
+        //System.out.println("\n!!!!! Erro na regra <" + nomeProducao + ">. Token recebido: " + getTipoTokenAtual() + ". Tokens esperados: " + erro.getStringTokensEsperados() + "\n");
     }
 
     public boolean eof() {
@@ -115,26 +106,19 @@ public class GerenciadorToken {
         return new Token(TipoToken.EOF, "$", 0, 0);
     }
 
-    /*
-    
-    não sei ao certo o erro, mas as vezes ele adiciona na lista de erro .. tokens que ja foram consumidos
-    ae armenguei aque kkkk 
-     */
     public void printErros() {
 
         System.out.print("\n");
         if (listaErros.isEmpty()) {
             System.out.println("Nenhum erro sintático foi encontrado");
         }
-
-       /* if (contTokenAtual == listaTokens.size()) {
-            System.out.println("Nenhum erro sintático foi encontrado");
-        }*/ else {
+        else {
+        	System.out.println("Erro de sintaxe: ");
             for (Erro erro : listaErros) {
             	int linha = erro.getTokenEncontrado().getLinha() + 1;
             	int posicao = erro.getTokenEncontrado().getPosicao();
             	String lexema = erro.getTokenEncontrado().getLexema();
-                System.out.println("Token inválido \"" + lexema + "\" na linha " + linha + ". Eram esperados os seguintes tokens: " + erro.getStringTokensEsperados());
+                System.out.println("Token inválido \"" + lexema + "\" na linha " + linha + " posição " + posicao + ". Eram esperados os seguintes tokens: " + erro.getStringTokensEsperados());
             }
         }
 
