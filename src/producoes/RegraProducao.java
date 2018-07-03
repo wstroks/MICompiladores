@@ -58,7 +58,7 @@ public abstract class RegraProducao {
      * @return true se sim, falso caso contrario
      */
     public boolean isFirst(TipoToken tipoToken) {
-    	//System.out.println("\n\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "? " + first.contains(tipoToken));
+    	System.out.println("\n\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "? " + first.contains(tipoToken));
 //    	if(first.contains(tipoToken)){
 //    		System.out.println("\n" + tipoToken + " isFirst de " + this.getClass().getSimpleName() + "\n");
 //    	}

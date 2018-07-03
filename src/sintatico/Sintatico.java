@@ -26,10 +26,12 @@ public class Sintatico {
 		
 		GerenciadorToken gerenciadorToken = new GerenciadorToken(listaTokens);
 		
-		//while(!gerenciadorToken.eof()){
+		if(Programa.getInstancia().isFirst(gerenciadorToken.getTipoTokenAtual())){
 			Programa.getInstancia().analisar(gerenciadorToken);
-			//System.out.print("Qtd de tokens restantes: " + gerenciadorToken.getQtdTokensRestantes());
-		//}
+		}
+        else{
+        	gerenciadorToken.addErro("<Programa>", Programa.getInstancia().getFirst());
+        }
 		
 		gerenciadorToken.printErros();
 		

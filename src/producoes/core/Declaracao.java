@@ -40,9 +40,7 @@ public class Declaracao extends RegraProducao {
                 return true;
             } else if (DeclaracaoDeTypedef.getInstancia().analisar(gerenciadorToken)) {
                 return true;
-            } 
-
-            //return true;
+            }
 
         }
         

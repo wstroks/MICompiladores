@@ -27,8 +27,6 @@ public class TipoAux extends RegraProducao {
 			return verificarSimboloVazio(gerenciadorToken, true);
 		}
 
-		return false;
-
 	}
 
 	@Override

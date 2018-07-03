@@ -29,8 +29,6 @@ public class ListaDeIntrucoesAux extends RegraProducao {
 			return verificarSimboloVazio(gerenciadorToken, true);
 		}
 
-		return false;
-
     }
 
     @Override

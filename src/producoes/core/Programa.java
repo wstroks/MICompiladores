@@ -20,14 +20,14 @@ public class Programa extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 		
-		while(!gerenciadorToken.eof() && isFirst(gerenciadorToken.getTokenAtual().getTipoToken())){
+		if(isFirst(gerenciadorToken.getTipoTokenAtual())){
 			if (Declaracao.getInstancia().analisar(gerenciadorToken)) {
 				if (ProgramaAux.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
 			}
 		}
-
+		
 		return false;
 	}
 
