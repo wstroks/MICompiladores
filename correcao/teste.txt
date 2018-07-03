@@ -1,1 +1,6 @@
-" string \"fechada\""
+start (){
+     if (a==b) then {
+        print ("teste");
+    }else {
+        print ("teste 2");
+}

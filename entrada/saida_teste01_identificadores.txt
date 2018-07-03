@@ -1,29 +1,3 @@
-3 PRE start
-3 IDE principal
-3 DEL (
-3 DEL )
-4 DEL {
-5 PRE int
-5 IDE cont
-5 IDE dor
-5 DEL ;
-6 IDE x
-6 DEL ;
-8 IDE salario
-8 IDE mes
-8 DEL ;
-10 IDE flag_
-10 NRO 1
-10 DEL ,
-10 IDE flag2
-10 IDE flag_3_
-10 DEL ;
-12 IDE uefs_123
+Foram encontrados os seguintes erros sintáticos: 
+Token inválido "principal" na linha 3. Eram esperados os seguintes tokens: DELIMITADOR_ABRE_PARENTESES
 
-
-Erros léxicos: 
-5 @ CARACTERE_NAO_RECONHECIDO
-6 _ CARACTERE_NAO_RECONHECIDO
-8 $ CARACTERE_NAO_RECONHECIDO
-10 # CARACTERE_NAO_RECONHECIDO
-10 # CARACTERE_NAO_RECONHECIDO

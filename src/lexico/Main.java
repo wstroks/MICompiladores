@@ -17,7 +17,7 @@ public class Main {
         try {
            
         	testarArquivosDiretorio("entrada");
-        	//testarArquivo("arquivos/teste.txt");
+        	//testarArquivo("entrada/teste08_sem_erros.txt");
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -47,7 +47,7 @@ public class Main {
         lexico.run();
         lexico.printTokens();
         
-        Sintatico sintatico = new Sintatico(lexico.getListaTokens());
+        Sintatico sintatico = new Sintatico(lexico.getListaTokens(false));
       
         
         try {
@@ -60,7 +60,8 @@ public class Main {
         	else if(aux.length == 1){
         		output = "saida_" + aux[0].replace(".txt", "");
         	}
-        	  sintatico.run(output);
+        	
+        	sintatico.run(output);
         	       	//System.out.println("\nArquivo gerado com sucesso");
        	
 		} catch (Exception e) {

@@ -35,7 +35,7 @@ public class Sintatico {
         }
 		
 		gerenciadorToken.printErros();
-                gerenciadorToken.printErroToFile(b);
+        gerenciadorToken.printErroToFile(b);
 		
 	}
 	

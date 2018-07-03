@@ -33,9 +33,9 @@ public class GerenciadorToken {
      * Imprime a lista de tokens
      */
     public void printTokens() {
-        System.out.println("Tokens: ");
+        //System.out.println("TOKENS QUE SERÃO ANALISADOS PELO LÉXICO: ");
         for (Token token : listaTokens) {
-            System.out.println(token);
+            System.out.println(token.getImpressaoToken());
         }
     }
 
@@ -116,7 +116,7 @@ public class GerenciadorToken {
             System.out.println("Nenhum erro sintático foi encontrado");
         }
         else {
-        	System.out.println("Erro de sintaxe: ");
+        	System.out.println("Foram encontrados os seguintes erros sintáticos: ");
             for (Erro erro : listaErros) {
             	int linha = erro.getTokenEncontrado().getLinha() + 1;
             	int posicao = erro.getTokenEncontrado().getPosicao();
@@ -135,14 +135,13 @@ public class GerenciadorToken {
         if (listaErros.isEmpty()) {
             writer.println("Nenhum erro foi encontrado");
         } else {
-            writer.println("Erros léxicos: ");
+            writer.println("Foram encontrados os seguintes erros sintáticos: ");
             for (Erro erro : listaErros) {
                 int linha = erro.getTokenEncontrado().getLinha() + 1;
                 int posicao = erro.getTokenEncontrado().getPosicao();
                 String lexema = erro.getTokenEncontrado().getLexema();
                 writer.println("Token inválido \"" + lexema + "\" na linha " + linha + ". Eram esperados os seguintes tokens: " + erro.getStringTokensEsperados()+"\n");
-                //writer.println("Linha "+erro.getTokenEncontrado().getLinha() +"  Token inválido: " + erro.getTokenEncontrado().getLexema() + ". Era esperado: " + erro.getStringTokensEsperados());
-            }
+                }
         }
 
         arquivo.close();

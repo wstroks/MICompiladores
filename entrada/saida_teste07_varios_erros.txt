@@ -1,20 +1,3 @@
-3 PRE float
-3 NRO 33
-3 DEL .
-3 NRO 33
-3 DEL ;
-5 PRE string
-5 IDE mens
-5 IDE gem_1
-7 NRO 123
-7 DEL .
-7 NRO 45
+Foram encontrados os seguintes erros sintáticos: 
+Token inválido "float" na linha 3. Eram esperados os seguintes tokens: PALAVRA_RESERVADA_CONST, PALAVRA_RESERVADA_FUNCTION, PALAVRA_RESERVADA_PROCEDURE, PALAVRA_RESERVADA_START, PALAVRA_RESERVADA_STRUCT, PALAVRA_RESERVADA_TYPEDEF, PALAVRA_RESERVADA_VAR
 
-
-Erros léxicos: 
-3 # CARACTERE_NAO_RECONHECIDO
-5 @ CARACTERE_NAO_RECONHECIDO
-7 # CARACTERE_NAO_RECONHECIDO
-9 "erro na cadeia. falta fecha aspas CADEIA_CARACTERES_MAL_FORMADA
-12 /* nao fechou // 
-comentario // COMENTARIO_MAL_FORMADO

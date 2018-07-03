@@ -307,8 +307,21 @@ public class Lexico {
 
 	}
 
-	public List<Token> getListaTokens() {
-		return listaTokens;
+	public List<Token> getListaTokens(boolean todos) {
+		if(todos){
+			return listaTokens;
+		}
+		else{
+			List<Token> tokens = new ArrayList<Token>();
+			for (Token token : listaTokens) {
+				if(token.getTipoToken() == TipoToken.COMENTARIO_LINHA || token.getTipoToken() == TipoToken.COMENTARIO_BLOCO){
+					continue;
+				}
+				tokens.add(token);
+			}
+			return tokens;
+		}
+		
 	}
 
 	public List<Token> getListaErros() {
