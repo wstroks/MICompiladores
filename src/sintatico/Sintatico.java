@@ -3,6 +3,7 @@
  */
 package sintatico;
 
+import java.io.IOException;
 import java.util.List;
 
 import lexico.Token;
@@ -20,7 +21,7 @@ public class Sintatico {
 		this.listaTokens = listaTokens;
 	}
 	
-	public void run(){
+	public void run(String b) throws IOException{
 		
 		System.out.println("\n===================== Análise sintática ===================");
 		
@@ -34,6 +35,7 @@ public class Sintatico {
         }
 		
 		gerenciadorToken.printErros();
+                gerenciadorToken.printErroToFile(b);
 		
 	}
 	

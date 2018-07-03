@@ -3,6 +3,9 @@
  */
 package sintatico;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,6 +124,28 @@ public class GerenciadorToken {
                 System.out.println("Token inválido \"" + lexema + "\" na linha " + linha + " posição " + posicao + ". Eram esperados os seguintes tokens: " + erro.getStringTokensEsperados());
             }
         }
+
+    }
+    public void printErroToFile(String output) throws IOException {
+
+        FileWriter arquivo = new FileWriter(output + ".txt");
+        PrintWriter writer = new PrintWriter(arquivo);
+
+        //writer.println("\n");
+        if (listaErros.isEmpty()) {
+            writer.println("Nenhum erro foi encontrado");
+        } else {
+            writer.println("Erros léxicos: ");
+            for (Erro erro : listaErros) {
+                int linha = erro.getTokenEncontrado().getLinha() + 1;
+                int posicao = erro.getTokenEncontrado().getPosicao();
+                String lexema = erro.getTokenEncontrado().getLexema();
+                writer.println("Token inválido \"" + lexema + "\" na linha " + linha + ". Eram esperados os seguintes tokens: " + erro.getStringTokensEsperados()+"\n");
+                //writer.println("Linha "+erro.getTokenEncontrado().getLinha() +"  Token inválido: " + erro.getTokenEncontrado().getLexema() + ". Era esperado: " + erro.getStringTokensEsperados());
+            }
+        }
+
+        arquivo.close();
 
     }
     
