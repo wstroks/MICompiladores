@@ -22,7 +22,7 @@ public class ParametrosFuncaoAux extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if(verificarToken(gerenciadorToken, gerenciadorToken.getTipoTokenAtual(), false)){
+		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA, false)){
 			if(ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
 				return true;
 			}

@@ -131,7 +131,10 @@ public class GerenciadorToken {
             System.out.println("Nenhum erro sintático foi encontrado");
         }*/ else {
             for (Erro erro : listaErros) {
-                System.out.println("Token inválido: " + erro.getTokenEncontrado().getLexema() + ". Era esperado: " + erro.getStringTokensEsperados());
+            	int linha = erro.getTokenEncontrado().getLinha() + 1;
+            	int posicao = erro.getTokenEncontrado().getPosicao();
+            	String lexema = erro.getTokenEncontrado().getLexema();
+                System.out.println("Token inválido \"" + lexema + "\" na linha " + linha + ". Eram esperados os seguintes tokens: " + erro.getStringTokensEsperados());
             }
         }
 

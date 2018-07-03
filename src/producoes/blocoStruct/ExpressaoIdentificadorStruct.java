@@ -26,7 +26,6 @@ public class ExpressaoIdentificadorStruct extends RegraProducao {
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 return true;
             }
-
         }
 
         return false;

@@ -25,14 +25,11 @@ public class TipoBase extends RegraProducao {
 
             if (Escalar.getInstancia().analisar(gerenciadorToken)) {
                 return true;
-            } // else if(DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)){
-              // return true;
-              // }
+            } 
             else if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT, false)) {
                 return true;
-
             }
         }
 

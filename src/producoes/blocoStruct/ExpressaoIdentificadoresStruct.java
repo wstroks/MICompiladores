@@ -24,15 +24,11 @@ public class ExpressaoIdentificadoresStruct extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (!ExpressaoIdentificadorStruct.getInstancia().analisar(gerenciadorToken)) {
-                return false;
+            if (ExpressaoIdentificadorStruct.getInstancia().analisar(gerenciadorToken)) {
+                if (ExpressaoIdentificadoresStructAux.getInstancia().analisar(gerenciadorToken)) {
+                    return false;
+                }
             }
-            
-            if (!ExpressaoIdentificadoresStructAux.getInstancia().analisar(gerenciadorToken)) {
-                return false;
-            }
-
-            return true;
 
         }
         

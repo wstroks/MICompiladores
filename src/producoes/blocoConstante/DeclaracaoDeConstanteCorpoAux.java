@@ -23,7 +23,7 @@ public class DeclaracaoDeConstanteCorpoAux extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (DeclaracaoDeConstanteCorpo.getInstancia().analisar(gerenciadorToken)) {
-            return false;
+            return true;
         }
         else{
 			return verificarSimboloVazio(gerenciadorToken, true);

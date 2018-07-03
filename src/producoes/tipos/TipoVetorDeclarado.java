@@ -25,7 +25,6 @@ public class TipoVetorDeclarado extends RegraProducao {
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE, true)) {
                     return true;
                 }
-
             }
         }
 

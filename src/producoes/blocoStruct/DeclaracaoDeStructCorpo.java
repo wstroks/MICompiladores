@@ -24,15 +24,11 @@ public class DeclaracaoDeStructCorpo extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!DeclaracaoDeStructLinha.getInstancia().analisar(gerenciadorToken)) {
-				return false;
+			if (DeclaracaoDeStructLinha.getInstancia().analisar(gerenciadorToken)) {
+				if (DeclaracaoDeStructCorpoAux.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
 			} 
-			
-			if (!DeclaracaoDeStructCorpoAux.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-
-			return true;
 
 		}
 		return false;

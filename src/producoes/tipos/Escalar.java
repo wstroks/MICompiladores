@@ -20,8 +20,6 @@ public class Escalar extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-        //System.out.println("Analisando <Escalar>");
-
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_INT, false)) {
                 return true;
@@ -32,7 +30,6 @@ public class Escalar extends RegraProducao {
             } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRING, false)) {
                 return true;
             }
-
         }
 
         return false;

@@ -22,17 +22,14 @@ public class DeclaracaoDeConstanteLinha extends RegraProducao {
 
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
+		
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!Tipo.getInstancia().analisar(gerenciadorToken)) {
-				return false;
+			if (Tipo.getInstancia().analisar(gerenciadorToken)) {
+				if (ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
 			}
-
-			if (!ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-
-			return true;
 
 		}
 

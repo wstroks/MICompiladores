@@ -8,7 +8,6 @@ package producoes.estruturasCondicionais;
 import lexico.TipoToken;
 import producoes.RegraProducao;
 import producoes.declaracaoFuncaoProcedimento.Bloco;
-import producoes.precedenciaOperadores.Expressao;
 import sintatico.GerenciadorToken;
 
 /**

@@ -22,8 +22,8 @@ public class ListaDeIntrucoesAux extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
         
-		if(ListaDeIntrucoes.getInstancia().isFirst(gerenciadorToken.getTipoTokenAtual())){
-			return ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken);
+		if(ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)){
+			return true;
         }
         else{
 			return verificarSimboloVazio(gerenciadorToken, true);

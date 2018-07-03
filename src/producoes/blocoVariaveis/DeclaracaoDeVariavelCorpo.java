@@ -24,15 +24,11 @@ public class DeclaracaoDeVariavelCorpo extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!DeclaracaoDeVariavelLinha.getInstancia().analisar(gerenciadorToken)) {
-				return false;
+			if (DeclaracaoDeVariavelLinha.getInstancia().analisar(gerenciadorToken)) {
+				if (DeclaracaoDeVariavelCorpoAux.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
 			}
-
-			if (!DeclaracaoDeVariavelCorpoAux.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-
-			return true;
 
 		}
 		

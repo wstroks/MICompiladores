@@ -1,3 +1,0 @@
-start () {
-    operacao[b][c] = outraCoisa[a];
-}

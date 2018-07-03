@@ -24,15 +24,11 @@ public class DeclaracaoDeConstanteCorpo extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!DeclaracaoDeConstanteLinha.getInstancia().analisar(gerenciadorToken)) {
-				return false;
+			if (DeclaracaoDeConstanteLinha.getInstancia().analisar(gerenciadorToken)) {
+				if (DeclaracaoDeConstanteCorpoAux.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
 			}
-
-			if (!DeclaracaoDeConstanteCorpoAux.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-
-			return true;
 
 		}
 		

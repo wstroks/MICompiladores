@@ -25,15 +25,11 @@ public class DeclaracaoDeStructLinha extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-			if (!Tipo.getInstancia().analisar(gerenciadorToken)) {
-				return false;
+			if (Tipo.getInstancia().analisar(gerenciadorToken)) {
+				if (ExpressaoIdentificadoresStruct.getInstancia().analisar(gerenciadorToken)) {
+					return true;
+				}
 			}
-
-			if (!ExpressaoIdentificadoresStruct.getInstancia().analisar(gerenciadorToken)) {
-				return false;
-			}
-
-			return true;
 
 		}
 

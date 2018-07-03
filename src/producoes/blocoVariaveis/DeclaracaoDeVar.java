@@ -24,9 +24,7 @@ public class DeclaracaoDeVar extends RegraProducao {
 
 			if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_VAR, false)) {
 				if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE, true)) {
-					if ((DeclaracaoDeVariavelCorpo.getInstancia().analisar(gerenciadorToken))) {
-						return true;
-					} else {
+					if (DeclaracaoDeVariavelCorpo.getInstancia().analisar(gerenciadorToken)) {
 						if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, true)) {
 							return true;
 						}

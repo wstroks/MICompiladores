@@ -22,14 +22,14 @@ public class OpUnary extends RegraProducao {
 	@Override
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
+		if (isFirst(gerenciadorToken.getTipoTokenAtual())) {
 
 			if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO, false)){
 				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
 			}
-			else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO, false)){
+			else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO, false)){
 				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
@@ -38,21 +38,17 @@ public class OpUnary extends RegraProducao {
 				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
-			}	
-			else if(gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.IDENTIFICADOR || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.CADEIA_CARACTERES || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.NUMERO||gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.DELIMITADOR_ABRE_PARENTESES  || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.PALAVRA_RESERVADA_FALSE || gerenciadorToken.getTokenAtual().getTipoToken() == TipoToken.PALAVRA_RESERVADA_TRUE ){
-				if(gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE){
-					if (Final.getInstancia().analisar(gerenciadorToken)) {
-						if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
-							return true;
-						}
+			}
+			else if(gerenciadorToken.getTipoTokenAtual() == TipoToken.IDENTIFICADOR && (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO) ){
+				if (Final.getInstancia().analisar(gerenciadorToken)) {
+					if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
+						return true;
 					}
 				}
-				else{
-					if (Valor.getInstancia().analisar(gerenciadorToken)) {
-						if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
-							return true;
-						}
-					}
+			}	
+			else if (Valor.getInstancia().analisar(gerenciadorToken)) {
+				if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
+					return true;
 				}
 			}
 

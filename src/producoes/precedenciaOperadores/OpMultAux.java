@@ -24,13 +24,13 @@ public class OpMultAux extends RegraProducao {
 
         if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_MULTIPLICACAO, false)) {
             if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
-                if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
+                if (OpMultAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
             }
         } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DIVISAO, false)) {
             if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
-                if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
+                if (OpMultAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
             }

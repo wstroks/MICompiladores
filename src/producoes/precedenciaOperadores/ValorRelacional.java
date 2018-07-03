@@ -23,23 +23,12 @@ public class ValorRelacional extends RegraProducao {
 	public boolean analisar(GerenciadorToken gerenciadorToken) {
 
 		if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
 			if (OpMult.getInstancia().analisar(gerenciadorToken)) {
-
 				if (ValorRelacionalAux.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
-
 			}
-			// return false;
-
 		} 
-		else{
-			return verificarSimboloVazio(gerenciadorToken, true);
-		}
-		// else if (isFollow(gerenciadorToken.getTokenAtual().getTipoToken())) {
-		// 	return true;
-		// }
 		
 		return false;
 	}

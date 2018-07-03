@@ -28,7 +28,6 @@ public class TipoVetorDeclarando extends RegraProducao {
 				}
 			}
                         
-
 		}
 
 		return false;
