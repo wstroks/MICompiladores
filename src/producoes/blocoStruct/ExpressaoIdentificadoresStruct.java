@@ -26,7 +26,7 @@ public class ExpressaoIdentificadoresStruct extends RegraProducao {
 
             if (ExpressaoIdentificadorStruct.getInstancia().analisar(gerenciadorToken)) {
                 if (ExpressaoIdentificadoresStructAux.getInstancia().analisar(gerenciadorToken)) {
-                    return false;
+                    return true;
                 }
             }
 

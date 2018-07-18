@@ -33,6 +33,7 @@ public class InstrucaoNormal extends RegraProducao {
                     return true;
                 }
             } else if (DeclaracaoDeStruct.getInstancia().analisar(gerenciadorToken)) {
+                System.out.println("\n\n asuhauhsua");
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA, true)) {
                     return true;
                 }
@@ -93,6 +94,7 @@ public class InstrucaoNormal extends RegraProducao {
         follow.add(TipoToken.PALAVRA_RESERVADA_WHILE);
         follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
         follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+        follow.add(TipoToken.PALAVRA_RESERVADA_IF);
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
     }
 

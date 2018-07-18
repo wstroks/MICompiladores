@@ -64,6 +64,7 @@ public class EstruturaCondicionalAux extends RegraProducao {
         follow.add(TipoToken.PALAVRA_RESERVADA_VAR);
         follow.add(TipoToken.PALAVRA_RESERVADA_WHILE);
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+        follow.add(TipoToken.PALAVRA_RESERVADA_IF);
     }
 
 }

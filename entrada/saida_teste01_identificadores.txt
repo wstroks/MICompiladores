@@ -1,3 +1,0 @@
-Foram encontrados os seguintes erros sintáticos: 
-Token inválido "principal" na linha 3. Eram esperados os seguintes tokens: DELIMITADOR_ABRE_PARENTESES
-

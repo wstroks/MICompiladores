@@ -39,14 +39,16 @@ public class OpUnary extends RegraProducao {
 					return true;
 				}
 			}
-			else if(gerenciadorToken.getTipoTokenAtual() == TipoToken.IDENTIFICADOR && (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO) ){
-				if (Final.getInstancia().analisar(gerenciadorToken)) {
+			else if(gerenciadorToken.getTipoTokenAtual() == TipoToken.IDENTIFICADOR && (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO ) ){
+                            System.out.println("narutando \n");
+                            if (Final.getInstancia().analisar(gerenciadorToken)) {
 					if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
 						return true;
 					}
 				}
 			}	
 			else if (Valor.getInstancia().analisar(gerenciadorToken)) {
+                             System.out.println("narutando 123 \n");
 				if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}

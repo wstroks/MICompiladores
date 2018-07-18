@@ -20,7 +20,7 @@ public class OperacaoDeAtribuicao extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
     	
-    	if(gerenciadorToken.getTipoTokenAtual() == TipoToken.IDENTIFICADOR){
+    	if(gerenciadorToken.getTipoTokenAtual() == TipoToken.IDENTIFICADOR && (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO  ||gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE )){
     		
     		if(gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO){
     			if(verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)){

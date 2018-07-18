@@ -90,6 +90,7 @@ public class Instrucao extends RegraProducao {
         follow.add(TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO);
         follow.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
         follow.add(TipoToken.DELIMITADOR_FECHA_CHAVE);
+        follow.add(TipoToken.PALAVRA_RESERVADA_IF);
     }
 
 }

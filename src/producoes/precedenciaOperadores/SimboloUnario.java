@@ -21,7 +21,7 @@ public class SimboloUnario extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-        	
+        	System.out.println("ENTROU AQUE HEHEHEHEHE \n");
     	if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO, false)){
     		return true;
     	}

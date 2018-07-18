@@ -43,6 +43,7 @@ public class ExpressaoIdentificadorStruct extends RegraProducao {
         // ',’ , ;
         follow.add(TipoToken.DELIMITADOR_VIRGULA);
         follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+       
     }
 
 }

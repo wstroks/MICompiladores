@@ -28,7 +28,8 @@ public class BlocoAux extends RegraProducao {
                     return true;
                 }
 
-            } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, false)) {
+            }//mudei false para true
+            else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, false)) {
                 return true;
             }
 

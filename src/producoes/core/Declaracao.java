@@ -57,6 +57,8 @@ public class Declaracao extends RegraProducao {
         first.add(TipoToken.PALAVRA_RESERVADA_START);
         first.add(TipoToken.PALAVRA_RESERVADA_VAR);
         first.add(TipoToken.PALAVRA_RESERVADA_TYPEDEF);
+        first.add(TipoToken.PALAVRA_RESERVADA_STRUCT);
+        
 
     }
 
