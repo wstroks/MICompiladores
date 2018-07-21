@@ -46,7 +46,7 @@ public class GerenciadorToken {
      * @return o token atual
      */
     public Token getTokenAtual() {
-        System.out.println("\n " +listaTokens.get(contTokenAtual).getTipoToken());
+        //System.out.println("\n " +listaTokens.get(contTokenAtual).getTipoToken());
         return listaTokens.get(contTokenAtual);
     }
     
@@ -60,7 +60,7 @@ public class GerenciadorToken {
      * @return o próximo token
      */
     public Token getProximoToken() {
-        System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
+        //System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
         return listaTokens.get(contTokenAtual + 1);
     }
 
@@ -71,8 +71,8 @@ public class GerenciadorToken {
      */
     public Token consumirTokenAtual() {
     	contTokenAtual++;
-        System.out.println("Quantidade de tokens restantes: " + getQtdTokensRestantes());
-        System.out.println();
+        //System.out.println("Quantidade de tokens restantes: " + getQtdTokensRestantes());
+        //System.out.println();
         return listaTokens.get(contTokenAtual);
     }
     
@@ -100,7 +100,7 @@ public class GerenciadorToken {
         
         Erro erro = new Erro(tokensEsperados, listaTokens.get(contTokenAtual), tokenAnterior);
         listaErros.add(erro);
-        System.out.println("\n!!!!! Erro na regra <" + nomeProducao + ">. Token recebido: " + getTipoTokenAtual() + ". Tokens esperados: " + erro.getStringTokensEsperados() + "\n");
+        //System.out.println("\n!!!!! Erro na regra <" + nomeProducao + ">. Token recebido: " + getTipoTokenAtual() + ". Tokens esperados: " + erro.getStringTokensEsperados() + "\n");
     }
 
     public boolean eof() {

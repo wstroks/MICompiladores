@@ -24,31 +24,27 @@ public class OpUnary extends RegraProducao {
 
 		if (isFirst(gerenciadorToken.getTipoTokenAtual())) {
 
-			if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO, false)){
+			if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_LOGICO_EXCLAMACAO_NEGADO, false)) {
 				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
-			}
-			else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO, false)){
+			} else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO, false)) {
 				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
-			}
-			else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, false)){
+			} else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, false)) {
 				if (OpUnary.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
-			}
-			else if(gerenciadorToken.getTipoTokenAtual() == TipoToken.IDENTIFICADOR && (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE || gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO ) ){
-                            System.out.println("narutando \n");
-                            if (Final.getInstancia().analisar(gerenciadorToken)) {
+			} else if (gerenciadorToken.getTipoTokenAtual() == TipoToken.IDENTIFICADOR
+					&& (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_ABRE_COLCHETE
+							|| gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.DELIMITADOR_PONTO)) {
+				if (Final.getInstancia().analisar(gerenciadorToken)) {
 					if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
 						return true;
 					}
 				}
-			}	
-			else if (Valor.getInstancia().analisar(gerenciadorToken)) {
-                             System.out.println("narutando 123 \n");
+			} else if (Valor.getInstancia().analisar(gerenciadorToken)) {
 				if (SimboloUnario.getInstancia().analisar(gerenciadorToken)) {
 					return true;
 				}
@@ -72,7 +68,7 @@ public class OpUnary extends RegraProducao {
 		first.add(TipoToken.PALAVRA_RESERVADA_FALSE);
 		first.add(TipoToken.PALAVRA_RESERVADA_TRUE);
 		first.add(TipoToken.NUMERO);
-                first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
+		first.add(TipoToken.DELIMITADOR_ABRE_PARENTESES);
 	}
 
 	@Override

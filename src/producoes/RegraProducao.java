@@ -16,7 +16,7 @@ public abstract class RegraProducao {
     protected ArrayList<TipoToken> follow = new ArrayList<TipoToken>();
     
     protected RegraProducao() {
-    	System.out.println("Analisando <" + getNomeClasse() + ">");
+    	//System.out.println("Analisando <" + getNomeClasse() + ">");
         this.gerarFirst();
         this.gerarFollow();
     }
@@ -111,7 +111,7 @@ public abstract class RegraProducao {
      */
     protected boolean consumir(GerenciadorToken gt, TipoToken tokenEsperado){
     	
-		System.out.println("\n**** Consumindo token "+ gt.getTipoTokenAtual() + " ("  + gt.getTokenAtual().getLexema() + ") na classe " + getNomeClasse() + ". Próximo token: " + gt.getProximoToken().getTipoToken() + "\n");
+		//System.out.println("\n**** Consumindo token "+ gt.getTipoTokenAtual() + " ("  + gt.getTokenAtual().getLexema() + ") na classe " + getNomeClasse() + ". Próximo token: " + gt.getProximoToken().getTipoToken() + "\n");
 		gt.consumirTokenAtual();
 		return true;
     	

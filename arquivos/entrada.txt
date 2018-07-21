@@ -1,5 +1,8 @@
-print var //oi var
-tay
-
-
-		/*teste*/
+start () {
+    var {
+        int numero, nota, total;
+        float media;
+        bool aprovado, final;
+        string nome;
+    }
+}

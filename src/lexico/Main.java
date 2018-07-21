@@ -16,8 +16,8 @@ public class Main {
 
         try {
            
-        	testarArquivosDiretorio("entrada");
-        	//testarArquivo("entrada/teste08_sem_erros.txt");
+        	//testarArquivosDiretorio("entrada");
+        	testarArquivo("arquivos/entrada.txt");
 
         } catch (Exception ex) {
             ex.printStackTrace();
