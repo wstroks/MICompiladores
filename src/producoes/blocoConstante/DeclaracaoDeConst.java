@@ -5,6 +5,7 @@ package producoes.blocoConstante;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import semantico.TabelaSimbolos;
 import sintatico.GerenciadorToken;
 
 /**
@@ -13,8 +14,15 @@ import sintatico.GerenciadorToken;
  */
 public class DeclaracaoDeConst extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new DeclaracaoDeConst();
+    /**
+	 * @param ts
+	 */
+	public DeclaracaoDeConst(TabelaSimbolos ts) {
+		super(ts);
+	}
+
+	public static RegraProducao getInstancia(TabelaSimbolos ts) {
+        return new DeclaracaoDeConst(ts);
     }
 
     @Override

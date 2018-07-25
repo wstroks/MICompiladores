@@ -1,8 +1,7 @@
 start () {
-    var {
-        int numero, nota, total;
-        float media;
-        bool aprovado, final;
-        string nome;
-    }
+
+    joao.idade = 15;
+    joao.peso = 60.5;
+    joao.altura = 1.75;
+
 }

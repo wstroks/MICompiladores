@@ -5,6 +5,7 @@ package producoes.core;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import semantico.TabelaSimbolos;
 import sintatico.GerenciadorToken;
 
 /**
@@ -13,8 +14,15 @@ import sintatico.GerenciadorToken;
  */
 public class Programa extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new Programa();
+	/**
+	 * @param ts
+	 */
+	public Programa(TabelaSimbolos ts) {
+		super(ts);
+	}
+
+	public static RegraProducao getInstancia(TabelaSimbolos ts) {
+		return new Programa(ts);
 	}
 
 	@Override

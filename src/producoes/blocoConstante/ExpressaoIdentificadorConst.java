@@ -8,6 +8,7 @@ package producoes.blocoConstante;
 import lexico.TipoToken;
 import producoes.RegraProducao;
 import producoes.precedenciaOperadores.Expressao;
+import semantico.TabelaSimbolos;
 import sintatico.GerenciadorToken;
 
 /**
@@ -16,8 +17,15 @@ import sintatico.GerenciadorToken;
  */
 public class ExpressaoIdentificadorConst extends RegraProducao {
 
-    public static RegraProducao getInstancia() {
-        return new ExpressaoIdentificadorConst();
+    /**
+	 * @param ts
+	 */
+	public ExpressaoIdentificadorConst(TabelaSimbolos ts) {
+		super(ts);
+	}
+
+	public static RegraProducao getInstancia(TabelaSimbolos ts) {
+        return new ExpressaoIdentificadorConst(ts);
     }
 
     @Override

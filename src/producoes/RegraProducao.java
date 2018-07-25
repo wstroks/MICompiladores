@@ -3,6 +3,7 @@ package producoes;
 import java.util.ArrayList;
 
 import lexico.TipoToken;
+import semantico.TabelaSimbolos;
 import sintatico.GerenciadorToken;
 
 /**
@@ -15,7 +16,7 @@ public abstract class RegraProducao {
     protected ArrayList<TipoToken> first  = new ArrayList<TipoToken>();
     protected ArrayList<TipoToken> follow = new ArrayList<TipoToken>();
     
-    protected RegraProducao() {
+    public RegraProducao(TabelaSimbolos ts) {
     	//System.out.println("Analisando <" + getNomeClasse() + ">");
         this.gerarFirst();
         this.gerarFollow();
