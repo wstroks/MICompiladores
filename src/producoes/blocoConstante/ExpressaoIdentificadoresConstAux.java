@@ -16,15 +16,8 @@ import sintatico.GerenciadorToken;
  */
 public class ExpressaoIdentificadoresConstAux extends RegraProducao {
 
-    /**
-	 * @param ts
-	 */
-	public ExpressaoIdentificadoresConstAux(TabelaSimbolos ts) {
-		super(ts);
-	}
-
-	public static RegraProducao getInstancia(TabelaSimbolos ts) {
-        return new ExpressaoIdentificadoresConstAux(ts);
+	public static RegraProducao getInstancia() {
+        return new ExpressaoIdentificadoresConstAux();
     }
 
     @Override

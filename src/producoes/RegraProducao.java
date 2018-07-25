@@ -16,7 +16,7 @@ public abstract class RegraProducao {
     protected ArrayList<TipoToken> first  = new ArrayList<TipoToken>();
     protected ArrayList<TipoToken> follow = new ArrayList<TipoToken>();
     
-    public RegraProducao(TabelaSimbolos ts) {
+    public RegraProducao() {
     	//System.out.println("Analisando <" + getNomeClasse() + ">");
         this.gerarFirst();
         this.gerarFollow();

@@ -14,15 +14,8 @@ import sintatico.GerenciadorToken;
  */
 public class DeclaracaoDeConst extends RegraProducao {
 
-    /**
-	 * @param ts
-	 */
-	public DeclaracaoDeConst(TabelaSimbolos ts) {
-		super(ts);
-	}
-
-	public static RegraProducao getInstancia(TabelaSimbolos ts) {
-        return new DeclaracaoDeConst(ts);
+	public static RegraProducao getInstancia() {
+        return new DeclaracaoDeConst();
     }
 
     @Override

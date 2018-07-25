@@ -14,15 +14,8 @@ import sintatico.GerenciadorToken;
  */
 public class Programa extends RegraProducao {
 
-	/**
-	 * @param ts
-	 */
-	public Programa(TabelaSimbolos ts) {
-		super(ts);
-	}
-
-	public static RegraProducao getInstancia(TabelaSimbolos ts) {
-		return new Programa(ts);
+	public static RegraProducao getInstancia() {
+		return new Programa();
 	}
 
 	@Override

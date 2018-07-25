@@ -17,15 +17,8 @@ import sintatico.GerenciadorToken;
  */
 public class DeclaracaoDeConstanteLinha extends RegraProducao {
 
-	/**
-	 * @param ts
-	 */
-	public DeclaracaoDeConstanteLinha(TabelaSimbolos ts) {
-		super(ts);
-	}
-
-	public static RegraProducao getInstancia(TabelaSimbolos ts) {
-		return new DeclaracaoDeConstanteLinha(ts);
+	public static RegraProducao getInstancia() {
+		return new DeclaracaoDeConstanteLinha();
 	}
 
 	@Override

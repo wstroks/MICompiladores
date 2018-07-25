@@ -20,25 +20,25 @@ public class Sintatico {
 	private TabelaSimbolos ts;
 	
 	public Sintatico(List<Token> listaTokens){
-		listaTokens = listaTokens;
-		ts = new TabelaSimbolos();
+		this.listaTokens = listaTokens;
+		this.ts = new TabelaSimbolos();
 	}
 	
 	public void run(String b) throws IOException{
 		
 		System.out.println("\n===================== Análise sintática ===================");
 		
-		GerenciadorToken gerenciadorToken = new GerenciadorToken(listaTokens);
+		GerenciadorToken gerenciadorToken = new GerenciadorToken(listaTokens, ts);
 		
-		if(Programa.getInstancia(ts).isFirst(gerenciadorToken.getTipoTokenAtual())){
-			Programa.getInstancia(ts).analisar(gerenciadorToken);
+		if(Programa.getInstancia().isFirst(gerenciadorToken.getTipoTokenAtual())){
+			Programa.getInstancia().analisar(gerenciadorToken);
 		}
         else{
         	gerenciadorToken.addErro("<Programa>", Programa.getInstancia().getFirst());
         }
 		
 		gerenciadorToken.printErros();
-        gerenciadorToken.printErroToFile(b);
+        //gerenciadorToken.printErroToFile(b);
 		
 	}
 	

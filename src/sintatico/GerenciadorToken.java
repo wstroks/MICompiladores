@@ -11,6 +11,7 @@ import java.util.List;
 
 import lexico.TipoToken;
 import lexico.Token;
+import semantico.TabelaSimbolos;
 
 /**
  * @author Tayane
@@ -21,13 +22,14 @@ public class GerenciadorToken {
     private List<Token> listaTokens;
     private ArrayList<Erro> listaErros;
     protected int contTokenAtual = 0;
-    
+    private TabelaSimbolos ts;
 
-    GerenciadorToken(List<Token> listaTokens) {
+    GerenciadorToken(List<Token> listaTokens, TabelaSimbolos ts) {
         this.listaTokens = listaTokens;
         //Adiciona o token EOF no final da lista
         this.listaTokens.add(getEofToken());
         this.listaErros = new ArrayList<Erro>();
+        this.ts = ts;
     }
 
     /**
