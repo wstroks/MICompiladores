@@ -186,7 +186,7 @@ public class TabelaSimbolos {
     depois tem que colocar a atribuicao na tabela nao sei se precisa
      */
     public void atribuicaoCorretaPeloTipoConst(Token recebe) {
-
+/*
         for (Listas a : tabelaSimbolosConst) {
           //  System.out.println(a.tipo.getPosicao() + " " + recebe.getPosicao();
             if (a.tipo.getLinha() == recebe.getLinha() && !(a.foiDeclaradocomo.equals(recebe.getTipoToken())) && (a.tipo.getPosicao() + 3) == recebe.getPosicao()) {
@@ -213,7 +213,7 @@ public class TabelaSimbolos {
                     erro.add(er);
                 }
             }
-        }
+        }*/
 
     }
 
