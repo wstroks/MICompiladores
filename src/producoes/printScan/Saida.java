@@ -8,6 +8,7 @@ package producoes.printScan;
 import lexico.TipoToken;
 import producoes.RegraProducao;
 import producoes.precedenciaOperadores.Expressao;
+import semantico.TabelaSimbolos;
 import sintatico.GerenciadorToken;
 
 /**
@@ -15,6 +16,7 @@ import sintatico.GerenciadorToken;
  * @author wstro
  */
 public class Saida extends RegraProducao {
+
 
 	public static RegraProducao getInstancia() {
 		return new Saida();

@@ -11,6 +11,7 @@ import producoes.blocoStruct.DeclaracaoDeStruct;
 import producoes.precedenciaOperadores.OperacaoDeAtribuicao;
 import producoes.printScan.Print;
 import producoes.printScan.Scan;
+import semantico.TabelaSimbolos;
 import sintatico.GerenciadorToken;
 
 /**
@@ -19,6 +20,8 @@ import sintatico.GerenciadorToken;
  */
 public class InstrucaoNormal extends RegraProducao {
 
+    
+   
     public static RegraProducao getInstancia() {
         return new InstrucaoNormal();
     }

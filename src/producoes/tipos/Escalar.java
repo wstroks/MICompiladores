@@ -22,12 +22,16 @@ public class Escalar extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_INT, false)) {
+                gerenciadorToken.ts.addTipo(gerenciadorToken.getAnteriorToken());
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FLOAT, false)) {
+                gerenciadorToken.ts.addTipo(gerenciadorToken.getAnteriorToken());
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_BOOL, false)) {
+                gerenciadorToken.ts.addTipo(gerenciadorToken.getAnteriorToken());
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRING, false)) {
+                gerenciadorToken.ts.addTipo(gerenciadorToken.getAnteriorToken());
                 return true;
             }
         }

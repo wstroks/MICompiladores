@@ -22,7 +22,7 @@ public class GerenciadorToken {
     private List<Token> listaTokens;
     private ArrayList<Erro> listaErros;
     protected int contTokenAtual = 0;
-    private TabelaSimbolos ts;
+    public TabelaSimbolos ts;
 
     GerenciadorToken(List<Token> listaTokens, TabelaSimbolos ts) {
         this.listaTokens = listaTokens;
@@ -64,6 +64,10 @@ public class GerenciadorToken {
     public Token getProximoToken() {
         //System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
         return listaTokens.get(contTokenAtual + 1);
+    }
+public Token getAnteriorToken() {
+        //System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
+        return listaTokens.get(contTokenAtual - 1);
     }
 
     /**

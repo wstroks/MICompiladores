@@ -6,6 +6,7 @@ package producoes.tipos;
 import lexico.TipoToken;
 import producoes.RegraProducao;
 import producoes.blocoStruct.DeclaracaoDeStruct;
+import semantico.TabelaSimbolos;
 import sintatico.GerenciadorToken;
 
 /**
@@ -25,10 +26,13 @@ public class TipoBase extends RegraProducao {
 
             if (Escalar.getInstancia().analisar(gerenciadorToken)) {
                 return true;
-            } 
-            else if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
+            } else if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
+                gerenciadorToken.ts.addTipo(gerenciadorToken.getAnteriorToken());
+
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT, false)) {
+                gerenciadorToken.ts.addTipo(gerenciadorToken.getAnteriorToken());
+
                 return true;
             }
         }

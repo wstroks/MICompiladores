@@ -20,6 +20,7 @@ public abstract class RegraProducao {
     	//System.out.println("Analisando <" + getNomeClasse() + ">");
         this.gerarFirst();
         this.gerarFollow();
+        
     }
     
     protected String getNomeClasse(){
@@ -52,7 +53,7 @@ public abstract class RegraProducao {
 	public ArrayList<TipoToken> getFollow() {
 		return follow;
 	}
-
+    
 	/**
      * Informa se o token esta no conjunto primeiro da regra
      * @param tipoToken um TokenClass

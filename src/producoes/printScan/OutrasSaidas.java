@@ -7,6 +7,7 @@ package producoes.printScan;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import semantico.TabelaSimbolos;
 import sintatico.GerenciadorToken;
 
 /**
@@ -14,6 +15,7 @@ import sintatico.GerenciadorToken;
  * @author wstro
  */
 public class OutrasSaidas extends RegraProducao {
+
 
     public static RegraProducao getInstancia() {
         return new OutrasSaidas();

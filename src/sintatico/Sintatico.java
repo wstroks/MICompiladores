@@ -38,6 +38,14 @@ public class Sintatico {
         }
 		
 		gerenciadorToken.printErros();
+                
+                
+                
+          System.out.println("\n===================== Análise Semantica ===================");
+
+               gerenciadorToken.ts.ImpressaoVariavelErro();
+               System.out.println("\n");
+               gerenciadorToken.ts.ImpressaoVariavel();
         //gerenciadorToken.printErroToFile(b);
 		
 	}

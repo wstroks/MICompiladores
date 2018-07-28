@@ -1,7 +1,9 @@
 package producoes.blocoVariaveis;
 
 import lexico.TipoToken;
+import lexico.Token;
 import producoes.RegraProducao;
+import producoes.printScan.Entrada;
 import sintatico.GerenciadorToken;
 
 /**
@@ -20,6 +22,11 @@ public class ExpressaoIdentificadorVar extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
+                //System.out.println("Token: "+gerenciadorToken.getAnteriorToken().getLexema().toString()+"\Token              Entrada envia=gerenciadorToken.getAnteriorToken();
+                
+                gerenciadorToken.ts.addTabelaVariaveis(gerenciadorToken.getAnteriorToken().getLexema(), gerenciadorToken.getAnteriorToken());
+
+                
                 if (ExpressaoIdentificadorVarAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }

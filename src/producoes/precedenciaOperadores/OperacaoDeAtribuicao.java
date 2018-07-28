@@ -24,6 +24,7 @@ public class OperacaoDeAtribuicao extends RegraProducao {
     		
     		if(gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO){
     			if(verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)){
+                            gerenciadorToken.ts.atribuicaoConst(gerenciadorToken.getAnteriorToken());
         			if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)){
             			if(Expressao.getInstancia().analisar(gerenciadorToken)){
             	    		return true;

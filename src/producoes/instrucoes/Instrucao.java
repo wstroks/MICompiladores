@@ -11,6 +11,7 @@ import producoes.blocoVariaveis.DeclaracaoDeVar;
 import producoes.declaracaoTipo.DeclaracaoDeTypedef;
 import producoes.estruturasCondicionais.EstruturaCondicional;
 import producoes.estruturasRepeticao.While;
+import semantico.TabelaSimbolos;
 import sintatico.GerenciadorToken;
 
 /**
@@ -19,6 +20,7 @@ import sintatico.GerenciadorToken;
  */
 public class Instrucao extends RegraProducao {
 
+   
     public static RegraProducao getInstancia() {
         return new Instrucao();
     }
