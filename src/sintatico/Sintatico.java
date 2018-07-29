@@ -18,10 +18,12 @@ public class Sintatico {
 
 	private List<Token> listaTokens;
 	private TabelaSimbolos ts;
+        
 
 	public Sintatico(List<Token> listaTokens) {
 		this.listaTokens = listaTokens;
 		this.ts = new TabelaSimbolos();
+                //this.addConst=addConst;
 	}
 
 	public void run(String b) throws IOException {

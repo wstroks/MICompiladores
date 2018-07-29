@@ -1,19 +1,14 @@
-function int nomeDaFuncao (int a, int b) {
-    nomeDaFuncao();
-    algumaOutraVariavel = nomeDaFuncao();
-    return;
-}
+const{
 
-function int nomeDaFuncao (int a, int b) {
-    return;
+int a=1,b=1.1;
+string c=1151,aaa="ahduahsd";
 }
 
 start(){
 
-  var{
-	int m=true;
-	String d;
-	string teste = "teste";
-  }
+var{
+int abb=1,basds=1.1;
+string casas=1151,asaa="ahduahsd";
 
+}
 }

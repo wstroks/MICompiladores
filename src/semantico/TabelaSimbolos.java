@@ -21,7 +21,10 @@ public class TabelaSimbolos {
     private List<Listas> tabelaSimbolosStruct;
     private ArrayList<ErroSemantico> erro;
     private List<Token> defineOTipoDeclarado;
-    
+    private List<Listas> tabelaSimbolosConstAux;
+    private List<Listas> tabelaSimbolosVarAux;
+    public boolean ajuda;
+
     private ArrayList<Funcao> tabelaSimbolosFuncao;
     public Funcao bufferFuncao;
 
@@ -32,10 +35,13 @@ public class TabelaSimbolos {
         tabelaSimbolosVariavel = new ArrayList<Listas>();
         tabelaSimbolosConst = new ArrayList<Listas>();
         tabelaSimbolosStruct = new ArrayList<Listas>();
-        tabelaSimbolosFuncao= new ArrayList<Funcao>();
+        tabelaSimbolosFuncao = new ArrayList<Funcao>();
+        tabelaSimbolosConstAux = new ArrayList<Listas>();
+        tabelaSimbolosVarAux = new ArrayList<Listas>();
         erro = new ArrayList<ErroSemantico>();
         defineOTipoDeclarado = new ArrayList<Token>();
-        
+        this.ajuda = ajuda;
+
     }
 
     public void addTipo(Token tipo) {
@@ -69,7 +75,7 @@ public class TabelaSimbolos {
             er.tipoDoErro = "Variável local duplicada";
             erro.add(er);
         } else {
-
+            atualizaVar();
             Listas etds = new Listas();
             //System.out.println("  " + nome);
             etds.nome = nome;
@@ -90,7 +96,7 @@ public class TabelaSimbolos {
             er.tipoDoErro = "Const";
             erro.add(er);
         } else {
-
+            atualizaConst();
             Listas etds = new Listas();
             //System.out.println("  " + nome);
             etds.nome = nome;
@@ -105,6 +111,34 @@ public class TabelaSimbolos {
         }
         //ImpressaoVariavel();
 
+    }
+
+    public void atualizaConst() {
+        if(tabelaSimbolosConst.size()!=0 && tabelaSimbolosConstAux.size()!=0){
+        for (int i = 0; i < tabelaSimbolosConst.size(); i++) {
+            Listas a=tabelaSimbolosConst.get(i);
+            for (int x = 0; x < tabelaSimbolosConstAux.size(); x++) {
+                Listas b=tabelaSimbolosConstAux.get(x);
+                if(a.equals(b)){
+                    tabelaSimbolosConst.remove(i);
+                }
+            }
+            }
+        }
+    }
+    
+     public void atualizaVar() {
+        if(tabelaSimbolosVariavel.size()!=0 && tabelaSimbolosVarAux.size()!=0){
+        for (int i = 0; i < tabelaSimbolosVariavel.size(); i++) {
+            Listas a=tabelaSimbolosVariavel.get(i);
+            for (int x = 0; x < tabelaSimbolosVarAux.size(); x++) {
+                Listas b=tabelaSimbolosVarAux.get(x);
+                if(a.equals(b)){
+                    tabelaSimbolosVariavel.remove(i);
+                }
+            }
+            }
+        }
     }
 
     public void addTabelaStruct(String nome, Token tipo) {
@@ -157,7 +191,7 @@ public class TabelaSimbolos {
             //a++;
             System.out.println("Struct " + n.nome.toUpperCase() + "Linha : " + n.tipo.getLinha() + " ele é um " + n.foiDeclaradocomo.toUpperCase());
 
-        }   
+        }
         System.out.println("\nTABELA DE SIMBOLOS FUNCAO");
         for (Funcao n : tabelaSimbolosFuncao) {
             //a++;
@@ -195,107 +229,127 @@ public class TabelaSimbolos {
     
     depois tem que colocar a atribuicao na tabela nao sei se precisa
      */
-       public void atribuicaoCorretaPeloTipoConst(Token t, Token a) {
+    public void atribuicaoCorretaPeloTipoConst(Token t, Token a) {
 
         for (Listas lista : tabelaSimbolosConst) {
             if (lista.tipo.getLexema().equals(a.getLexema())) {
                 //System.out.println("asas");
                 if (lista.foiDeclaradocomo.equals("int")) {
-                   // System.out.println("asas 1");
+                    // System.out.println("asas 1");
                     if (t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
+                        //Listas b =new Listas();
+                        tabelaSimbolosConstAux.add(lista);
                         ErroSemantico er = new ErroSemantico();
                         er.tipo = t;
                         er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
                         erro.add(er);
+
                     }
+
                 } else if (lista.foiDeclaradocomo.equals("float")) {
                     if (!t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
+                        //tabelaSimbolosConst.remove(lista);
+                        tabelaSimbolosConstAux.add(lista);
                         ErroSemantico er = new ErroSemantico();
                         er.tipo = t;
                         er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
                         erro.add(er);
+
                     }
+
                 } else if (lista.foiDeclaradocomo.equals("string")) {
                     if (!t.getTipoToken().toString().equals("CADEIA_CARACTERES") || t.getLexema().equals("true") || t.getLexema().equals("false")) {
+                        //tabelaSimbolosConst.remove(lista);
+                        tabelaSimbolosConstAux.add(lista);
                         ErroSemantico er = new ErroSemantico();
                         er.tipo = t;
                         er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
                         erro.add(er);
+                        //tabelaSimbolosConst.remove(lista);
+
                     }
+
                 }
             }
 
         }
     }
 
- public void atribuicaoCorretaPeloTipoVar(Token t,Token a) {
-         for (Listas lista : tabelaSimbolosVariavel) {
+    public void atribuicaoCorretaPeloTipoVar(Token t, Token a) {
+        for (Listas lista : tabelaSimbolosVariavel) {
             if (lista.tipo.getLexema().equals(a.getLexema())) {
                 //System.out.println("asas");
                 if (lista.foiDeclaradocomo.equals("int")) {
-                   // System.out.println("asas 1");
+                    // System.out.println("asas 1");
                     if (t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
+                        tabelaSimbolosVarAux.add(lista);
                         ErroSemantico er = new ErroSemantico();
                         er.tipo = t;
                         er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
                         erro.add(er);
+                        // tabelaSimbolosVariavel.remove(lista);
                     }
                 } else if (lista.foiDeclaradocomo.equals("float")) {
                     if (!t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
+                         tabelaSimbolosVarAux.add(lista);
                         ErroSemantico er = new ErroSemantico();
                         er.tipo = t;
                         er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
                         erro.add(er);
+                        //tabelaSimbolosVariavel.remove(lista);
                     }
                 } else if (lista.foiDeclaradocomo.equals("string")) {
                     if (!t.getTipoToken().toString().equals("CADEIA_CARACTERES") || t.getLexema().equals("true") || t.getLexema().equals("false")) {
+                         tabelaSimbolosVarAux.add(lista);
                         ErroSemantico er = new ErroSemantico();
                         er.tipo = t;
                         er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
                         erro.add(er);
+                        // tabelaSimbolosVariavel.remove(lista);
                     }
                 }
             }
-       
-         }
-       
-    }    
+
+        }
+
+    }
+
     /**
      * Adiciona a função que está no buffer na tabela de simbolos de function
      */
-    public void addFuncao(){
-    	//Verificar se já existe uma função com o mesmo nome mesmos parametros (mesma quantidade e mesmos tipos)
-    	if(!funcaoBufferJaExiste()){
-    		tabelaSimbolosFuncao.add(bufferFuncao);
-    	}
-    	else{
+    public void addFuncao() {
+        //Verificar se já existe uma função com o mesmo nome mesmos parametros (mesma quantidade e mesmos tipos)
+        if (!funcaoBufferJaExiste()) {
+            tabelaSimbolosFuncao.add(bufferFuncao);
+        } else {
             ErroSemantico er = new ErroSemantico();
             er.tipoDoErro = "Função já declarada " + bufferFuncao.getNome();
-            erro.add(er);  
-    	}
+            erro.add(er);
+        }
     }
-    
+
     /**
      * Limpa o buffer de função
      */
-    public void clearBufferFuncao(){
-    	bufferFuncao = new Funcao();
+    public void clearBufferFuncao() {
+        bufferFuncao = new Funcao();
     }
-    
+
     /**
      * Verifica se a função que está no buffer já existe
+     *
      * @return boolean
      */
-    public boolean funcaoBufferJaExiste(){
-    	
-    	for (Funcao funcao : tabelaSimbolosFuncao) {
-    		if(funcao.isEquals(bufferFuncao)){
-    			return true;
-    		}
-		}
-    	
-    	return false;
-    	
+    public boolean funcaoBufferJaExiste() {
+
+        for (Funcao funcao : tabelaSimbolosFuncao) {
+            if (funcao.isEquals(bufferFuncao)) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
-   
+
 }

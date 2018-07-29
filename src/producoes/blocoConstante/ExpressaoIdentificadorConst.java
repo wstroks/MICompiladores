@@ -31,7 +31,7 @@ public class ExpressaoIdentificadorConst extends RegraProducao {
 
                 if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
                     //System.out.println(gerenciadorToken.getTokenAtual().getLexema());
-                    gerenciadorToken.ts.atribuicaoCorretaPeloTipoConst(gerenciadorToken.getTokenAtual(), gerenciadorToken.getAnteriorDeterminaToken(2));
+                   gerenciadorToken.ts.atribuicaoCorretaPeloTipoConst(gerenciadorToken.getTokenAtual(), gerenciadorToken.getAnteriorDeterminaToken(2));
                     if (Expressao.getInstancia().analisar(gerenciadorToken)) {
                         return true;
                     }
