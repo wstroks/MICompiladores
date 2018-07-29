@@ -24,16 +24,31 @@ public class EscalarRelacional extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_DIFERENTE, false)) {
+               // System.out.println(gerenciadorToken.getAnteriorToken().getLexema()+gerenciadorToken.getTokenAtual().getLexema()+ gerenciadorToken.getProximoDeterminaToken(1).getLexema());
+                gerenciadorToken.ts.expressaoIf(gerenciadorToken.getAnteriorToken(),gerenciadorToken.getTokenAtual(), gerenciadorToken.getProximoDeterminaToken(1));
+
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_IGUAL, false)) {
+                //System.out.println(gerenciadorToken.getAnteriorToken().getLexema()+gerenciadorToken.getTokenAtual().getLexema()+ gerenciadorToken.getProximoDeterminaToken(1).getLexema());
+                gerenciadorToken.ts.expressaoIf(gerenciadorToken.getAnteriorToken(),gerenciadorToken.getTokenAtual(), gerenciadorToken.getProximoDeterminaToken(1));
+
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_QUE, false)) {
+                 gerenciadorToken.ts.expressaoIf(gerenciadorToken.getAnteriorDeterminaToken(2),gerenciadorToken.getAnteriorToken(), gerenciadorToken.getTokenAtual());
+                
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MENOR_IGUAL_QUE, false)) {
+                //System.out.println(gerenciadorToken.getAnteriorToken().getLexema()+gerenciadorToken.getTokenAtual().getLexema()+ gerenciadorToken.getProximoDeterminaToken(1).getLexema());
+                gerenciadorToken.ts.expressaoIf(gerenciadorToken.getAnteriorToken(),gerenciadorToken.getTokenAtual(), gerenciadorToken.getProximoDeterminaToken(1));
+
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_IGUAL_QUE, false)) {
+                 gerenciadorToken.ts.expressaoIf(gerenciadorToken.getAnteriorDeterminaToken(2),gerenciadorToken.getAnteriorToken(), gerenciadorToken.getTokenAtual());
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_MAIOR_QUE, false)) {
+               // System.out.println(gerenciadorToken.getAnteriorDeterminaToken(2).getLexema() + gerenciadorToken.getAnteriorToken().getLexema()+ gerenciadorToken.getTokenAtual().getLexema());
+                        gerenciadorToken.ts.expressaoIf(gerenciadorToken.getAnteriorDeterminaToken(2),gerenciadorToken.getAnteriorToken(), gerenciadorToken.getTokenAtual());
+
                 return true;
             }
 

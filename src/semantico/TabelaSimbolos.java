@@ -114,29 +114,29 @@ public class TabelaSimbolos {
     }
 
     public void atualizaConst() {
-        if(tabelaSimbolosConst.size()!=0 && tabelaSimbolosConstAux.size()!=0){
-        for (int i = 0; i < tabelaSimbolosConst.size(); i++) {
-            Listas a=tabelaSimbolosConst.get(i);
-            for (int x = 0; x < tabelaSimbolosConstAux.size(); x++) {
-                Listas b=tabelaSimbolosConstAux.get(x);
-                if(a.equals(b)){
-                    tabelaSimbolosConst.remove(i);
+        if (tabelaSimbolosConst.size() != 0 && tabelaSimbolosConstAux.size() != 0) {
+            for (int i = 0; i < tabelaSimbolosConst.size(); i++) {
+                Listas a = tabelaSimbolosConst.get(i);
+                for (int x = 0; x < tabelaSimbolosConstAux.size(); x++) {
+                    Listas b = tabelaSimbolosConstAux.get(x);
+                    if (a.equals(b)) {
+                        tabelaSimbolosConst.remove(i);
+                    }
                 }
-            }
             }
         }
     }
-    
-     public void atualizaVar() {
-        if(tabelaSimbolosVariavel.size()!=0 && tabelaSimbolosVarAux.size()!=0){
-        for (int i = 0; i < tabelaSimbolosVariavel.size(); i++) {
-            Listas a=tabelaSimbolosVariavel.get(i);
-            for (int x = 0; x < tabelaSimbolosVarAux.size(); x++) {
-                Listas b=tabelaSimbolosVarAux.get(x);
-                if(a.equals(b)){
-                    tabelaSimbolosVariavel.remove(i);
+
+    public void atualizaVar() {
+        if (tabelaSimbolosVariavel.size() != 0 && tabelaSimbolosVarAux.size() != 0) {
+            for (int i = 0; i < tabelaSimbolosVariavel.size(); i++) {
+                Listas a = tabelaSimbolosVariavel.get(i);
+                for (int x = 0; x < tabelaSimbolosVarAux.size(); x++) {
+                    Listas b = tabelaSimbolosVarAux.get(x);
+                    if (a.equals(b)) {
+                        tabelaSimbolosVariavel.remove(i);
+                    }
                 }
-            }
             }
         }
     }
@@ -291,7 +291,7 @@ public class TabelaSimbolos {
                     }
                 } else if (lista.foiDeclaradocomo.equals("float")) {
                     if (!t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
-                         tabelaSimbolosVarAux.add(lista);
+                        tabelaSimbolosVarAux.add(lista);
                         ErroSemantico er = new ErroSemantico();
                         er.tipo = t;
                         er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
@@ -300,7 +300,7 @@ public class TabelaSimbolos {
                     }
                 } else if (lista.foiDeclaradocomo.equals("string")) {
                     if (!t.getTipoToken().toString().equals("CADEIA_CARACTERES") || t.getLexema().equals("true") || t.getLexema().equals("false")) {
-                         tabelaSimbolosVarAux.add(lista);
+                        tabelaSimbolosVarAux.add(lista);
                         ErroSemantico er = new ErroSemantico();
                         er.tipo = t;
                         er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
@@ -350,6 +350,81 @@ public class TabelaSimbolos {
 
         return false;
 
+    }
+
+    public void expressaoIf(Token anterior, Token atual, Token proximo) {
+        Listas primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosVariavel);
+        Listas segundoTipo = retornaTokenDeclarado(proximo.getLexema(), tabelaSimbolosVariavel);;
+
+        if (primeiroTipo == null && segundoTipo == null) {
+            if (!anterior.getTipoToken().toString().equals(proximo.getTipoToken().toString())) {
+
+                ErroSemantico er = new ErroSemantico();
+                er.tipo = anterior;
+                er.tipoDoErro = "Expressao condicional errada";
+                erro.add(er);
+
+                ErroSemantico e = new ErroSemantico();
+                e.tipo = proximo;
+                e.tipoDoErro = "Expressao condicional errada";
+                erro.add(e);
+            } else {
+                if (anterior.getTipoToken().toString().equals("NUMERO")) {
+                    System.out.println("asasdasdasda");
+                      if ((!anterior.getLexema().contains(".") && proximo.getLexema().contains(".")) || (anterior.getLexema().contains(".") && !proximo.getLexema().contains("."))) {
+                        ErroSemantico er = new ErroSemantico();
+                        er.tipo = anterior;
+                        er.tipoDoErro = "Expressao condicional errada";
+                        erro.add(er);
+
+                        ErroSemantico e = new ErroSemantico();
+                        e.tipo = proximo;
+                        e.tipoDoErro = "Expressao condicional errada";
+                        erro.add(e);
+                    }
+                }else if(anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE")|| proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE") ||anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE")|| proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE")){
+                        ErroSemantico er = new ErroSemantico();
+                        er.tipo = anterior;
+                        er.tipoDoErro = "Expressao condicional errada";
+                        erro.add(er);
+
+                        ErroSemantico e = new ErroSemantico();
+                        e.tipo = proximo;
+                        e.tipoDoErro = "Expressao condicional errada";
+                        erro.add(e); 
+                    }
+            }
+        } else if (primeiroTipo == null) {
+            ErroSemantico er = new ErroSemantico();
+            er.tipo = anterior;
+            er.tipoDoErro = "Expressao em IF Não foi declarado em Var";
+            erro.add(er);
+        } else if (segundoTipo == null) {
+            ErroSemantico e = new ErroSemantico();
+            e.tipo = proximo;
+            e.tipoDoErro = "Expressao em IF Não foi declarado em Var";
+            erro.add(e);
+        } else {
+            //System.out.println(primeiroTipo.foiDeclaradocomo + segundoTipo.foiDeclaradocomo);
+            if (!primeiroTipo.foiDeclaradocomo.equals(segundoTipo.foiDeclaradocomo)) {
+                ErroSemantico er = new ErroSemantico();
+                er.tipo = proximo;
+                er.tipoDoErro = "Expressao em IF Não são do msm tipo";
+                erro.add(er);
+
+            }
+        }
+
+    }
+
+    public Listas retornaTokenDeclarado(String nome, List<Listas> a) {
+        for (Listas etds : a) {
+            String naruto = etds.nome;
+            if (naruto.equals(nome)) {
+                return etds;
+            }
+        }
+        return null;
     }
 
 }

@@ -36,7 +36,7 @@ public class ValorRelacionalAux extends RegraProducao {
 				}
 			}
 		}
-        else{
+        else{       
 			return verificarSimboloVazio(gerenciadorToken, true);
 		}
 

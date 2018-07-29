@@ -23,7 +23,7 @@ public class GerenciadorToken {
     private ArrayList<Erro> listaErros;
     protected int contTokenAtual = 0;
     public TabelaSimbolos ts;
-    public boolean addConst;
+   
 
     GerenciadorToken(List<Token> listaTokens, TabelaSimbolos ts) {
         this.listaTokens = listaTokens;
@@ -31,7 +31,7 @@ public class GerenciadorToken {
         this.listaTokens.add(getEofToken());
         this.listaErros = new ArrayList<Erro>();
         this.ts = ts;
-        this.addConst=addConst;
+        
     }
 
     /**
@@ -74,6 +74,10 @@ public Token getAnteriorToken() {
 
 public Token getAnteriorDeterminaToken(int x){
     return listaTokens.get(contTokenAtual - x);
+}
+
+public Token getProximoDeterminaToken(int x){
+    return listaTokens.get(contTokenAtual + x);
 }
 
     /**
