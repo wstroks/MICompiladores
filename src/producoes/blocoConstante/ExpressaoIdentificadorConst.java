@@ -17,7 +17,7 @@ import sintatico.GerenciadorToken;
  */
 public class ExpressaoIdentificadorConst extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
+    public static RegraProducao getInstancia() {
         return new ExpressaoIdentificadorConst();
     }
 
@@ -26,12 +26,12 @@ public class ExpressaoIdentificadorConst extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
-                
-              gerenciadorToken.ts.addTabelaConst(gerenciadorToken.getAnteriorToken().getLexema(),gerenciadorToken.getAnteriorToken());
+
+                gerenciadorToken.ts.addTabelaConst(gerenciadorToken.getAnteriorToken().getLexema(), gerenciadorToken.getAnteriorToken());
 
                 if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
                     //System.out.println(gerenciadorToken.getTokenAtual().getLexema());
-                    gerenciadorToken.ts.atribuicaoCorretaPeloTipoConst(gerenciadorToken.getTokenAtual());
+                    gerenciadorToken.ts.atribuicaoCorretaPeloTipoConst(gerenciadorToken.getTokenAtual(), gerenciadorToken.getAnteriorDeterminaToken(2));
                     if (Expressao.getInstancia().analisar(gerenciadorToken)) {
                         return true;
                     }

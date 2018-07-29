@@ -195,63 +195,71 @@ public class TabelaSimbolos {
     
     depois tem que colocar a atribuicao na tabela nao sei se precisa
      */
-    public void atribuicaoCorretaPeloTipoConst(Token recebe) {
-/*
-        for (Listas a : tabelaSimbolosConst) {
-          //  System.out.println(a.tipo.getPosicao() + " " + recebe.getPosicao();
-            if (a.tipo.getLinha() == recebe.getLinha() && !(a.foiDeclaradocomo.equals(recebe.getTipoToken())) && (a.tipo.getPosicao() + 3) == recebe.getPosicao()) {
-                ErroSemantico er = new ErroSemantico();
-                er.tipo = a.tipo;
-                er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
-                erro.add(er);
-            } else if (a.foiDeclaradocomo.equals("int")) {
-                //System.out.println("entrou  ");
-                
-                if (recebe.getLexema().contains(".")) {
-                    ErroSemantico er = new ErroSemantico();
-                    er.tipo = a.tipo;
-                    er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
-                    erro.add(er);
-                }
-            }else if (a.foiDeclaradocomo.equals("float")) {
-                //System.out.println("entrou  ");
-                
-                if (!recebe.getLexema().contains(".")) {
-                    ErroSemantico er = new ErroSemantico();
-                    er.tipo = a.tipo;
-                    er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
-                    erro.add(er);
-                }
-            }
-        }*/
+       public void atribuicaoCorretaPeloTipoConst(Token t, Token a) {
 
-    }
-
-    public void atribuicaoCorretaPeloTipoVar(Token recebe) {
-
-        /*for (Listas a : tabelaSimbolosVariavel) {
-            //System.out.println(a.tipo.getTipoToken() + " " + recebe.getTipoToken());
-            if (a.foiDeclaradocomo.equals("bool")) {
-                if(!recebe.getLexema().equals("true") && !recebe.getLexema().equals("false")){
-                ErroSemantico er = new ErroSemantico();
-                er.tipo = a.tipo;
-                er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Var";
-                erro.add(er);
-                }
-            }if (a.foiDeclaradocomo.equals("int")) {
-                //System.out.println("entrou  1");
-                
-                if(!recebe.getTipoToken().toString().toLowerCase().equals("palavra_reservada_int")) {
-                    ErroSemantico er = new ErroSemantico();
-                    er.tipo = a.tipo;
-                    er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Var";
-                    erro.add(er);
+        for (Listas lista : tabelaSimbolosConst) {
+            if (lista.tipo.getLexema().equals(a.getLexema())) {
+                //System.out.println("asas");
+                if (lista.foiDeclaradocomo.equals("int")) {
+                   // System.out.println("asas 1");
+                    if (t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
+                        ErroSemantico er = new ErroSemantico();
+                        er.tipo = t;
+                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
+                        erro.add(er);
+                    }
+                } else if (lista.foiDeclaradocomo.equals("float")) {
+                    if (!t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
+                        ErroSemantico er = new ErroSemantico();
+                        er.tipo = t;
+                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
+                        erro.add(er);
+                    }
+                } else if (lista.foiDeclaradocomo.equals("string")) {
+                    if (!t.getTipoToken().toString().equals("CADEIA_CARACTERES") || t.getLexema().equals("true") || t.getLexema().equals("false")) {
+                        ErroSemantico er = new ErroSemantico();
+                        er.tipo = t;
+                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
+                        erro.add(er);
+                    }
                 }
             }
-        }*/
 
+        }
     }
-    
+
+ public void atribuicaoCorretaPeloTipoVar(Token t,Token a) {
+         for (Listas lista : tabelaSimbolosVariavel) {
+            if (lista.tipo.getLexema().equals(a.getLexema())) {
+                //System.out.println("asas");
+                if (lista.foiDeclaradocomo.equals("int")) {
+                   // System.out.println("asas 1");
+                    if (t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
+                        ErroSemantico er = new ErroSemantico();
+                        er.tipo = t;
+                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
+                        erro.add(er);
+                    }
+                } else if (lista.foiDeclaradocomo.equals("float")) {
+                    if (!t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
+                        ErroSemantico er = new ErroSemantico();
+                        er.tipo = t;
+                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
+                        erro.add(er);
+                    }
+                } else if (lista.foiDeclaradocomo.equals("string")) {
+                    if (!t.getTipoToken().toString().equals("CADEIA_CARACTERES") || t.getLexema().equals("true") || t.getLexema().equals("false")) {
+                        ErroSemantico er = new ErroSemantico();
+                        er.tipo = t;
+                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
+                        erro.add(er);
+                    }
+                }
+            }
+       
+         }
+       
+    }    
     /**
      * Adiciona a função que está no buffer na tabela de simbolos de function
      */

@@ -12,40 +12,39 @@ import sintatico.GerenciadorToken;
  */
 public class ExpressaoIdentificadorVarAux extends RegraProducao {
 
-	public static RegraProducao getInstancia() {
-		return new ExpressaoIdentificadorVarAux();
-	}
+    public static RegraProducao getInstancia() {
+        return new ExpressaoIdentificadorVarAux();
+    }
 
-	@Override
-	public boolean analisar(GerenciadorToken gerenciadorToken) {
+    @Override
+    public boolean analisar(GerenciadorToken gerenciadorToken) {
 
-		if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, false)){
-                    
-			if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                            gerenciadorToken.ts.atribuicaoCorretaPeloTipoVar(gerenciadorToken.getAnteriorToken());
-				return true;
-			}
-		}
-		else{
-			return verificarSimboloVazio(gerenciadorToken, true);
-		}
-		
-		return false;
-		
-	}
+        if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, false)) {
 
-	@Override
-	protected void gerarFirst() {
-		// =, E
-		first.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
-		first.add(TipoToken.EOF);
-	}
+            if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                gerenciadorToken.ts.atribuicaoCorretaPeloTipoVar(gerenciadorToken.getAnteriorToken(), gerenciadorToken.getAnteriorDeterminaToken(3));
+                return true;
+            }
+        } else {
+            return verificarSimboloVazio(gerenciadorToken, true);
+        }
 
-	@Override
-	protected void gerarFollow() {
-		// , ;
-		follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
-		follow.add(TipoToken.DELIMITADOR_VIRGULA);
-	}
+        return false;
+
+    }
+
+    @Override
+    protected void gerarFirst() {
+        // =, E
+        first.add(TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO);
+        first.add(TipoToken.EOF);
+    }
+
+    @Override
+    protected void gerarFollow() {
+        // , ;
+        follow.add(TipoToken.DELIMITADOR_PONTO_VIRGULA);
+        follow.add(TipoToken.DELIMITADOR_VIRGULA);
+    }
 
 }

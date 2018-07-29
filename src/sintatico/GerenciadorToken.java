@@ -70,6 +70,10 @@ public Token getAnteriorToken() {
         return listaTokens.get(contTokenAtual - 1);
     }
 
+public Token getAnteriorDeterminaToken(int x){
+    return listaTokens.get(contTokenAtual - x);
+}
+
     /**
      * Consome o token atual
      *
