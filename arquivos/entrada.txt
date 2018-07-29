@@ -1,7 +1,19 @@
-start () {
+function int nomeDaFuncao (int a, int b) {
+    nomeDaFuncao();
+    algumaOutraVariavel = nomeDaFuncao();
+    return;
+}
 
-    joao.idade = 15;
-    joao.peso = 60.5;
-    joao.altura = 1.75;
+function int nomeDaFuncao (int a, int b) {
+    return;
+}
+
+start(){
+
+  var{
+	int m=true;
+	String d;
+	string teste = "teste";
+  }
 
 }

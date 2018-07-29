@@ -12,6 +12,16 @@ import lexico.Token;
  * @author wstro
  */
 public class ErroSemantico {
+	
     Token tipo;
     String tipoDoErro;
+    
+    public String getMensagem(){
+    	String mensagem = tipoDoErro;
+    	if(tipo != null){
+    		mensagem += " " + tipo.getLexema();
+    	}
+    	return mensagem;
+    }
+    
 }

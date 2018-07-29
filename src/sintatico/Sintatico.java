@@ -15,41 +15,36 @@ import semantico.TabelaSimbolos;
  *
  */
 public class Sintatico {
-	
+
 	private List<Token> listaTokens;
 	private TabelaSimbolos ts;
-	
-	public Sintatico(List<Token> listaTokens){
+
+	public Sintatico(List<Token> listaTokens) {
 		this.listaTokens = listaTokens;
 		this.ts = new TabelaSimbolos();
 	}
-	
-	public void run(String b) throws IOException{
-		
+
+	public void run(String b) throws IOException {
+
 		System.out.println("\n===================== Análise sintática ===================");
-		
+
 		GerenciadorToken gerenciadorToken = new GerenciadorToken(listaTokens, ts);
-		
-		if(Programa.getInstancia().isFirst(gerenciadorToken.getTipoTokenAtual())){
+
+		if (Programa.getInstancia().isFirst(gerenciadorToken.getTipoTokenAtual())) {
 			Programa.getInstancia().analisar(gerenciadorToken);
+		} else {
+			gerenciadorToken.addErro("<Programa>", Programa.getInstancia().getFirst());
 		}
-        else{
-        	gerenciadorToken.addErro("<Programa>", Programa.getInstancia().getFirst());
-        }
-		
+
 		gerenciadorToken.printErros();
-                
-                
-                
-          System.out.println("\n===================== Análise Semantica ===================");
 
-               gerenciadorToken.ts.ImpressaoVariavelErro();
-               System.out.println("\n");
-               gerenciadorToken.ts.ImpressaoVariavel();
-        //gerenciadorToken.printErroToFile(b);
-		
+		System.out.println("\n===================== Análise Semantica ===================");
+
+		gerenciadorToken.ts.ImpressaoVariavelErro();
+		System.out.println("\n");
+		gerenciadorToken.ts.ImpressaoVariavel();
+		// gerenciadorToken.printErroToFile(b);
+
 	}
-	
-
 
 }

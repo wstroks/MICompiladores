@@ -21,12 +21,8 @@ public class ExpressaoIdentificadorVar extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
 
-            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
-                //System.out.println("Token: "+gerenciadorToken.getAnteriorToken().getLexema().toString()+"\Token              Entrada envia=gerenciadorToken.getAnteriorToken();
-                
+            if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {               
                 gerenciadorToken.ts.addTabelaVariaveis(gerenciadorToken.getAnteriorToken().getLexema(), gerenciadorToken.getAnteriorToken());
-
-                
                 if (ExpressaoIdentificadorVarAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }

@@ -21,6 +21,9 @@ public class TabelaSimbolos {
     private List<Listas> tabelaSimbolosStruct;
     private ArrayList<ErroSemantico> erro;
     private List<Token> defineOTipoDeclarado;
+    
+    private ArrayList<Funcao> tabelaSimbolosFuncao;
+    public Funcao bufferFuncao;
 
     public TabelaSimbolos() {
         //functionsProcedures = new ArrayList<Entrada>();
@@ -29,8 +32,10 @@ public class TabelaSimbolos {
         tabelaSimbolosVariavel = new ArrayList<Listas>();
         tabelaSimbolosConst = new ArrayList<Listas>();
         tabelaSimbolosStruct = new ArrayList<Listas>();
+        tabelaSimbolosFuncao= new ArrayList<Funcao>();
         erro = new ArrayList<ErroSemantico>();
         defineOTipoDeclarado = new ArrayList<Token>();
+        
     }
 
     public void addTipo(Token tipo) {
@@ -54,14 +59,14 @@ public class TabelaSimbolos {
             //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
             ErroSemantico er = new ErroSemantico();
             er.tipo = tipo;
-            er.tipoDoErro = "Valor ja foi declarado em Const";
+            er.tipoDoErro = "Variável " + nome + " já foi declarada anteriomente com uma constante";
             erro.add(er);
         } else if (JafoiDeclarado(nome, tabelaSimbolosVariavel)) {
 
             //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
             ErroSemantico er = new ErroSemantico();
             er.tipo = tipo;
-            er.tipoDoErro = "Var";
+            er.tipoDoErro = "Variável local duplicada";
             erro.add(er);
         } else {
 
@@ -152,16 +157,21 @@ public class TabelaSimbolos {
             //a++;
             System.out.println("Struct " + n.nome.toUpperCase() + "Linha : " + n.tipo.getLinha() + " ele é um " + n.foiDeclaradocomo.toUpperCase());
 
+        }   
+        System.out.println("\nTABELA DE SIMBOLOS FUNCAO");
+        for (Funcao n : tabelaSimbolosFuncao) {
+            //a++;
+            System.out.println("Nome: " + n.getNome() + " | Tipo de retorno: " + n.getTipoRetorno().toString() + " | Parâmetros: " + n.converterParametrosToString());
+
         }
     }
 
     public void ImpressaoVariavelErro() {
         //int a = 0;
-        System.out.println("\n TODOS OS ERROS");
-        for (ErroSemantico etds : erro) {
+        System.out.println("Erros semânticos (" + erro.size() + "): ");
+        for (ErroSemantico e : erro) {
             // a++;
-            System.out.println(etds.tipoDoErro + " " + etds.tipo.getLexema().toUpperCase());
-
+            System.out.println(e.getMensagem());
         }
     }
 
@@ -241,5 +251,43 @@ public class TabelaSimbolos {
         }*/
 
     }
-
+    
+    /**
+     * Adiciona a função que está no buffer na tabela de simbolos de function
+     */
+    public void addFuncao(){
+    	//Verificar se já existe uma função com o mesmo nome mesmos parametros (mesma quantidade e mesmos tipos)
+    	if(!funcaoBufferJaExiste()){
+    		tabelaSimbolosFuncao.add(bufferFuncao);
+    	}
+    	else{
+            ErroSemantico er = new ErroSemantico();
+            er.tipoDoErro = "Função já declarada " + bufferFuncao.getNome();
+            erro.add(er);  
+    	}
+    }
+    
+    /**
+     * Limpa o buffer de função
+     */
+    public void clearBufferFuncao(){
+    	bufferFuncao = new Funcao();
+    }
+    
+    /**
+     * Verifica se a função que está no buffer já existe
+     * @return boolean
+     */
+    public boolean funcaoBufferJaExiste(){
+    	
+    	for (Funcao funcao : tabelaSimbolosFuncao) {
+    		if(funcao.isEquals(bufferFuncao)){
+    			return true;
+    		}
+		}
+    	
+    	return false;
+    	
+    }
+   
 }

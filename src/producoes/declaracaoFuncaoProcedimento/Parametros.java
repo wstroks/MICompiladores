@@ -25,6 +25,7 @@ public class Parametros extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
         	
             if (Parametro.getInstancia().analisar(gerenciadorToken)) {
+            	gerenciadorToken.ts.bufferFuncao.addParametro(gerenciadorToken.getAnteriorToken().getTipoToken());
                 if (ParametrosAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }

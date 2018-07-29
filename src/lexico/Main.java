@@ -65,6 +65,7 @@ public class Main {
        	
 		} catch (Exception e) {
 			System.out.println("Erro ao gerar arquivo de saída: " + e.getMessage());
+			e.printStackTrace();
 		}
         
     }
