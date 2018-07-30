@@ -354,9 +354,10 @@ public class TabelaSimbolos {
 
     public void expressaoIf(Token anterior, Token atual, Token proximo) {
         Listas primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosVariavel);
-        Listas segundoTipo = retornaTokenDeclarado(proximo.getLexema(), tabelaSimbolosVariavel);;
+        Listas segundoTipo = retornaTokenDeclarado(proximo.getLexema(), tabelaSimbolosVariavel);
 
-        if (primeiroTipo == null && segundoTipo == null) {
+        if (!JafoiDeclarado(anterior.getLexema(), tabelaSimbolosVariavel) && !JafoiDeclarado(proximo.getLexema(), tabelaSimbolosVariavel)) {
+            System.out.println("1");
             if (!anterior.getTipoToken().toString().equals(proximo.getTipoToken().toString())) {
 
                 ErroSemantico er = new ErroSemantico();
@@ -370,8 +371,8 @@ public class TabelaSimbolos {
                 erro.add(e);
             } else {
                 if (anterior.getTipoToken().toString().equals("NUMERO")) {
-                    System.out.println("asasdasdasda");
-                      if ((!anterior.getLexema().contains(".") && proximo.getLexema().contains(".")) || (anterior.getLexema().contains(".") && !proximo.getLexema().contains("."))) {
+                    System.out.println("2");
+                    if ((!anterior.getLexema().contains(".") && proximo.getLexema().contains(".")) || (anterior.getLexema().contains(".") && !proximo.getLexema().contains("."))) {
                         ErroSemantico er = new ErroSemantico();
                         er.tipo = anterior;
                         er.tipoDoErro = "Expressao condicional errada";
@@ -382,29 +383,42 @@ public class TabelaSimbolos {
                         e.tipoDoErro = "Expressao condicional errada";
                         erro.add(e);
                     }
-                }else if(anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE")|| proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE") ||anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE")|| proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE")){
-                        ErroSemantico er = new ErroSemantico();
-                        er.tipo = anterior;
-                        er.tipoDoErro = "Expressao condicional errada";
-                        erro.add(er);
+                } else if (anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE") || proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE") || anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE") || proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE")) {
+                    ErroSemantico er = new ErroSemantico();
+                    er.tipo = anterior;
+                    er.tipoDoErro = "Expressao condicional errada";
+                    erro.add(er);
 
-                        ErroSemantico e = new ErroSemantico();
-                        e.tipo = proximo;
-                        e.tipoDoErro = "Expressao condicional errada";
-                        erro.add(e); 
-                    }
+                    ErroSemantico e = new ErroSemantico();
+                    e.tipo = proximo;
+                    e.tipoDoErro = "Expressao condicional errada";
+                    erro.add(e);
+                } else {
+                    System.out.println("asdasdv");
+                    ErroSemantico er = new ErroSemantico();
+                    er.tipo = anterior;
+                    er.tipoDoErro = "Expressao em IF Não foi declarado em Var";
+                    erro.add(er);
+
+                    ErroSemantico e = new ErroSemantico();
+                    e.tipo = proximo;
+                    e.tipoDoErro = "Expressao em IF Não foi declarado em Var";
+                    erro.add(e);
+                }
             }
         } else if (primeiroTipo == null) {
+            System.out.println("3");
             ErroSemantico er = new ErroSemantico();
             er.tipo = anterior;
+            er.tipoDoErro = "Expressao em IF Não foi declarado em Var ";
+            erro.add(er);
+        }else if (segundoTipo==null) {
+            System.out.println("3");
+            ErroSemantico er = new ErroSemantico();
+            er.tipo = proximo;
             er.tipoDoErro = "Expressao em IF Não foi declarado em Var";
             erro.add(er);
-        } else if (segundoTipo == null) {
-            ErroSemantico e = new ErroSemantico();
-            e.tipo = proximo;
-            e.tipoDoErro = "Expressao em IF Não foi declarado em Var";
-            erro.add(e);
-        } else {
+        }  else {
             //System.out.println(primeiroTipo.foiDeclaradocomo + segundoTipo.foiDeclaradocomo);
             if (!primeiroTipo.foiDeclaradocomo.equals(segundoTipo.foiDeclaradocomo)) {
                 ErroSemantico er = new ErroSemantico();
