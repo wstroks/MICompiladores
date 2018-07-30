@@ -3,6 +3,7 @@
  */
 package semantico;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 
 import semantico.Listas;
@@ -71,23 +72,17 @@ public class Funcao {
 		
 		if(nome.equals(funcao.getNome())){
 			if(getQtdParametros() == funcao.getQtdParametros()){ 
+				//Quando a quantidade de parâmetros é igual, verificar se os tipos são iguais
+				for (int i = 0; i < parametros.size(); i++) {
+					if(parametros.get(i).foiDeclaradocomo != funcao.getParametros().get(i).foiDeclaradocomo){
+						return false;
+					}
+				}
 				return true;
 			}
 		}
 		
 		return false;
-	}
-	
-	public static boolean isDeclarada(ArrayList<Funcao> tabelaSimbolosFuncao, String nome){
-		
-		for (Funcao funcao : tabelaSimbolosFuncao) {
-			if(funcao.getNome().equals(nome)){
-				return true;
-			}
-		}
-		
-		return false;
-		
 	}
 	
 	public void print(){

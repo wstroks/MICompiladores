@@ -1,6 +1,8 @@
 function int teste(int a, int b){
 }
 
+function int teste(int a, string b){}
+
 start(){
 	var{
 		int x;

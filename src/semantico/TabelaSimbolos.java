@@ -348,9 +348,9 @@ public class TabelaSimbolos {
      */
     public void validaChamadaFuncao(){
     	//Verifica se a função foi declarada
-    	if(Funcao.isDeclarada(tabelaSimbolosFuncao, bufferFuncao.getNome())){
+    	if(getFuncao(bufferFuncao) != null){
     		//Verifica se a quantidade de parâmetros e os tipos estão corretos
-    		Funcao funcaoDeclarada = getFuncaoByName(bufferFuncao.getNome());
+    		Funcao funcaoDeclarada = getFuncao(bufferFuncao);
     		if(funcaoDeclarada.getQtdParametros() == bufferFuncao.getQtdParametros()){
     			for (int i = 0; i < funcaoDeclarada.getQtdParametros(); i++) {
 					if(funcaoDeclarada.getParametros().get(i).foiDeclaradocomo != bufferFuncao.getParametros().get(i).foiDeclaradocomo){
@@ -371,17 +371,33 @@ public class TabelaSimbolos {
     	}
     	else{
     		//erro: chamando função não declarada
-            ErroSemantico er = new ErroSemantico();
-            er.tipoDoErro = "Chamada de função não declarada " + bufferFuncao.getNome();
-            erro.add(er);
+    		if(existeFuncaoMesmoNome(bufferFuncao)){
+                ErroSemantico er = new ErroSemantico();
+                er.tipoDoErro = "A chamada da função " + bufferFuncao.getNome() + " não é aplicável para os argumentos " + bufferFuncao.getStringArgumentos();
+                erro.add(er);
+    		}
+    		else{
+                ErroSemantico er = new ErroSemantico();
+                er.tipoDoErro = "Chamada de função não declarada " + bufferFuncao.getNome();
+                erro.add(er);
+    		}
     	}
     	
     }
     
-    public Funcao getFuncaoByName(String nome){
-    	for (Funcao funcao : tabelaSimbolosFuncao) {
-			if(funcao.getNome().equals(nome)){
-				return funcao;
+    public boolean existeFuncaoMesmoNome(Funcao funcao){
+    	for (Funcao f : tabelaSimbolosFuncao) {
+			if(f.getNome().equals(funcao.getNome())){
+				return true;
+			}
+		}
+    	return false;
+    }
+    
+    public Funcao getFuncao(Funcao funcao){
+    	for (Funcao f : tabelaSimbolosFuncao) {
+			if(f.isEquals(funcao)){
+				return f;
 			}
 		}
     	return null;
