@@ -354,7 +354,13 @@ public class TabelaSimbolos {
 
     public void expressaoIf(Token anterior, Token atual, Token proximo) {
         Listas primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosVariavel);
+        if(primeiroTipo==null){
+            primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosConst);
+        }
         Listas segundoTipo = retornaTokenDeclarado(proximo.getLexema(), tabelaSimbolosVariavel);
+        if(segundoTipo==null){
+            segundoTipo = retornaTokenDeclarado(proximo.getLexema(), tabelaSimbolosConst);
+        }
 
         if (!JafoiDeclarado(anterior.getLexema(), tabelaSimbolosVariavel) && !JafoiDeclarado(proximo.getLexema(), tabelaSimbolosVariavel)) {
             System.out.println("1");
