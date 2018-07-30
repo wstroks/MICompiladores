@@ -18,5 +18,27 @@ public class Listas {
     public Token tipo;
     public String foiDeclaradocomo;
     
+    public Listas(){
+    	
+    }
+    
+    public Listas(Token token, String tipoVariavel){
+    	this.nome = token.getLexema();
+    	tipo = token;
+    	foiDeclaradocomo = tipoVariavel;
+    }
+    
+    public String getString(){
+    	String string = "";
+    	if(nome != null){
+    		string += nome;
+    	}
+    	
+    	if(foiDeclaradocomo != null && !foiDeclaradocomo.isEmpty()){
+    		string += " (" + foiDeclaradocomo + ")";
+    	}
+    	
+    	return string;
+    }
 
 }

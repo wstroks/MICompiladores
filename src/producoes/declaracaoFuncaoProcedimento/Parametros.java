@@ -6,7 +6,9 @@
 package producoes.declaracaoFuncaoProcedimento;
 
 import lexico.TipoToken;
+import lexico.Token;
 import producoes.RegraProducao;
+import semantico.Listas;
 import sintatico.GerenciadorToken;
 
 /**
@@ -25,7 +27,9 @@ public class Parametros extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
         	
             if (Parametro.getInstancia().analisar(gerenciadorToken)) {
-            	gerenciadorToken.ts.bufferFuncao.addParametro(gerenciadorToken.getAnteriorToken().getTipoToken());
+            	String tipoVariavel = gerenciadorToken.getAnteriorDeterminaToken(2).getLexema();
+            	Token token = gerenciadorToken.getAnteriorToken();
+            	gerenciadorToken.ts.bufferFuncao.addParametro(new Listas(token, tipoVariavel));
                 if (ParametrosAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }

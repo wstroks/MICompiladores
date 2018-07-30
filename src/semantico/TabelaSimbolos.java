@@ -59,6 +59,21 @@ public class TabelaSimbolos {
         }
         return null;
     }
+    
+    /**
+     * Retorna o tipo de uma variáve. Caso a variável não seja encontrada na tabela de símbolos, uma string vazia é retornada. 
+     * obs: não está sendo considerado o escopo
+     * @param nomeVariavel
+     * @return String tipo da variável
+     */
+    public String getTipoVariavel(String nomeVariavel){
+    	for (Listas variavel : tabelaSimbolosVariavel) {
+			if(variavel.nome.equals(nomeVariavel)){
+				return variavel.foiDeclaradocomo;
+			}
+		}
+    	return "";
+    }
 
     public void addTabelaVariaveis(String nome, Token tipo) {
         if (JafoiDeclarado(nome, tabelaSimbolosConst)) {
@@ -195,8 +210,7 @@ public class TabelaSimbolos {
         System.out.println("\nTABELA DE SIMBOLOS FUNCAO");
         for (Funcao n : tabelaSimbolosFuncao) {
             //a++;
-            System.out.println("Nome: " + n.getNome() + " | Tipo de retorno: " + n.getTipoRetorno().toString() + " | Parâmetros: " + n.converterParametrosToString());
-
+            n.print();
         }
     }
 
@@ -326,6 +340,51 @@ public class TabelaSimbolos {
             er.tipoDoErro = "Função já declarada " + bufferFuncao.getNome();
             erro.add(er);
         }
+    }
+    
+    /**
+     * Valida a chamada de uma função. Em casa de erro, é adicionado na lista de erros semânticos
+     * A função a ser avaliada é sempre a que está no buffer de função
+     */
+    public void validaChamadaFuncao(){
+    	//Verifica se a função foi declarada
+    	if(Funcao.isDeclarada(tabelaSimbolosFuncao, bufferFuncao.getNome())){
+    		//Verifica se a quantidade de parâmetros e os tipos estão corretos
+    		Funcao funcaoDeclarada = getFuncaoByName(bufferFuncao.getNome());
+    		if(funcaoDeclarada.getQtdParametros() == bufferFuncao.getQtdParametros()){
+    			for (int i = 0; i < funcaoDeclarada.getQtdParametros(); i++) {
+					if(funcaoDeclarada.getParametros().get(i).foiDeclaradocomo != bufferFuncao.getParametros().get(i).foiDeclaradocomo){
+						//erro: chama de função com tipos diferentes
+		                ErroSemantico er = new ErroSemantico();
+		                er.tipoDoErro = "A chamada da função " + funcaoDeclarada.getNomeComArgumentos() + " não é aplicável para os argumentos " + bufferFuncao.getStringArgumentos();
+		                erro.add(er);
+		                break;
+					}
+				}
+    		}
+    		else{
+    			//erro: chamada de função errada - quantidade de parametros diferentes
+                ErroSemantico er = new ErroSemantico();
+                er.tipoDoErro = "A chamada da função " + funcaoDeclarada.getNomeComArgumentos() + " não é aplicável para os argumentos " + bufferFuncao.getStringArgumentos();
+                erro.add(er);
+    		}
+    	}
+    	else{
+    		//erro: chamando função não declarada
+            ErroSemantico er = new ErroSemantico();
+            er.tipoDoErro = "Chamada de função não declarada " + bufferFuncao.getNome();
+            erro.add(er);
+    	}
+    	
+    }
+    
+    public Funcao getFuncaoByName(String nome){
+    	for (Funcao funcao : tabelaSimbolosFuncao) {
+			if(funcao.getNome().equals(nome)){
+				return funcao;
+			}
+		}
+    	return null;
     }
 
     /**

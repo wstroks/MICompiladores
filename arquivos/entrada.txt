@@ -1,14 +1,10 @@
-const{
-
-int a=1,b=1.1;
-string c=1151,aaa="ahduahsd";
+function int teste(int a, int b){
 }
 
 start(){
-
-var{
-int abb=1,basds=1.1;
-string casas=1151,asaa="ahduahsd";
-
-}
+	var{
+		int x;
+		string y;	
+	}
+	teste(x, y);
 }

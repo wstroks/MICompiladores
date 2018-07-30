@@ -5,7 +5,7 @@ package semantico;
 
 import java.util.ArrayList;
 
-import lexico.TipoToken;
+import semantico.Listas;
 
 /**
  * @author Tayane
@@ -14,22 +14,22 @@ import lexico.TipoToken;
 public class Funcao {
 	
 	private String nome;
-	private ArrayList<TipoToken> parametros;
-	private TipoToken tipoRetorno;
+	private ArrayList<Listas> parametros;
+	private String tipoRetorno;
 	
 	public Funcao(){
-		parametros = new ArrayList<TipoToken>();
+		parametros = new ArrayList<Listas>();
 	}
 	
-	public void addParametro(TipoToken tipo){
+	public void addParametro(Listas tipo){
 		parametros.add(tipo);
 	}
 
-	public TipoToken getTipoRetorno() {
+	public String getTipoRetorno() {
 		return tipoRetorno;
 	}
 
-	public void setTipoRetorno(TipoToken tipoRetorno) {
+	public void setTipoRetorno(String tipoRetorno) {
 		this.tipoRetorno = tipoRetorno;
 	}
 
@@ -41,7 +41,7 @@ public class Funcao {
 		return nome;
 	}
 
-	public ArrayList<TipoToken> getParametros() {
+	public ArrayList<Listas> getParametros() {
 		return parametros;
 	}	
 	
@@ -53,10 +53,10 @@ public class Funcao {
 		String string = "";
 		for (int i = 0; i < parametros.size(); i++) {
 			if(i == 0){
-				string = parametros.get(i).toString();
+				string = parametros.get(i).getString();
 			}
 			else{
-				string += ", " + parametros.get(i).toString();
+				string += ", " + parametros.get(i).getString();
 			}
 		}
 		return string;
@@ -76,6 +76,50 @@ public class Funcao {
 		}
 		
 		return false;
+	}
+	
+	public static boolean isDeclarada(ArrayList<Funcao> tabelaSimbolosFuncao, String nome){
+		
+		for (Funcao funcao : tabelaSimbolosFuncao) {
+			if(funcao.getNome().equals(nome)){
+				return true;
+			}
+		}
+		
+		return false;
+		
+	}
+	
+	public void print(){
+		String string = "";
+		if(nome != null){
+			string += "Nome: " + nome;
+		}
+		if(tipoRetorno != null){
+			string += " | Tipo de retorno: " + tipoRetorno;
+		}
+		if(parametros != null){
+			string += " | Parâmetros: " + converterParametrosToString();
+		}
+		System.out.println(string);
+	}
+	
+	public String getStringArgumentos(){
+		String argumentos = "(";
+		for (int i = 0; i < parametros.size(); i++) {
+			if(i == 0){
+				argumentos += parametros.get(i).foiDeclaradocomo;
+			}
+			else{
+				argumentos += ", " + parametros.get(i).foiDeclaradocomo;
+			}
+		}
+		argumentos += ")";
+		return argumentos;
+	}
+	
+	public String getNomeComArgumentos(){
+		return nome + getStringArgumentos();
 	}
 
 }
