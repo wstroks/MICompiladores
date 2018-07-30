@@ -116,5 +116,14 @@ public class Funcao {
 	public String getNomeComArgumentos(){
 		return nome + getStringArgumentos();
 	}
+	
+	public boolean possuiParametrosNaoDeclarados(){
+		for (Listas parametro : parametros) {
+			if(!parametro.isDeclarado()){
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

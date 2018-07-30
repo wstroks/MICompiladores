@@ -372,9 +372,23 @@ public class TabelaSimbolos {
     	else{
     		//erro: chamando função não declarada
     		if(existeFuncaoMesmoNome(bufferFuncao)){
-                ErroSemantico er = new ErroSemantico();
-                er.tipoDoErro = "A chamada da função " + bufferFuncao.getNome() + " não é aplicável para os argumentos " + bufferFuncao.getStringArgumentos();
-                erro.add(er);
+    			//Verifica se os parametros foram declarados
+    			if(bufferFuncao.possuiParametrosNaoDeclarados()){
+    				for (Listas parametro : bufferFuncao.getParametros()) {
+    					System.out.println(parametro.isDeclarado());
+    					if(!parametro.isDeclarado()){
+    						//erro: parâmetro de função não declarado
+    						ErroSemantico er = new ErroSemantico();
+    		                er.tipoDoErro = "A variável " + parametro.nome + " não foi declarada";
+    		                erro.add(er);
+    					}
+    				}
+    			}
+    			else{
+                    ErroSemantico er = new ErroSemantico();
+                    er.tipoDoErro = "A chamada da função " + bufferFuncao.getNome() + " não é aplicável para os argumentos " + bufferFuncao.getStringArgumentos();
+                    erro.add(er);
+    			}
     		}
     		else{
                 ErroSemantico er = new ErroSemantico();
@@ -385,6 +399,11 @@ public class TabelaSimbolos {
     	
     }
     
+    /**
+     * Verifica se existe uma função com declarada com o mesmo nome (não verifica se os parâmetros são iguais)
+     * @param Funcao funcao
+     * @return boolean
+     */
     public boolean existeFuncaoMesmoNome(Funcao funcao){
     	for (Funcao f : tabelaSimbolosFuncao) {
 			if(f.getNome().equals(funcao.getNome())){
@@ -394,6 +413,11 @@ public class TabelaSimbolos {
     	return false;
     }
     
+    /**
+     * Retorna uma função declarada a partir de uma função chamada. Caso a função chamada não tenha sido declarada, é retornado null
+     * @param Funcao funcao
+     * @return Funcao 
+     */
     public Funcao getFuncao(Funcao funcao){
     	for (Funcao f : tabelaSimbolosFuncao) {
 			if(f.isEquals(funcao)){

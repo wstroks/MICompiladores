@@ -40,5 +40,9 @@ public class Listas {
     	
     	return string;
     }
+    
+    public boolean isDeclarado(){
+    	return !foiDeclaradocomo.isEmpty();
+    }
 
 }

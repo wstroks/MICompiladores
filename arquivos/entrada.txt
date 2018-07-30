@@ -8,5 +8,5 @@ start(){
 		int x;
 		string y;	
 	}
-	teste(x, y);
+	teste(c, d);
 }
