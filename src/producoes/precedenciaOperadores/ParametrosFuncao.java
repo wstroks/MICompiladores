@@ -25,11 +25,9 @@ public class ParametrosFuncao extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-        	//System.out.println("parametros função: " + gerenciadorToken.getAnteriorDeterminaToken(1).getLexema());
-        	//System.out.println("tipo parametro: " + gerenciadorToken.ts.getTipoVariavel(gerenciadorToken.getAnteriorDeterminaToken(1).getLexema()));
-        	Token token = gerenciadorToken.getAnteriorDeterminaToken(1);
-        	gerenciadorToken.ts.bufferFuncao.addParametro(new Listas(token, gerenciadorToken.ts.getTipoVariavel(token.getLexema())));
-            if(ParametrosFuncaoAux.getInstancia().analisar(gerenciadorToken)) {
+            Token token = gerenciadorToken.getAnteriorDeterminaToken(1);
+            gerenciadorToken.ts.bufferFuncao.addParametro(new Listas(token, gerenciadorToken.ts.getTipoVariavel(token.getLexema())));
+            if (ParametrosFuncaoAux.getInstancia().analisar(gerenciadorToken)) {
                 return true;
             }
         }

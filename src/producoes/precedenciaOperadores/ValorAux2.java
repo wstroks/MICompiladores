@@ -24,8 +24,7 @@ public class ValorAux2 extends RegraProducao {
 
         if (ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
-            	//Verifica se a chamada está correta
-            	gerenciadorToken.ts.validaChamadaFuncao();
+                gerenciadorToken.ts.validaChamadaFuncao();
                 return true;
             }
         } 

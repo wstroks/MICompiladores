@@ -1,12 +1,26 @@
-function int teste(int a, int b){
+
+const{
+	float az=10.1;
+		int zz=10;
+int []vy=10;
+bool yy=true;
 }
-
-function int teste(int a, string b){}
-
 start(){
-	var{
-		int x;
-		string y;	
-	}
-	teste(c, d);
+d++;
+var{
+int []v;
+int a=1,c=2;
+float d=1.1,p=13.0;
+string y;
+
 }
+y++;
+yy++;
+vy[1]=v[1]+1.0;
+
+if(a+c+c>d)then{
+
+}
+
+}
+

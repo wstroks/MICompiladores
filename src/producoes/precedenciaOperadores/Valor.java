@@ -24,7 +24,11 @@ public class Valor extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
+                
+               gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
                 if (ValorAux1.getInstancia().analisar(gerenciadorToken)) {
+                    
                     return true;
                 }
             } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, false)) {

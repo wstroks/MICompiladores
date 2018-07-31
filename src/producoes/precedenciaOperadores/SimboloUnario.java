@@ -21,15 +21,18 @@ public class SimboloUnario extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-    	if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO, false)){
-    		return true;
-    	}
-    	else if(verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, false)){
-    		return true;
-    	}
-        else{
-			return verificarSimboloVazio(gerenciadorToken, true);
-		}
+        if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO, false)) {
+               System.out.println(gerenciadorToken.getAnteriorDeterminaToken(2).getLexema()+gerenciadorToken.getAnteriorToken().getLexema());
+            gerenciadorToken.ts.incrementadorDescremeta(gerenciadorToken.getAnteriorDeterminaToken(2), gerenciadorToken.getAnteriorToken());
+            return true;
+        } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, false)) {
+            //System.out.println(gerenciadorToken.getAnteriorDeterminaToken(2)+gerenciadorToken.getAnteriorToken().getLexema());
+            gerenciadorToken.ts.incrementadorDescremeta(gerenciadorToken.getAnteriorDeterminaToken(2), gerenciadorToken.getAnteriorToken());
+
+            return true;
+        } else {
+            return verificarSimboloVazio(gerenciadorToken, true);
+        }
 
     }
 
@@ -38,7 +41,7 @@ public class SimboloUnario extends RegraProducao {
         //{ --, ++, E}
         first.add(TipoToken.OPERADOR_ARITIMETICO_DECREMENTO);
         first.add(TipoToken.OPERADOR_ARITIMETICO_INCREMENTO);
-        first.add(TipoToken.EOF);    
+        first.add(TipoToken.EOF);
     }
 
     @Override
@@ -63,4 +66,3 @@ public class SimboloUnario extends RegraProducao {
     }
 
 }
-

@@ -25,11 +25,11 @@ public class Parametros extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-        	
+
             if (Parametro.getInstancia().analisar(gerenciadorToken)) {
-            	String tipoVariavel = gerenciadorToken.getAnteriorDeterminaToken(2).getLexema();
-            	Token token = gerenciadorToken.getAnteriorToken();
-            	gerenciadorToken.ts.bufferFuncao.addParametro(new Listas(token, tipoVariavel));
+                String tipoVariavel = gerenciadorToken.getAnteriorDeterminaToken(2).getLexema();
+                Token token = gerenciadorToken.getAnteriorToken();
+                gerenciadorToken.ts.bufferFuncao.addParametro(new Listas(token, tipoVariavel));
                 if (ParametrosAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }
@@ -54,7 +54,7 @@ public class Parametros extends RegraProducao {
     @Override
     protected void gerarFollow() {
         //{ ) }
-       follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
+        follow.add(TipoToken.DELIMITADOR_FECHA_PARENTESES);
     }
 
 }

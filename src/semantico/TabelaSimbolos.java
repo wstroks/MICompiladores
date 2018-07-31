@@ -23,6 +23,7 @@ public class TabelaSimbolos {
     private List<Token> defineOTipoDeclarado;
     private List<Listas> tabelaSimbolosConstAux;
     private List<Listas> tabelaSimbolosVarAux;
+     private List<Token> ajudaExpressaoAtribuicao;
     public boolean ajuda;
 
     private ArrayList<Funcao> tabelaSimbolosFuncao;
@@ -40,6 +41,7 @@ public class TabelaSimbolos {
         tabelaSimbolosVarAux = new ArrayList<Listas>();
         erro = new ArrayList<ErroSemantico>();
         defineOTipoDeclarado = new ArrayList<Token>();
+         ajudaExpressaoAtribuicao = new ArrayList<Token>();
         this.ajuda = ajuda;
 
     }
@@ -451,13 +453,15 @@ public class TabelaSimbolos {
 
     }
 
-    public void expressaoIf(Token anterior, Token atual, Token proximo) {
+    
+
+   public void expressaoIf(Token anterior, Token atual, Token proximo) {
         Listas primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosVariavel);
-        if(primeiroTipo==null){
+        if (primeiroTipo == null) {
             primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosConst);
         }
         Listas segundoTipo = retornaTokenDeclarado(proximo.getLexema(), tabelaSimbolosVariavel);
-        if(segundoTipo==null){
+        if (segundoTipo == null) {
             segundoTipo = retornaTokenDeclarado(proximo.getLexema(), tabelaSimbolosConst);
         }
 
@@ -517,13 +521,13 @@ public class TabelaSimbolos {
             er.tipo = anterior;
             er.tipoDoErro = "Expressao em IF Não foi declarado em Var ";
             erro.add(er);
-        }else if (segundoTipo==null) {
+        } else if (segundoTipo == null) {
             System.out.println("3");
             ErroSemantico er = new ErroSemantico();
             er.tipo = proximo;
             er.tipoDoErro = "Expressao em IF Não foi declarado em Var";
             erro.add(er);
-        }  else {
+        } else {
             //System.out.println(primeiroTipo.foiDeclaradocomo + segundoTipo.foiDeclaradocomo);
             if (!primeiroTipo.foiDeclaradocomo.equals(segundoTipo.foiDeclaradocomo)) {
                 ErroSemantico er = new ErroSemantico();
@@ -544,6 +548,98 @@ public class TabelaSimbolos {
             }
         }
         return null;
+    }
+
+    public void incrementadorDescremeta(Token anterior, Token proximo) {
+        Listas primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosVariavel);
+        Listas segundoTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosConst);
+
+        if (primeiroTipo == null && segundoTipo == null) {
+            ErroSemantico er = new ErroSemantico();
+            er.tipo = anterior;
+            er.tipoDoErro = "Variavel não declarada";
+            erro.add(er);
+
+        } else {
+            if (primeiroTipo != null) {
+                if (primeiroTipo.foiDeclaradocomo.equals("string") || primeiroTipo.foiDeclaradocomo.equals("bool")) {
+                    ErroSemantico er = new ErroSemantico();
+                    er.tipo = anterior;
+                    er.tipoDoErro = "Tipo de incremento/decremento não é float/int";
+                    erro.add(er);
+                }
+
+            } else if (segundoTipo != null) {
+                if (segundoTipo.foiDeclaradocomo.equals("string") || segundoTipo.foiDeclaradocomo.equals("bool")) {
+                    ErroSemantico er = new ErroSemantico();
+                    er.tipo = anterior;
+                    er.tipoDoErro = "Tipo de incremento/decremento não é float/int";
+                    erro.add(er);
+                }
+            }
+        }
+
+    }
+
+    public void atribuicaoExpressao() {
+        int inteiros = 0;
+        int Ninteiros = 0;
+        int strin=0;
+        int bo=0;
+        int errado=0;
+
+        for (Token a : ajudaExpressaoAtribuicao) {
+            Listas primeiroTipo = retornaTokenDeclarado(a.getLexema(), tabelaSimbolosVariavel);
+            Listas segundoTipo = retornaTokenDeclarado(a.getLexema(), tabelaSimbolosConst);
+            if (primeiroTipo != null) {
+                if (primeiroTipo.foiDeclaradocomo.equals("int")) {
+                    inteiros++;
+                } else if (primeiroTipo.foiDeclaradocomo.equals("float")) {
+                    Ninteiros++;
+                }else if(primeiroTipo.foiDeclaradocomo.equals("string")){
+                    strin++;
+                }else if(primeiroTipo.foiDeclaradocomo.equals("bool")){
+                    bo++;
+                }
+            } else if (segundoTipo != null) {
+                if (segundoTipo.foiDeclaradocomo.equals("int")) {
+                    inteiros++;
+                } else if (segundoTipo.foiDeclaradocomo.equals("float")) {
+                    Ninteiros++;
+                }else if(segundoTipo.foiDeclaradocomo.equals("string")){
+                    strin++;
+                }else if(segundoTipo.foiDeclaradocomo.equals("bool")){
+                    bo++;
+                }
+            }
+        }System.out.println("inteiro "+ inteiros);
+        System.out.println(" não inteiro "+ Ninteiros);
+         if ((inteiros != 0) && ((Ninteiros > 0) || strin>0 && bo>0 )) {
+            ErroSemantico er = new ErroSemantico();
+            er.tipo = ajudaExpressaoAtribuicao.get(0);
+            er.tipoDoErro = "Os tipos não iguais na atribuicao ";
+            erro.add(er);
+        }else if( Ninteiros != 0&& (inteiros > 0  || strin>0 || bo>0)){
+            ErroSemantico er = new ErroSemantico();
+            er.tipo = ajudaExpressaoAtribuicao.get(0);
+            er.tipoDoErro = "Os tipos não iguais na atribuicao ";
+            erro.add(er);
+        }else if(strin!=0 && (bo>0 || inteiros > 0 || Ninteiros > 0) ){
+            ErroSemantico er = new ErroSemantico();
+            er.tipo = ajudaExpressaoAtribuicao.get(0);
+            er.tipoDoErro = "Os tipos não iguais na atribuicao ";
+            erro.add(er);
+        }else if( bo!=0 && (strin>0 ||inteiros > 0 || Ninteiros > 0 )){
+            ErroSemantico er = new ErroSemantico();
+            er.tipo = ajudaExpressaoAtribuicao.get(0);
+            er.tipoDoErro = "Os tipos não iguais na atribuicao ";
+            erro.add(er);
+        }
+        ajudaExpressaoAtribuicao.clear();
+    }
+
+    public void addAtriicaoExpressao(Token x) {
+        ajudaExpressaoAtribuicao.add(x);
     }
 
 }
