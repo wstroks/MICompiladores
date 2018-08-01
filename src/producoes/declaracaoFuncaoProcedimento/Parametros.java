@@ -23,9 +23,7 @@ public class Parametros extends RegraProducao {
 
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
-
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
             if (Parametro.getInstancia().analisar(gerenciadorToken)) {
                 String tipoVariavel = gerenciadorToken.getAnteriorDeterminaToken(2).getLexema();
                 Token token = gerenciadorToken.getAnteriorToken();

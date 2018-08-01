@@ -22,7 +22,7 @@ public class SimboloUnario extends RegraProducao {
     @Override
     public boolean analisar(GerenciadorToken gerenciadorToken) {
         if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_INCREMENTO, false)) {
-               System.out.println(gerenciadorToken.getAnteriorDeterminaToken(2).getLexema()+gerenciadorToken.getAnteriorToken().getLexema());
+               //System.out.println(gerenciadorToken.getAnteriorDeterminaToken(2).getLexema()+gerenciadorToken.getAnteriorToken().getLexema());
             gerenciadorToken.ts.incrementadorDescremeta(gerenciadorToken.getAnteriorDeterminaToken(2), gerenciadorToken.getAnteriorToken());
             return true;
         } else if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_ARITIMETICO_DECREMENTO, false)) {

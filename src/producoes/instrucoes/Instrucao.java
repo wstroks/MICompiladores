@@ -29,7 +29,6 @@ public class Instrucao extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-
             if (InstrucaoNormal.getInstancia().analisar(gerenciadorToken)) {
                 return true;
             } else if (EstruturaCondicional.getInstancia().analisar(gerenciadorToken)) {

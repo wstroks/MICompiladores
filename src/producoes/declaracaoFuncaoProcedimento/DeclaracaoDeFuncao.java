@@ -22,8 +22,8 @@ public class DeclaracaoDeFuncao extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
-        	gerenciadorToken.ts.clearBufferFuncao();
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FUNCTION, false)) {
+            	gerenciadorToken.ts.clearBufferFuncao();
                 if (FuncID.getInstancia().analisar(gerenciadorToken)) {
                 	gerenciadorToken.ts.bufferFuncao.setNome(gerenciadorToken.getAnteriorToken().getLexema());
                     if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {

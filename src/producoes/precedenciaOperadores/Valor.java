@@ -26,7 +26,7 @@ public class Valor extends RegraProducao {
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 
                gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
-                System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
+                //System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
                 if (ValorAux1.getInstancia().analisar(gerenciadorToken)) {
                     
                     return true;

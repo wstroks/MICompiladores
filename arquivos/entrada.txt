@@ -1,26 +1,13 @@
-
-const{
-	float az=10.1;
-		int zz=10;
-int []vy=10;
-bool yy=true;
-}
-start(){
-d++;
-var{
-int []v;
-int a=1,c=2;
-float d=1.1,p=13.0;
-string y;
-
-}
-y++;
-yy++;
-vy[1]=v[1]+1.0;
-
-if(a+c+c>d)then{
-
+function int nomeDaFuncao ( ) {
+    nomeDaFuncao();
+    algumaOutraVariavel = nomeDaFuncao();
+    return;
 }
 
+function boolean teste(int a, int b){
 }
 
+procedure nomeDoProcedimento ( ) {
+    nomeDaFuncao();
+    algumaOutraVariavel = nomeDaFuncao();
+}

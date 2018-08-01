@@ -3,7 +3,6 @@
  */
 package semantico;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 
 import semantico.Listas;
@@ -12,13 +11,16 @@ import semantico.Listas;
  * @author Tayane
  *
  */
-public class Funcao {
+public class FuncaoProcedimento {
 	
 	private String nome;
 	private ArrayList<Listas> parametros;
 	private String tipoRetorno;
+	private String tipo = "function"; //"function" ou "procedure"
+	private String cenario = "declaracao"; //"declaracao" ou "chamada"
 	
-	public Funcao(){
+	public FuncaoProcedimento(String cenario){
+		this.cenario = cenario;
 		parametros = new ArrayList<Listas>();
 	}
 	
@@ -46,6 +48,18 @@ public class Funcao {
 		return parametros;
 	}	
 	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	public String getCenario() {
+		return cenario;
+	}
+
 	public int getQtdParametros(){
 		return parametros.size();
 	}
@@ -65,16 +79,16 @@ public class Funcao {
 	
 	/**
 	 * Verifica se uma função é igual a outra (sobrecarga não configura funções iguais, sobrescrita não é permitido)
-	 * @param funcao
+	 * @param funcaoProcedimento
 	 * @return
 	 */
-	public boolean isEquals(Funcao funcao){
+	public boolean isEquals(FuncaoProcedimento funcaoProcedimento){
 		
-		if(nome.equals(funcao.getNome())){
-			if(getQtdParametros() == funcao.getQtdParametros()){ 
+		if(nome.equals(funcaoProcedimento.getNome())){
+			if(getQtdParametros() == funcaoProcedimento.getQtdParametros()){ 
 				//Quando a quantidade de parâmetros é igual, verificar se os tipos são iguais
 				for (int i = 0; i < parametros.size(); i++) {
-					if(parametros.get(i).foiDeclaradocomo != funcao.getParametros().get(i).foiDeclaradocomo){
+					if(parametros.get(i).foiDeclaradocomo != funcaoProcedimento.getParametros().get(i).foiDeclaradocomo){
 						return false;
 					}
 				}
@@ -86,7 +100,7 @@ public class Funcao {
 	}
 	
 	public void print(){
-		String string = "";
+		String string = this.tipo.toUpperCase() + " => ";
 		if(nome != null){
 			string += "Nome: " + nome;
 		}
@@ -124,6 +138,14 @@ public class Funcao {
 			}
 		}
 		return false;
+	}
+
+	public boolean isDeclaracao(){
+		return cenario.equals("declaracao");
+	}
+
+	public boolean isChamada(){
+		return cenario.equals("chamada");
 	}
 
 }

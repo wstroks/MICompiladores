@@ -26,8 +26,9 @@ public class TabelaSimbolos {
      private List<Token> ajudaExpressaoAtribuicao;
     public boolean ajuda;
 
-    private ArrayList<Funcao> tabelaSimbolosFuncao;
-    public Funcao bufferFuncao;
+    private ArrayList<FuncaoProcedimento> tabelaSimbolosFuncao;
+    public FuncaoProcedimento bufferFuncao;
+    public FuncaoProcedimento bufferChamadaFuncao;
 
     public TabelaSimbolos() {
         //functionsProcedures = new ArrayList<Entrada>();
@@ -36,7 +37,7 @@ public class TabelaSimbolos {
         tabelaSimbolosVariavel = new ArrayList<Listas>();
         tabelaSimbolosConst = new ArrayList<Listas>();
         tabelaSimbolosStruct = new ArrayList<Listas>();
-        tabelaSimbolosFuncao = new ArrayList<Funcao>();
+        tabelaSimbolosFuncao = new ArrayList<FuncaoProcedimento>();
         tabelaSimbolosConstAux = new ArrayList<Listas>();
         tabelaSimbolosVarAux = new ArrayList<Listas>();
         erro = new ArrayList<ErroSemantico>();
@@ -209,8 +210,8 @@ public class TabelaSimbolos {
             System.out.println("Struct " + n.nome.toUpperCase() + "Linha : " + n.tipo.getLinha() + " ele é um " + n.foiDeclaradocomo.toUpperCase());
 
         }
-        System.out.println("\nTABELA DE SIMBOLOS FUNCAO");
-        for (Funcao n : tabelaSimbolosFuncao) {
+        System.out.println("\nTABELA DE SIMBOLOS FUNCAO E PROCEDIMENTO");
+        for (FuncaoProcedimento n : tabelaSimbolosFuncao) {
             //a++;
             n.print();
         }
@@ -336,6 +337,8 @@ public class TabelaSimbolos {
     public void addFuncao() {
         //Verificar se já existe uma função com o mesmo nome mesmos parametros (mesma quantidade e mesmos tipos)
         if (!funcaoBufferJaExiste()) {
+        	//System.out.println("adicionando funcao: " + bufferFuncao.getNome());
+        	//System.out.println("tipo retorno: " + bufferFuncao.getTipoRetorno());
             tabelaSimbolosFuncao.add(bufferFuncao);
         } else {
             ErroSemantico er = new ErroSemantico();
@@ -350,15 +353,15 @@ public class TabelaSimbolos {
      */
     public void validaChamadaFuncao(){
     	//Verifica se a função foi declarada
-    	if(getFuncao(bufferFuncao) != null){
+    	if(getFuncao(bufferChamadaFuncao) != null){
     		//Verifica se a quantidade de parâmetros e os tipos estão corretos
-    		Funcao funcaoDeclarada = getFuncao(bufferFuncao);
-    		if(funcaoDeclarada.getQtdParametros() == bufferFuncao.getQtdParametros()){
+    		FuncaoProcedimento funcaoDeclarada = getFuncao(bufferChamadaFuncao);
+    		if(funcaoDeclarada.getQtdParametros() == bufferChamadaFuncao.getQtdParametros()){
     			for (int i = 0; i < funcaoDeclarada.getQtdParametros(); i++) {
-					if(funcaoDeclarada.getParametros().get(i).foiDeclaradocomo != bufferFuncao.getParametros().get(i).foiDeclaradocomo){
+					if(funcaoDeclarada.getParametros().get(i).foiDeclaradocomo != bufferChamadaFuncao.getParametros().get(i).foiDeclaradocomo){
 						//erro: chama de função com tipos diferentes
 		                ErroSemantico er = new ErroSemantico();
-		                er.tipoDoErro = "A chamada da função " + funcaoDeclarada.getNomeComArgumentos() + " não é aplicável para os argumentos " + bufferFuncao.getStringArgumentos();
+		                er.tipoDoErro = "A chamada da função " + funcaoDeclarada.getNomeComArgumentos() + " não é aplicável para os argumentos " + bufferChamadaFuncao.getStringArgumentos();
 		                erro.add(er);
 		                break;
 					}
@@ -367,17 +370,17 @@ public class TabelaSimbolos {
     		else{
     			//erro: chamada de função errada - quantidade de parametros diferentes
                 ErroSemantico er = new ErroSemantico();
-                er.tipoDoErro = "A chamada da função " + funcaoDeclarada.getNomeComArgumentos() + " não é aplicável para os argumentos " + bufferFuncao.getStringArgumentos();
+                er.tipoDoErro = "A chamada da função " + funcaoDeclarada.getNomeComArgumentos() + " não é aplicável para os argumentos " + bufferChamadaFuncao.getStringArgumentos();
                 erro.add(er);
     		}
     	}
     	else{
     		//erro: chamando função não declarada
-    		if(existeFuncaoMesmoNome(bufferFuncao)){
+    		if(existeFuncaoMesmoNome(bufferChamadaFuncao)){
     			//Verifica se os parametros foram declarados
-    			if(bufferFuncao.possuiParametrosNaoDeclarados()){
-    				for (Listas parametro : bufferFuncao.getParametros()) {
-    					System.out.println(parametro.isDeclarado());
+    			if(bufferChamadaFuncao.possuiParametrosNaoDeclarados()){
+    				for (Listas parametro : bufferChamadaFuncao.getParametros()) {
+    					//System.out.println(parametro.isDeclarado());
     					if(!parametro.isDeclarado()){
     						//erro: parâmetro de função não declarado
     						ErroSemantico er = new ErroSemantico();
@@ -388,13 +391,13 @@ public class TabelaSimbolos {
     			}
     			else{
                     ErroSemantico er = new ErroSemantico();
-                    er.tipoDoErro = "A chamada da função " + bufferFuncao.getNome() + " não é aplicável para os argumentos " + bufferFuncao.getStringArgumentos();
+                    er.tipoDoErro = "A chamada da função " + bufferChamadaFuncao.getNome() + " não é aplicável para os argumentos " + bufferChamadaFuncao.getStringArgumentos();
                     erro.add(er);
     			}
     		}
     		else{
                 ErroSemantico er = new ErroSemantico();
-                er.tipoDoErro = "Chamada de função não declarada " + bufferFuncao.getNome();
+                er.tipoDoErro = "Chamada de função não declarada " + bufferChamadaFuncao.getNome();
                 erro.add(er);
     		}
     	}
@@ -403,12 +406,12 @@ public class TabelaSimbolos {
     
     /**
      * Verifica se existe uma função com declarada com o mesmo nome (não verifica se os parâmetros são iguais)
-     * @param Funcao funcao
+     * @param FuncaoProcedimento funcao
      * @return boolean
      */
-    public boolean existeFuncaoMesmoNome(Funcao funcao){
-    	for (Funcao f : tabelaSimbolosFuncao) {
-			if(f.getNome().equals(funcao.getNome())){
+    public boolean existeFuncaoMesmoNome(FuncaoProcedimento funcaoProcedimento){
+    	for (FuncaoProcedimento f : tabelaSimbolosFuncao) {
+			if(f.getNome().equals(funcaoProcedimento.getNome())){
 				return true;
 			}
 		}
@@ -417,12 +420,12 @@ public class TabelaSimbolos {
     
     /**
      * Retorna uma função declarada a partir de uma função chamada. Caso a função chamada não tenha sido declarada, é retornado null
-     * @param Funcao funcao
-     * @return Funcao 
+     * @param FuncaoProcedimento funcao
+     * @return FuncaoProcedimento 
      */
-    public Funcao getFuncao(Funcao funcao){
-    	for (Funcao f : tabelaSimbolosFuncao) {
-			if(f.isEquals(funcao)){
+    public FuncaoProcedimento getFuncao(FuncaoProcedimento funcaoProcedimento){
+    	for (FuncaoProcedimento f : tabelaSimbolosFuncao) {
+			if(f.isEquals(funcaoProcedimento)){
 				return f;
 			}
 		}
@@ -430,21 +433,28 @@ public class TabelaSimbolos {
     }
 
     /**
-     * Limpa o buffer de função
+     * Limpa o buffer de declaração de função/procedimento
      */
     public void clearBufferFuncao() {
-        bufferFuncao = new Funcao();
+        bufferFuncao = new FuncaoProcedimento("declaracao");
     }
 
     /**
-     * Verifica se a função que está no buffer já existe
+     * Limpa o buffer de chamada de função/procedimento
+     */
+    public void clearBufferChamadaFuncao() {
+        bufferChamadaFuncao = new FuncaoProcedimento("chamada");
+    }
+
+    /**
+     * Verifica se a função que está no buffer de declaração de função já existe
      *
      * @return boolean
      */
     public boolean funcaoBufferJaExiste() {
 
-        for (Funcao funcao : tabelaSimbolosFuncao) {
-            if (funcao.isEquals(bufferFuncao)) {
+        for (FuncaoProcedimento funcaoProcedimento : tabelaSimbolosFuncao) {
+            if (funcaoProcedimento.isEquals(bufferFuncao)) {
                 return true;
             }
         }
@@ -466,7 +476,7 @@ public class TabelaSimbolos {
         }
 
         if (!JafoiDeclarado(anterior.getLexema(), tabelaSimbolosVariavel) && !JafoiDeclarado(proximo.getLexema(), tabelaSimbolosVariavel)) {
-            System.out.println("1");
+            //System.out.println("1");
             if (!anterior.getTipoToken().toString().equals(proximo.getTipoToken().toString())) {
 
                 ErroSemantico er = new ErroSemantico();
@@ -516,13 +526,13 @@ public class TabelaSimbolos {
                 }
             }
         } else if (primeiroTipo == null) {
-            System.out.println("3");
+            //System.out.println("3");
             ErroSemantico er = new ErroSemantico();
             er.tipo = anterior;
             er.tipoDoErro = "Expressao em IF Não foi declarado em Var ";
             erro.add(er);
         } else if (segundoTipo == null) {
-            System.out.println("3");
+            //System.out.println("3");
             ErroSemantico er = new ErroSemantico();
             er.tipo = proximo;
             er.tipoDoErro = "Expressao em IF Não foi declarado em Var";
@@ -612,8 +622,9 @@ public class TabelaSimbolos {
                     bo++;
                 }
             }
-        }System.out.println("inteiro "+ inteiros);
-        System.out.println(" não inteiro "+ Ninteiros);
+        }
+        //System.out.println("inteiro "+ inteiros);
+        //System.out.println(" não inteiro "+ Ninteiros);
          if ((inteiros != 0) && ((Ninteiros > 0) || strin>0 && bo>0 )) {
             ErroSemantico er = new ErroSemantico();
             er.tipo = ajudaExpressaoAtribuicao.get(0);

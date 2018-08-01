@@ -24,8 +24,8 @@ public class ValorAux1 extends RegraProducao {
 
         if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, false)) {
             // System.out.println(gerenciadorToken.getAnteriorToken().getLexema()+gerenciadorToken.getTokenAtual().getLexema()+ gerenciadorToken.getProximoDeterminaToken(1).getLexema());
-            gerenciadorToken.ts.clearBufferFuncao();
-            gerenciadorToken.ts.bufferFuncao.setNome(gerenciadorToken.getAnteriorDeterminaToken(2).getLexema());
+            gerenciadorToken.ts.clearBufferChamadaFuncao();
+            gerenciadorToken.ts.bufferChamadaFuncao.setNome(gerenciadorToken.getAnteriorDeterminaToken(2).getLexema());
             if (ValorAux2.getInstancia().analisar(gerenciadorToken)) {
                 return true;
             }
