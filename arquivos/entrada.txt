@@ -6,12 +6,12 @@ function int nomeDaFuncao ( ) {
 
 function boolean teste(int a){ }
 
-procedure teste(int a) { }
+//procedure teste(int a) { }
 
-start(){
-	var{
-		int a, b;
-	}
-	teste(a);
-}
+//start(){
+//	var{
+//		int a, b;
+//	}
+//	teste(a);
+//}
 

@@ -25,6 +25,7 @@ public class DeclaracaoDeInicio extends RegraProducao {
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
                     if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
                         if (Bloco.getInstancia().analisar(gerenciadorToken)) {
+                        	gerenciadorToken.ts.incrementaStart();
                             return true;
                         }
                     }

@@ -23,12 +23,14 @@ public class TabelaSimbolos {
     private List<Token> defineOTipoDeclarado;
     private List<Listas> tabelaSimbolosConstAux;
     private List<Listas> tabelaSimbolosVarAux;
-     private List<Token> ajudaExpressaoAtribuicao;
+    private List<Token> ajudaExpressaoAtribuicao;
     public boolean ajuda;
 
     private ArrayList<FuncaoProcedimento> tabelaSimbolosFuncao;
     public FuncaoProcedimento bufferFuncaoProcedimento;
     public FuncaoProcedimento bufferChamadaFuncaoProcedimento;
+    
+    private int qtdStart = 0; //quantidade de vezes que o método start foi chamado
 
     public TabelaSimbolos() {
         //functionsProcedures = new ArrayList<Entrada>();
@@ -650,6 +652,22 @@ public class TabelaSimbolos {
 
     public void addAtriicaoExpressao(Token x) {
         ajudaExpressaoAtribuicao.add(x);
+    }
+    
+    public void incrementaStart(){
+    	qtdStart++;
+    }
+  
+    public void verificaStart(){
+		ErroSemantico er = new ErroSemantico();
+    	if(qtdStart == 0){
+            er.tipoDoErro = "Método start não declarado";
+            erro.add(er);
+    	}
+    	else if(qtdStart > 1){
+            er.tipoDoErro = "Múltiplas ocorrências do método start foram encontradas: " + qtdStart + " ocorrências";
+            erro.add(er);
+    	}
     }
 
 }
