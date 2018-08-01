@@ -6,6 +6,7 @@ package producoes.declaracaoFuncaoProcedimento;
 import lexico.TipoToken;
 import producoes.RegraProducao;
 import producoes.blocoVariaveis.ExpressaoIdentificadoresVar;
+import semantico.FuncaoProcedimento;
 import sintatico.GerenciadorToken;
 
 /**
@@ -23,12 +24,12 @@ public class DeclaracaoDeFuncao extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FUNCTION, false)) {
-            	gerenciadorToken.ts.clearBufferFuncao();
+            	gerenciadorToken.ts.clearBufferFuncaoProcedimento(FuncaoProcedimento.getTipoFuncao());
                 if (FuncID.getInstancia().analisar(gerenciadorToken)) {
-                	gerenciadorToken.ts.bufferFuncao.setNome(gerenciadorToken.getAnteriorToken().getLexema());
+                	gerenciadorToken.ts.bufferFuncaoProcedimento.setNome(gerenciadorToken.getAnteriorToken().getLexema());
                     if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
                         if (FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
-                        	gerenciadorToken.ts.addFuncao();
+                        	gerenciadorToken.ts.addFuncaoProcedimento();
                             return true;
                         }
                     }

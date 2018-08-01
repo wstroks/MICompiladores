@@ -7,6 +7,7 @@ package producoes.precedenciaOperadores;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import semantico.FuncaoProcedimento;
 import sintatico.GerenciadorToken;
 
 /**
@@ -25,6 +26,7 @@ public class ValorAux2 extends RegraProducao {
         if (ParametrosFuncao.getInstancia().analisar(gerenciadorToken)) {
             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
                 gerenciadorToken.ts.validaChamadaFuncao();
+                //gerenciadorToken.ts.clearBufferChamadaFuncaoProcedimento(FuncaoProcedimento.getTipoFuncao());
                 return true;
             }
         } 

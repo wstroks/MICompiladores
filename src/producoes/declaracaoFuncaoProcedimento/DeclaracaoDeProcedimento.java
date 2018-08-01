@@ -7,6 +7,7 @@ package producoes.declaracaoFuncaoProcedimento;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import semantico.FuncaoProcedimento;
 import sintatico.GerenciadorToken;
 
 /**
@@ -24,9 +25,12 @@ public class DeclaracaoDeProcedimento extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_PROCEDURE, false)) {
+            	gerenciadorToken.ts.clearBufferFuncaoProcedimento(FuncaoProcedimento.getTipoProcedimento());
                 if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, true)) {
+                	gerenciadorToken.ts.bufferFuncaoProcedimento.setNome(gerenciadorToken.getAnteriorToken().getLexema());
                     if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
                         if (FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
+                        	gerenciadorToken.ts.addFuncaoProcedimento();
                             return true;
                         }
                     }

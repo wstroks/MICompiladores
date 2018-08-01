@@ -27,7 +27,7 @@ public class Parametros extends RegraProducao {
             if (Parametro.getInstancia().analisar(gerenciadorToken)) {
                 String tipoVariavel = gerenciadorToken.getAnteriorDeterminaToken(2).getLexema();
                 Token token = gerenciadorToken.getAnteriorToken();
-                gerenciadorToken.ts.bufferFuncao.addParametro(new Listas(token, tipoVariavel));
+                gerenciadorToken.ts.bufferFuncaoProcedimento.addParametro(new Listas(token, tipoVariavel));
                 if (ParametrosAux.getInstancia().analisar(gerenciadorToken)) {
                     return true;
                 }

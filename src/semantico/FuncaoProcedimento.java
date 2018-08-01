@@ -13,13 +13,14 @@ import semantico.Listas;
  */
 public class FuncaoProcedimento {
 	
-	private String nome;
+	private String nome = "";
 	private ArrayList<Listas> parametros;
 	private String tipoRetorno;
 	private String tipo = "function"; //"function" ou "procedure"
 	private String cenario = "declaracao"; //"declaracao" ou "chamada"
 	
-	public FuncaoProcedimento(String cenario){
+	public FuncaoProcedimento(String tipo, String cenario){
+		this.tipo = tipo;
 		this.cenario = cenario;
 		parametros = new ArrayList<Listas>();
 	}
@@ -78,7 +79,7 @@ public class FuncaoProcedimento {
 	}
 	
 	/**
-	 * Verifica se uma função é igual a outra (sobrecarga não configura funções iguais, sobrescrita não é permitido)
+	 * Verifica se uma função/procedimento é igual a outra (sobrecarga não configura funções iguais, sobrescrita não é permitido)
 	 * @param funcaoProcedimento
 	 * @return
 	 */
@@ -88,7 +89,7 @@ public class FuncaoProcedimento {
 			if(getQtdParametros() == funcaoProcedimento.getQtdParametros()){ 
 				//Quando a quantidade de parâmetros é igual, verificar se os tipos são iguais
 				for (int i = 0; i < parametros.size(); i++) {
-					if(parametros.get(i).foiDeclaradocomo != funcaoProcedimento.getParametros().get(i).foiDeclaradocomo){
+					if(!parametros.get(i).foiDeclaradocomo.equals(funcaoProcedimento.getParametros().get(i).foiDeclaradocomo)){
 						return false;
 					}
 				}
@@ -146,6 +147,22 @@ public class FuncaoProcedimento {
 
 	public boolean isChamada(){
 		return cenario.equals("chamada");
+	}
+	
+	public static String getTipoFuncao(){
+		return "function";
+	}
+	
+	public static String getTipoProcedimento(){
+		return "procedure";
+	}
+	
+	public boolean isFuncao(){
+		return tipo.equals(getTipoFuncao());
+	}
+
+	public boolean isProcedimento(){
+		return tipo.equals(getTipoProcedimento());
 	}
 
 }

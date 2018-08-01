@@ -4,10 +4,14 @@ function int nomeDaFuncao ( ) {
     return;
 }
 
-function boolean teste(int a, int b){
+function boolean teste(int a){ }
+
+procedure teste(int a) { }
+
+start(){
+	var{
+		int a, b;
+	}
+	teste(a);
 }
 
-procedure nomeDoProcedimento ( ) {
-    nomeDaFuncao();
-    algumaOutraVariavel = nomeDaFuncao();
-}
