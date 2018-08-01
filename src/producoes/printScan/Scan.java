@@ -27,6 +27,7 @@ public class Scan extends RegraProducao {
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
                     if ((Entrada.getInstancia().analisar(gerenciadorToken))) {
                         if ((OutrasEntradas.getInstancia().analisar(gerenciadorToken))) {
+                            gerenciadorToken.ts.ajudaExpressaoAtribuicao.clear();
                             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
                                 return true;
                             }

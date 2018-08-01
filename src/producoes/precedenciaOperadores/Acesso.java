@@ -6,6 +6,7 @@
 package producoes.precedenciaOperadores;
 
 import lexico.TipoToken;
+import lexico.Token;
 import producoes.RegraProducao;
 import sintatico.GerenciadorToken;
 
@@ -29,8 +30,13 @@ public class Acesso extends RegraProducao {
                 }
             } 
             else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_COLCHETE, false)) {
+                gerenciadorToken.ts.ajudaVetor=true;
                 if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                    
+                    gerenciadorToken.ts.ajudaVetores();
                     if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_COLCHETE, true)) {
+                       gerenciadorToken.ts.ajudaVetor=false;
+                       
                         return true;
                     }
                 }

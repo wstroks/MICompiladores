@@ -30,6 +30,7 @@ public class Entrada extends RegraProducao {
                     return true;
                 }
             } else if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
+                gerenciadorToken.ts.variavelNaoDeclaradoErro(gerenciadorToken.getAnteriorToken());
                 return true;
             }
 

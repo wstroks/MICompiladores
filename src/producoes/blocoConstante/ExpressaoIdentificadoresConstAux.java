@@ -25,6 +25,7 @@ public class ExpressaoIdentificadoresConstAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA, false)) {
+                gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA, false)) {
                 if (ExpressaoIdentificadoresConst.getInstancia().analisar(gerenciadorToken)) {

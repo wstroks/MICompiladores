@@ -28,6 +28,7 @@ public class OperacaoDeAtribuicao extends RegraProducao {
 				if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
 					gerenciadorToken.ts.atribuicaoConst(gerenciadorToken.getAnteriorToken());
 					gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                                        gerenciadorToken.ts.variavelNaoDeclaradoErro(gerenciadorToken.getAnteriorToken());
 					//System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
 					if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
 
@@ -39,12 +40,14 @@ public class OperacaoDeAtribuicao extends RegraProducao {
 			} else if (Final.getInstancia().analisar(gerenciadorToken)) {
 				if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
 					if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                                            gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getTokenAtual());
 						return true;
 					}
 				}
 			}
 
 		} else if (Expressao.getInstancia().analisar(gerenciadorToken)) {
+                    gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getTokenAtual());
 			return true;
 		}
 

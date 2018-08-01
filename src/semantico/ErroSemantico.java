@@ -19,7 +19,7 @@ public class ErroSemantico {
     public String getMensagem(){
     	String mensagem = tipoDoErro;
     	if(tipo != null){
-    		mensagem += " " + tipo.getLexema();
+    		mensagem += " | " + "Lexama: " + tipo.getLexema();
     	}
     	return mensagem;
     }

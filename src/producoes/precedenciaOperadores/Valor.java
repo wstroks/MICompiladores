@@ -26,6 +26,12 @@ public class Valor extends RegraProducao {
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
                 
                gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+               if(gerenciadorToken.ts.ajudaVetor){
+                    gerenciadorToken.ts.removeAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                    gerenciadorToken.ts.ajudaVetores.add(gerenciadorToken.getAnteriorToken());
+                }
+               gerenciadorToken.ts.variavelNaoDeclaradoErro(gerenciadorToken.getAnteriorToken());
+                
                 //System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
                 if (ValorAux1.getInstancia().analisar(gerenciadorToken)) {
                     
@@ -38,12 +44,33 @@ public class Valor extends RegraProducao {
                     }
                 }
             } else if (verificarToken(gerenciadorToken, TipoToken.NUMERO, false)) {
+                
+                gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                if(gerenciadorToken.ts.ajudaVetor){
+                    gerenciadorToken.ts.removeAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                    gerenciadorToken.ts.ajudaVetores.add(gerenciadorToken.getAnteriorToken());
+                }
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_FALSE, false)) {
+                gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                 if(gerenciadorToken.ts.ajudaVetor){
+                    gerenciadorToken.ts.removeAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                    gerenciadorToken.ts.ajudaVetores.add(gerenciadorToken.getAnteriorToken());
+                }
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_TRUE, false)) {
+                gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                 if(gerenciadorToken.ts.ajudaVetor){
+                    gerenciadorToken.ts.removeAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                    gerenciadorToken.ts.ajudaVetores.add(gerenciadorToken.getAnteriorToken());
+                }
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.CADEIA_CARACTERES, false)) {
+                gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                 if(gerenciadorToken.ts.ajudaVetor){
+                    gerenciadorToken.ts.removeAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                    gerenciadorToken.ts.ajudaVetores.add(gerenciadorToken.getAnteriorToken());
+                }
                 return true;
             }
 

@@ -31,6 +31,8 @@ public class Print extends RegraProducao {
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
                     if (Saida.getInstancia().analisar(gerenciadorToken)) {
                         if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
+                            gerenciadorToken.ts.atribuicaoExpressao();
+                            gerenciadorToken.ts.ajudaExpressaoAtribuicao.clear();
                             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
                                 return true;
                             }

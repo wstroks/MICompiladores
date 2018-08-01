@@ -32,8 +32,9 @@ public class InstrucaoNormal extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (OperacaoDeAtribuicao.getInstancia().analisar(gerenciadorToken)) {
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA, true)) {
-                    gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
                     gerenciadorToken.ts.atribuicaoExpressao();
+                    gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                    
                     //System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
                     return true;
                 }

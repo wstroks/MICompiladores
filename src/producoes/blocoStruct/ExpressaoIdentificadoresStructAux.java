@@ -31,6 +31,7 @@ public class ExpressaoIdentificadoresStructAux extends RegraProducao {
                 }
 
             } else if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO_VIRGULA, true)) {
+                gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
                 return true;
             }
 

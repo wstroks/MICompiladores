@@ -25,6 +25,8 @@ public class OutrasSaidas extends RegraProducao {
     public boolean analisar(GerenciadorToken gerenciadorToken) {
             
 		if(verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_VIRGULA, false)){
+                    gerenciadorToken.ts.atribuicaoExpressao();
+                    gerenciadorToken.ts.ajudaExpressaoAtribuicao.clear();
 			if (Saida.getInstancia().analisar(gerenciadorToken)) {
 				if (OutrasSaidas.getInstancia().analisar(gerenciadorToken)) {
 					return true;
