@@ -47,7 +47,7 @@ public class Sintatico {
 		gerenciadorToken.ts.ImpressaoVariavelErro();
 		System.out.println("\n");
 		gerenciadorToken.ts.ImpressaoVariavel();
-		// gerenciadorToken.printErroToFile(b);
+		gerenciadorToken.ts.printErroToFile(b);
 
 	}
 

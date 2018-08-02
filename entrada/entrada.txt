@@ -1,35 +1,50 @@
+const {
+  int a=1.0;
+}
+
+
+
+var{
+	int w, z; //escopo = "global"
+}
+
+function int teste1(){
+	var{
+		int x, y; 
+	}
+ x=b;
+}
+
+var{
+	int t, s; 
+}
+struct washington{
+	int naruto;
+
+}
+
+struct narutando extends washington{
+	int dasd;
+	
+
+}
+function int teste2(){
+	var{
+		int i, j; 
+	}
+	
+	i = x;
+	j = w; 
+	a = j; 
+	
+}
+
 start(){
-
-    struct Students{
-        string name;
-        float math, physics, mean;
-    };
-
-    var {
-        
-        int count;
-    }
-
-    while(count < 5){
-
-        print("Nome do aluno: ", count + 1);
-        scan(students[count].name);
-
-        print("Nota de matematica: ");
-        scan(students[count].math);
-
-        print("Nota de fisica: ");
-        scan(students[count].physics);
-
-        students[count].mean = (students[count].math + students[count].physics)/2;
-    }
-
-    print("\nExibindo nomes e medias:\n");
-
-    while(count < 5){
-        print("Aluno ", count + 1);
-        print("Nome: ", students[count].name);
-        print("Media:", students[count].mean);
-    }
-
+	var{
+		int a; 
+	}
+	
+	i = x; 
+	a = z; 
+	a=1.0+100;
 }

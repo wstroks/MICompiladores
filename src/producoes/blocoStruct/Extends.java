@@ -30,8 +30,10 @@ public class Extends extends RegraProducao {
                
                gerenciadorToken.ts.ajudaStructExtende=gerenciadorToken.getAnteriorToken().getLexema().toString();
                
+               
                 
                 gerenciadorToken.ts.erroEx(gerenciadorToken.getAnteriorToken());
+                //gerenciadorToken.ts.Atualiza();
                 return true;
             }
         } 

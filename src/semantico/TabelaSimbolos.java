@@ -3,9 +3,14 @@
  */
 package semantico;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import lexico.Token;
+import sintatico.Erro;
 
 /**
  * @author Tayane
@@ -19,6 +24,7 @@ public class TabelaSimbolos {
     private List<Listas> tabelaSimbolosVariavel;
     private List<Listas> tabelaSimbolosConst;
     private List<StructTabela> tabelaSimbolosStruct;
+    private List<StructTabela> tabelaSimbolosStructAux;
     private ArrayList<ErroSemantico> erro;
     private List<Token> defineOTipoDeclarado;
     private List<Listas> tabelaSimbolosConstAux;
@@ -38,6 +44,7 @@ public class TabelaSimbolos {
     public boolean ajudaVetor = false;
 
     private int qtdStart = 0; //quantidade de vezes que o método start foi chamado
+    private String nomeVariavel;
 
     public TabelaSimbolos() {
         //functionsProcedures = new ArrayList<Entrada>();
@@ -46,6 +53,7 @@ public class TabelaSimbolos {
         tabelaSimbolosVariavel = new ArrayList<Listas>();
         tabelaSimbolosConst = new ArrayList<Listas>();
         tabelaSimbolosStruct = new ArrayList<StructTabela>();
+        tabelaSimbolosStructAux = new ArrayList<StructTabela>();
         tabelaSimbolosFuncao = new ArrayList<FuncaoProcedimento>();
         tabelaSimbolosConstAux = new ArrayList<Listas>();
         tabelaSimbolosVarAux = new ArrayList<Listas>();
@@ -54,7 +62,7 @@ public class TabelaSimbolos {
         ajudaExpressaoAtribuicao = new ArrayList<Token>();
         ajudaVetores = new ArrayList<Token>();
         this.ajuda = ajuda;
-        
+
         //Inicializando só pra evitar exceção
         clearBufferFuncaoProcedimento(FuncaoProcedimento.getTipoFuncao());
 
@@ -169,30 +177,70 @@ public class TabelaSimbolos {
             jaTemStructNome = true;
         }
     }
-    
-     public void erroEx(Token tipo) {
+
+    public void erroEx(Token tipo) {
 
         if (jaExisteStructNomeExtends(ajudaStructExtende, tabelaSimbolosStruct)) {
             //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
             erro.add(new ErroSemantico(tipo, "Struct extendida não existe " + (ajudaStructExtende)));
             jaTemStructNome = true;
+        } else {
+            Atualiza();
         }
-        
+
+    }
+
+    public void Atualiza() {
+        List<StructTabela> uss = new ArrayList<StructTabela>();
+        List<StructTabela> na = new ArrayList<StructTabela>();
+        String nome = ajudaStructNome;
+        String struct = ajudaStructExtende;
+        Iterator<StructTabela> yy = tabelaSimbolosStruct.iterator();
+        //System.out.println(" " + ajudaStructExtende + " " + ajudaStructNome);
+
+        while (yy.hasNext()) {
+            StructTabela n = yy.next();
+
+            if (ajudaStructExtende.equals(n.nomeStruct)) {
+                StructTabela asdhausd = new StructTabela();
+                asdhausd.nomeVariavel = n.nomeVariavel;
+                asdhausd.extende = ajudaStructExtende;
+                asdhausd.nomeStruct = ajudaStructNome;
+                asdhausd.tipo = n.tipo;
+                asdhausd.foiDeclaradocomo = n.foiDeclaradocomo;
+                tabelaSimbolosStructAux.add(asdhausd);
+                //System.out.println("STRUCT=> " + "Nome da Struct: " + n.nomeStruct + " | " + " extends: " + n.extende + " | " + "Nome da Variavel: " + n.nomeVariavel + " | " + "VariavelTipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
+            }
+        }
+
     }
 
     public void addTabelaStruct(String nome, Token tipo) {
+        String naruto = nome;
         if (jaExisteStructVariavel(nome, tabelaSimbolosStruct) && !jaTemStructNome) {
             erro.add(new ErroSemantico(tipo, "Declaração variável duplicada na struct " + ajudaStructNome));
         } else {
-            if (!jaTemStructNome ) {
-                StructTabela etds = new StructTabela();
-                //System.out.println("  " + nome);
-                etds.nomeVariavel = nome;
-                etds.extende = ajudaStructExtende;
-                etds.nomeStruct = ajudaStructNome;
-                etds.tipo = tipo;
-                etds.foiDeclaradocomo = encontraTipo(tipo);
-                tabelaSimbolosStruct.add(etds);
+            //Atualiza(ajudaStructNome, ajudaStructExtende);
+
+            if (!jaTemStructNome) {
+                if (jaExisteStructVariavel(nome, tabelaSimbolosStructAux)) {
+
+                    erro.add(new ErroSemantico(tipo, "Declaração variável duplicada na struct " + ajudaStructNome));
+                } else {
+
+                    StructTabela n = new StructTabela();
+
+                    //System.out.println("  " + nome);
+                    n.nomeVariavel = nome;
+                    n.extende = ajudaStructExtende;
+                    n.nomeStruct = ajudaStructNome;
+                    n.tipo = tipo;
+                    n.foiDeclaradocomo = encontraTipo(tipo);
+                    //System.out.println("STRUCT=33> " + "Nome da Struct: " + n.nomeStruct + " | " + " extends: " + n.extende + " | " + "Nome da Variavel: " + n.nomeVariavel + " | " + "VariavelTipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
+
+                    tabelaSimbolosStruct.add(n);
+                }
+
             }
         }
         //ImpressaoVariavel();
@@ -200,12 +248,12 @@ public class TabelaSimbolos {
     }
 
     public boolean JafoiDeclarado(String nome, List<Listas> a) {
-    	String escopoAtual = bufferFuncaoProcedimento.getNome();
+        String escopoAtual = bufferFuncaoProcedimento.getNome();
         for (Listas etds : a) {
             if (etds.nome.equals(nome)) {
-            	if(etds.isEscopoGlobal() || (etds.getEscopo().equals(escopoAtual))){
-            		return true;
-            	}  
+                if (etds.isEscopoGlobal() || (etds.getEscopo().equals(escopoAtual))) {
+                    return true;
+                }
             }
         }
         return false;
@@ -220,9 +268,7 @@ public class TabelaSimbolos {
         }
         return false;
     }
-    
-    
-    
+
     public boolean jaExisteStructNomeExtends(String nome, List<StructTabela> a) {
         for (StructTabela etds : a) {
             String naruto = etds.nomeStruct;
@@ -233,8 +279,6 @@ public class TabelaSimbolos {
         }
         return true;
     }
-    
-    
 
     public boolean jaExisteStructVariavel(String nome, List<StructTabela> a) {
         for (StructTabela etds : a) {
@@ -268,9 +312,16 @@ public class TabelaSimbolos {
         for (StructTabela n : tabelaSimbolosStruct) {
             //a++;
             //System.out.println("Struct " + n.nome.toUpperCase() + "Linha : " + n.tipo.getLinha() + " ele é um " + n.foiDeclaradocomo.toUpperCase());
-            System.out.println("STRUCT=> " + "Nome da Struct: " + n.nomeStruct +" | "+ " extends: " + n.extende + " | "+ "Nome da Variavel: " + n.nomeVariavel + " | " + "VariavelTipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
+            System.out.println("STRUCT=> " + "Nome da Struct: " + n.nomeStruct + " | " + " extends: " + n.extende + " | " + "Nome da Variavel: " + n.nomeVariavel + " | " + "VariavelTipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
 
         }
+        for (StructTabela n : tabelaSimbolosStructAux) {
+            //a++;
+            //System.out.println("Struct " + n.nome.toUpperCase() + "Linha : " + n.tipo.getLinha() + " ele é um " + n.foiDeclaradocomo.toUpperCase());
+            System.out.println("STRUCT=> " + "Nome da Struct: " + n.nomeStruct + " | " + " extends: " + n.extende + " | " + "Nome da Variavel: " + n.nomeVariavel + " | " + "VariavelTipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
+
+        }
+
         System.out.println("\nTABELA DE SIMBOLOS FUNCAO E PROCEDIMENTO");
         for (FuncaoProcedimento n : tabelaSimbolosFuncao) {
             //a++;
@@ -285,6 +336,26 @@ public class TabelaSimbolos {
             // a++;
             System.out.println(e.getMensagem());
         }
+    }
+    
+    public void printErroToFile(String output) throws IOException {
+
+        FileWriter arquivo = new FileWriter(output + ".txt");
+        PrintWriter writer = new PrintWriter(arquivo);
+
+        //writer.println("\n");
+        if (erro.isEmpty()) {
+            writer.println("Sucesso");
+        } else {
+            writer.println("Foram encontrados os seguintes erros semantico: ");
+            for (ErroSemantico erro : erro) {
+                
+                writer.println(erro.getMensagem());
+                }
+        }
+
+        arquivo.close();
+
     }
 
     /*
@@ -373,7 +444,7 @@ public class TabelaSimbolos {
      * Adiciona a função que está no buffer na tabela de simbolos de function
      */
     public void addFuncaoProcedimento() {
-    	Token token = bufferFuncaoProcedimento.getTokenErro();
+        Token token = bufferFuncaoProcedimento.getTokenErro();
         //Verificar se já existe uma função com o mesmo nome mesmos parametros (mesma quantidade e mesmos tipos)
         if (!funcaoProcedimentoBufferJaExiste()) {
             tabelaSimbolosFuncao.add(bufferFuncaoProcedimento);
@@ -390,7 +461,7 @@ public class TabelaSimbolos {
      * função
      */
     public void validaChamadaFuncao() {
-    	Token token = bufferChamadaFuncaoProcedimento.getTokenErro();
+        Token token = bufferChamadaFuncaoProcedimento.getTokenErro();
         //Verifica se a função foi declarada
         if (getFuncao(bufferChamadaFuncaoProcedimento) != null) {
             //Verifica se a quantidade de parâmetros e os tipos estão corretos
@@ -421,8 +492,7 @@ public class TabelaSimbolos {
                             erro.add(new ErroSemantico(token, "A variável " + parametro.nome + " não foi declarada"));
                         }
                     }
-                } 
-                else {
+                } else {
                     String msg = "A chamada da rotina não é aplicável para os argumentos utilizados";
                     erro.add(new ErroSemantico(token, msg));
                 }
@@ -597,7 +667,7 @@ public class TabelaSimbolos {
             Listas primeiroTipo = retornaTokenDeclarado(a.getLexema(), tabelaSimbolosVariavel);
             Listas segundoTipo = retornaTokenDeclarado(a.getLexema(), tabelaSimbolosConst);
             Token recebe = a;
-            System.out.println(a.getLexema() + " " + a.getLinha() + "\n");
+            //System.out.println(a.getLexema() + " " + a.getLinha() + "\n");
             if (primeiroTipo != null) {
                 nulo++;
                 if (primeiroTipo.foiDeclaradocomo.equals("int")) {
