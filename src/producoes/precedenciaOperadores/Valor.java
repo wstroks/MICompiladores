@@ -30,8 +30,9 @@ public class Valor extends RegraProducao {
                     gerenciadorToken.ts.removeAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
                     gerenciadorToken.ts.ajudaVetores.add(gerenciadorToken.getAnteriorToken());
                 }
+               if(!gerenciadorToken.ts.ajudaFunction){
                gerenciadorToken.ts.variavelNaoDeclaradoErro(gerenciadorToken.getAnteriorToken());
-                
+               }
                 //System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
                 if (ValorAux1.getInstancia().analisar(gerenciadorToken)) {
                     

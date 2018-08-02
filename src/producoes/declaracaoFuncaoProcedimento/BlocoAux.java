@@ -25,6 +25,7 @@ public class BlocoAux extends RegraProducao {
 
             if (ListaDeIntrucoes.getInstancia().analisar(gerenciadorToken)) {
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, true)) {
+                    gerenciadorToken.ts.ajudaFunction=false;
                     return true;
                 }
 
