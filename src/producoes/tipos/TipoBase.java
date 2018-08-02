@@ -4,6 +4,7 @@
 package producoes.tipos;
 
 import lexico.TipoToken;
+import lexico.Token;
 import producoes.RegraProducao;
 import producoes.blocoStruct.DeclaracaoDeStruct;
 import semantico.TabelaSimbolos;
@@ -31,9 +32,13 @@ public class TipoBase extends RegraProducao {
 
                 return true;
             } else if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_STRUCT, false)) {
+                if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, true)){
+                    
+                    //Token add= new Token(TipoToken.PALAVRA_RESERVADA_STRUCT, "struct "+gerenciadorToken.getAnteriorToken().getLexema(), gerenciadorToken.getAnteriorToken().getLinha(), gerenciadorToken.getAnteriorToken().getPosicao());
                 gerenciadorToken.ts.addTipo(gerenciadorToken.getAnteriorToken());
-
-                return true;
+                 return true;
+                }
+               
             }
         }
 

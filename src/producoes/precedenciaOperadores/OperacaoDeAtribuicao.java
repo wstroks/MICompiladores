@@ -27,8 +27,11 @@ public class OperacaoDeAtribuicao extends RegraProducao {
 			if (gerenciadorToken.getProximoToken().getTipoToken() == TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO) {
 				if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
 					gerenciadorToken.ts.atribuicaoConst(gerenciadorToken.getAnteriorToken());
+                                        
 					gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
+                                        if(!gerenciadorToken.ts.ajudaFunction){
                                         gerenciadorToken.ts.variavelNaoDeclaradoErro(gerenciadorToken.getAnteriorToken());
+                                        }
 					//System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
 					if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
 

@@ -26,6 +26,7 @@ public class Acesso extends RegraProducao {
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_PONTO, false)) {
                 if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, true)) {
+                    //gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
                     return true;
                 }
             } 

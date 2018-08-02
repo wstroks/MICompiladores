@@ -31,6 +31,7 @@ public class TabelaSimbolos {
     public boolean ajudaStruct;
     public boolean jaTemStructNome;
     public boolean jaTemStructExtends;
+    public boolean ajudaFunction;
     private ArrayList<FuncaoProcedimento> tabelaSimbolosFuncao;
     public FuncaoProcedimento bufferFuncaoProcedimento;
     public FuncaoProcedimento bufferChamadaFuncaoProcedimento;
