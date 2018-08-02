@@ -27,11 +27,11 @@ public class ParametrosFuncao extends RegraProducao {
         if (Expressao.getInstancia().analisar(gerenciadorToken)) {
             Token token = gerenciadorToken.getAnteriorDeterminaToken(1);
             
-            if(gerenciadorToken.ts.bufferFuncaoProcedimento != null && !gerenciadorToken.ts.bufferFuncaoProcedimento.getNome().isEmpty()){//declaracao
-                gerenciadorToken.ts.bufferFuncaoProcedimento.addParametro(new Listas(token, gerenciadorToken.ts.getTipoVariavel(token.getLexema())));
-            }
-            else{//chamada
+            if(gerenciadorToken.ts.bufferChamadaFuncaoProcedimento != null && !gerenciadorToken.ts.bufferChamadaFuncaoProcedimento.getNome().isEmpty()){//chamada
                 gerenciadorToken.ts.bufferChamadaFuncaoProcedimento.addParametro(new Listas(token, gerenciadorToken.ts.getTipoVariavel(token.getLexema())));
+            }
+            else{//declaracao
+                gerenciadorToken.ts.bufferFuncaoProcedimento.addParametro(new Listas(token, gerenciadorToken.ts.getTipoVariavel(token.getLexema())));
             }
             if (ParametrosFuncaoAux.getInstancia().analisar(gerenciadorToken)) {
                 return true;

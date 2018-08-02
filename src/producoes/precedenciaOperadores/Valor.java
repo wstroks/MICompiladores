@@ -31,7 +31,9 @@ public class Valor extends RegraProducao {
                     gerenciadorToken.ts.ajudaVetores.add(gerenciadorToken.getAnteriorToken());
                 }
                
-               gerenciadorToken.ts.variavelNaoDeclaradoErro(gerenciadorToken.getAnteriorToken());
+			   if(!gerenciadorToken.getTokenAtual().getTipoToken().equals(TipoToken.DELIMITADOR_ABRE_PARENTESES)){ //funcao/procedimento
+				   gerenciadorToken.ts.variavelNaoDeclaradoErro(gerenciadorToken.getAnteriorToken());
+			   }
                
                 //System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
                 if (ValorAux1.getInstancia().analisar(gerenciadorToken)) {

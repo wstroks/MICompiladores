@@ -474,14 +474,15 @@ public class TabelaSimbolos {
                             erro.add(er);
                         }
                     }
-                } else {
+                } 
+                else {
                     ErroSemantico er = new ErroSemantico();
                     er.tipoDoErro = "A chamada da rotina " + bufferChamadaFuncaoProcedimento.getNome() + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos();
                     erro.add(er);
                 }
             } else {
                 ErroSemantico er = new ErroSemantico();
-                er.tipoDoErro = "A chamada de rotina não declarada " + bufferChamadaFuncaoProcedimento.getNome();
+                er.tipoDoErro = "Chamada de rotina não declarada " + bufferChamadaFuncaoProcedimento.getNome();
                 erro.add(er);
             }
         }
