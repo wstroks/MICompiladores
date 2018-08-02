@@ -5,6 +5,7 @@ package producoes.declaracaoFuncaoProcedimento;
 
 import lexico.TipoToken;
 import producoes.RegraProducao;
+import semantico.FuncaoProcedimento;
 import sintatico.GerenciadorToken;
 
 /**
@@ -24,8 +25,11 @@ public class DeclaracaoDeInicio extends RegraProducao {
             if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_START, false)) {
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
                     if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_PARENTESES, true)) {
+                    	gerenciadorToken.ts.clearBufferFuncaoProcedimento(FuncaoProcedimento.getTipoFuncao());
+                    	gerenciadorToken.ts.bufferFuncaoProcedimento.setNome("start");
+                    	gerenciadorToken.ts.incrementaStart();
                         if (Bloco.getInstancia().analisar(gerenciadorToken)) {
-                        	gerenciadorToken.ts.incrementaStart();
+                        	gerenciadorToken.ts.clearBufferFuncaoProcedimento(FuncaoProcedimento.getTipoFuncao());
                             return true;
                         }
                     }

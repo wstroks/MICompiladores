@@ -1,17 +1,35 @@
-function int nomeDaFuncao ( ) {
-    nomeDaFuncao();
-    algumaOutraVariavel = nomeDaFuncao();
-    return;
+
+var{
+	int w, z; //escopo = "global"
 }
 
-function boolean teste(int a){ }
+function int teste1(){
+	var{
+		int x, y; //escopo = "teste1"
+	}
+}
 
-//procedure teste(int a) { }
+var{
+	int t, s; //escopo = "global"
+}
 
-//start(){
-//	var{
-//		int a, b;
-//	}
-//	teste(a);
-//}
+function int teste2(){
+	var{
+		int i, j; //escopo = "teste2"
+	}
+	
+	i = x; //erro: x não declarada
+	j = w; //ok
+	a = j; //erro: a não declarada
+	
+}
+
+start(){
+	var{
+		int a; //escopo = "start"
+	}
+	
+	i = x; //erro: i não declarada e x não declarada
+	a = z; //ok
+}
 

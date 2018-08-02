@@ -53,6 +53,9 @@ public class TabelaSimbolos {
         ajudaExpressaoAtribuicao = new ArrayList<Token>();
         ajudaVetores = new ArrayList<Token>();
         this.ajuda = ajuda;
+        
+        //Inicializando só pra evitar exceção
+        clearBufferFuncaoProcedimento(FuncaoProcedimento.getTipoFuncao());
 
     }
 
@@ -110,7 +113,7 @@ public class TabelaSimbolos {
             etds.nome = nome;
             etds.tipo = tipo;
             etds.foiDeclaradocomo = encontraTipo(tipo);
-
+            etds.setEscopo(bufferFuncaoProcedimento.getNome());
             tabelaSimbolosVariavel.add(etds);
         }
         //ImpressaoVariavel();
@@ -202,7 +205,7 @@ public class TabelaSimbolos {
 
             ErroSemantico er = new ErroSemantico();
             er.tipo = tipo;
-            er.tipoDoErro = "Variavel dentro da Struct " + (ajudaStructNome) + " Já existe";
+            er.tipoDoErro = "Variável dentro da struct " + (ajudaStructNome) + " já existe";
             erro.add(er);
 
         } else {
@@ -222,10 +225,12 @@ public class TabelaSimbolos {
     }
 
     public boolean JafoiDeclarado(String nome, List<Listas> a) {
+    	String escopoAtual = bufferFuncaoProcedimento.getNome();
         for (Listas etds : a) {
-            String naruto = etds.nome;
-            if (naruto.equals(nome)) {
-                return true;
+            if (etds.nome.equals(nome)) {
+            	if(etds.isEscopoGlobal() || (etds.getEscopo().equals(escopoAtual))){
+            		return true;
+            	}  
             }
         }
         return false;
@@ -303,7 +308,8 @@ public class TabelaSimbolos {
         System.out.println("Erros semânticos (" + erro.size() + "): ");
         for (ErroSemantico e : erro) {
             // a++;
-            System.out.println("ERRO=> " + "Descricao do erro: " + (e.getMensagem()) + " | " + "Linha: " + e.tipo.getLinha());
+            //System.out.println("ERRO=> " + "Descricao do erro: " + (e.getMensagem()) + " | " + "Linha: " + e.tipo.getLinha());
+        	System.out.println("ERRO=> " + "Descricao do erro: " + (e.getMensagem()));
         }
     }
 

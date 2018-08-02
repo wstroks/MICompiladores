@@ -17,6 +17,7 @@ public class Listas {
     public String nome;
     public Token tipo;
     public String foiDeclaradocomo;
+    private String escopo = "";
     
     public Listas(){
     	
@@ -44,5 +45,17 @@ public class Listas {
     public boolean isDeclarado(){
     	return !foiDeclaradocomo.isEmpty();
     }
+
+	public String getEscopo() {
+		return escopo;
+	}
+
+	public void setEscopo(String escopo) {
+		this.escopo = escopo;
+	}
+	
+	public boolean isEscopoGlobal(){
+		return escopo.isEmpty();
+	}
 
 }
