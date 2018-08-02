@@ -29,9 +29,9 @@ public class OperacaoDeAtribuicao extends RegraProducao {
 					gerenciadorToken.ts.atribuicaoConst(gerenciadorToken.getAnteriorToken());
                                         
 					gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
-                                        if(!gerenciadorToken.ts.ajudaFunction){
+                                       
                                         gerenciadorToken.ts.variavelNaoDeclaradoErro(gerenciadorToken.getAnteriorToken());
-                                        }
+                                        
 					//System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
 					if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
 
