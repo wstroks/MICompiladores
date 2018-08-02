@@ -24,19 +24,30 @@ public class DeclaracaoDeStructAux extends RegraProducao {
 
         if (isFirst(gerenciadorToken.getTokenAtual().getTipoToken())) {
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, false)) {
+                gerenciadorToken.ts.ajudaStructNome=gerenciadorToken.getAnteriorToken().getLexema().toString();
+                gerenciadorToken.ts.erroStructNome(gerenciadorToken.getAnteriorToken());
+                
                 if (Extends.getInstancia().analisar(gerenciadorToken)) {
                     if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE, true)) {
                         if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
                             if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, true)) {
+                                gerenciadorToken.ts.jaTemStructNome=false;
+                                gerenciadorToken.ts.jaTemStructExtends=false;
+                                gerenciadorToken.ts.ajudaStructExtende="";
                                 return true;
                             }
                         }
                     }
                 }
             } else if (Extends.getInstancia().analisar(gerenciadorToken)) {
+                //gerenciadorToken.ts.erroStructNome(gerenciadorToken.getAnteriorToken());
+                //gerenciadorToken.ts.ajudaStructNome=gerenciadorToken.getAnteriorToken().getLexema().toString();
                 if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_CHAVE, false)) {
                     if (DeclaracaoDeStructCorpo.getInstancia().analisar(gerenciadorToken)) {
                         if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_FECHA_CHAVE, true)) {
+                                gerenciadorToken.ts.jaTemStructNome=false;
+                                gerenciadorToken.ts.jaTemStructExtends=false;
+                                 gerenciadorToken.ts.ajudaStructExtende="";
                             return true;
                         }
                     }

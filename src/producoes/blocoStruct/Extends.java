@@ -24,6 +24,14 @@ public class Extends extends RegraProducao {
 
         if (verificarToken(gerenciadorToken, TipoToken.PALAVRA_RESERVADA_EXTENDS, false)) {
             if (verificarToken(gerenciadorToken, TipoToken.IDENTIFICADOR, true)) {
+                //gerenciadorToken.ts.ajudaStructNome=gerenciadorToken.getAnteriorToken().getLexema().toString();
+                //System.out.println(gerenciadorToken.getAnteriorToken().getLexema());
+               //gerenciadorToken.ts.ajudaStruct= gerenciadorToken.ts.erroStructNomeExtemds(gerenciadorToken.getAnteriorToken());
+               
+               gerenciadorToken.ts.ajudaStructExtende=gerenciadorToken.getAnteriorToken().getLexema().toString();
+               
+                
+                gerenciadorToken.ts.erroEx(gerenciadorToken.getAnteriorToken());
                 return true;
             }
         } 

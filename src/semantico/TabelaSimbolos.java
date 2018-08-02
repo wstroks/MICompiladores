@@ -18,7 +18,7 @@ public class TabelaSimbolos {
     //private ArrayList<String> test;
     private List<Listas> tabelaSimbolosVariavel;
     private List<Listas> tabelaSimbolosConst;
-    private List<Listas> tabelaSimbolosStruct;
+    private List<StructTabela> tabelaSimbolosStruct;
     private ArrayList<ErroSemantico> erro;
     private List<Token> defineOTipoDeclarado;
     private List<Listas> tabelaSimbolosConstAux;
@@ -26,7 +26,11 @@ public class TabelaSimbolos {
     public List<Token> ajudaExpressaoAtribuicao;
     public List<Token> ajudaVetores;
     public boolean ajuda;
-
+    public String ajudaStructExtende = "";
+    public String ajudaStructNome = "";
+    public boolean ajudaStruct;
+    public boolean jaTemStructNome;
+    public boolean jaTemStructExtends;
     private ArrayList<FuncaoProcedimento> tabelaSimbolosFuncao;
     public FuncaoProcedimento bufferFuncaoProcedimento;
     public FuncaoProcedimento bufferChamadaFuncaoProcedimento;
@@ -40,7 +44,7 @@ public class TabelaSimbolos {
 
         tabelaSimbolosVariavel = new ArrayList<Listas>();
         tabelaSimbolosConst = new ArrayList<Listas>();
-        tabelaSimbolosStruct = new ArrayList<Listas>();
+        tabelaSimbolosStruct = new ArrayList<StructTabela>();
         tabelaSimbolosFuncao = new ArrayList<FuncaoProcedimento>();
         tabelaSimbolosConstAux = new ArrayList<Listas>();
         tabelaSimbolosVarAux = new ArrayList<Listas>();
@@ -166,21 +170,52 @@ public class TabelaSimbolos {
         }
     }
 
-    public void addTabelaStruct(String nome, Token tipo) {
-        if (JafoiDeclarado(nome, tabelaSimbolosStruct)) {
+    public void erroStructNome(Token tipo) {
+
+        if (jaExisteStructNome(ajudaStructNome, tabelaSimbolosStruct)) {
             //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
             ErroSemantico er = new ErroSemantico();
             er.tipo = tipo;
-            er.tipoDoErro = "Struct";
+            er.tipoDoErro = "Bloco de Struct criado com mesmo nome " + (ajudaStructNome);
             erro.add(er);
-        } else {
+            jaTemStructNome = true;
+        }
+    }
+    
+     public void erroEx(Token tipo) {
 
-            Listas etds = new Listas();
-            //System.out.println("  " + nome);
-            etds.nome = nome;
-            etds.tipo = tipo;
-            etds.foiDeclaradocomo = encontraTipo(tipo);
-            tabelaSimbolosStruct.add(etds);
+        if (jaExisteStructNomeExtends(ajudaStructExtende, tabelaSimbolosStruct)) {
+            //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
+            
+        
+            ErroSemantico er = new ErroSemantico();
+            er.tipo = tipo;
+            er.tipoDoErro = "Struct extendida não foi declarada " + (ajudaStructExtende);
+            erro.add(er);
+            jaTemStructNome = true;
+        }
+        
+    }
+
+    public void addTabelaStruct(String nome, Token tipo) {
+        if (jaExisteStructVariavel(nome, tabelaSimbolosStruct) && !jaTemStructNome) {
+
+            ErroSemantico er = new ErroSemantico();
+            er.tipo = tipo;
+            er.tipoDoErro = "Variavel dentro da Struct " + (ajudaStructNome) + " Já existe";
+            erro.add(er);
+
+        } else {
+            if (!jaTemStructNome ) {
+                StructTabela etds = new StructTabela();
+                //System.out.println("  " + nome);
+                etds.nomeVariavel = nome;
+                etds.extende = ajudaStructExtende;
+                etds.nomeStruct = ajudaStructNome;
+                etds.tipo = tipo;
+                etds.foiDeclaradocomo = encontraTipo(tipo);
+                tabelaSimbolosStruct.add(etds);
+            }
         }
         //ImpressaoVariavel();
 
@@ -191,6 +226,44 @@ public class TabelaSimbolos {
             String naruto = etds.nome;
             if (naruto.equals(nome)) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean jaExisteStructNome(String nome, List<StructTabela> a) {
+        for (StructTabela etds : a) {
+            String naruto = etds.nomeStruct;
+            if (naruto.equals(nome)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    
+    public boolean jaExisteStructNomeExtends(String nome, List<StructTabela> a) {
+        for (StructTabela etds : a) {
+            String naruto = etds.nomeStruct;
+            //System.out.println(naruto +"  yy");
+            if (naruto.equals(nome)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    
+
+    public boolean jaExisteStructVariavel(String nome, List<StructTabela> a) {
+        for (StructTabela etds : a) {
+            String naruto = etds.nomeVariavel;
+            String sasuke = etds.nomeStruct;
+            if (sasuke.equals(ajudaStructNome)) {
+                if (naruto.equals(nome)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -212,10 +285,10 @@ public class TabelaSimbolos {
             System.out.println("CONST=> " + "Nome: " + n.nome + " | " + "Tipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
         }
         System.out.println("\nTABELA DE SIMBOLOS STRUCT");
-        for (Listas n : tabelaSimbolosStruct) {
+        for (StructTabela n : tabelaSimbolosStruct) {
             //a++;
             //System.out.println("Struct " + n.nome.toUpperCase() + "Linha : " + n.tipo.getLinha() + " ele é um " + n.foiDeclaradocomo.toUpperCase());
-            System.out.println("STRUCT=> " + "Nome: " + n.nome + " | " + "Tipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
+            System.out.println("STRUCT=> " + "Nome da Struct: " + n.nomeStruct +" | "+ " extends: " + n.extende + " | "+ "Nome da Variavel: " + n.nomeVariavel + " | " + "VariavelTipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
 
         }
         System.out.println("\nTABELA DE SIMBOLOS FUNCAO E PROCEDIMENTO");
