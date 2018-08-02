@@ -67,18 +67,19 @@ public class GerenciadorToken {
         //System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
         return listaTokens.get(contTokenAtual + 1);
     }
-public Token getAnteriorToken() {
-        //System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
-        return listaTokens.get(contTokenAtual - 1);
-    }
-
-public Token getAnteriorDeterminaToken(int x){
-    return listaTokens.get(contTokenAtual - x);
-}
-
-public Token getProximoDeterminaToken(int x){
-    return listaTokens.get(contTokenAtual + x);
-}
+    
+	public Token getAnteriorToken() {
+	        //System.out.println(listaTokens.get(contTokenAtual).getTipoToken());
+	        return listaTokens.get(contTokenAtual - 1);
+	    }
+	
+	public Token getAnteriorDeterminaToken(int x){
+	    return listaTokens.get(contTokenAtual - x);
+	}
+	
+	public Token getProximoDeterminaToken(int x){
+	    return listaTokens.get(contTokenAtual + x);
+	}
 
     /**
      * Consome o token atual
@@ -168,5 +169,9 @@ public Token getProximoDeterminaToken(int x){
     
     public int getQtdTokensRestantes(){
     	return listaTokens.size() - contTokenAtual;
+    }
+    
+    public Token getUltimoToken(){
+    	return listaTokens.get(listaTokens.size() - 1);
     }
 }

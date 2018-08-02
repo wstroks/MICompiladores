@@ -5,6 +5,7 @@ package semantico;
 
 import java.util.ArrayList;
 
+import lexico.Token;
 import semantico.Listas;
 
 /**
@@ -18,6 +19,7 @@ public class FuncaoProcedimento {
 	private String tipoRetorno;
 	private String tipo = "function"; //"function" ou "procedure"
 	private String cenario = "declaracao"; //"declaracao" ou "chamada"
+	private Token tokenErro;
 	
 	public FuncaoProcedimento(String tipo, String cenario){
 		this.tipo = tipo;
@@ -163,6 +165,14 @@ public class FuncaoProcedimento {
 
 	public boolean isProcedimento(){
 		return tipo.equals(getTipoProcedimento());
+	}
+
+	public Token getTokenErro() {
+		return tokenErro;
+	}
+
+	public void setTokenErro(Token tokenErro) {
+		this.tokenErro = tokenErro;
 	}
 
 }

@@ -35,7 +35,7 @@ public class Sintatico {
 		if (Programa.getInstancia().isFirst(gerenciadorToken.getTipoTokenAtual())) {
 			Programa.getInstancia().analisar(gerenciadorToken);
 			//Verificando se o método start foi declarado
-			gerenciadorToken.ts.verificaStart();
+			gerenciadorToken.ts.verificaStart(gerenciadorToken.getUltimoToken());
 		} else {
 			gerenciadorToken.addErro("<Programa>", Programa.getInstancia().getFirst());
 		}

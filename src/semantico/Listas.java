@@ -19,8 +19,8 @@ public class Listas {
     public String foiDeclaradocomo;
     private String escopo = "";
     
-    public Listas(){
-    	
+    public Listas(Token token){
+    	tipo = token;
     }
     
     public Listas(Token token, String tipoVariavel){

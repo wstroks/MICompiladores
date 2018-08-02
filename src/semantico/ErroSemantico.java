@@ -13,15 +13,16 @@ import lexico.Token;
  */
 public class ErroSemantico {
 	
-    Token tipo;
-    String tipoDoErro;
+    public Token tipo;
+    public String tipoDoErro;
+    
+    public ErroSemantico(Token token, String mensagem){
+    	tipo = token;
+    	tipoDoErro = mensagem;
+    }
     
     public String getMensagem(){
-    	String mensagem = tipoDoErro;
-    	if(tipo != null){
-    		mensagem += " | " + "Lexema: " + tipo.getLexema();
-    	}
-    	return mensagem;
+    	return "Linha " + (tipo.getLinha() + 1) + ": " + tipoDoErro + " \"" + tipo.getLexema() + "\"";
     }
     
 }

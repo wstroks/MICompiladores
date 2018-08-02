@@ -27,6 +27,7 @@ public class DeclaracaoDeFuncao extends RegraProducao {
             	gerenciadorToken.ts.clearBufferFuncaoProcedimento(FuncaoProcedimento.getTipoFuncao());
                 if (FuncID.getInstancia().analisar(gerenciadorToken)) {
                 	gerenciadorToken.ts.bufferFuncaoProcedimento.setNome(gerenciadorToken.getAnteriorToken().getLexema());
+                	gerenciadorToken.ts.bufferFuncaoProcedimento.setTokenErro(gerenciadorToken.getAnteriorToken());
                     if (verificarToken(gerenciadorToken, TipoToken.DELIMITADOR_ABRE_PARENTESES, true)) {
                         if (FuncaoProcedimentoFim.getInstancia().analisar(gerenciadorToken)) {
                         	gerenciadorToken.ts.addFuncaoProcedimento();

@@ -27,6 +27,7 @@ public class ValorAux1 extends RegraProducao {
             // System.out.println(gerenciadorToken.getAnteriorToken().getLexema()+gerenciadorToken.getTokenAtual().getLexema()+ gerenciadorToken.getProximoDeterminaToken(1).getLexema());
             gerenciadorToken.ts.clearBufferChamadaFuncaoProcedimento(FuncaoProcedimento.getTipoFuncao());
             gerenciadorToken.ts.bufferChamadaFuncaoProcedimento.setNome(gerenciadorToken.getAnteriorDeterminaToken(2).getLexema());
+            gerenciadorToken.ts.bufferChamadaFuncaoProcedimento.setTokenErro(gerenciadorToken.getAnteriorDeterminaToken(2));
             if (ValorAux2.getInstancia().analisar(gerenciadorToken)) {
                 return true;
             }

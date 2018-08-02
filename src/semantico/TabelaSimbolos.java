@@ -96,23 +96,15 @@ public class TabelaSimbolos {
     public void addTabelaVariaveis(String nome, Token tipo) {
         if (JafoiDeclarado(nome, tabelaSimbolosConst)) {
             //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = tipo;
-            er.tipoDoErro = "Variável " + nome + " já foi declarada anteriomente com uma constante";
-            erro.add(er);
+            erro.add(new ErroSemantico(tipo, "Variável " + nome + " já foi declarada anteriomente como uma constante"));
         } else if (JafoiDeclarado(nome, tabelaSimbolosVariavel)) {
-
-            //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = tipo;
-            er.tipoDoErro = "Variável local duplicada";
-            erro.add(er);
+            erro.add(new ErroSemantico(tipo, "Variável local duplicada"));
         } else {
             atualizaVar();
-            Listas etds = new Listas();
+            Listas etds = new Listas(tipo);
             //System.out.println("  " + nome);
             etds.nome = nome;
-            etds.tipo = tipo;
+            //etds.tipo = tipo;
             etds.foiDeclaradocomo = encontraTipo(tipo);
             etds.setEscopo(bufferFuncaoProcedimento.getNome());
             tabelaSimbolosVariavel.add(etds);
@@ -123,17 +115,13 @@ public class TabelaSimbolos {
 
     public void addTabelaConst(String nome, Token tipo) {
         if (JafoiDeclarado(nome, tabelaSimbolosConst)) {
-            //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = tipo;
-            er.tipoDoErro = "Const";
-            erro.add(er);
+            erro.add(new ErroSemantico(tipo, "Constante já declarada anteriormente"));
         } else {
             atualizaConst();
-            Listas etds = new Listas();
+            Listas etds = new Listas(tipo);
             //System.out.println("  " + nome);
             etds.nome = nome;
-            etds.tipo = tipo;
+            //etds.tipo = tipo;
             etds.foiDeclaradocomo = encontraTipo(tipo);
             //antes dele adiciona verifica se existe o tipo atribuido tá correto
             //if (atribuicaoCorretaPeloTipo(tipo, nome)) {
@@ -177,11 +165,7 @@ public class TabelaSimbolos {
     public void erroStructNome(Token tipo) {
 
         if (jaExisteStructNome(ajudaStructNome, tabelaSimbolosStruct)) {
-            //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = tipo;
-            er.tipoDoErro = "Bloco de Struct criado com mesmo nome " + (ajudaStructNome);
-            erro.add(er);
+            erro.add(new ErroSemantico(tipo, "Declaração de struct duplicada " + ajudaStructNome));
             jaTemStructNome = true;
         }
     }
@@ -190,12 +174,7 @@ public class TabelaSimbolos {
 
         if (jaExisteStructNomeExtends(ajudaStructExtende, tabelaSimbolosStruct)) {
             //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
-            
-        
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = tipo;
-            er.tipoDoErro = "Struct extendida não foi declarada " + (ajudaStructExtende);
-            erro.add(er);
+            erro.add(new ErroSemantico(tipo, "Struct extendida não existe " + (ajudaStructExtende)));
             jaTemStructNome = true;
         }
         
@@ -203,12 +182,7 @@ public class TabelaSimbolos {
 
     public void addTabelaStruct(String nome, Token tipo) {
         if (jaExisteStructVariavel(nome, tabelaSimbolosStruct) && !jaTemStructNome) {
-
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = tipo;
-            er.tipoDoErro = "Variável dentro da struct " + (ajudaStructNome) + " já existe";
-            erro.add(er);
-
+            erro.add(new ErroSemantico(tipo, "Declaração variável duplicada na struct " + ajudaStructNome));
         } else {
             if (!jaTemStructNome ) {
                 StructTabela etds = new StructTabela();
@@ -309,8 +283,7 @@ public class TabelaSimbolos {
         System.out.println("Erros semânticos (" + erro.size() + "): ");
         for (ErroSemantico e : erro) {
             // a++;
-            //System.out.println("ERRO=> " + "Descricao do erro: " + (e.getMensagem()) + " | " + "Linha: " + e.tipo.getLinha());
-        	System.out.println("ERRO=> " + "Descricao do erro: " + (e.getMensagem()));
+            System.out.println(e.getMensagem());
         }
     }
 
@@ -321,11 +294,7 @@ public class TabelaSimbolos {
     public void atribuicaoConst(Token recebe) {
         for (Listas a : tabelaSimbolosConst) {
             if (a.tipo.getLexema().equals(recebe.getLexema())) {
-                ErroSemantico er = new ErroSemantico();
-                er.tipo = recebe;
-                er.tipoDoErro = "Alterar valor de uma const";
-                erro.add(er);
-
+                erro.add(new ErroSemantico(recebe, "Não é possível alterar o valor de uma constante"));
             }
         }
     }
@@ -344,21 +313,14 @@ public class TabelaSimbolos {
                     if (t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
                         //Listas b =new Listas();
                         tabelaSimbolosConstAux.add(lista);
-                        ErroSemantico er = new ErroSemantico();
-                        er.tipo = t;
-                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
-                        erro.add(er);
-
+                        erro.add(new ErroSemantico(t, "Tipo de atribuição inválido na declaração de constante"));
                     }
 
                 } else if (lista.foiDeclaradocomo.equals("float")) {
                     if (!t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
                         //tabelaSimbolosConst.remove(lista);
                         tabelaSimbolosConstAux.add(lista);
-                        ErroSemantico er = new ErroSemantico();
-                        er.tipo = t;
-                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
-                        erro.add(er);
+                        erro.add(new ErroSemantico(t, "Tipo de atribuição inválido na declaração de constante"));
 
                     }
 
@@ -366,10 +328,7 @@ public class TabelaSimbolos {
                     if (!t.getTipoToken().toString().equals("CADEIA_CARACTERES") || t.getLexema().equals("true") || t.getLexema().equals("false")) {
                         //tabelaSimbolosConst.remove(lista);
                         tabelaSimbolosConstAux.add(lista);
-                        ErroSemantico er = new ErroSemantico();
-                        er.tipo = t;
-                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de Const";
-                        erro.add(er);
+                        erro.add(new ErroSemantico(t, "Tipo de atribuição inválido na declaração de constante"));
                         //tabelaSimbolosConst.remove(lista);
 
                     }
@@ -388,28 +347,19 @@ public class TabelaSimbolos {
                     // System.out.println("asas 1");
                     if (t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
                         tabelaSimbolosVarAux.add(lista);
-                        ErroSemantico er = new ErroSemantico();
-                        er.tipo = t;
-                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
-                        erro.add(er);
+                        erro.add(new ErroSemantico(t, "Tipo de atribuicao invalida na declaracao de var"));
                         // tabelaSimbolosVariavel.remove(lista);
                     }
                 } else if (lista.foiDeclaradocomo.equals("float")) {
                     if (!t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
                         tabelaSimbolosVarAux.add(lista);
-                        ErroSemantico er = new ErroSemantico();
-                        er.tipo = t;
-                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
-                        erro.add(er);
+                        erro.add(new ErroSemantico(t, "Tipo de atribuicao invalida na declaracao de var"));
                         //tabelaSimbolosVariavel.remove(lista);
                     }
                 } else if (lista.foiDeclaradocomo.equals("string")) {
                     if (!t.getTipoToken().toString().equals("CADEIA_CARACTERES") || t.getLexema().equals("true") || t.getLexema().equals("false")) {
                         tabelaSimbolosVarAux.add(lista);
-                        ErroSemantico er = new ErroSemantico();
-                        er.tipo = t;
-                        er.tipoDoErro = "Tipo de atribuicao invalida na declaracao de var";
-                        erro.add(er);
+                        erro.add(new ErroSemantico(t, "Tipo de atribuicao invalida na declaracao de var"));
                         // tabelaSimbolosVariavel.remove(lista);
                     }
                 }
@@ -423,13 +373,13 @@ public class TabelaSimbolos {
      * Adiciona a função que está no buffer na tabela de simbolos de function
      */
     public void addFuncaoProcedimento() {
+    	Token token = bufferFuncaoProcedimento.getTokenErro();
         //Verificar se já existe uma função com o mesmo nome mesmos parametros (mesma quantidade e mesmos tipos)
         if (!funcaoProcedimentoBufferJaExiste()) {
             tabelaSimbolosFuncao.add(bufferFuncaoProcedimento);
         } else {
-            ErroSemantico er = new ErroSemantico();
-            er.tipoDoErro = bufferFuncaoProcedimento.getTipo() + " " + bufferFuncaoProcedimento.getNome() + " já declarada como function ou procedure";
-            erro.add(er);
+            String msgErro = bufferFuncaoProcedimento.getTipo() + " " + bufferFuncaoProcedimento.getNome() + " já declarada como function ou procedure";
+            erro.add(new ErroSemantico(token, msgErro));
         }
         clearBufferFuncaoProcedimento(bufferFuncaoProcedimento.getTipo());
     }
@@ -440,6 +390,7 @@ public class TabelaSimbolos {
      * função
      */
     public void validaChamadaFuncao() {
+    	Token token = bufferChamadaFuncaoProcedimento.getTokenErro();
         //Verifica se a função foi declarada
         if (getFuncao(bufferChamadaFuncaoProcedimento) != null) {
             //Verifica se a quantidade de parâmetros e os tipos estão corretos
@@ -448,17 +399,15 @@ public class TabelaSimbolos {
                 for (int i = 0; i < funcaoDeclarada.getQtdParametros(); i++) {
                     if (!funcaoDeclarada.getParametros().get(i).foiDeclaradocomo.equals(bufferChamadaFuncaoProcedimento.getParametros().get(i).foiDeclaradocomo)) {
                         //erro: chama de função com tipos diferentes
-                        ErroSemantico er = new ErroSemantico();
-                        er.tipoDoErro = "A chamada da " + bufferChamadaFuncaoProcedimento.getTipo() + " " + funcaoDeclarada.getNomeComArgumentos() + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos();
-                        erro.add(er);
+                        String msg = "A chamada da " + bufferChamadaFuncaoProcedimento.getTipo() + " " + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos();
+                        erro.add(new ErroSemantico(token, msg));
                         break;
                     }
                 }
             } else {
                 //erro: chamada de função errada - quantidade de parametros diferentes
-                ErroSemantico er = new ErroSemantico();
-                er.tipoDoErro = "A chamada da " + bufferChamadaFuncaoProcedimento.getTipo() + " " + funcaoDeclarada.getNomeComArgumentos() + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos() + ". Quantidade de argumentos diferente.";
-                erro.add(er);
+                String msg = "A chamada da " + bufferChamadaFuncaoProcedimento.getTipo() + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos() + ". Quantidade de argumentos diferente.";
+                erro.add(new ErroSemantico(token, msg));
             }
         } else {
             //erro: chamando função não declarada
@@ -469,21 +418,17 @@ public class TabelaSimbolos {
                         //System.out.println(parametro.isDeclarado());
                         if (!parametro.isDeclarado()) {
                             //erro: parâmetro de função não declarado
-                            ErroSemantico er = new ErroSemantico();
-                            er.tipoDoErro = "A variável " + parametro.nome + " não foi declarada";
-                            erro.add(er);
+                            erro.add(new ErroSemantico(token, "A variável " + parametro.nome + " não foi declarada"));
                         }
                     }
                 } 
                 else {
-                    ErroSemantico er = new ErroSemantico();
-                    er.tipoDoErro = "A chamada da rotina " + bufferChamadaFuncaoProcedimento.getNome() + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos();
-                    erro.add(er);
+                    String msg = "A chamada da rotina não é aplicável para os argumentos utilizados";
+                    erro.add(new ErroSemantico(token, msg));
                 }
             } else {
-                ErroSemantico er = new ErroSemantico();
-                er.tipoDoErro = "Chamada de rotina não declarada " + bufferChamadaFuncaoProcedimento.getNome();
-                erro.add(er);
+                String msg = "Chamada de rotina não declarada";
+                erro.add(new ErroSemantico(token, msg));
             }
         }
 
@@ -566,69 +511,32 @@ public class TabelaSimbolos {
         if (!JafoiDeclarado(anterior.getLexema(), tabelaSimbolosVariavel) && !JafoiDeclarado(proximo.getLexema(), tabelaSimbolosVariavel)) {
             //System.out.println("1");
             if (!anterior.getTipoToken().toString().equals(proximo.getTipoToken().toString())) {
-
-                ErroSemantico er = new ErroSemantico();
-                er.tipo = anterior;
-                er.tipoDoErro = "Expressao condicional errada";
-                erro.add(er);
-
-                ErroSemantico e = new ErroSemantico();
-                e.tipo = proximo;
-                e.tipoDoErro = "Expressao condicional errada";
-                erro.add(e);
+                erro.add(new ErroSemantico(anterior, "Expressão condicional inválida"));
+                erro.add(new ErroSemantico(proximo, "Expressão condicional inválida"));
                 cont++;
             } else {
                 if (anterior.getTipoToken().toString().equals("NUMERO")) {
                     //System.out.println("2");
                     if ((!anterior.getLexema().contains(".") && proximo.getLexema().contains(".")) || (anterior.getLexema().contains(".") && !proximo.getLexema().contains("."))) {
-                        ErroSemantico er = new ErroSemantico();
-                        er.tipo = anterior;
-                        er.tipoDoErro = "Expressao condicional errada";
-                        erro.add(er);
-
-                        ErroSemantico e = new ErroSemantico();
-                        e.tipo = proximo;
-                        e.tipoDoErro = "Expressao condicional errada";
-                        erro.add(e);
+                        erro.add(new ErroSemantico(anterior, "Expressão condicional inválida"));
+                        erro.add(new ErroSemantico(proximo, "Expressão condicional inválida"));
                         cont++;
                     }
                 } else if (anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE") || proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE") || anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE") || proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE")) {
-                    ErroSemantico er = new ErroSemantico();
-                    er.tipo = anterior;
-                    er.tipoDoErro = "Expressao condicional errada";
-                    erro.add(er);
-
-                    ErroSemantico e = new ErroSemantico();
-                    e.tipo = proximo;
-                    e.tipoDoErro = "Expressao condicional errada";
-                    erro.add(e);
+                    erro.add(new ErroSemantico(anterior, "Expressão condicional inválida"));
+                    erro.add(new ErroSemantico(proximo, "Expressão condicional inválida"));
                     cont++;
                 } else {
                     //  System.out.println("asdasdv");
-                    ErroSemantico er = new ErroSemantico();
-                    er.tipo = anterior;
-                    er.tipoDoErro = "Expressao em IF Não foi declarado em Var";
-                    erro.add(er);
-
-                    ErroSemantico e = new ErroSemantico();
-                    e.tipo = proximo;
-                    e.tipoDoErro = "Expressao em IF Não foi declarado em Var";
-                    erro.add(e);
+                    erro.add(new ErroSemantico(anterior, "Variável não declarada"));
+                    erro.add(new ErroSemantico(proximo, "Variável não declarada"));
                     cont++;
                 }
             }
         } else if (primeiroTipo == null && cont != 0) {
-            //System.out.println("3");
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = anterior;
-            er.tipoDoErro = "Expressao em IF Não foi declarado em Var ";
-            erro.add(er);
+            erro.add(new ErroSemantico(anterior, "Variável não declarada"));
         } else if (segundoTipo == null && cont != 0) {
-            //System.out.println("3");
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = proximo;
-            er.tipoDoErro = "Expressao em IF Não foi declarado em Var";
-            erro.add(er);
+            erro.add(new ErroSemantico(proximo, "Variável não declarada"));
         }
         /*else {
            
@@ -658,26 +566,18 @@ public class TabelaSimbolos {
         Listas segundoTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosConst);
 
         if (primeiroTipo == null && segundoTipo == null) {
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = anterior;
-            er.tipoDoErro = "Variavel não declarada";
-            erro.add(er);
-
+            erro.add(new ErroSemantico(anterior, "Variavel não declarada"));
         } else {
             if (primeiroTipo != null) {
                 if (primeiroTipo.foiDeclaradocomo.equals("string") || primeiroTipo.foiDeclaradocomo.equals("bool")) {
-                    ErroSemantico er = new ErroSemantico();
-                    er.tipo = anterior;
-                    er.tipoDoErro = "Tipo de incremento/decremento não é float/int";
-                    erro.add(er);
+                    //er.tipoDoErro = "Tipo de incremento/decremento não é float/int";
+                    erro.add(new ErroSemantico(anterior, "Operação não permitida para este tipo de dado"));
                 }
 
             } else if (segundoTipo != null) {
                 if (segundoTipo.foiDeclaradocomo.equals("string") || segundoTipo.foiDeclaradocomo.equals("bool")) {
-                    ErroSemantico er = new ErroSemantico();
-                    er.tipo = anterior;
-                    er.tipoDoErro = "Tipo de incremento/decremento não é float/int";
-                    erro.add(er);
+                    //er.tipoDoErro = "Tipo de incremento/decremento não é float/int";
+                    erro.add(new ErroSemantico(anterior, "Operação não permitida para este tipo de dado"));
                 }
             }
         }
@@ -740,27 +640,18 @@ public class TabelaSimbolos {
         //System.out.println("inteiro "+ inteiros);
         //System.out.println(" não inteiro "+ Ninteiros);
         if ((inteiros != 0) && ((Ninteiros > 0) || strin > 0 && bo > 0)) {
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = ajudaExpressaoAtribuicao.get(0);
-            er.tipoDoErro = "Os tipos não são iguais ";
-            erro.add(er);
+            //er.tipoDoErro = "Os tipos não são iguais ";
+            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação não permitida entre tipos de dados diferentes"));
         } else if (Ninteiros != 0 && (inteiros > 0 || strin > 0 || bo > 0)) {
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = ajudaExpressaoAtribuicao.get(0);
-            er.tipoDoErro = "Os tipos não são iguais ";
-            erro.add(er);
+            //er.tipoDoErro = "Os tipos não são iguais ";
+            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação não permitida entre tipos de dados diferentes"));
         } else if (strin != 0 && (bo > 0 || inteiros > 0 || Ninteiros > 0)) {
-
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = ajudaExpressaoAtribuicao.get(0);
-            er.tipoDoErro = "Os tipos não são iguais ";
-            erro.add(er);
+            //er.tipoDoErro = "Os tipos não são iguais ";
+            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação não permitida entre tipos de dados diferentes"));
 
         } else if (bo != 0 && (strin > 0 || inteiros > 0 || Ninteiros > 0)) {
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = ajudaExpressaoAtribuicao.get(0);
-            er.tipoDoErro = "Os tipos não  são iguais  ";
-            erro.add(er);
+            //er.tipoDoErro = "Os tipos não  são iguais  ";
+            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação não permitida entre tipos de dados diferentes"));
         }
         ajudaExpressaoAtribuicao.clear();
     }
@@ -784,14 +675,11 @@ public class TabelaSimbolos {
         qtdStart++;
     }
 
-    public void verificaStart() {
-        ErroSemantico er = new ErroSemantico();
+    public void verificaStart(Token token) {
         if (qtdStart == 0) {
-            er.tipoDoErro = "Método start não declarado";
-            erro.add(er);
+            erro.add(new ErroSemantico(token, "Método start não declarado"));
         } else if (qtdStart > 1) {
-            er.tipoDoErro = "Múltiplas ocorrências do método start foram encontradas: " + qtdStart + " ocorrências";
-            erro.add(er);
+            erro.add(new ErroSemantico(token, "Múltiplas ocorrências do método start foram encontradas: " + qtdStart + " ocorrências"));
         }
     }
 
@@ -800,10 +688,7 @@ public class TabelaSimbolos {
         boolean y = JafoiDeclarado(o.getLexema(), tabelaSimbolosVariavel);
 
         if (x != true && y != true) {
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = o;
-            er.tipoDoErro = "Variavel não declarada ";
-            erro.add(er);
+            erro.add(new ErroSemantico(o, "Variável não declarada"));
         }
 
     }
@@ -864,11 +749,8 @@ public class TabelaSimbolos {
         // System.out.println("inteiro "+ inteiros);
         //  System.out.println("não inteiro "+ Ninteiros);
         if (Ninteiros > 0 || strin > 0 || bo > 0) {
-
-            ErroSemantico er = new ErroSemantico();
-            er.tipo = ajudaVetores.get(0);
-            er.tipoDoErro = "Em vetor só aceita acesso por um int ";
-            erro.add(er);
+            //er.tipoDoErro = "Em vetor só aceita acesso por um int ";
+            erro.add(new ErroSemantico(ajudaVetores.get(0), "Acesso a vetor inválido: apenas números inteiros são permitidos"));
         }
         ajudaVetores.clear();
     }
