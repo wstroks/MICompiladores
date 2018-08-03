@@ -449,7 +449,7 @@ public class TabelaSimbolos {
         if (!funcaoProcedimentoBufferJaExiste()) {
             tabelaSimbolosFuncao.add(bufferFuncaoProcedimento);
         } else {
-            String msgErro = bufferFuncaoProcedimento.getTipo() + " " + bufferFuncaoProcedimento.getNome() + " já declarada como function ou procedure";
+            String msgErro = bufferFuncaoProcedimento.getTipo() + " já declarada como function ou procedure";
             erro.add(new ErroSemantico(token, msgErro));
         }
         clearBufferFuncaoProcedimento(bufferFuncaoProcedimento.getTipo());
