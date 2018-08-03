@@ -1,50 +1,8 @@
-const {
-  int a=1.0;
-}
-
-
-
 var{
-	int w, z; //escopo = "global"
-}
-
-function int teste1(){
-	var{
-		int x, y; 
-	}
- x=b;
-}
-
-var{
-	int t, s; 
-}
-struct washington{
-	int naruto;
-
-}
-
-struct narutando extends washington{
-	int dasd;
-	
-
-}
-function int teste2(){
-	var{
-		int i, j; 
-	}
-	
-	i = x;
-	j = w; 
-	a = j; 
-	
+	int x, y;
+	string u;
 }
 
 start(){
-	var{
-		int a; 
-	}
-	
-	i = x; 
-	a = z; 
-	a=1.0+100;
+	x = u;
 }

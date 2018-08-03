@@ -347,7 +347,7 @@ public class TabelaSimbolos {
         if (erro.isEmpty()) {
             writer.println("Sucesso");
         } else {
-            writer.println("Foram encontrados os seguintes erros semantico: ");
+            writer.println("Foram encontrados os seguintes erros semânticos: ");
             for (ErroSemantico erro : erro) {
                 
                 writer.println(erro.getMensagem());
@@ -418,19 +418,19 @@ public class TabelaSimbolos {
                     // System.out.println("asas 1");
                     if (t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
                         tabelaSimbolosVarAux.add(lista);
-                        erro.add(new ErroSemantico(t, "Tipo de atribuicao invalida na declaracao de var"));
+                        erro.add(new ErroSemantico(t, "Tipo de atribuição inálida na declaração de variável"));
                         // tabelaSimbolosVariavel.remove(lista);
                     }
                 } else if (lista.foiDeclaradocomo.equals("float")) {
                     if (!t.getLexema().contains(".") || t.getLexema().equals("true") || t.getLexema().equals("false") || t.getTipoToken().toString().equals("CADEIA_CARACTERES")) {
                         tabelaSimbolosVarAux.add(lista);
-                        erro.add(new ErroSemantico(t, "Tipo de atribuicao invalida na declaracao de var"));
+                        erro.add(new ErroSemantico(t, "Tipo de atribuição inálida na declaração de variável"));
                         //tabelaSimbolosVariavel.remove(lista);
                     }
                 } else if (lista.foiDeclaradocomo.equals("string")) {
                     if (!t.getTipoToken().toString().equals("CADEIA_CARACTERES") || t.getLexema().equals("true") || t.getLexema().equals("false")) {
                         tabelaSimbolosVarAux.add(lista);
-                        erro.add(new ErroSemantico(t, "Tipo de atribuicao invalida na declaracao de var"));
+                        erro.add(new ErroSemantico(t, "Tipo de atribuição inálida na declaração de variável"));
                         // tabelaSimbolosVariavel.remove(lista);
                     }
                 }
@@ -636,7 +636,7 @@ public class TabelaSimbolos {
         Listas segundoTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosConst);
 
         if (primeiroTipo == null && segundoTipo == null) {
-            erro.add(new ErroSemantico(anterior, "Variavel não declarada"));
+            erro.add(new ErroSemantico(anterior, "Variável não declarada"));
         } else {
             if (primeiroTipo != null) {
                 if (primeiroTipo.foiDeclaradocomo.equals("string") || primeiroTipo.foiDeclaradocomo.equals("bool")) {
@@ -711,17 +711,17 @@ public class TabelaSimbolos {
         //System.out.println(" não inteiro "+ Ninteiros);
         if ((inteiros != 0) && ((Ninteiros > 0) || strin > 0 && bo > 0)) {
             //er.tipoDoErro = "Os tipos não são iguais ";
-            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação não permitida entre tipos de dados diferentes"));
+            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação de atribução entre tipos de dados diferentes"));
         } else if (Ninteiros != 0 && (inteiros > 0 || strin > 0 || bo > 0)) {
             //er.tipoDoErro = "Os tipos não são iguais ";
-            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação não permitida entre tipos de dados diferentes"));
+            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação de atribução entre tipos de dados diferentes"));
         } else if (strin != 0 && (bo > 0 || inteiros > 0 || Ninteiros > 0)) {
             //er.tipoDoErro = "Os tipos não são iguais ";
-            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação não permitida entre tipos de dados diferentes"));
+            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação de atribução entre tipos de dados diferentes"));
 
         } else if (bo != 0 && (strin > 0 || inteiros > 0 || Ninteiros > 0)) {
             //er.tipoDoErro = "Os tipos não  são iguais  ";
-            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação não permitida entre tipos de dados diferentes"));
+            erro.add(new ErroSemantico(ajudaExpressaoAtribuicao.get(0), "Operação de atribução entre tipos de dados diferentes"));
         }
         ajudaExpressaoAtribuicao.clear();
     }
