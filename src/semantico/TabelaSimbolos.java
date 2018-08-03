@@ -38,6 +38,7 @@ public class TabelaSimbolos {
     public boolean jaTemStructNome;
     public boolean jaTemStructExtends;
     public boolean ajudaFunction;
+    public boolean ajudaIF;
     private ArrayList<FuncaoProcedimento> tabelaSimbolosFuncao;
     public FuncaoProcedimento bufferFuncaoProcedimento;
     public FuncaoProcedimento bufferChamadaFuncaoProcedimento;
@@ -217,30 +218,37 @@ public class TabelaSimbolos {
 
     public void addTabelaStruct(String nome, Token tipo) {
         String naruto = nome;
-        if (jaExisteStructVariavel(nome, tabelaSimbolosStruct) && !jaTemStructNome) {
-            erro.add(new ErroSemantico(tipo, "Declaração variável duplicada na struct " + ajudaStructNome));
+
+        if (JafoiDeclarado(ajudaStructNome, tabelaSimbolosConst)) {
+            erro.add(new ErroSemantico(tipo, "Nome da struct ja utilizado em const " + ajudaStructNome));
+        } else if (JafoiDeclarado(ajudaStructNome, tabelaSimbolosVariavel)) {
+            erro.add(new ErroSemantico(tipo, "Nome da struct ja utilizado em Var " + ajudaStructNome));
         } else {
-            //Atualiza(ajudaStructNome, ajudaStructExtende);
+            if (jaExisteStructVariavel(nome, tabelaSimbolosStruct) && !jaTemStructNome) {
+                erro.add(new ErroSemantico(tipo, "Declaração variável duplicada na struct " + ajudaStructNome));
+            } else {
+                //Atualiza(ajudaStructNome, ajudaStructExtende);
 
-            if (!jaTemStructNome) {
-                if (jaExisteStructVariavel(nome, tabelaSimbolosStructAux)) {
+                if (!jaTemStructNome) {
+                    if (jaExisteStructVariavel(nome, tabelaSimbolosStructAux)) {
 
-                    erro.add(new ErroSemantico(tipo, "Declaração variável duplicada na struct " + ajudaStructNome));
-                } else {
+                        erro.add(new ErroSemantico(tipo, "Declaração variável duplicada na struct " + ajudaStructNome));
+                    } else {
 
-                    StructTabela n = new StructTabela();
+                        StructTabela n = new StructTabela();
 
-                    //System.out.println("  " + nome);
-                    n.nomeVariavel = nome;
-                    n.extende = ajudaStructExtende;
-                    n.nomeStruct = ajudaStructNome;
-                    n.tipo = tipo;
-                    n.foiDeclaradocomo = encontraTipo(tipo);
-                    //System.out.println("STRUCT=33> " + "Nome da Struct: " + n.nomeStruct + " | " + " extends: " + n.extende + " | " + "Nome da Variavel: " + n.nomeVariavel + " | " + "VariavelTipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
+                        //System.out.println("  " + nome);
+                        n.nomeVariavel = nome;
+                        n.extende = ajudaStructExtende;
+                        n.nomeStruct = ajudaStructNome;
+                        n.tipo = tipo;
+                        n.foiDeclaradocomo = encontraTipo(tipo);
+                        //System.out.println("STRUCT=33> " + "Nome da Struct: " + n.nomeStruct + " | " + " extends: " + n.extende + " | " + "Nome da Variavel: " + n.nomeVariavel + " | " + "VariavelTipo: " + n.foiDeclaradocomo + " | " + "linha: " + n.tipo.getLinha());
 
-                    tabelaSimbolosStruct.add(n);
+                        tabelaSimbolosStruct.add(n);
+                    }
+
                 }
-
             }
         }
         //ImpressaoVariavel();
@@ -337,7 +345,7 @@ public class TabelaSimbolos {
             System.out.println(e.getMensagem());
         }
     }
-    
+
     public void printErroToFile(String output) throws IOException {
 
         FileWriter arquivo = new FileWriter(output + ".txt");
@@ -349,9 +357,9 @@ public class TabelaSimbolos {
         } else {
             writer.println("Foram encontrados os seguintes erros semânticos: ");
             for (ErroSemantico erro : erro) {
-                
+
                 writer.println(erro.getMensagem());
-                }
+            }
         }
 
         arquivo.close();
@@ -569,6 +577,8 @@ public class TabelaSimbolos {
 
     public void expressaoIf(Token anterior, Token atual, Token proximo) {
         int cont = 0;
+
+        System.out.println(atual.getLexema() + " asdasd\n");
         Listas primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosVariavel);
         if (primeiroTipo == null) {
             primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosConst);
@@ -582,24 +592,24 @@ public class TabelaSimbolos {
             //System.out.println("1");
             if (!anterior.getTipoToken().toString().equals(proximo.getTipoToken().toString())) {
                 erro.add(new ErroSemantico(anterior, "Expressão condicional inválida"));
-                erro.add(new ErroSemantico(proximo, "Expressão condicional inválida"));
+                //erro.add(new ErroSemantico(proximo, "Expressão condicional inválida"));
                 cont++;
             } else {
                 if (anterior.getTipoToken().toString().equals("NUMERO")) {
                     //System.out.println("2");
                     if ((!anterior.getLexema().contains(".") && proximo.getLexema().contains(".")) || (anterior.getLexema().contains(".") && !proximo.getLexema().contains("."))) {
                         erro.add(new ErroSemantico(anterior, "Expressão condicional inválida"));
-                        erro.add(new ErroSemantico(proximo, "Expressão condicional inválida"));
+                        //erro.add(new ErroSemantico(proximo, "Expressão condicional inválida"));
                         cont++;
                     }
                 } else if (anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE") || proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE") || anterior.getTipoToken().toString().equals("PALAVRA_RESERVADA_FALSE") || proximo.getTipoToken().toString().equals("PALAVRA_RESERVADA_TRUE")) {
                     erro.add(new ErroSemantico(anterior, "Expressão condicional inválida"));
-                    erro.add(new ErroSemantico(proximo, "Expressão condicional inválida"));
+                    //erro.add(new ErroSemantico(proximo, "Expressão condicional inválida"));
                     cont++;
                 } else {
                     //  System.out.println("asdasdv");
                     erro.add(new ErroSemantico(anterior, "Variável não declarada"));
-                    erro.add(new ErroSemantico(proximo, "Variável não declarada"));
+                    // erro.add(new ErroSemantico(proximo, "Variável não declarada"));
                     cont++;
                 }
             }
