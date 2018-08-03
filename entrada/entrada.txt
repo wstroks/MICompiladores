@@ -1,8 +1,10 @@
 var{
-	int x, y;
-	string u;
+	int teste;
 }
 
 start(){
-	x = u;
+
+var{
+	int teste;
+}
 }

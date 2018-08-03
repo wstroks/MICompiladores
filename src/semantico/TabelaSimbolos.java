@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import lexico.Token;
-import sintatico.Erro;
 
 /**
  * @author Tayane
@@ -107,7 +106,7 @@ public class TabelaSimbolos {
             //throw new RuntimeException("Erro semantico: Variavel "+ nome+ " foi declarada duas vezes");
             erro.add(new ErroSemantico(tipo, "Variável " + nome + " já foi declarada anteriomente como uma constante"));
         } else if (JafoiDeclarado(nome, tabelaSimbolosVariavel)) {
-            erro.add(new ErroSemantico(tipo, "Variável local duplicada"));
+            erro.add(new ErroSemantico(tipo, "Declaração de variável duplicada"));
         } else {
             atualizaVar();
             Listas etds = new Listas(tipo);
@@ -124,7 +123,7 @@ public class TabelaSimbolos {
 
     public void addTabelaConst(String nome, Token tipo) {
         if (JafoiDeclarado(nome, tabelaSimbolosConst)) {
-            erro.add(new ErroSemantico(tipo, "Constante já declarada anteriormente"));
+            erro.add(new ErroSemantico(tipo, "Constante já declarada anteriormente: " + nome));
         } else {
             atualizaConst();
             Listas etds = new Listas(tipo);
@@ -220,9 +219,9 @@ public class TabelaSimbolos {
         String naruto = nome;
 
         if (JafoiDeclarado(ajudaStructNome, tabelaSimbolosConst)) {
-            erro.add(new ErroSemantico(tipo, "Nome da struct ja utilizado em const " + ajudaStructNome));
+            erro.add(new ErroSemantico(tipo, "Nome da struct já utilizado em uma constante " + ajudaStructNome));
         } else if (JafoiDeclarado(ajudaStructNome, tabelaSimbolosVariavel)) {
-            erro.add(new ErroSemantico(tipo, "Nome da struct ja utilizado em Var " + ajudaStructNome));
+            erro.add(new ErroSemantico(tipo, "Nome da struct já utilizado em uma variável " + ajudaStructNome));
         } else {
             if (jaExisteStructVariavel(nome, tabelaSimbolosStruct) && !jaTemStructNome) {
                 erro.add(new ErroSemantico(tipo, "Declaração variável duplicada na struct " + ajudaStructNome));
@@ -457,7 +456,7 @@ public class TabelaSimbolos {
         if (!funcaoProcedimentoBufferJaExiste()) {
             tabelaSimbolosFuncao.add(bufferFuncaoProcedimento);
         } else {
-            String msgErro = bufferFuncaoProcedimento.getTipo() + " já declarada como function ou procedure";
+            String msgErro = bufferFuncaoProcedimento.getTipo() + " já declarada como function ou procedure: " + bufferFuncaoProcedimento.getNome();
             erro.add(new ErroSemantico(token, msgErro));
         }
         clearBufferFuncaoProcedimento(bufferFuncaoProcedimento.getTipo());
@@ -478,14 +477,14 @@ public class TabelaSimbolos {
                 for (int i = 0; i < funcaoDeclarada.getQtdParametros(); i++) {
                     if (!funcaoDeclarada.getParametros().get(i).foiDeclaradocomo.equals(bufferChamadaFuncaoProcedimento.getParametros().get(i).foiDeclaradocomo)) {
                         //erro: chama de função com tipos diferentes
-                        String msg = "A chamada da " + bufferChamadaFuncaoProcedimento.getTipo() + " " + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos();
+                        String msg = "A chamada da " + bufferChamadaFuncaoProcedimento.getTipo() + bufferChamadaFuncaoProcedimento.getNome() + " " + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos();
                         erro.add(new ErroSemantico(token, msg));
                         break;
                     }
                 }
             } else {
                 //erro: chamada de função errada - quantidade de parametros diferentes
-                String msg = "A chamada da " + bufferChamadaFuncaoProcedimento.getTipo() + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos() + ". Quantidade de argumentos diferente.";
+                String msg = "A chamada da " + bufferChamadaFuncaoProcedimento.getTipo() + bufferChamadaFuncaoProcedimento.getNome() + " não é aplicável para os argumentos " + bufferChamadaFuncaoProcedimento.getStringArgumentos() + ". Quantidade de argumentos diferente.";
                 erro.add(new ErroSemantico(token, msg));
             }
         } else {
@@ -578,7 +577,6 @@ public class TabelaSimbolos {
     public void expressaoIf(Token anterior, Token atual, Token proximo) {
         int cont = 0;
 
-        System.out.println(atual.getLexema() + " asdasd\n");
         Listas primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosVariavel);
         if (primeiroTipo == null) {
             primeiroTipo = retornaTokenDeclarado(anterior.getLexema(), tabelaSimbolosConst);

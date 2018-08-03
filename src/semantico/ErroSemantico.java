@@ -22,7 +22,8 @@ public class ErroSemantico {
     }
     
     public String getMensagem(){
-    	return "Linha " + (tipo.getLinha() + 1) + ": " + tipoDoErro + " \"" + tipo.getLexema() + "\"";
+    	//return "Linha " + (tipo.getLinha() + 1) + ": " + tipoDoErro + " \"" + tipo.getLexema() + "\"";
+    	return "Linha " + (tipo.getLinha() + 1) + ": " + tipoDoErro;
     }
     
 }
