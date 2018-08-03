@@ -41,7 +41,7 @@ public class OperacaoDeAtribuicao extends RegraProducao {
 			} else if (Final.getInstancia().analisar(gerenciadorToken)) {
 				if (verificarToken(gerenciadorToken, TipoToken.OPERADOR_RELACIONAL_ATRIBUICAO, true)) {
 					if (Expressao.getInstancia().analisar(gerenciadorToken)) {
-                                            gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getTokenAtual());
+                                            gerenciadorToken.ts.addAtriicaoExpressao(gerenciadorToken.getAnteriorToken());
 						return true;
 					}
 				}
